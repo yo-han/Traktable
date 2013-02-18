@@ -45,12 +45,28 @@
 		04714E2316D2BF2900A308F7 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04714E2216D2BF2900A308F7 /* config.plist */; };
 		04714E2516D2BFBB00A308F7 /* config-example.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04714E2416D2BFBB00A308F7 /* config-example.plist */; };
 		04714E2816D2C59900A308F7 /* ITConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 04714E2716D2C59900A308F7 /* ITConfig.m */; };
+		04714E6216D2D6D500A308F7 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 04714E6116D2D6D500A308F7 /* dsa_pub.pem */; };
+		04714E8016D2DEC000A308F7 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04714E7F16D2DEC000A308F7 /* Sparkle.framework */; };
+		04714E8116D2DEC500A308F7 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 04714E7F16D2DEC000A308F7 /* Sparkle.framework */; };
 		0481386A16CA8C6000E682A0 /* PrefIndexViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0481386916CA8C6000E682A0 /* PrefIndexViewController.m */; };
 		0481386B16CA8DA100E682A0 /* MASPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0481386616CA8BF400E682A0 /* MASPreferencesWindowController.m */; };
 		0481386D16CA8DB300E682A0 /* PrefIndexViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0481386C16CA8DB300E682A0 /* PrefIndexViewController.xib */; };
 		049ACB0916C2AD43007F103C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 049ACB0816C2AD43007F103C /* CFNetwork.framework */; };
 		049C48BE16C0223B00CC9A0E /* ITMovie.m in Sources */ = {isa = PBXBuildFile; fileRef = 049C48BD16C0223B00CC9A0E /* ITMovie.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		04714E5F16D2D3D600A308F7 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				04714E8116D2DEC500A308F7 /* Sparkle.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		042F07DE16BC19DB00A0CE9E /* iTraktor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iTraktor.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -120,6 +136,11 @@
 		04714E2416D2BFBB00A308F7 /* config-example.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "config-example.plist"; sourceTree = "<group>"; };
 		04714E2616D2C59900A308F7 /* ITConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITConfig.h; sourceTree = "<group>"; };
 		04714E2716D2C59900A308F7 /* ITConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITConfig.m; sourceTree = "<group>"; };
+		04714E6116D2D6D500A308F7 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
+		04714E7916D2DC2000A308F7 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
+		04714E7B16D2DC8200A308F7 /* Sparkle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = Sparkle.framework; path = "/Users/johan/Library/Developer/Xcode/DerivedData/iTraktor-dtvqbktctfpnvsehmbaehxjwlodv/Build/Products/Debug/Sparkle.framework"; sourceTree = "<absolute>"; };
+		04714E7D16D2DE4200A308F7 /* Sparkle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = Sparkle.framework; path = "/Users/johan/Library/Developer/Xcode/DerivedData/iTraktor-dtvqbktctfpnvsehmbaehxjwlodv/Build/Products/Debug/Sparkle.framework"; sourceTree = "<absolute>"; };
+		04714E7F16D2DEC000A308F7 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		0481386316CA8BF400E682A0 /* MASPreferencesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MASPreferencesViewController.h; sourceTree = "<group>"; };
 		0481386416CA8BF400E682A0 /* MASPreferencesWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MASPreferencesWindow.xib; sourceTree = "<group>"; };
 		0481386516CA8BF400E682A0 /* MASPreferencesWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MASPreferencesWindowController.h; sourceTree = "<group>"; };
@@ -142,6 +163,7 @@
 				042F081616BD64ED00A0CE9E /* Security.framework in Frameworks */,
 				042F081416BD64C400A0CE9E /* ScriptingBridge.framework in Frameworks */,
 				042F07E316BC19DB00A0CE9E /* Cocoa.framework in Frameworks */,
+				04714E8016D2DEC000A308F7 /* Sparkle.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -151,6 +173,9 @@
 		042F07D316BC19DB00A0CE9E = {
 			isa = PBXGroup;
 			children = (
+				04714E7D16D2DE4200A308F7 /* Sparkle.framework */,
+				04714E7B16D2DC8200A308F7 /* Sparkle.framework */,
+				04714E7916D2DC2000A308F7 /* Sparkle.framework */,
 				0437203216CEF3ED003B8AB6 /* icon.icns */,
 				042F07E816BC19DB00A0CE9E /* iTraktor */,
 				042F07E116BC19DB00A0CE9E /* Frameworks */,
@@ -169,6 +194,7 @@
 		042F07E116BC19DB00A0CE9E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				04714E7F16D2DEC000A308F7 /* Sparkle.framework */,
 				049ACB0816C2AD43007F103C /* CFNetwork.framework */,
 				042F07E516BC19DB00A0CE9E /* AppKit.framework */,
 				042F07E616BC19DB00A0CE9E /* CoreData.framework */,
@@ -215,6 +241,7 @@
 		042F07E916BC19DB00A0CE9E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				04714E6116D2D6D500A308F7 /* dsa_pub.pem */,
 				04714E2216D2BF2900A308F7 /* config.plist */,
 				04714E2416D2BFBB00A308F7 /* config-example.plist */,
 				0437204216CEF823003B8AB6 /* menuicon.png */,
@@ -329,6 +356,7 @@
 				042F07DA16BC19DB00A0CE9E /* Sources */,
 				042F07DB16BC19DB00A0CE9E /* Frameworks */,
 				042F07DC16BC19DB00A0CE9E /* Resources */,
+				04714E5F16D2D3D600A308F7 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -384,6 +412,7 @@
 				0437204316CEF823003B8AB6 /* menuicon.png in Resources */,
 				04714E2316D2BF2900A308F7 /* config.plist in Resources */,
 				04714E2516D2BFBB00A308F7 /* config-example.plist in Resources */,
+				04714E6216D2D6D500A308F7 /* dsa_pub.pem in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
