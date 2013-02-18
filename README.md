@@ -14,3 +14,4 @@ Rename config-example.plist to config.plist and enter a tvdb and trakt api key.
 * [MASPreferences](https://github.com/shpakovski/MASPreferences)
 * [FMDB](https://github.com/ccgus/fmdb)
 * [EMKeychain](http://extendmac.com/EMKeychain/)
+* [Sparkle](https://github.com/andymatuschak/Sparkle)
