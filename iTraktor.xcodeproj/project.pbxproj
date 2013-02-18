@@ -44,6 +44,7 @@
 		046C9BDC16C16F490003AD64 /* iTraktor.db in Resources */ = {isa = PBXBuildFile; fileRef = 046C9BCF16C167B80003AD64 /* iTraktor.db */; };
 		04714E2316D2BF2900A308F7 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04714E2216D2BF2900A308F7 /* config.plist */; };
 		04714E2516D2BFBB00A308F7 /* config-example.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04714E2416D2BFBB00A308F7 /* config-example.plist */; };
+		04714E2816D2C59900A308F7 /* ITConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 04714E2716D2C59900A308F7 /* ITConfig.m */; };
 		0481386A16CA8C6000E682A0 /* PrefIndexViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0481386916CA8C6000E682A0 /* PrefIndexViewController.m */; };
 		0481386B16CA8DA100E682A0 /* MASPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0481386616CA8BF400E682A0 /* MASPreferencesWindowController.m */; };
 		0481386D16CA8DB300E682A0 /* PrefIndexViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0481386C16CA8DB300E682A0 /* PrefIndexViewController.xib */; };
@@ -117,6 +118,8 @@
 		046C9BD016C1685B0003AD64 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		04714E2216D2BF2900A308F7 /* config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
 		04714E2416D2BFBB00A308F7 /* config-example.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "config-example.plist"; sourceTree = "<group>"; };
+		04714E2616D2C59900A308F7 /* ITConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITConfig.h; sourceTree = "<group>"; };
+		04714E2716D2C59900A308F7 /* ITConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITConfig.m; sourceTree = "<group>"; };
 		0481386316CA8BF400E682A0 /* MASPreferencesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MASPreferencesViewController.h; sourceTree = "<group>"; };
 		0481386416CA8BF400E682A0 /* MASPreferencesWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MASPreferencesWindow.xib; sourceTree = "<group>"; };
 		0481386516CA8BF400E682A0 /* MASPreferencesWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MASPreferencesWindowController.h; sourceTree = "<group>"; };
@@ -195,6 +198,8 @@
 				049C48BD16C0223B00CC9A0E /* ITMovie.m */,
 				046C9BB816C159BA0003AD64 /* ITLibrary.h */,
 				046C9BB916C159BA0003AD64 /* ITLibrary.m */,
+				04714E2616D2C59900A308F7 /* ITConfig.h */,
+				04714E2716D2C59900A308F7 /* ITConfig.m */,
 				0469CC2016CD8CEA006863B7 /* ITTVdb.h */,
 				0469CC2116CD8CEA006863B7 /* ITTVdb.m */,
 				0469CBFE16CBE010006863B7 /* IMDB.h */,
@@ -413,6 +418,7 @@
 				0469CC1E16CBF19F006863B7 /* TVDbUpdater.m in Sources */,
 				0469CC1F16CBF19F006863B7 /* XMLReader.m in Sources */,
 				0469CC2216CD8CEA006863B7 /* ITTVdb.m in Sources */,
+				04714E2816D2C59900A308F7 /* ITConfig.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

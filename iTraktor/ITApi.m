@@ -9,6 +9,7 @@
 #import "ITApi.h"
 #import "ITTVShow.h"
 #import "ITMovie.h"
+#import "ITConfig.h"
 #import "EMKeychainItem.h"
 
 #define kApiUrl @"http://api.trakt.tv"
@@ -52,8 +53,9 @@
 
 - (NSString *)apiKey {
     
+    NSDictionary *config = [ITConfig getConfigFile];
     
-
+    return [config objectForKey:@"traktApiKey"];
 }
 
 - (NSString *)username {

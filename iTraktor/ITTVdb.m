@@ -8,6 +8,7 @@
 
 #import "ITTVdb.h"
 #import "ITLibrary.h"
+#import "ITConfig.h"
 #import "FMDatabase.h"
 #import "iTVDb/iTVDb.h"
 
@@ -28,7 +29,9 @@
     
     if([cachedID isEqualToString:@""]) {
         
-        [[TVDbClient sharedInstance] setApiKey: @""];
+        NSDictionary *config = [ITConfig getConfigFile];
+        
+        [[TVDbClient sharedInstance] setApiKey:[config objectForKey:@"tvdbApiKey"]];
         NSMutableArray *shows = [TVDbShow findByName:title];
         
         if([shows count] == 0) {
