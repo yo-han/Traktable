@@ -1,7 +1,7 @@
 iTraktor
 ========
 
-Trakt Scrobbler for iTunes/AppleTV. Download a binary version [here](w3f.nl/itraktor/).
+Trakt Scrobbler for iTunes/AppleTV. Download a binary version [here](http://w3f.nl/itraktor/).
 
 ## Install
 
