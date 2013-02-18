@@ -1,0 +1,572 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		042F07E316BC19DB00A0CE9E /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 042F07E216BC19DB00A0CE9E /* Cocoa.framework */; };
+		042F07ED16BC19DB00A0CE9E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 042F07EB16BC19DB00A0CE9E /* InfoPlist.strings */; };
+		042F07EF16BC19DB00A0CE9E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 042F07EE16BC19DB00A0CE9E /* main.m */; };
+		042F07F316BC19DB00A0CE9E /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 042F07F116BC19DB00A0CE9E /* Credits.rtf */; };
+		042F07F616BC19DB00A0CE9E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 042F07F516BC19DB00A0CE9E /* AppDelegate.m */; };
+		042F07F916BC19DB00A0CE9E /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 042F07F716BC19DB00A0CE9E /* MainMenu.xib */; };
+		042F080F16BD646000A0CE9E /* ITApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 042F080A16BC1E4C00A0CE9E /* ITApi.m */; };
+		042F081016BD646000A0CE9E /* ITVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 042F080C16BC1E4C00A0CE9E /* ITVideo.m */; };
+		042F081116BD646000A0CE9E /* ITTVShow.m in Sources */ = {isa = PBXBuildFile; fileRef = 042F080E16BC1E4C00A0CE9E /* ITTVShow.m */; };
+		042F081216BD649800A0CE9E /* EMKeychainItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 042F080716BC1A5200A0CE9E /* EMKeychainItem.m */; };
+		042F081416BD64C400A0CE9E /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 042F081316BD64C400A0CE9E /* ScriptingBridge.framework */; };
+		042F081616BD64ED00A0CE9E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 042F081516BD64ED00A0CE9E /* Security.framework */; };
+		0437203316CEF3ED003B8AB6 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 0437203216CEF3ED003B8AB6 /* icon.icns */; };
+		0437204316CEF823003B8AB6 /* menuicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0437204216CEF823003B8AB6 /* menuicon.png */; };
+		045235A416CA9069005D25E4 /* MASPreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0481386416CA8BF400E682A0 /* MASPreferencesWindow.xib */; };
+		0469CC0016CBE010006863B7 /* IMDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 0469CBFF16CBE010006863B7 /* IMDB.m */; };
+		0469CC1616CBF19F006863B7 /* NSString+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0469CC0416CBF19F006863B7 /* NSString+Helper.m */; };
+		0469CC1716CBF19F006863B7 /* iTVDb.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 0469CC0616CBF19F006863B7 /* iTVDb.podspec */; };
+		0469CC1816CBF19F006863B7 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 0469CC0716CBF19F006863B7 /* LICENSE */; };
+		0469CC1916CBF19F006863B7 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 0469CC0816CBF19F006863B7 /* README.md */; };
+		0469CC1A16CBF19F006863B7 /* TVDbClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 0469CC0A16CBF19F006863B7 /* TVDbClient.m */; };
+		0469CC1B16CBF19F006863B7 /* TVDbEpisode.m in Sources */ = {isa = PBXBuildFile; fileRef = 0469CC0C16CBF19F006863B7 /* TVDbEpisode.m */; };
+		0469CC1C16CBF19F006863B7 /* TVDbImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0469CC0E16CBF19F006863B7 /* TVDbImage.m */; };
+		0469CC1D16CBF19F006863B7 /* TVDbShow.m in Sources */ = {isa = PBXBuildFile; fileRef = 0469CC1016CBF19F006863B7 /* TVDbShow.m */; };
+		0469CC1E16CBF19F006863B7 /* TVDbUpdater.m in Sources */ = {isa = PBXBuildFile; fileRef = 0469CC1216CBF19F006863B7 /* TVDbUpdater.m */; };
+		0469CC1F16CBF19F006863B7 /* XMLReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0469CC1516CBF19F006863B7 /* XMLReader.m */; };
+		0469CC2216CD8CEA006863B7 /* ITTVdb.m in Sources */ = {isa = PBXBuildFile; fileRef = 0469CC2116CD8CEA006863B7 /* ITTVdb.m */; };
+		046C9BBA16C159BA0003AD64 /* ITLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 046C9BB916C159BA0003AD64 /* ITLibrary.m */; };
+		046C9BD116C1685B0003AD64 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 046C9BD016C1685B0003AD64 /* libsqlite3.dylib */; };
+		046C9BD316C168880003AD64 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 046C9BC216C166AE0003AD64 /* FMDatabase.m */; };
+		046C9BD516C168880003AD64 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 046C9BC416C166AE0003AD64 /* FMDatabaseAdditions.m */; };
+		046C9BD716C168880003AD64 /* FMDatabasePool.m in Sources */ = {isa = PBXBuildFile; fileRef = 046C9BC616C166AE0003AD64 /* FMDatabasePool.m */; };
+		046C9BD916C168880003AD64 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 046C9BC816C166AE0003AD64 /* FMDatabaseQueue.m */; };
+		046C9BDB16C168880003AD64 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 046C9BCB16C166AE0003AD64 /* FMResultSet.m */; };
+		046C9BDC16C16F490003AD64 /* iTraktor.db in Resources */ = {isa = PBXBuildFile; fileRef = 046C9BCF16C167B80003AD64 /* iTraktor.db */; };
+		04714E2316D2BF2900A308F7 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04714E2216D2BF2900A308F7 /* config.plist */; };
+		04714E2516D2BFBB00A308F7 /* config-example.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04714E2416D2BFBB00A308F7 /* config-example.plist */; };
+		0481386A16CA8C6000E682A0 /* PrefIndexViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0481386916CA8C6000E682A0 /* PrefIndexViewController.m */; };
+		0481386B16CA8DA100E682A0 /* MASPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0481386616CA8BF400E682A0 /* MASPreferencesWindowController.m */; };
+		0481386D16CA8DB300E682A0 /* PrefIndexViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0481386C16CA8DB300E682A0 /* PrefIndexViewController.xib */; };
+		049ACB0916C2AD43007F103C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 049ACB0816C2AD43007F103C /* CFNetwork.framework */; };
+		049C48BE16C0223B00CC9A0E /* ITMovie.m in Sources */ = {isa = PBXBuildFile; fileRef = 049C48BD16C0223B00CC9A0E /* ITMovie.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		042F07DE16BC19DB00A0CE9E /* iTraktor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iTraktor.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		042F07E216BC19DB00A0CE9E /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		042F07E516BC19DB00A0CE9E /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		042F07E616BC19DB00A0CE9E /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		042F07E716BC19DB00A0CE9E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		042F07EA16BC19DB00A0CE9E /* iTraktor-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iTraktor-Info.plist"; sourceTree = "<group>"; };
+		042F07EC16BC19DB00A0CE9E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		042F07EE16BC19DB00A0CE9E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		042F07F016BC19DB00A0CE9E /* iTraktor-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iTraktor-Prefix.pch"; sourceTree = "<group>"; };
+		042F07F216BC19DB00A0CE9E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		042F07F416BC19DB00A0CE9E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		042F07F516BC19DB00A0CE9E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		042F07F816BC19DB00A0CE9E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		042F080516BC1A3B00A0CE9E /* iTunes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iTunes.h; sourceTree = "<group>"; };
+		042F080616BC1A5200A0CE9E /* EMKeychainItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EMKeychainItem.h; sourceTree = "<group>"; };
+		042F080716BC1A5200A0CE9E /* EMKeychainItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EMKeychainItem.m; sourceTree = "<group>"; };
+		042F080916BC1E4C00A0CE9E /* ITApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ITApi.h; sourceTree = "<group>"; };
+		042F080A16BC1E4C00A0CE9E /* ITApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ITApi.m; sourceTree = "<group>"; };
+		042F080B16BC1E4C00A0CE9E /* ITVideo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ITVideo.h; sourceTree = "<group>"; };
+		042F080C16BC1E4C00A0CE9E /* ITVideo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ITVideo.m; sourceTree = "<group>"; };
+		042F080D16BC1E4C00A0CE9E /* ITTVShow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ITTVShow.h; sourceTree = "<group>"; };
+		042F080E16BC1E4C00A0CE9E /* ITTVShow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ITTVShow.m; sourceTree = "<group>"; };
+		042F081316BD64C400A0CE9E /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = System/Library/Frameworks/ScriptingBridge.framework; sourceTree = SDKROOT; };
+		042F081516BD64ED00A0CE9E /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		0437203216CEF3ED003B8AB6 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = "<group>"; };
+		0437204216CEF823003B8AB6 /* menuicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menuicon.png; sourceTree = "<group>"; };
+		0469CBFE16CBE010006863B7 /* IMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMDB.h; sourceTree = "<group>"; };
+		0469CBFF16CBE010006863B7 /* IMDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMDB.m; sourceTree = "<group>"; };
+		0469CC0316CBF19F006863B7 /* NSString+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Helper.h"; sourceTree = "<group>"; };
+		0469CC0416CBF19F006863B7 /* NSString+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Helper.m"; sourceTree = "<group>"; };
+		0469CC0516CBF19F006863B7 /* iTVDb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iTVDb.h; sourceTree = "<group>"; };
+		0469CC0616CBF19F006863B7 /* iTVDb.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = iTVDb.podspec; sourceTree = "<group>"; };
+		0469CC0716CBF19F006863B7 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		0469CC0816CBF19F006863B7 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		0469CC0916CBF19F006863B7 /* TVDbClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVDbClient.h; sourceTree = "<group>"; };
+		0469CC0A16CBF19F006863B7 /* TVDbClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVDbClient.m; sourceTree = "<group>"; };
+		0469CC0B16CBF19F006863B7 /* TVDbEpisode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVDbEpisode.h; sourceTree = "<group>"; };
+		0469CC0C16CBF19F006863B7 /* TVDbEpisode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVDbEpisode.m; sourceTree = "<group>"; };
+		0469CC0D16CBF19F006863B7 /* TVDbImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVDbImage.h; sourceTree = "<group>"; };
+		0469CC0E16CBF19F006863B7 /* TVDbImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVDbImage.m; sourceTree = "<group>"; };
+		0469CC0F16CBF19F006863B7 /* TVDbShow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVDbShow.h; sourceTree = "<group>"; };
+		0469CC1016CBF19F006863B7 /* TVDbShow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVDbShow.m; sourceTree = "<group>"; };
+		0469CC1116CBF19F006863B7 /* TVDbUpdater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVDbUpdater.h; sourceTree = "<group>"; };
+		0469CC1216CBF19F006863B7 /* TVDbUpdater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVDbUpdater.m; sourceTree = "<group>"; };
+		0469CC1416CBF19F006863B7 /* XMLReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLReader.h; sourceTree = "<group>"; };
+		0469CC1516CBF19F006863B7 /* XMLReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XMLReader.m; sourceTree = "<group>"; };
+		0469CC2016CD8CEA006863B7 /* ITTVdb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITTVdb.h; sourceTree = "<group>"; };
+		0469CC2116CD8CEA006863B7 /* ITTVdb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITTVdb.m; sourceTree = "<group>"; };
+		046C9BB816C159BA0003AD64 /* ITLibrary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITLibrary.h; sourceTree = "<group>"; };
+		046C9BB916C159BA0003AD64 /* ITLibrary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITLibrary.m; sourceTree = "<group>"; };
+		046C9BC116C166AE0003AD64 /* FMDatabase.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
+		046C9BC216C166AE0003AD64 /* FMDatabase.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
+		046C9BC316C166AE0003AD64 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		046C9BC416C166AE0003AD64 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		046C9BC516C166AE0003AD64 /* FMDatabasePool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMDatabasePool.h; sourceTree = "<group>"; };
+		046C9BC616C166AE0003AD64 /* FMDatabasePool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMDatabasePool.m; sourceTree = "<group>"; };
+		046C9BC716C166AE0003AD64 /* FMDatabaseQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMDatabaseQueue.h; sourceTree = "<group>"; };
+		046C9BC816C166AE0003AD64 /* FMDatabaseQueue.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseQueue.m; sourceTree = "<group>"; };
+		046C9BC916C166AE0003AD64 /* fmdb.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = fmdb.m; sourceTree = "<group>"; };
+		046C9BCA16C166AE0003AD64 /* FMResultSet.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		046C9BCB16C166AE0003AD64 /* FMResultSet.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		046C9BCF16C167B80003AD64 /* iTraktor.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTraktor.db; sourceTree = "<group>"; };
+		046C9BD016C1685B0003AD64 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		04714E2216D2BF2900A308F7 /* config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = config.plist; sourceTree = "<group>"; };
+		04714E2416D2BFBB00A308F7 /* config-example.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "config-example.plist"; sourceTree = "<group>"; };
+		0481386316CA8BF400E682A0 /* MASPreferencesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MASPreferencesViewController.h; sourceTree = "<group>"; };
+		0481386416CA8BF400E682A0 /* MASPreferencesWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MASPreferencesWindow.xib; sourceTree = "<group>"; };
+		0481386516CA8BF400E682A0 /* MASPreferencesWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MASPreferencesWindowController.h; sourceTree = "<group>"; };
+		0481386616CA8BF400E682A0 /* MASPreferencesWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MASPreferencesWindowController.m; sourceTree = "<group>"; };
+		0481386816CA8C6000E682A0 /* PrefIndexViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefIndexViewController.h; sourceTree = "<group>"; };
+		0481386916CA8C6000E682A0 /* PrefIndexViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrefIndexViewController.m; sourceTree = "<group>"; };
+		0481386C16CA8DB300E682A0 /* PrefIndexViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrefIndexViewController.xib; sourceTree = "<group>"; };
+		049ACB0816C2AD43007F103C /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		049C48BC16C0223B00CC9A0E /* ITMovie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITMovie.h; sourceTree = "<group>"; };
+		049C48BD16C0223B00CC9A0E /* ITMovie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITMovie.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		042F07DB16BC19DB00A0CE9E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				049ACB0916C2AD43007F103C /* CFNetwork.framework in Frameworks */,
+				046C9BD116C1685B0003AD64 /* libsqlite3.dylib in Frameworks */,
+				042F081616BD64ED00A0CE9E /* Security.framework in Frameworks */,
+				042F081416BD64C400A0CE9E /* ScriptingBridge.framework in Frameworks */,
+				042F07E316BC19DB00A0CE9E /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		042F07D316BC19DB00A0CE9E = {
+			isa = PBXGroup;
+			children = (
+				0437203216CEF3ED003B8AB6 /* icon.icns */,
+				042F07E816BC19DB00A0CE9E /* iTraktor */,
+				042F07E116BC19DB00A0CE9E /* Frameworks */,
+				042F07DF16BC19DB00A0CE9E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		042F07DF16BC19DB00A0CE9E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				042F07DE16BC19DB00A0CE9E /* iTraktor.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		042F07E116BC19DB00A0CE9E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				049ACB0816C2AD43007F103C /* CFNetwork.framework */,
+				042F07E516BC19DB00A0CE9E /* AppKit.framework */,
+				042F07E616BC19DB00A0CE9E /* CoreData.framework */,
+				042F07E716BC19DB00A0CE9E /* Foundation.framework */,
+				046C9BD016C1685B0003AD64 /* libsqlite3.dylib */,
+				042F081516BD64ED00A0CE9E /* Security.framework */,
+				042F081316BD64C400A0CE9E /* ScriptingBridge.framework */,
+				042F07E216BC19DB00A0CE9E /* Cocoa.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		042F07E816BC19DB00A0CE9E /* iTraktor */ = {
+			isa = PBXGroup;
+			children = (
+				042F07F416BC19DB00A0CE9E /* AppDelegate.h */,
+				042F07F516BC19DB00A0CE9E /* AppDelegate.m */,
+				0481386816CA8C6000E682A0 /* PrefIndexViewController.h */,
+				0481386916CA8C6000E682A0 /* PrefIndexViewController.m */,
+				042F080916BC1E4C00A0CE9E /* ITApi.h */,
+				042F080A16BC1E4C00A0CE9E /* ITApi.m */,
+				042F080B16BC1E4C00A0CE9E /* ITVideo.h */,
+				042F080C16BC1E4C00A0CE9E /* ITVideo.m */,
+				042F080D16BC1E4C00A0CE9E /* ITTVShow.h */,
+				042F080E16BC1E4C00A0CE9E /* ITTVShow.m */,
+				049C48BC16C0223B00CC9A0E /* ITMovie.h */,
+				049C48BD16C0223B00CC9A0E /* ITMovie.m */,
+				046C9BB816C159BA0003AD64 /* ITLibrary.h */,
+				046C9BB916C159BA0003AD64 /* ITLibrary.m */,
+				0469CC2016CD8CEA006863B7 /* ITTVdb.h */,
+				0469CC2116CD8CEA006863B7 /* ITTVdb.m */,
+				0469CBFE16CBE010006863B7 /* IMDB.h */,
+				0469CBFF16CBE010006863B7 /* IMDB.m */,
+				0481386C16CA8DB300E682A0 /* PrefIndexViewController.xib */,
+				042F07F716BC19DB00A0CE9E /* MainMenu.xib */,
+				042F080416BC1A3100A0CE9E /* Lib */,
+				042F07E916BC19DB00A0CE9E /* Supporting Files */,
+			);
+			path = iTraktor;
+			sourceTree = "<group>";
+		};
+		042F07E916BC19DB00A0CE9E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				04714E2216D2BF2900A308F7 /* config.plist */,
+				04714E2416D2BFBB00A308F7 /* config-example.plist */,
+				0437204216CEF823003B8AB6 /* menuicon.png */,
+				046C9BCF16C167B80003AD64 /* iTraktor.db */,
+				042F07EA16BC19DB00A0CE9E /* iTraktor-Info.plist */,
+				042F07EB16BC19DB00A0CE9E /* InfoPlist.strings */,
+				042F07EE16BC19DB00A0CE9E /* main.m */,
+				042F07F016BC19DB00A0CE9E /* iTraktor-Prefix.pch */,
+				042F07F116BC19DB00A0CE9E /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		042F080416BC1A3100A0CE9E /* Lib */ = {
+			isa = PBXGroup;
+			children = (
+				0469CC0116CBF19F006863B7 /* itvdb */,
+				0481386716CA8C0200E682A0 /* MASPreferences */,
+				046C9BCC16C166B30003AD64 /* FMDB */,
+				042F080816BC1A5500A0CE9E /* EMKeychain */,
+				042F080516BC1A3B00A0CE9E /* iTunes.h */,
+			);
+			name = Lib;
+			sourceTree = "<group>";
+		};
+		042F080816BC1A5500A0CE9E /* EMKeychain */ = {
+			isa = PBXGroup;
+			children = (
+				042F080616BC1A5200A0CE9E /* EMKeychainItem.h */,
+				042F080716BC1A5200A0CE9E /* EMKeychainItem.m */,
+			);
+			name = EMKeychain;
+			sourceTree = "<group>";
+		};
+		0469CC0116CBF19F006863B7 /* itvdb */ = {
+			isa = PBXGroup;
+			children = (
+				0469CC0216CBF19F006863B7 /* Helpers */,
+				0469CC0516CBF19F006863B7 /* iTVDb.h */,
+				0469CC0616CBF19F006863B7 /* iTVDb.podspec */,
+				0469CC0716CBF19F006863B7 /* LICENSE */,
+				0469CC0816CBF19F006863B7 /* README.md */,
+				0469CC0916CBF19F006863B7 /* TVDbClient.h */,
+				0469CC0A16CBF19F006863B7 /* TVDbClient.m */,
+				0469CC0B16CBF19F006863B7 /* TVDbEpisode.h */,
+				0469CC0C16CBF19F006863B7 /* TVDbEpisode.m */,
+				0469CC0D16CBF19F006863B7 /* TVDbImage.h */,
+				0469CC0E16CBF19F006863B7 /* TVDbImage.m */,
+				0469CC0F16CBF19F006863B7 /* TVDbShow.h */,
+				0469CC1016CBF19F006863B7 /* TVDbShow.m */,
+				0469CC1116CBF19F006863B7 /* TVDbUpdater.h */,
+				0469CC1216CBF19F006863B7 /* TVDbUpdater.m */,
+				0469CC1316CBF19F006863B7 /* XMLReader */,
+			);
+			path = itvdb;
+			sourceTree = "<group>";
+		};
+		0469CC0216CBF19F006863B7 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				0469CC0316CBF19F006863B7 /* NSString+Helper.h */,
+				0469CC0416CBF19F006863B7 /* NSString+Helper.m */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		0469CC1316CBF19F006863B7 /* XMLReader */ = {
+			isa = PBXGroup;
+			children = (
+				0469CC1416CBF19F006863B7 /* XMLReader.h */,
+				0469CC1516CBF19F006863B7 /* XMLReader.m */,
+			);
+			path = XMLReader;
+			sourceTree = "<group>";
+		};
+		046C9BCC16C166B30003AD64 /* FMDB */ = {
+			isa = PBXGroup;
+			children = (
+				046C9BC116C166AE0003AD64 /* FMDatabase.h */,
+				046C9BC216C166AE0003AD64 /* FMDatabase.m */,
+				046C9BC316C166AE0003AD64 /* FMDatabaseAdditions.h */,
+				046C9BC416C166AE0003AD64 /* FMDatabaseAdditions.m */,
+				046C9BC516C166AE0003AD64 /* FMDatabasePool.h */,
+				046C9BC616C166AE0003AD64 /* FMDatabasePool.m */,
+				046C9BC716C166AE0003AD64 /* FMDatabaseQueue.h */,
+				046C9BC816C166AE0003AD64 /* FMDatabaseQueue.m */,
+				046C9BC916C166AE0003AD64 /* fmdb.m */,
+				046C9BCA16C166AE0003AD64 /* FMResultSet.h */,
+				046C9BCB16C166AE0003AD64 /* FMResultSet.m */,
+			);
+			name = FMDB;
+			sourceTree = "<group>";
+		};
+		0481386716CA8C0200E682A0 /* MASPreferences */ = {
+			isa = PBXGroup;
+			children = (
+				0481386316CA8BF400E682A0 /* MASPreferencesViewController.h */,
+				0481386416CA8BF400E682A0 /* MASPreferencesWindow.xib */,
+				0481386516CA8BF400E682A0 /* MASPreferencesWindowController.h */,
+				0481386616CA8BF400E682A0 /* MASPreferencesWindowController.m */,
+			);
+			name = MASPreferences;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		042F07DD16BC19DB00A0CE9E /* iTraktor */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 042F07FC16BC19DB00A0CE9E /* Build configuration list for PBXNativeTarget "iTraktor" */;
+			buildPhases = (
+				042F07DA16BC19DB00A0CE9E /* Sources */,
+				042F07DB16BC19DB00A0CE9E /* Frameworks */,
+				042F07DC16BC19DB00A0CE9E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = iTraktor;
+			productName = iTraktor;
+			productReference = 042F07DE16BC19DB00A0CE9E /* iTraktor.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		042F07D516BC19DB00A0CE9E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = Mustacherious;
+			};
+			buildConfigurationList = 042F07D816BC19DB00A0CE9E /* Build configuration list for PBXProject "iTraktor" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				English,
+			);
+			mainGroup = 042F07D316BC19DB00A0CE9E;
+			productRefGroup = 042F07DF16BC19DB00A0CE9E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				042F07DD16BC19DB00A0CE9E /* iTraktor */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		042F07DC16BC19DB00A0CE9E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				045235A416CA9069005D25E4 /* MASPreferencesWindow.xib in Resources */,
+				046C9BDC16C16F490003AD64 /* iTraktor.db in Resources */,
+				042F07ED16BC19DB00A0CE9E /* InfoPlist.strings in Resources */,
+				042F07F316BC19DB00A0CE9E /* Credits.rtf in Resources */,
+				042F07F916BC19DB00A0CE9E /* MainMenu.xib in Resources */,
+				0481386D16CA8DB300E682A0 /* PrefIndexViewController.xib in Resources */,
+				0469CC1716CBF19F006863B7 /* iTVDb.podspec in Resources */,
+				0469CC1816CBF19F006863B7 /* LICENSE in Resources */,
+				0469CC1916CBF19F006863B7 /* README.md in Resources */,
+				0437203316CEF3ED003B8AB6 /* icon.icns in Resources */,
+				0437204316CEF823003B8AB6 /* menuicon.png in Resources */,
+				04714E2316D2BF2900A308F7 /* config.plist in Resources */,
+				04714E2516D2BFBB00A308F7 /* config-example.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		042F07DA16BC19DB00A0CE9E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0481386B16CA8DA100E682A0 /* MASPreferencesWindowController.m in Sources */,
+				046C9BD316C168880003AD64 /* FMDatabase.m in Sources */,
+				046C9BD516C168880003AD64 /* FMDatabaseAdditions.m in Sources */,
+				046C9BD716C168880003AD64 /* FMDatabasePool.m in Sources */,
+				046C9BD916C168880003AD64 /* FMDatabaseQueue.m in Sources */,
+				046C9BDB16C168880003AD64 /* FMResultSet.m in Sources */,
+				042F081216BD649800A0CE9E /* EMKeychainItem.m in Sources */,
+				042F080F16BD646000A0CE9E /* ITApi.m in Sources */,
+				042F081016BD646000A0CE9E /* ITVideo.m in Sources */,
+				042F081116BD646000A0CE9E /* ITTVShow.m in Sources */,
+				042F07EF16BC19DB00A0CE9E /* main.m in Sources */,
+				042F07F616BC19DB00A0CE9E /* AppDelegate.m in Sources */,
+				049C48BE16C0223B00CC9A0E /* ITMovie.m in Sources */,
+				046C9BBA16C159BA0003AD64 /* ITLibrary.m in Sources */,
+				0481386A16CA8C6000E682A0 /* PrefIndexViewController.m in Sources */,
+				0469CC0016CBE010006863B7 /* IMDB.m in Sources */,
+				0469CC1616CBF19F006863B7 /* NSString+Helper.m in Sources */,
+				0469CC1A16CBF19F006863B7 /* TVDbClient.m in Sources */,
+				0469CC1B16CBF19F006863B7 /* TVDbEpisode.m in Sources */,
+				0469CC1C16CBF19F006863B7 /* TVDbImage.m in Sources */,
+				0469CC1D16CBF19F006863B7 /* TVDbShow.m in Sources */,
+				0469CC1E16CBF19F006863B7 /* TVDbUpdater.m in Sources */,
+				0469CC1F16CBF19F006863B7 /* XMLReader.m in Sources */,
+				0469CC2216CD8CEA006863B7 /* ITTVdb.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		042F07EB16BC19DB00A0CE9E /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				042F07EC16BC19DB00A0CE9E /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		042F07F116BC19DB00A0CE9E /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				042F07F216BC19DB00A0CE9E /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		042F07F716BC19DB00A0CE9E /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				042F07F816BC19DB00A0CE9E /* en */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		042F07FA16BC19DB00A0CE9E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		042F07FB16BC19DB00A0CE9E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		042F07FD16BC19DB00A0CE9E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/../../Library/Developer/Xcode/DerivedData/iTMDb-elomqdgishobeyewfiumjnwailyk/Build/Products/Debug\"",
+					"\"$(SRCROOT)/../../Downloads\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "iTraktor/iTraktor-Prefix.pch";
+				INFOPLIST_FILE = "iTraktor/iTraktor-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/iTraktor\"",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		042F07FE16BC19DB00A0CE9E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+					"\"$(SRCROOT)/../../Library/Developer/Xcode/DerivedData/iTMDb-elomqdgishobeyewfiumjnwailyk/Build/Products/Debug\"",
+					"\"$(SRCROOT)/../../Downloads\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "iTraktor/iTraktor-Prefix.pch";
+				INFOPLIST_FILE = "iTraktor/iTraktor-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/iTraktor\"",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		042F07D816BC19DB00A0CE9E /* Build configuration list for PBXProject "iTraktor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				042F07FA16BC19DB00A0CE9E /* Debug */,
+				042F07FB16BC19DB00A0CE9E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		042F07FC16BC19DB00A0CE9E /* Build configuration list for PBXNativeTarget "iTraktor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				042F07FD16BC19DB00A0CE9E /* Debug */,
+				042F07FE16BC19DB00A0CE9E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 042F07D516BC19DB00A0CE9E /* Project object */;
+}

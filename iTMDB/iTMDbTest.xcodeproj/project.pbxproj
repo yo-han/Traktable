@@ -1,0 +1,350 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AAA5D52114829C9700BD9791 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAA5D52014829C9700BD9791 /* Cocoa.framework */; };
+		AAA5D52B14829C9700BD9791 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = AAA5D52914829C9700BD9791 /* InfoPlist.strings */; };
+		AAA5D52D14829C9700BD9791 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA5D52C14829C9700BD9791 /* main.m */; };
+		AAA5D53114829C9700BD9791 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = AAA5D52F14829C9700BD9791 /* Credits.rtf */; };
+		AAA5D54814829DB900BD9791 /* TestAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AAA5D54714829DB900BD9791 /* TestAppDelegate.m */; };
+		AAA5D54A14829DC000BD9791 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = AAA5D54914829DC000BD9791 /* MainMenu.xib */; };
+		FAA700F3157E42B400430D40 /* iTMDb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAA700F2157E42A900430D40 /* iTMDb.framework */; };
+		FAA700F5157E42C400430D40 /* iTMDb.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = FAA700F2157E42A900430D40 /* iTMDb.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FAA700F1157E42A900430D40 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FAA700EA157E42A800430D40 /* iTMDb.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
+			remoteInfo = iTMDb;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		FAA700F4157E42BB00430D40 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				FAA700F5157E42C400430D40 /* iTMDb.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		AAA5D51C14829C9700BD9791 /* iTMDbTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iTMDbTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AAA5D52014829C9700BD9791 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		AAA5D52314829C9700BD9791 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		AAA5D52414829C9700BD9791 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		AAA5D52514829C9700BD9791 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		AAA5D52A14829C9700BD9791 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AAA5D52C14829C9700BD9791 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		AAA5D52E14829C9700BD9791 /* iTMDbTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iTMDbTest-Prefix.pch"; sourceTree = "<group>"; };
+		AAA5D53014829C9700BD9791 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		AAA5D54614829DB900BD9791 /* TestAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestAppDelegate.h; sourceTree = "<group>"; };
+		AAA5D54714829DB900BD9791 /* TestAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestAppDelegate.m; sourceTree = "<group>"; };
+		AAA5D54914829DC000BD9791 /* MainMenu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainMenu.xib; sourceTree = "<group>"; };
+		AAA5D54B14829DC700BD9791 /* iTMDbTest-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "iTMDbTest-Info.plist"; sourceTree = "<group>"; };
+		FAA700EA157E42A800430D40 /* iTMDb.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = iTMDb.xcodeproj; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AAA5D51914829C9700BD9791 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AAA5D52114829C9700BD9791 /* Cocoa.framework in Frameworks */,
+				FAA700F3157E42B400430D40 /* iTMDb.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AAA5D51114829C9700BD9791 = {
+			isa = PBXGroup;
+			children = (
+				AAA5D52614829C9700BD9791 /* iTMDbTest */,
+				AAA5D51F14829C9700BD9791 /* Frameworks */,
+				AAA5D51D14829C9700BD9791 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AAA5D51D14829C9700BD9791 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AAA5D51C14829C9700BD9791 /* iTMDbTest.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AAA5D51F14829C9700BD9791 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FAA700EA157E42A800430D40 /* iTMDb.xcodeproj */,
+				AAA5D52014829C9700BD9791 /* Cocoa.framework */,
+				AAA5D52214829C9700BD9791 /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AAA5D52214829C9700BD9791 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AAA5D52314829C9700BD9791 /* AppKit.framework */,
+				AAA5D52414829C9700BD9791 /* CoreData.framework */,
+				AAA5D52514829C9700BD9791 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		AAA5D52614829C9700BD9791 /* iTMDbTest */ = {
+			isa = PBXGroup;
+			children = (
+				AAA5D54614829DB900BD9791 /* TestAppDelegate.h */,
+				AAA5D54714829DB900BD9791 /* TestAppDelegate.m */,
+				AAA5D52714829C9700BD9791 /* Supporting Files */,
+			);
+			path = iTMDbTest;
+			sourceTree = "<group>";
+		};
+		AAA5D52714829C9700BD9791 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AAA5D54B14829DC700BD9791 /* iTMDbTest-Info.plist */,
+				AAA5D54914829DC000BD9791 /* MainMenu.xib */,
+				AAA5D52914829C9700BD9791 /* InfoPlist.strings */,
+				AAA5D52C14829C9700BD9791 /* main.m */,
+				AAA5D52E14829C9700BD9791 /* iTMDbTest-Prefix.pch */,
+				AAA5D52F14829C9700BD9791 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FAA700EB157E42A800430D40 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FAA700F2157E42A900430D40 /* iTMDb.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AAA5D51B14829C9700BD9791 /* iTMDbTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AAA5D53A14829C9700BD9791 /* Build configuration list for PBXNativeTarget "iTMDbTest" */;
+			buildPhases = (
+				AAA5D51814829C9700BD9791 /* Sources */,
+				AAA5D51914829C9700BD9791 /* Frameworks */,
+				AAA5D51A14829C9700BD9791 /* Resources */,
+				FAA700F4157E42BB00430D40 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = iTMDbTest;
+			productName = iTMDbTest;
+			productReference = AAA5D51C14829C9700BD9791 /* iTMDbTest.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AAA5D51314829C9700BD9791 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0440;
+				ORGANIZATIONNAME = Devify;
+			};
+			buildConfigurationList = AAA5D51614829C9700BD9791 /* Build configuration list for PBXProject "iTMDbTest" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = AAA5D51114829C9700BD9791;
+			productRefGroup = AAA5D51D14829C9700BD9791 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = FAA700EB157E42A800430D40 /* Products */;
+					ProjectRef = FAA700EA157E42A800430D40 /* iTMDb.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				AAA5D51B14829C9700BD9791 /* iTMDbTest */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		FAA700F2157E42A900430D40 /* iTMDb.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = iTMDb.framework;
+			remoteRef = FAA700F1157E42A900430D40 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AAA5D51A14829C9700BD9791 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AAA5D52B14829C9700BD9791 /* InfoPlist.strings in Resources */,
+				AAA5D53114829C9700BD9791 /* Credits.rtf in Resources */,
+				AAA5D54A14829DC000BD9791 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AAA5D51814829C9700BD9791 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AAA5D52D14829C9700BD9791 /* main.m in Sources */,
+				AAA5D54814829DB900BD9791 /* TestAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		AAA5D52914829C9700BD9791 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AAA5D52A14829C9700BD9791 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		AAA5D52F14829C9700BD9791 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AAA5D53014829C9700BD9791 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		AAA5D53814829C9700BD9791 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		AAA5D53914829C9700BD9791 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		AAA5D53B14829C9700BD9791 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "iTMDbTest/iTMDbTest-Prefix.pch";
+				INFOPLIST_FILE = "iTMDbTest/iTMDbTest-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		AAA5D53C14829C9700BD9791 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "iTMDbTest/iTMDbTest-Prefix.pch";
+				INFOPLIST_FILE = "iTMDbTest/iTMDbTest-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AAA5D51614829C9700BD9791 /* Build configuration list for PBXProject "iTMDbTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AAA5D53814829C9700BD9791 /* Debug */,
+				AAA5D53914829C9700BD9791 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AAA5D53A14829C9700BD9791 /* Build configuration list for PBXNativeTarget "iTMDbTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AAA5D53B14829C9700BD9791 /* Debug */,
+				AAA5D53C14829C9700BD9791 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AAA5D51314829C9700BD9791 /* Project object */;
+}
