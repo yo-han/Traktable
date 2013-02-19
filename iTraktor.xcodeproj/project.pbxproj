@@ -137,9 +137,6 @@
 		04714E2616D2C59900A308F7 /* ITConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITConfig.h; sourceTree = "<group>"; };
 		04714E2716D2C59900A308F7 /* ITConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITConfig.m; sourceTree = "<group>"; };
 		04714E6116D2D6D500A308F7 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = dsa_pub.pem; sourceTree = "<group>"; };
-		04714E7916D2DC2000A308F7 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
-		04714E7B16D2DC8200A308F7 /* Sparkle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = Sparkle.framework; path = "/Users/johan/Library/Developer/Xcode/DerivedData/iTraktor-dtvqbktctfpnvsehmbaehxjwlodv/Build/Products/Debug/Sparkle.framework"; sourceTree = "<absolute>"; };
-		04714E7D16D2DE4200A308F7 /* Sparkle.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = Sparkle.framework; path = "/Users/johan/Library/Developer/Xcode/DerivedData/iTraktor-dtvqbktctfpnvsehmbaehxjwlodv/Build/Products/Debug/Sparkle.framework"; sourceTree = "<absolute>"; };
 		04714E7F16D2DEC000A308F7 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		0481386316CA8BF400E682A0 /* MASPreferencesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MASPreferencesViewController.h; sourceTree = "<group>"; };
 		0481386416CA8BF400E682A0 /* MASPreferencesWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MASPreferencesWindow.xib; sourceTree = "<group>"; };
@@ -173,9 +170,6 @@
 		042F07D316BC19DB00A0CE9E = {
 			isa = PBXGroup;
 			children = (
-				04714E7D16D2DE4200A308F7 /* Sparkle.framework */,
-				04714E7B16D2DC8200A308F7 /* Sparkle.framework */,
-				04714E7916D2DC2000A308F7 /* Sparkle.framework */,
 				0437203216CEF3ED003B8AB6 /* icon.icns */,
 				042F07E816BC19DB00A0CE9E /* iTraktor */,
 				042F07E116BC19DB00A0CE9E /* Frameworks */,
