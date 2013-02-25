@@ -62,7 +62,7 @@
             return @"";
         
         } else {
-            
+
             [self setCache:imdbId title:title];
             NSLog(@"movie %@ imdbId found and cached: %@", title, cachedID);
             
@@ -80,10 +80,12 @@
     
     NSString *dbFilePath = [[ITLibrary applicationSupportFolder] stringByAppendingPathComponent:@"iTraktor.db"];
     FMDatabase *db = [FMDatabase databaseWithPath:dbFilePath];
-    
-    [db open];
+   
+    [db open]
     [db executeUpdate:@"REPLACE INTO imdb (movie, imdbId) VALUES (?,?)", aTitle, imdbId];
+    NSLog(@"%@", [db lastErrorMessage]);
     [db close];
+    
 }
 
 + (NSString *)checkCache:(NSString *)title {
