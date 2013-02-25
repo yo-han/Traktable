@@ -38,12 +38,17 @@
     if([[responseDict objectForKey:@"Response"] isEqualToString:@"False"]) {
         return @"";
     } else {
-        return [responseDict objectForKey:@"imdbID"];
+        NSString *responseD = [responseDict objectForKey:@"imdbID"];
+        
+        if(responseD == nil)
+            return @"";
+        
+        return responseD;
     }
 }
 
 + (NSString * )getImdbIdByTitle:(NSString *)title year:(NSString *)aYear {
-    
+
     NSString *cachedID = [self checkCache:title];
     NSLog(@"Looking for movie %@ imdbId", title);
     
@@ -97,6 +102,9 @@
         imdbId = @"";
     
     [db close];
+    
+    if(imdbId == nil)
+        imdbId = @"";
     
     return imdbId;
 }

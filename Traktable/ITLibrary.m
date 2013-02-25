@@ -30,15 +30,16 @@
 - (id)init {
     
     iTunesBridge = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
+    ITApi *api = [ITApi new];
     
     NSString *appSupportPath = [ITLibrary applicationSupportFolder];
     [self createDir:appSupportPath];
     
     dbFilePath = [appSupportPath stringByAppendingPathComponent:@"iTraktor.db"];
     
-    bool b = [[NSFileManager defaultManager] fileExistsAtPath:dbFilePath];
+    bool b = [self dbExists];
     
-    if(b == NO) {
+    if([api testAccount] && b == NO) {
         
         NSError *err;
         NSFileManager *fileManager = [[NSFileManager alloc] init];
@@ -55,6 +56,13 @@
     _db = [FMDatabase databaseWithPath:dbFilePath];
     
     return self;
+}
+
+- (BOOL)dbExists {
+    
+    bool b = [[NSFileManager defaultManager] fileExistsAtPath:dbFilePath];
+    
+    return b;
 }
 
 - (SBElementArray *)getVideos:(iTunesESpK)playlist noCheck:(BOOL)noChecking {
@@ -110,11 +118,21 @@
 
 - (void)syncLibrary {
     
+    if(![self dbExists]) {
+        [self init];
+        return;
+    }
+        
+    ITApi *api = [[ITApi alloc] init];
+    
     NSArray *movies = [self getVideos:iTunesESpKMovies noCheck:NO];
     NSArray *shows = [self getVideos:iTunesESpKTVShows noCheck:NO];
     firstImport = NO;
     
-    [self checkTracks:movies];
+    NSArray *seenMovies = [self checkTracks:movies];
+    if([seenMovies count] > 0)
+        [api seen:seenMovies type:iTunesEVdKMovie video:nil];
+    
     [self checkTracks:shows];
     
     [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"ITLastSyncDate"];
