@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "042F07DD16BC19DB00A0CE9E"
-               BuildableName = "iTraktor.app"
-               BlueprintName = "iTraktor"
-               ReferencedContainer = "container:iTraktor.xcodeproj">
+               BuildableName = "Traktable.app"
+               BlueprintName = "Traktable"
+               ReferencedContainer = "container:Traktable.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "042F07DD16BC19DB00A0CE9E"
-            BuildableName = "iTraktor.app"
-            BlueprintName = "iTraktor"
-            ReferencedContainer = "container:iTraktor.xcodeproj">
+            BuildableName = "Traktable.app"
+            BlueprintName = "Traktable"
+            ReferencedContainer = "container:Traktable.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -52,9 +52,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "042F07DD16BC19DB00A0CE9E"
-            BuildableName = "iTraktor.app"
-            BlueprintName = "iTraktor"
-            ReferencedContainer = "container:iTraktor.xcodeproj">
+            BuildableName = "Traktable.app"
+            BlueprintName = "Traktable"
+            ReferencedContainer = "container:Traktable.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -70,9 +70,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "042F07DD16BC19DB00A0CE9E"
-            BuildableName = "iTraktor.app"
-            BlueprintName = "iTraktor"
-            ReferencedContainer = "container:iTraktor.xcodeproj">
+            BuildableName = "Traktable.app"
+            BlueprintName = "Traktable"
+            ReferencedContainer = "container:Traktable.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

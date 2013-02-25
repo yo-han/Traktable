@@ -69,15 +69,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		042F07DE16BC19DB00A0CE9E /* iTraktor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iTraktor.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		042F07DE16BC19DB00A0CE9E /* Traktable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Traktable.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		042F07E216BC19DB00A0CE9E /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		042F07E516BC19DB00A0CE9E /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		042F07E616BC19DB00A0CE9E /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		042F07E716BC19DB00A0CE9E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		042F07EA16BC19DB00A0CE9E /* iTraktor-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iTraktor-Info.plist"; sourceTree = "<group>"; };
+		042F07EA16BC19DB00A0CE9E /* Traktable-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Traktable-Info.plist"; sourceTree = "<group>"; };
 		042F07EC16BC19DB00A0CE9E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		042F07EE16BC19DB00A0CE9E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		042F07F016BC19DB00A0CE9E /* iTraktor-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iTraktor-Prefix.pch"; sourceTree = "<group>"; };
+		042F07F016BC19DB00A0CE9E /* Traktable-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Traktable-Prefix.pch"; sourceTree = "<group>"; };
 		042F07F216BC19DB00A0CE9E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
 		042F07F416BC19DB00A0CE9E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		042F07F516BC19DB00A0CE9E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -171,7 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				0437203216CEF3ED003B8AB6 /* icon.icns */,
-				042F07E816BC19DB00A0CE9E /* iTraktor */,
+				042F07E816BC19DB00A0CE9E /* Traktable */,
 				042F07E116BC19DB00A0CE9E /* Frameworks */,
 				042F07DF16BC19DB00A0CE9E /* Products */,
 			);
@@ -180,7 +180,7 @@
 		042F07DF16BC19DB00A0CE9E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				042F07DE16BC19DB00A0CE9E /* iTraktor.app */,
+				042F07DE16BC19DB00A0CE9E /* Traktable.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -201,7 +201,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		042F07E816BC19DB00A0CE9E /* iTraktor */ = {
+		042F07E816BC19DB00A0CE9E /* Traktable */ = {
 			isa = PBXGroup;
 			children = (
 				042F07F416BC19DB00A0CE9E /* AppDelegate.h */,
@@ -229,7 +229,8 @@
 				042F080416BC1A3100A0CE9E /* Lib */,
 				042F07E916BC19DB00A0CE9E /* Supporting Files */,
 			);
-			path = iTraktor;
+			name = Traktable;
+			path = Traktable;
 			sourceTree = "<group>";
 		};
 		042F07E916BC19DB00A0CE9E /* Supporting Files */ = {
@@ -240,10 +241,10 @@
 				04714E2416D2BFBB00A308F7 /* config-example.plist */,
 				0437204216CEF823003B8AB6 /* menuicon.png */,
 				046C9BCF16C167B80003AD64 /* iTraktor.db */,
-				042F07EA16BC19DB00A0CE9E /* iTraktor-Info.plist */,
+				042F07EA16BC19DB00A0CE9E /* Traktable-Info.plist */,
 				042F07EB16BC19DB00A0CE9E /* InfoPlist.strings */,
 				042F07EE16BC19DB00A0CE9E /* main.m */,
-				042F07F016BC19DB00A0CE9E /* iTraktor-Prefix.pch */,
+				042F07F016BC19DB00A0CE9E /* Traktable-Prefix.pch */,
 				042F07F116BC19DB00A0CE9E /* Credits.rtf */,
 			);
 			name = "Supporting Files";
@@ -343,9 +344,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		042F07DD16BC19DB00A0CE9E /* iTraktor */ = {
+		042F07DD16BC19DB00A0CE9E /* Traktable */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 042F07FC16BC19DB00A0CE9E /* Build configuration list for PBXNativeTarget "iTraktor" */;
+			buildConfigurationList = 042F07FC16BC19DB00A0CE9E /* Build configuration list for PBXNativeTarget "Traktable" */;
 			buildPhases = (
 				042F07DA16BC19DB00A0CE9E /* Sources */,
 				042F07DB16BC19DB00A0CE9E /* Frameworks */,
@@ -356,9 +357,9 @@
 			);
 			dependencies = (
 			);
-			name = iTraktor;
-			productName = iTraktor;
-			productReference = 042F07DE16BC19DB00A0CE9E /* iTraktor.app */;
+			name = Traktable;
+			productName = Traktable;
+			productReference = 042F07DE16BC19DB00A0CE9E /* Traktable.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -370,7 +371,7 @@
 				LastUpgradeCheck = 0450;
 				ORGANIZATIONNAME = Mustacherious;
 			};
-			buildConfigurationList = 042F07D816BC19DB00A0CE9E /* Build configuration list for PBXProject "iTraktor" */;
+			buildConfigurationList = 042F07D816BC19DB00A0CE9E /* Build configuration list for PBXProject "Traktable" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -383,7 +384,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				042F07DD16BC19DB00A0CE9E /* iTraktor */,
+				042F07DD16BC19DB00A0CE9E /* Traktable */,
 			);
 		};
 /* End PBXProject section */
@@ -542,14 +543,14 @@
 					"\"$(SRCROOT)/../../Downloads\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "iTraktor/iTraktor-Prefix.pch";
-				INFOPLIST_FILE = "iTraktor/iTraktor-Info.plist";
+				GCC_PREFIX_HEADER = "Traktable/Traktable-Prefix.pch";
+				INFOPLIST_FILE = "Traktable/Traktable-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/iTraktor\"",
+					"\"$(SRCROOT)/Traktable\"",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Traktable;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -566,14 +567,14 @@
 					"\"$(SRCROOT)/../../Downloads\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "iTraktor/iTraktor-Prefix.pch";
-				INFOPLIST_FILE = "iTraktor/iTraktor-Info.plist";
+				GCC_PREFIX_HEADER = "Traktable/Traktable-Prefix.pch";
+				INFOPLIST_FILE = "Traktable/Traktable-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/iTraktor\"",
+					"\"$(SRCROOT)/Traktable\"",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Traktable;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -581,7 +582,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		042F07D816BC19DB00A0CE9E /* Build configuration list for PBXProject "iTraktor" */ = {
+		042F07D816BC19DB00A0CE9E /* Build configuration list for PBXProject "Traktable" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				042F07FA16BC19DB00A0CE9E /* Debug */,
@@ -590,7 +591,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		042F07FC16BC19DB00A0CE9E /* Build configuration list for PBXNativeTarget "iTraktor" */ = {
+		042F07FC16BC19DB00A0CE9E /* Build configuration list for PBXNativeTarget "Traktable" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				042F07FD16BC19DB00A0CE9E /* Debug */,
