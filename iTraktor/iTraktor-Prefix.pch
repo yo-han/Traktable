@@ -1,7 +1,0 @@
-//
-// Prefix header for all source files of the 'iTraktor' target in the 'iTraktor' project
-//
-
-#ifdef __OBJC__
-    #import <Cocoa/Cocoa.h>
-#endif
