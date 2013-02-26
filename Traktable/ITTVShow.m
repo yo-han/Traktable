@@ -26,7 +26,7 @@
     show.duration       = (NSInteger)([iTunesTrack duration]/60);
     show.persistentID   = [iTunesTrack persistentID];
     show.videoKind      = [iTunesTrack videoKind];
-    show.imdbId         = [ITTVdb getTVDBId:show.show];
+    //show.imdbId         = [ITTVdb getTVDBId:show.show];
 
     return show;
 }
