@@ -204,8 +204,6 @@
         }
     }
     
-    [self.db close];
-    
     return seenVideos;
 }
 
