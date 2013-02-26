@@ -52,6 +52,9 @@
     NSString *cachedID = [self checkCache:title];
     NSLog(@"Looking for movie %@ imdbId", title);
     
+    if(cachedID == (id)[NSNull null])
+        cachedID = @"";
+    
     if([cachedID isEqualToString:@""]) {
         
         NSString * imdbId = [self callAPI:title year:aYear];
@@ -81,7 +84,7 @@
     NSString *dbFilePath = [[ITLibrary applicationSupportFolder] stringByAppendingPathComponent:@"iTraktor.db"];
     FMDatabase *db = [FMDatabase databaseWithPath:dbFilePath];
    
-    [db open]
+    [db open];
     [db executeUpdate:@"REPLACE INTO imdb (movie, imdbId) VALUES (?,?)", aTitle, imdbId];
     NSLog(@"%@", [db lastErrorMessage]);
     [db close];

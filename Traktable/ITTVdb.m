@@ -27,6 +27,9 @@
     NSLog(@"Looking for show %@ imdbId", title);
     NSString *cachedID = [self checkCache:title];
     
+    if(cachedID == (id)[NSNull null])
+        cachedID = @"";
+    
     if([cachedID isEqualToString:@""]) {
         
         NSDictionary *config = [ITConfig getConfigFile];
