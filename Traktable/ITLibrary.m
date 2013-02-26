@@ -47,13 +47,14 @@
         
         [fileManager copyItemAtPath:defaultDbPath toPath:dbFilePath error:&err];
         
-        NSLog(@"%@",err);
+        NSLog(@"DB Create error: %@",err);
         
-        if(err == nil)
-            [self importLibrary];
+        //if(err == nil)
+        //    [self importLibrary];
     }
     
     _db = [FMDatabase databaseWithPath:dbFilePath];
+    [_db open];
     
     return self;
 }
@@ -77,7 +78,7 @@
     
     NSPredicate *trackFilter = [NSPredicate predicateWithFormat:predicateString, lastSyncDate];
     NSArray *tracks = [self getTrackList:trackFilter playlistType:playlist];
-    
+
     return (SBElementArray *) tracks;
 }
 
@@ -102,13 +103,13 @@
 }
 
 - (void)importLibrary {
-    
+
     ITApi *api = [[ITApi alloc] init];
     firstImport = YES;
     
     NSArray *movies = [self getVideos:iTunesESpKMovies noCheck:YES];
     NSArray *shows = [self getVideos:iTunesESpKTVShows noCheck:YES];
-    
+
     NSArray *seenMovies = [self checkTracks:movies];
     if([seenMovies count] > 0)
         [api seen:seenMovies type:iTunesEVdKMovie video:nil];
@@ -117,7 +118,7 @@
 }
 
 - (void)syncLibrary {
-    
+
     if(![self dbExists]) {
         [self init];
         return;
@@ -139,9 +140,7 @@
 }
 
 - (NSArray *)checkTracks:(NSArray *)tracks {
-    
-    [self.db open];
-    
+
     NSMutableArray *seenVideos = [[NSMutableArray alloc] init];
     ITVideo *video = [[ITVideo alloc] init];
     ITApi *api = [[ITApi alloc] init];
@@ -158,7 +157,7 @@
         }
         
         if(playedCount == nil) {
-            
+  
             [self updateTrackCount:track scrobbled:NO];
             
             if([track playedCount] > 0) {
@@ -208,10 +207,11 @@
 }
 
 - (void)updateTrackCount:(iTunesTrack *)track scrobbled:(BOOL)scrobble {
-    
-    [self.db open];
-    
+        
     NSDictionary *argsDict = [NSDictionary dictionaryWithObjectsAndKeys:[[track persistentID] description], @"id", [NSNumber numberWithInt:(int) [track playedCount]], @"played", [NSNumber numberWithBool:scrobble], @"scrobble", nil];
+    
+    NSLog(@"id: %@, played: %@", [argsDict objectForKey:@"id"], [argsDict objectForKey:@"played"]);
+    
     [self.db executeUpdate:@"REPLACE INTO library (persistentId, playedCount, scrobbled) VALUES (:id, :played, :scrobble)" withParameterDictionary:argsDict];
 }
 

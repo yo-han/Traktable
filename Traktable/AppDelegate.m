@@ -89,7 +89,7 @@
 }
 
 - (void)iTunesChangedState:(NSNotification*)notification {
-    
+
     if(![self.api testAccount]) {
         
         [self noAuthAlert];
