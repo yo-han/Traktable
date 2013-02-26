@@ -264,11 +264,15 @@
     
     if(videoType == iTunesEVdKTVShow) {
         
+        NSLog(@"Seen shows: %@", videos);
+        
         params = [self TVShow:aVideo batch:videos];
         type = @"show/episode";
         
     } else if(videoType == iTunesEVdKMovie) {
-
+        
+        NSLog(@"Seen movies: %@", videos);
+        
         params = [self Movie:nil batch:videos];
         type = @"movie";
     }
