@@ -130,6 +130,7 @@
     firstImport = NO;
 
     NSArray *seenMovies = [self checkTracks:movies];
+    NSLog(@"%@",seenMovies);
     if([seenMovies count] > 0)
         [api seen:seenMovies type:iTunesEVdKMovie video:nil];
     
