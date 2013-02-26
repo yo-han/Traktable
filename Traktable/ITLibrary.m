@@ -67,7 +67,7 @@
 
 - (SBElementArray *)getVideos:(iTunesESpK)playlist noCheck:(BOOL)noChecking {
     
-    NSDate *lastSyncDate = [[NSUserDefaults standardUserDefaults] objectForKey:@"ITLastSyncDate"];
+    NSDate *lastSyncDate = nil;//[[NSUserDefaults standardUserDefaults] objectForKey:@"ITLastSyncDate"];
     NSString *predicateString;
     
     if(lastSyncDate == nil || noChecking == YES)
