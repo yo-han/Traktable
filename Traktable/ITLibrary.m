@@ -67,7 +67,7 @@
 
 - (SBElementArray *)getVideos:(iTunesESpK)playlist noCheck:(BOOL)noChecking {
     
-    NSDate *lastSyncDate = nil;//[[NSUserDefaults standardUserDefaults] objectForKey:@"ITLastSyncDate"];
+    NSDate *lastSyncDate = [[NSUserDefaults standardUserDefaults] objectForKey:@"ITLastSyncDate"];
     NSString *predicateString;
     
     if(lastSyncDate == nil || noChecking == YES)
@@ -130,11 +130,10 @@
     firstImport = NO;
 
     NSArray *seenMovies = [self checkTracks:movies];
-    NSLog(@"%@",seenMovies);
     if([seenMovies count] > 0)
         [api seen:seenMovies type:iTunesEVdKMovie video:nil];
     
-    //[self checkTracks:shows];
+    [self checkTracks:shows];
     
     [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"ITLastSyncDate"];
 }
