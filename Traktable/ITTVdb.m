@@ -62,11 +62,9 @@
     
     NSString *dbFilePath = [[ITLibrary applicationSupportFolder] stringByAppendingPathComponent:@"iTraktor.db"];
     FMDatabase *db = [FMDatabase databaseWithPath:dbFilePath];
-        NSLog(@"Debug: m1");
+
     [db open];
-        NSLog(@"Debug: m2");
     [db executeUpdate:@"REPLACE INTO tvdbCache (show, imdbId) VALUES (%@, %@)", aTitle, imdbId];
-        NSLog(@"Debug: m3");
 }
 
 + (NSString *)checkCache:(NSString *)title {
@@ -83,8 +81,6 @@
         _imdbId = [s objectForColumnName:@"imdbId"];
     else
         _imdbId = @"";
-    
-    [db close];
     
     return _imdbId;
 }
