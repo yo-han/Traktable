@@ -23,7 +23,7 @@
     movie.duration       = (NSInteger)([iTunesTrack duration]/60);
     movie.persistentID   = [iTunesTrack persistentID];
     movie.videoKind      = [iTunesTrack videoKind];
-    //movie.imdbId      =  [IMDB getImdbIdByTitle:movie.name year:[[NSNumber numberWithInt:movie.year] stringValue]];
+    movie.imdbId      =  [IMDB getImdbIdByTitle:movie.name year:[[NSNumber numberWithInt:movie.year] stringValue]];
     
     return movie;
 }

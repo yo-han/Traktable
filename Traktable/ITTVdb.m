@@ -26,17 +26,18 @@
     
     NSLog(@"Looking for show %@ imdbId", title);
     NSString *cachedID = [self checkCache:title];
-    
+    NSLog(@"Debug: m1");
     if(cachedID == (id)[NSNull null])
         cachedID = @"";
-    
+        NSLog(@"Debug: m2");
     if([cachedID isEqualToString:@""]) {
-        
+            NSLog(@"Debug: m3");
         NSDictionary *config = [ITConfig getConfigFile];
-        
+            NSLog(@"Debug: m4");
         [[TVDbClient sharedInstance] setApiKey:[config objectForKey:@"tvdbApiKey"]];
+            NSLog(@"Debug: m5");
         NSMutableArray *shows = [TVDbShow findByName:title];
-        
+            NSLog(@"Debug: m6");
         if([shows count] == 0) {
             
             NSLog(@"Show %@ imdbId not found", title);
