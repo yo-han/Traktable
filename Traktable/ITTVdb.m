@@ -26,18 +26,17 @@
     
     NSLog(@"Looking for show %@ imdbId", title);
     NSString *cachedID = [self checkCache:title];
-    NSLog(@"Debug: m1");
+    
     if(cachedID == (id)[NSNull null])
         cachedID = @"";
-        NSLog(@"Debug: m2");
+    
     if([cachedID isEqualToString:@""]) {
-            NSLog(@"Debug: m3");
+        
         NSDictionary *config = [ITConfig getConfigFile];
-            NSLog(@"Debug: m4");
+        
         [[TVDbClient sharedInstance] setApiKey:[config objectForKey:@"tvdbApiKey"]];
-            NSLog(@"Debug: m5");
         NSMutableArray *shows = [TVDbShow findByName:title];
-            NSLog(@"Debug: m6");
+        
         if([shows count] == 0) {
             
             NSLog(@"Show %@ imdbId not found", title);
@@ -63,10 +62,11 @@
     
     NSString *dbFilePath = [[ITLibrary applicationSupportFolder] stringByAppendingPathComponent:@"iTraktor.db"];
     FMDatabase *db = [FMDatabase databaseWithPath:dbFilePath];
-    
+        NSLog(@"Debug: m1");
     [db open];
-    [db executeUpdate:@"REPLACE INTO tvdbCache (show, imdbId) VALUES (?,?)", aTitle, imdbId];
-    [db close];
+        NSLog(@"Debug: m2");
+    [db executeUpdate:@"REPLACE INTO tvdbCache (show, imdbId) VALUES (%@, %@)", aTitle, imdbId];
+        NSLog(@"Debug: m3");
 }
 
 + (NSString *)checkCache:(NSString *)title {
