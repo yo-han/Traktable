@@ -10,6 +10,7 @@
 #import "MASPreferencesWindowController.h"
 #import "PrefIndexViewController.h"
 #import "PrefSyncViewController.h"
+#import "PrefUpdateViewController.h"
 #import "iTunes.h"
 #import "ITApi.h"
 #import "ITVideo.h"
@@ -175,7 +176,8 @@
     if(_preferencesWindow == nil){
         NSViewController *prefIndexViewController = [[PrefIndexViewController alloc] initWithNibName:@"PrefIndexViewController" bundle:[NSBundle mainBundle]];
         NSViewController *prefSyncViewController = [[PrefSyncViewController alloc] initWithNibName:@"PrefSyncViewController" bundle:[NSBundle mainBundle]];
-        NSArray *views = [NSArray arrayWithObjects:prefIndexViewController, prefSyncViewController, nil];
+        NSViewController *prefUpdateViewController = [[PrefUpdateViewController alloc] initWithNibName:@"PrefUpdateViewController" bundle:[NSBundle mainBundle]];
+        NSArray *views = [NSArray arrayWithObjects:prefIndexViewController, prefSyncViewController, prefUpdateViewController, nil];
         NSString *title = NSLocalizedString(@"Preferences", @"With the letter P of Preferences...");
         _preferencesWindow = [[MASPreferencesWindowController alloc] initWithViewControllers:views title:title];
     }

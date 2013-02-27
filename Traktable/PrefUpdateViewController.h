@@ -9,11 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "MASPreferencesViewController.h"
 
-@interface PrefSyncViewController : NSViewController <MASPreferencesViewController>
-
-@property(nonatomic, retain) IBOutlet NSButton *testButton;
-
-- (IBAction)sync:(id)sender;
-- (IBAction)import:(id)sender;
+@interface PrefUpdateViewController : NSViewController <MASPreferencesViewController>
 
 @end

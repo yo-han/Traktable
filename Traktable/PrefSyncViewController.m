@@ -46,6 +46,9 @@
 
 - (IBAction)sync:(id)sender {
     
+    NSButton *btn = (NSButton *) sender;
+    [btn setEnabled:NO];
+   
     ITApi *api = [ITApi new];
     ITLibrary *library = [[ITLibrary alloc] init];
     
@@ -55,9 +58,14 @@
         //[self noAuthAlert];
         NSLog(@"No auth, no sync");
     }
+    
+    [btn setEnabled:YES];
 }
 
 - (IBAction)import:(id)sender {
+    
+    NSButton *btn = (NSButton *) sender;
+    [btn setEnabled:NO];
     
     ITApi *api = [ITApi new];
     ITLibrary *library = [[ITLibrary alloc] init];
@@ -68,5 +76,7 @@
         //[self noAuthAlert];
         NSLog(@"No auth, no sync");
     }
+    
+    [btn setEnabled:YES];
 }
 @end
