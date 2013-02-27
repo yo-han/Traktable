@@ -167,9 +167,7 @@
     if ([currentlyPlaying playCount] < [[self.library getTrack:[currentlyPlaying persistentID] type:playlist] playedCount]) {
         
         [self.api updateState:currentlyPlaying state:@"scrobble"];
-        [self.library.db open];
         [self.library updateTrackCount:[self.library getTrack:[currentlyPlaying persistentID] type:playlist] scrobbled:YES];
-        [self.library.db close];
         
     } else {
         [self.api updateState:currentlyPlaying state:@"cancelwatching"];

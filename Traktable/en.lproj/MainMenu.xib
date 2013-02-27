@@ -62,15 +62,6 @@
 									<reference key="NSOnImage" ref="35465992"/>
 									<reference key="NSMixedImage" ref="502551668"/>
 								</object>
-								<object class="NSMenuItem" id="800569972">
-									<reference key="NSMenu" ref="110575045"/>
-									<string key="NSTitle">Sync</string>
-									<string key="NSKeyEquiv">s</string>
-									<int key="NSKeyEquivModMask">1048576</int>
-									<int key="NSMnemonicLoc">2147483647</int>
-									<reference key="NSOnImage" ref="35465992"/>
-									<reference key="NSMixedImage" ref="502551668"/>
-								</object>
 								<object class="NSMenuItem" id="632440034">
 									<reference key="NSMenu" ref="110575045"/>
 									<string key="NSTitle">Check for updates</string>
@@ -166,14 +157,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
-						<string key="label">sync:</string>
-						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="800569972"/>
-					</object>
-					<int key="connectionID">548</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
 						<string key="label">checkForUpdates:</string>
 						<reference key="source" ref="1057447841"/>
 						<reference key="destination" ref="632440034"/>
@@ -231,7 +214,6 @@
 							<reference ref="380520749"/>
 							<reference ref="1050832689"/>
 							<reference ref="632440034"/>
-							<reference ref="800569972"/>
 						</array>
 						<reference key="parent" ref="694149608"/>
 					</object>
@@ -270,11 +252,6 @@
 						<reference key="object" ref="632440034"/>
 						<reference key="parent" ref="110575045"/>
 					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">546</int>
-						<reference key="object" ref="800569972"/>
-						<reference key="parent" ref="110575045"/>
-					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -288,7 +265,6 @@
 				<string key="541.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="543.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="544.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="546.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="56.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="57.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="58.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -307,7 +283,6 @@
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="displayPreferences:">id</string>
 						<string key="showLog:">id</string>
-						<string key="sync:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="displayPreferences:">
@@ -316,10 +291,6 @@
 						</object>
 						<object class="IBActionInfo" key="showLog:">
 							<string key="name">showLog:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="sync:">
-							<string key="name">sync:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 					</dictionary>

@@ -54,7 +54,6 @@
     }
     
     _db = [FMDatabase databaseWithPath:dbFilePath];
-    [_db open];
     
     return self;
 }
@@ -140,7 +139,9 @@
 }
 
 - (NSArray *)checkTracks:(NSArray *)tracks {
-
+    
+    [self.db open];
+    
     NSMutableArray *seenVideos = [[NSMutableArray alloc] init];
     ITVideo *video = [[ITVideo alloc] init];
     ITApi *api = [[ITApi alloc] init];
@@ -211,7 +212,8 @@
     NSDictionary *argsDict = [NSDictionary dictionaryWithObjectsAndKeys:[[track persistentID] description], @"id", [NSNumber numberWithInt:(int) [track playedCount]], @"played", [NSNumber numberWithBool:scrobble], @"scrobble", nil];
     
     NSLog(@"id: %@, played: %@", [argsDict objectForKey:@"id"], [argsDict objectForKey:@"played"]);
-    
+
+    [self.db open];
     [self.db executeUpdate:@"REPLACE INTO library (persistentId, playedCount, scrobbled) VALUES (:id, :played, :scrobble)" withParameterDictionary:argsDict];
 }
 
