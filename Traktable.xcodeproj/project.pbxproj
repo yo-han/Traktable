@@ -51,6 +51,8 @@
 		0481386A16CA8C6000E682A0 /* PrefIndexViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0481386916CA8C6000E682A0 /* PrefIndexViewController.m */; };
 		0481386B16CA8DA100E682A0 /* MASPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0481386616CA8BF400E682A0 /* MASPreferencesWindowController.m */; };
 		0481386D16CA8DB300E682A0 /* PrefIndexViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0481386C16CA8DB300E682A0 /* PrefIndexViewController.xib */; };
+		048DF1F616DEBF55004B064A /* PrefSyncViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 048DF1F516DEBF54004B064A /* PrefSyncViewController.m */; };
+		048DF1F816DEC3ED004B064A /* PrefSyncViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048DF1F716DEC3ED004B064A /* PrefSyncViewController.xib */; };
 		049ACB0916C2AD43007F103C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 049ACB0816C2AD43007F103C /* CFNetwork.framework */; };
 		049C48BE16C0223B00CC9A0E /* ITMovie.m in Sources */ = {isa = PBXBuildFile; fileRef = 049C48BD16C0223B00CC9A0E /* ITMovie.m */; };
 /* End PBXBuildFile section */
@@ -145,6 +147,9 @@
 		0481386816CA8C6000E682A0 /* PrefIndexViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefIndexViewController.h; sourceTree = "<group>"; };
 		0481386916CA8C6000E682A0 /* PrefIndexViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrefIndexViewController.m; sourceTree = "<group>"; };
 		0481386C16CA8DB300E682A0 /* PrefIndexViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrefIndexViewController.xib; sourceTree = "<group>"; };
+		048DF1F416DEBF54004B064A /* PrefSyncViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefSyncViewController.h; sourceTree = "<group>"; };
+		048DF1F516DEBF54004B064A /* PrefSyncViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrefSyncViewController.m; sourceTree = "<group>"; };
+		048DF1F716DEC3ED004B064A /* PrefSyncViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrefSyncViewController.xib; sourceTree = "<group>"; };
 		049ACB0816C2AD43007F103C /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		049C48BC16C0223B00CC9A0E /* ITMovie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITMovie.h; sourceTree = "<group>"; };
 		049C48BD16C0223B00CC9A0E /* ITMovie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITMovie.m; sourceTree = "<group>"; };
@@ -208,6 +213,8 @@
 				042F07F516BC19DB00A0CE9E /* AppDelegate.m */,
 				0481386816CA8C6000E682A0 /* PrefIndexViewController.h */,
 				0481386916CA8C6000E682A0 /* PrefIndexViewController.m */,
+				048DF1F416DEBF54004B064A /* PrefSyncViewController.h */,
+				048DF1F516DEBF54004B064A /* PrefSyncViewController.m */,
 				042F080916BC1E4C00A0CE9E /* ITApi.h */,
 				042F080A16BC1E4C00A0CE9E /* ITApi.m */,
 				042F080B16BC1E4C00A0CE9E /* ITVideo.h */,
@@ -225,11 +232,11 @@
 				0469CBFE16CBE010006863B7 /* IMDB.h */,
 				0469CBFF16CBE010006863B7 /* IMDB.m */,
 				0481386C16CA8DB300E682A0 /* PrefIndexViewController.xib */,
+				048DF1F716DEC3ED004B064A /* PrefSyncViewController.xib */,
 				042F07F716BC19DB00A0CE9E /* MainMenu.xib */,
 				042F080416BC1A3100A0CE9E /* Lib */,
 				042F07E916BC19DB00A0CE9E /* Supporting Files */,
 			);
-			name = Traktable;
 			path = Traktable;
 			sourceTree = "<group>";
 		};
@@ -408,6 +415,7 @@
 				04714E2316D2BF2900A308F7 /* config.plist in Resources */,
 				04714E2516D2BFBB00A308F7 /* config-example.plist in Resources */,
 				04714E6216D2D6D500A308F7 /* dsa_pub.pem in Resources */,
+				048DF1F816DEC3ED004B064A /* PrefSyncViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -443,6 +451,7 @@
 				0469CC1F16CBF19F006863B7 /* XMLReader.m in Sources */,
 				0469CC2216CD8CEA006863B7 /* ITTVdb.m in Sources */,
 				04714E2816D2C59900A308F7 /* ITConfig.m in Sources */,
+				048DF1F616DEBF55004B064A /* PrefSyncViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

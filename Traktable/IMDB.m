@@ -57,6 +57,8 @@
     
     if([cachedID isEqualToString:@""]) {
         
+        /* Off for now
+         
         NSString * imdbId = [self callAPI:title year:aYear];
         
         if([imdbId isEqualToString:@""]) {
@@ -71,6 +73,9 @@
             
             return imdbId;
         }
+         */
+        return @"";
+        
     } else {
         
         NSLog(@"movie %@ imdbId cached: %@", title, cachedID);

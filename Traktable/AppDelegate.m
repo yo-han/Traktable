@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "MASPreferencesWindowController.h"
 #import "PrefIndexViewController.h"
+#import "PrefSyncViewController.h"
 #import "iTunes.h"
 #import "ITApi.h"
 #import "ITVideo.h"
@@ -57,13 +58,6 @@
 - (IBAction)showLog:(id)sender {
     
     [[NSWorkspace sharedWorkspace] openFile:@"/tmp/ITDebug.log"];
-}
-
-- (IBAction)sync:(id)sender {
-    
-    NSLog(@"Sync by hand");
-    
-    [self.library syncLibrary]; 
 }
 
 - (void) redirectConsoleLogToDocumentFolder
@@ -180,7 +174,8 @@
     
     if(_preferencesWindow == nil){
         NSViewController *prefIndexViewController = [[PrefIndexViewController alloc] initWithNibName:@"PrefIndexViewController" bundle:[NSBundle mainBundle]];
-        NSArray *views = [NSArray arrayWithObjects:prefIndexViewController, nil];
+        NSViewController *prefSyncViewController = [[PrefSyncViewController alloc] initWithNibName:@"PrefSyncViewController" bundle:[NSBundle mainBundle]];
+        NSArray *views = [NSArray arrayWithObjects:prefIndexViewController, prefSyncViewController, nil];
         NSString *title = NSLocalizedString(@"Preferences", @"With the letter P of Preferences...");
         _preferencesWindow = [[MASPreferencesWindowController alloc] initWithViewControllers:views title:title];
     }

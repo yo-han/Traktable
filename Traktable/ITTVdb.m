@@ -32,6 +32,7 @@
     
     if([cachedID isEqualToString:@""]) {
         
+        /** Off for now 
         NSDictionary *config = [ITConfig getConfigFile];
         
         [[TVDbClient sharedInstance] setApiKey:[config objectForKey:@"tvdbApiKey"]];
@@ -50,6 +51,11 @@
             NSLog(@"Show %@ imdbId found and cached: %@", title, show.imdbId);
             return show.imdbId;
         }
+         
+        */
+        
+        return @"";
+        
     } else {
         
         NSLog(@"Show %@ imdbId cached: %@", title, cachedID);
