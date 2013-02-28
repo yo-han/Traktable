@@ -11,5 +11,6 @@
 @interface ITNotification : NSObject
 
 + (void)showNotification:(NSString *)description;
++ (void)growl:(NSString *)description;
 
 @end

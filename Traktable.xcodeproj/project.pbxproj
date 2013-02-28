@@ -57,6 +57,9 @@
 		048DF1FC16DECC99004B064A /* PrefUpdateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 048DF1FB16DECC99004B064A /* PrefUpdateViewController.m */; };
 		048DF1FE16DECD14004B064A /* PrefUpdateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048DF1FD16DECD14004B064A /* PrefUpdateViewController.xib */; };
 		048DF20116DFEE69004B064A /* ITNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 048DF20016DFEE69004B064A /* ITNotification.m */; };
+		048DF20316DFF64A004B064A /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 048DF20216DFF64A004B064A /* Growl.framework */; };
+		048DF20416DFF676004B064A /* Growl.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 048DF20216DFF64A004B064A /* Growl.framework */; };
+		048DF20616DFF6DD004B064A /* Growl Registration Ticket.growlRegDict in Resources */ = {isa = PBXBuildFile; fileRef = 048DF20516DFF6DD004B064A /* Growl Registration Ticket.growlRegDict */; };
 		049ACB0916C2AD43007F103C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 049ACB0816C2AD43007F103C /* CFNetwork.framework */; };
 		049C48BE16C0223B00CC9A0E /* ITMovie.m in Sources */ = {isa = PBXBuildFile; fileRef = 049C48BD16C0223B00CC9A0E /* ITMovie.m */; };
 /* End PBXBuildFile section */
@@ -69,6 +72,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				04714E8116D2DEC500A308F7 /* Sparkle.framework in CopyFiles */,
+				048DF20416DFF676004B064A /* Growl.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -159,6 +163,8 @@
 		048DF1FD16DECD14004B064A /* PrefUpdateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrefUpdateViewController.xib; sourceTree = "<group>"; };
 		048DF1FF16DFEE69004B064A /* ITNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITNotification.h; sourceTree = "<group>"; };
 		048DF20016DFEE69004B064A /* ITNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITNotification.m; sourceTree = "<group>"; };
+		048DF20216DFF64A004B064A /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Growl.framework; sourceTree = "<group>"; };
+		048DF20516DFF6DD004B064A /* Growl Registration Ticket.growlRegDict */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Growl Registration Ticket.growlRegDict"; sourceTree = "<group>"; };
 		049ACB0816C2AD43007F103C /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		049C48BC16C0223B00CC9A0E /* ITMovie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITMovie.h; sourceTree = "<group>"; };
 		049C48BD16C0223B00CC9A0E /* ITMovie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITMovie.m; sourceTree = "<group>"; };
@@ -175,6 +181,7 @@
 				042F081416BD64C400A0CE9E /* ScriptingBridge.framework in Frameworks */,
 				042F07E316BC19DB00A0CE9E /* Cocoa.framework in Frameworks */,
 				04714E8016D2DEC000A308F7 /* Sparkle.framework in Frameworks */,
+				048DF20316DFF64A004B064A /* Growl.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,6 +209,7 @@
 		042F07E116BC19DB00A0CE9E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				048DF20216DFF64A004B064A /* Growl.framework */,
 				04714E7F16D2DEC000A308F7 /* Sparkle.framework */,
 				049ACB0816C2AD43007F103C /* CFNetwork.framework */,
 				042F07E516BC19DB00A0CE9E /* AppKit.framework */,
@@ -267,6 +275,7 @@
 				042F07EE16BC19DB00A0CE9E /* main.m */,
 				042F07F016BC19DB00A0CE9E /* Traktable-Prefix.pch */,
 				042F07F116BC19DB00A0CE9E /* Credits.rtf */,
+				048DF20516DFF6DD004B064A /* Growl Registration Ticket.growlRegDict */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -432,6 +441,7 @@
 				048DF1F816DEC3ED004B064A /* PrefSyncViewController.xib in Resources */,
 				048DF1FA16DECC6B004B064A /* PrefUpdateViewController.h in Resources */,
 				048DF1FE16DECD14004B064A /* PrefUpdateViewController.xib in Resources */,
+				048DF20616DFF6DD004B064A /* Growl Registration Ticket.growlRegDict in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
