@@ -60,6 +60,7 @@
 		048DF20316DFF64A004B064A /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 048DF20216DFF64A004B064A /* Growl.framework */; };
 		048DF20416DFF676004B064A /* Growl.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 048DF20216DFF64A004B064A /* Growl.framework */; };
 		048DF20616DFF6DD004B064A /* Growl Registration Ticket.growlRegDict in Resources */ = {isa = PBXBuildFile; fileRef = 048DF20516DFF6DD004B064A /* Growl Registration Ticket.growlRegDict */; };
+		048DF20A16DFFF17004B064A /* sync.png in Resources */ = {isa = PBXBuildFile; fileRef = 048DF20916DFFF17004B064A /* sync.png */; };
 		049ACB0916C2AD43007F103C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 049ACB0816C2AD43007F103C /* CFNetwork.framework */; };
 		049C48BE16C0223B00CC9A0E /* ITMovie.m in Sources */ = {isa = PBXBuildFile; fileRef = 049C48BD16C0223B00CC9A0E /* ITMovie.m */; };
 /* End PBXBuildFile section */
@@ -165,6 +166,7 @@
 		048DF20016DFEE69004B064A /* ITNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITNotification.m; sourceTree = "<group>"; };
 		048DF20216DFF64A004B064A /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Growl.framework; sourceTree = "<group>"; };
 		048DF20516DFF6DD004B064A /* Growl Registration Ticket.growlRegDict */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Growl Registration Ticket.growlRegDict"; sourceTree = "<group>"; };
+		048DF20916DFFF17004B064A /* sync.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sync.png; sourceTree = "<group>"; };
 		049ACB0816C2AD43007F103C /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		049C48BC16C0223B00CC9A0E /* ITMovie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITMovie.h; sourceTree = "<group>"; };
 		049C48BD16C0223B00CC9A0E /* ITMovie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITMovie.m; sourceTree = "<group>"; };
@@ -265,6 +267,7 @@
 		042F07E916BC19DB00A0CE9E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				048DF20916DFFF17004B064A /* sync.png */,
 				04714E6116D2D6D500A308F7 /* dsa_pub.pem */,
 				04714E2216D2BF2900A308F7 /* config.plist */,
 				04714E2416D2BFBB00A308F7 /* config-example.plist */,
@@ -442,6 +445,7 @@
 				048DF1FA16DECC6B004B064A /* PrefUpdateViewController.h in Resources */,
 				048DF1FE16DECD14004B064A /* PrefUpdateViewController.xib in Resources */,
 				048DF20616DFF6DD004B064A /* Growl Registration Ticket.growlRegDict in Resources */,
+				048DF20A16DFFF17004B064A /* sync.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

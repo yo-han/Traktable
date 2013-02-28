@@ -38,7 +38,7 @@
 }
 
 -(NSImage *)toolbarItemImage{
-    return [NSImage imageNamed:NSImageNameAdvanced];
+    return [NSImage imageNamed:@"sync.png"];
 }
 
 -(NSString *)toolbarItemLabel{

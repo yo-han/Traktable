@@ -33,7 +33,7 @@
 }
 
 -(NSImage *)toolbarItemImage{
-    return [NSImage imageNamed:NSImageNamePreferencesGeneral];
+    return [NSImage imageNamed:NSImageNameNetwork];
 }
 
 -(NSString *)toolbarItemLabel{
