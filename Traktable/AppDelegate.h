@@ -13,7 +13,7 @@
 
 @class ITApi, ITVideo, ITLibrary;
 
-@interface AppDelegate : NSObject <NSApplicationDelegate, NSMenuDelegate>
+@interface AppDelegate : NSObject <NSApplicationDelegate, NSMenuDelegate, NSUserNotificationCenterDelegate>
 
 @property (strong) NSWindowController *preferencesWindow;
 @property (strong) IBOutlet NSMenu *statusMenu;

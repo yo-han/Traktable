@@ -9,6 +9,7 @@
 #import "PrefSyncViewController.h"
 #import "ITLibrary.h"
 #import "ITApi.h"
+#import "ITNotification.h"
 
 @interface PrefSyncViewController()
 
@@ -46,6 +47,8 @@
 
 - (IBAction)sync:(id)sender {
     
+    [ITNotification showNotification:[NSString stringWithFormat:@"Start iTunes library sync"]];
+    
     NSButton *btn = (NSButton *) sender;
     [btn setEnabled:NO];
    
@@ -60,9 +63,13 @@
     }
     
     [btn setEnabled:YES];
+    
+    [ITNotification showNotification:[NSString stringWithFormat:@"iTunes library sync done"]];
 }
 
 - (IBAction)import:(id)sender {
+    
+    [ITNotification showNotification:[NSString stringWithFormat:@"Start iTunes library import"]];
     
     NSButton *btn = (NSButton *) sender;
     [btn setEnabled:NO];
@@ -78,5 +85,8 @@
     }
     
     [btn setEnabled:YES];
+    
+    [ITNotification showNotification:[NSString stringWithFormat:@"iTunes library import done"]];
+
 }
 @end

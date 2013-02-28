@@ -23,7 +23,6 @@
 
 - (void)updateTrackCount:(iTunesTrack *)track scrobbled:(BOOL)scrobble;
 - (iTunesTrack *)getTrack:(NSString *)persistentID type:(iTunesESpK)videoType;
-- (void)seen:(NSArray *)videos type:(iTunesEVdK)videoType;
 - (SBElementArray *)getVideos:(iTunesESpK)playlist noCheck:(BOOL)noChecking;
 
 + (NSString *)applicationSupportFolder;

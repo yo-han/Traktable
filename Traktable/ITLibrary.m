@@ -14,7 +14,6 @@
 @interface ITLibrary()
 
 - (id)init;
-- (void)seen:(NSArray *)videos type:(iTunesEVdK)videoType;
 - (NSArray *)checkTracks:(NSArray *)tracks;
 - (void)createDir:(NSString *)dir;
 
@@ -48,9 +47,6 @@
         [fileManager copyItemAtPath:defaultDbPath toPath:dbFilePath error:&err];
         
         NSLog(@"DB Create error: %@",err);
-        
-        //if(err == nil)
-        //    [self importLibrary];
     }
     
     _db = [FMDatabase databaseWithPath:dbFilePath];
@@ -102,7 +98,7 @@
 }
 
 - (void)importLibrary {
-
+    
     ITApi *api = [[ITApi alloc] init];
     firstImport = YES;
     
@@ -122,7 +118,7 @@
         [self init];
         return;
     }
-        
+       
     ITApi *api = [[ITApi alloc] init];
     
     NSArray *movies = [self getVideos:iTunesESpKMovies noCheck:NO];

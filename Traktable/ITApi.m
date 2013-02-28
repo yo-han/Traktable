@@ -11,6 +11,7 @@
 #import "ITMovie.h"
 #import "ITConfig.h"
 #import "EMKeychainItem.h"
+#import "ITNotification.h"
 
 #define kApiUrl @"http://api.trakt.tv"
 
@@ -22,9 +23,10 @@
 - (NSDictionary *)TVShow:(ITTVShow *)aTVShow batch:(NSArray *)aBatch;
 - (NSDictionary *)Movie:(ITMovie *)aMovie batch:(NSArray *)aBatch;
 
-- (void)callAPI:(NSString*)apiCall WithParameters:(NSDictionary *)params;
+- (void)callAPI:(NSString*)apiCall WithParameters:(NSDictionary *)params notification:(NSDictionary *)notification;
 - (NSDictionary *)callURLSync:(NSString *)requestUrl withParameters:(NSDictionary *)params;
 - (void)callURL:(NSString *)requestUrl withParameters:(NSDictionary *)params completionHandler:(void (^)(NSDictionary *, NSError *))completionBlock;
+- (void)callAPISucces:(NSDictionary *)notification;
 
 @end
 
@@ -214,14 +216,24 @@
 }
 
 
-- (void)callAPI:(NSString*)apiCall WithParameters:(NSDictionary *)params {
+- (void)callAPI:(NSString*)apiCall WithParameters:(NSDictionary *)params notification:(NSDictionary *)notification {
     
     [self callURL:apiCall withParameters:params completionHandler:^(NSDictionary *dict, NSError *err) {
         if ([[dict objectForKey:@"status"] isEqualToString:@"success"]){
+            
             NSLog(@"Succes: %@",[dict objectForKey:@"message"]);
+            
+            if(notification != nil)
+                [self callAPISucces:notification];
         }
         if (err) NSLog(@"Error: %@",[err description]);
     }];
+}
+
+- (void)callAPISucces:(NSDictionary *)notification {
+    
+    if([[notification objectForKey:@"state"] isEqual: @"scrobble"])
+        [ITNotification showNotification:[NSString stringWithFormat:@"Scrobbled: %@", [notification objectForKey:@"video"]]];
 }
 
 - (BOOL)testAccount {
@@ -252,9 +264,11 @@
         params = [self Movie:(ITMovie *)aVideo batch:nil];
         type = @"movie";
     }
-
+    
+    NSDictionary *notification = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:aState, aVideo, nil] forKeys:[NSArray arrayWithObjects:@"state", @"video", nil]];
+    
     NSString *url = [NSString stringWithFormat:@"%@/%@/%@/%@", kApiUrl, type, aState, [self apiKey]];
-    [self callAPI:url WithParameters:params];
+    [self callAPI:url WithParameters:params notification:notification];
 }
 
 - (void)seen:(NSArray *)videos type:(iTunesEVdK)videoType video:(id)aVideo {
@@ -279,7 +293,7 @@
 
     NSString *url = [NSString stringWithFormat:@"%@/%@/seen/%@", kApiUrl, type, [self apiKey]];
 
-    [self callAPI:url WithParameters:params];
+    [self callAPI:url WithParameters:params notification:nil];
 }
 
 @end

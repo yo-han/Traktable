@@ -16,6 +16,7 @@
 #import "ITVideo.h"
 #import "ITLibrary.h"
 #import "ITMovie.h"
+#import "ITNotification.h"
 
 @interface AppDelegate()
 
@@ -33,7 +34,11 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+    // Make sure all logging with NSLog is ported to the log file in the compiled version of the app
     [self redirectConsoleLogToDocumentFolder];
+    
+    // Register this class as the NotificationCenter delegate
+    [[NSUserNotificationCenter defaultUserNotificationCenter] setDelegate:self];
     
     _api = [ITApi new];
     _video = [[ITVideo alloc] init];
@@ -98,7 +103,7 @@
     if ([playerState isEqualToString:@"Playing"]) {
         
         NSLog(@"iTunes play");
-        
+                
         if (![self.video isVideoPlaying]) {
          
             [self checkProgress];
@@ -139,6 +144,8 @@
 -(void)watching {
     
     [self.api updateState:currentlyPlaying state:@"watching"];
+    
+    [ITNotification showNotification:[NSString stringWithFormat:@"Watching: %@", currentlyPlaying]];
 }
 
 -(void)checkProgress {
@@ -163,9 +170,12 @@
         
         [self.api updateState:currentlyPlaying state:@"scrobble"];
         [self.library updateTrackCount:[self.library getTrack:[currentlyPlaying persistentID] type:playlist] scrobbled:YES];
-        
+       
     } else {
+        
         [self.api updateState:currentlyPlaying state:@"cancelwatching"];
+        
+        [ITNotification showNotification:[NSString stringWithFormat:@"Canceled watching: %@", currentlyPlaying]];
     }
 
     currentlyPlaying = nil;
@@ -191,5 +201,12 @@
     [alert setMessageText:@"Can't scrobble right now"];
     [alert setInformativeText:@"You didn't submit your authentication data yet or it is incorrect. Without the right username and password it's pretty hard to scrobble..."];
     [alert runModal];
+}
+
+#pragma mark -- NotificationCenter
+
+// Always show notifications, also when the app is not key
+- (BOOL)userNotificationCenter:(NSUserNotificationCenter *)center shouldPresentNotification:(NSUserNotification *)notification{
+    return YES;
 }
 @end

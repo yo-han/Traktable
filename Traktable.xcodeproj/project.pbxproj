@@ -56,6 +56,7 @@
 		048DF1FA16DECC6B004B064A /* PrefUpdateViewController.h in Resources */ = {isa = PBXBuildFile; fileRef = 048DF1F916DECC6B004B064A /* PrefUpdateViewController.h */; };
 		048DF1FC16DECC99004B064A /* PrefUpdateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 048DF1FB16DECC99004B064A /* PrefUpdateViewController.m */; };
 		048DF1FE16DECD14004B064A /* PrefUpdateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048DF1FD16DECD14004B064A /* PrefUpdateViewController.xib */; };
+		048DF20116DFEE69004B064A /* ITNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 048DF20016DFEE69004B064A /* ITNotification.m */; };
 		049ACB0916C2AD43007F103C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 049ACB0816C2AD43007F103C /* CFNetwork.framework */; };
 		049C48BE16C0223B00CC9A0E /* ITMovie.m in Sources */ = {isa = PBXBuildFile; fileRef = 049C48BD16C0223B00CC9A0E /* ITMovie.m */; };
 /* End PBXBuildFile section */
@@ -156,6 +157,8 @@
 		048DF1F916DECC6B004B064A /* PrefUpdateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefUpdateViewController.h; sourceTree = "<group>"; };
 		048DF1FB16DECC99004B064A /* PrefUpdateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrefUpdateViewController.m; sourceTree = "<group>"; };
 		048DF1FD16DECD14004B064A /* PrefUpdateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrefUpdateViewController.xib; sourceTree = "<group>"; };
+		048DF1FF16DFEE69004B064A /* ITNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITNotification.h; sourceTree = "<group>"; };
+		048DF20016DFEE69004B064A /* ITNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITNotification.m; sourceTree = "<group>"; };
 		049ACB0816C2AD43007F103C /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		049C48BC16C0223B00CC9A0E /* ITMovie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITMovie.h; sourceTree = "<group>"; };
 		049C48BD16C0223B00CC9A0E /* ITMovie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITMovie.m; sourceTree = "<group>"; };
@@ -239,6 +242,8 @@
 				0469CC2116CD8CEA006863B7 /* ITTVdb.m */,
 				0469CBFE16CBE010006863B7 /* IMDB.h */,
 				0469CBFF16CBE010006863B7 /* IMDB.m */,
+				048DF1FF16DFEE69004B064A /* ITNotification.h */,
+				048DF20016DFEE69004B064A /* ITNotification.m */,
 				0481386C16CA8DB300E682A0 /* PrefIndexViewController.xib */,
 				048DF1F716DEC3ED004B064A /* PrefSyncViewController.xib */,
 				048DF1FD16DECD14004B064A /* PrefUpdateViewController.xib */,
@@ -464,6 +469,7 @@
 				04714E2816D2C59900A308F7 /* ITConfig.m in Sources */,
 				048DF1F616DEBF55004B064A /* PrefSyncViewController.m in Sources */,
 				048DF1FC16DECC99004B064A /* PrefUpdateViewController.m in Sources */,
+				048DF20116DFEE69004B064A /* ITNotification.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
