@@ -21,13 +21,14 @@
 @interface AppDelegate()
 
 - (IBAction)showLog:(id)sender;
+- (IBAction)feedback:(id)sender;
 - (IBAction)displayPreferences:(id)sender;
 
 @end
 
 @implementation AppDelegate
 
-@synthesize currentlyPlaying, statusItem, statusMenu, timer;
+@synthesize currentlyPlaying, statusItem, statusMenu, showLog, timer;
 @synthesize api=_api;
 @synthesize video=_video;
 @synthesize library=_library;
@@ -66,6 +67,16 @@
     [[NSWorkspace sharedWorkspace] openFile:@"/tmp/ITDebug.log"];
 }
 
+- (IBAction)feedback:(id)sender {
+    
+    NSString *encodedSubject = [NSString stringWithFormat:@"SUBJECT=%@", [@"Traktable feedback" stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+    NSString *encodedBody = [NSString stringWithFormat:@"BODY=%@", [@"Your feedback here..." stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
+    NSString *encodedTo = [@"traktable@w3f.nl" stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
+    NSString *encodedURLString = [NSString stringWithFormat:@"mailto:%@?%@&%@", encodedTo, encodedSubject, encodedBody];
+    NSURL *mailtoURL = [NSURL URLWithString:encodedURLString];
+    [[NSWorkspace sharedWorkspace] openURL:mailtoURL];
+}
+
 - (void) redirectConsoleLogToDocumentFolder
 {
     NSString *currentPath = [[NSBundle mainBundle] bundlePath];
@@ -81,6 +92,9 @@
     
     NSImage *icon = [NSImage imageNamed:@"menuicon.png"];
     [icon setSize:CGSizeMake(18, 18)];
+    
+    [showLog setKeyEquivalentModifierMask:NSAlternateKeyMask];
+    [showLog setAlternate:YES];
     
     statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
     [statusItem setMenu:statusMenu];

@@ -17,6 +17,7 @@
 
 @property (strong) NSWindowController *preferencesWindow;
 @property (strong) IBOutlet NSMenu *statusMenu;
+@property (strong) IBOutlet NSMenuItem *showLog;
 @property (strong) NSStatusItem * statusItem;
 
 @property(nonatomic, retain) id currentlyPlaying;
