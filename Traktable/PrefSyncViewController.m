@@ -47,6 +47,8 @@
 
 - (IBAction)sync:(id)sender {
     
+    NSLog(@"[manual sync] -- Start iTunes library sync");
+    
     [ITNotification showNotification:[NSString stringWithFormat:@"Start iTunes library sync"]];
     
     NSButton *btn = (NSButton *) sender;
@@ -65,6 +67,8 @@
     [btn setEnabled:YES];
     
     [ITNotification showNotification:[NSString stringWithFormat:@"iTunes library sync done"]];
+    
+    NSLog(@"[/manual sync] -- iTunes library sync done");
 }
 
 - (IBAction)import:(id)sender {

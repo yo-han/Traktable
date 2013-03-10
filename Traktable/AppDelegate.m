@@ -116,7 +116,7 @@
     
     if ([playerState isEqualToString:@"Playing"]) {
         
-        NSLog(@"iTunes play");
+        NSLog(@"iTunes started playing");
                 
         if (![self.video isVideoPlaying]) {
          
@@ -132,13 +132,13 @@
         
     } else if ([playerState isEqualToString:@"Stopped"]) {
         
-        NSLog(@"iTunes stopped");
+        NSLog(@"iTunes stopped playing");
         
         [timer invalidate];
         if (currentlyPlaying) [self checkProgress];
         
     } else if ([playerState isEqualToString:@"Paused"]) {
-        NSLog(@"iTunes paused");
+        NSLog(@"iTunes paused playing");
         
         [timer invalidate];
         if (currentlyPlaying) [self checkProgress];
