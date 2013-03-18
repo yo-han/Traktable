@@ -170,7 +170,7 @@
                     
                     NSDictionary *videoDict;
                     
-                    if([track videoKind] == iTunesEVdKMovie) {
+                    if([track seasonNumber] == 0) {
                         
                         videoDict = [NSDictionary dictionaryWithObjectsAndKeys:
                                      [track name], @"title",
@@ -179,7 +179,7 @@
                                      [NSNumber numberWithInteger:[[track playedDate] timeIntervalSince1970]],@"last_played",
                                      nil];
                         
-                    } else if([track videoKind] == iTunesEVdKTVShow) {
+                    } else {
                         
                         videoDict = [NSDictionary dictionaryWithObjectsAndKeys:
                                      [NSNumber numberWithInteger:[track seasonNumber]],@"season",
@@ -202,7 +202,14 @@
                 
             } else if([playedCount integerValue] < [track playedCount]) {
                 
-                id scrobbleVideo = [video getVideoByType:track type:[track videoKind]];
+                iTunesEVdK *type;
+                
+                if([track seasonNumber] == 0)
+                    type = iTunesEVdKMovie;
+                else
+                    type = iTunesEVdKTVShow;
+                
+                id scrobbleVideo = [video getVideoByType:track type:type];
                 [api updateState:scrobbleVideo state:@"scrobble"];
                 
                 [self updateTrackCount:track scrobbled:YES];
