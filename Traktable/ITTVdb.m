@@ -10,6 +10,7 @@
 #import "ITLibrary.h"
 #import "ITConfig.h"
 #import "FMDatabase.h"
+#import "FMDatabaseQueue.h"
 #import "iTVDb/iTVDb.h"
 
 @interface ITTVdb()
@@ -18,7 +19,6 @@
 + (NSString *)checkCache:(NSString *)title;
 
 @end
-
 
 @implementation ITTVdb
 
@@ -32,7 +32,6 @@
     
     if([cachedID isEqualToString:@""]) {
         
-        /** Off for now 
         NSDictionary *config = [ITConfig getConfigFile];
         
         [[TVDbClient sharedInstance] setApiKey:[config objectForKey:@"tvdbApiKey"]];
@@ -51,8 +50,6 @@
             NSLog(@"Show %@ imdbId found and cached: %@", title, show.imdbId);
             return show.imdbId;
         }
-         
-        */
         
         return @"";
         
@@ -67,26 +64,30 @@
 + (void)setCache:(NSString *)imdbId title:(NSString *)aTitle {
     
     NSString *dbFilePath = [[ITLibrary applicationSupportFolder] stringByAppendingPathComponent:@"iTraktor.db"];
-    FMDatabase *db = [FMDatabase databaseWithPath:dbFilePath];
-
-    [db open];
-    [db executeUpdate:@"REPLACE INTO tvdbCache (show, imdbId) VALUES (%@, %@)", aTitle, imdbId];
+    FMDatabaseQueue *dbQueue = [FMDatabaseQueue databaseQueueWithPath:dbFilePath];
+    
+    [dbQueue inDatabase:^(FMDatabase *db) {
+        [db executeUpdate:@"REPLACE INTO tvdbCache (show, imdbId) VALUES (%@, %@)", aTitle, imdbId];
+    }];
 }
 
 + (NSString *)checkCache:(NSString *)title {
     
-    NSString *_imdbId;
+    __block NSString *_imdbId = nil;
     NSString *dbFilePath = [[ITLibrary applicationSupportFolder] stringByAppendingPathComponent:@"iTraktor.db"];
-    FMDatabase *db = [FMDatabase databaseWithPath:dbFilePath];
+    FMDatabaseQueue *dbQueue = [FMDatabaseQueue databaseQueueWithPath:dbFilePath];
     
-    [db open];
-    
-    FMResultSet *s = [db executeQuery:@"SELECT imdbId FROM tvdbCache WHERE show = ?", title];
-    
-    if ([s next])
-        _imdbId = [s objectForColumnName:@"imdbId"];
-    else
-        _imdbId = @"";
+    [dbQueue inDatabase:^(FMDatabase *db) {
+            
+        FMResultSet *s = [db executeQuery:@"SELECT imdbId FROM tvdbCache WHERE show = ?", title];
+        
+        if ([s next])
+            _imdbId = [s objectForColumnName:@"imdbId"];
+        else
+            _imdbId = @"";
+        
+        [s close];
+    }];
     
     return _imdbId;
 }

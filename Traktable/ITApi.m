@@ -189,7 +189,7 @@
     [request setHTTPBody: [NSJSONSerialization dataWithJSONObject:params options:NSJSONWritingPrettyPrinted error:nil]];
     
     NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-    [queue setName:@"com.mustacherious.iTraktor"];
+    [queue setName:@"com.mustacherious.iTraktor.apiCall"];
     
     [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
         

@@ -9,6 +9,7 @@
 #import "IMDB.h"
 #import "ITLibrary.h"
 #import "FMDatabase.h"
+#import "FMDatabaseQueue.h"
 
 @interface IMDB()
 
@@ -56,8 +57,6 @@
         cachedID = @"";
     
     if([cachedID isEqualToString:@""]) {
-        
-        /* Off for now
          
         NSString * imdbId = [self callAPI:title year:aYear];
         
@@ -73,7 +72,7 @@
             
             return imdbId;
         }
-         */
+         
         return @"";
         
     } else {
@@ -87,31 +86,29 @@
 + (void)setCache:(NSString *)imdbId title:(NSString *)aTitle {
     
     NSString *dbFilePath = [[ITLibrary applicationSupportFolder] stringByAppendingPathComponent:@"iTraktor.db"];
-    FMDatabase *db = [FMDatabase databaseWithPath:dbFilePath];
-   
-    [db open];
-    [db executeUpdate:@"REPLACE INTO imdb (movie, imdbId) VALUES (?,?)", aTitle, imdbId];
-    NSLog(@"%@", [db lastErrorMessage]);
-    [db close];
+    FMDatabaseQueue *dbQueue = [FMDatabaseQueue databaseQueueWithPath:dbFilePath];
     
+    [dbQueue inDatabase:^(FMDatabase *db) {
+        [db executeUpdate:@"REPLACE INTO imdb (movie, imdbId) VALUES (?,?)", aTitle, imdbId];
+    }];    
 }
 
 + (NSString *)checkCache:(NSString *)title {
     
-    NSString *imdbId;
+    __block NSString *imdbId = nil;
     NSString *dbFilePath = [[ITLibrary applicationSupportFolder] stringByAppendingPathComponent:@"iTraktor.db"];
-    FMDatabase *db = [FMDatabase databaseWithPath:dbFilePath];
+    FMDatabaseQueue *dbQueue = [FMDatabaseQueue databaseQueueWithPath:dbFilePath];
     
-    [db open];
+    [dbQueue inDatabase:^(FMDatabase *db) {
+        FMResultSet *s = [db executeQuery:@"SELECT imdbId FROM imdb WHERE movie = ?", title];
+        
+        if ([s next])
+            imdbId = [s objectForColumnName:@"imdbId"];
+        else
+            imdbId = @"";
     
-    FMResultSet *s = [db executeQuery:@"SELECT imdbId FROM imdb WHERE movie = ?", title];
-    
-    if ([s next])
-        imdbId = [s objectForColumnName:@"imdbId"];
-    else
-        imdbId = @"";
-    
-    [db close];
+        [s close];
+    }];
     
     if(imdbId == nil)
         imdbId = @"";

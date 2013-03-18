@@ -22,7 +22,7 @@
 @implementation ITLibrary
 
 @synthesize iTunesBridge;
-@synthesize db=_db;
+@synthesize dbQueue=_dbQueue;
 @synthesize dbFilePath;
 @synthesize firstImport;
 
@@ -49,7 +49,7 @@
         NSLog(@"DB Create error: %@",err);
     }
     
-    _db = [FMDatabase databaseWithPath:dbFilePath];
+    _dbQueue = [FMDatabaseQueue databaseQueueWithPath:dbFilePath];
     
     return self;
 }
@@ -136,69 +136,83 @@
 
 - (NSArray *)checkTracks:(NSArray *)tracks {
     
-    [self.db open];
-    
     NSMutableArray *seenVideos = [[NSMutableArray alloc] init];
-    ITVideo *video = [[ITVideo alloc] init];
-    ITApi *api = [[ITApi alloc] init];
+    ITVideo *video = [ITVideo new];
+    ITApi *api = [ITApi new];
+    
+    NSOperationQueue *queue = [NSOperationQueue new];
     
     int i;
     for(i = 0; i < [tracks count]; i++) {
         
-        iTunesTrack *track = [tracks objectAtIndex:i];
-        FMResultSet *s = [self.db executeQuery:@"SELECT playedCount FROM library WHERE persistentId = ?", [[track persistentID] description]];
-        
-        id playedCount;
-        if ([s next]) {
-            playedCount = [s objectForColumnName:@"playedCount"];
-        }
-        
-        if(playedCount == nil) {
-  
-            [self updateTrackCount:track scrobbled:NO];
-            
-            if([track playedCount] > 0) {
+        NSBlockOperation *operation = [[NSBlockOperation alloc] init];
+
+        [operation addExecutionBlock:
+         ^{       
+            iTunesTrack *track = [tracks objectAtIndex:i];
+            __block id playedCount;
+             
+            [self.dbQueue inDatabase:^(FMDatabase *db) {
+                FMResultSet *s = [db executeQuery:@"SELECT playedCount FROM library WHERE persistentId = ?", [[track persistentID] description]];
                 
-                NSDictionary *videoDict;
-                
-                if([track videoKind] == iTunesEVdKMovie) {
-                    
-                    videoDict = [NSDictionary dictionaryWithObjectsAndKeys:
-                                 [track name], @"title",
-                                 [NSNumber numberWithInteger:[track year]],@"year",
-                                 [NSNumber numberWithInteger:[track playedCount]],@"plays",
-                                 [NSNumber numberWithInteger:[[track playedDate] timeIntervalSince1970]],@"last_played",
-                                 nil];
-                    
-                } else if([track videoKind] == iTunesEVdKTVShow) {
-                    
-                    videoDict = [NSDictionary dictionaryWithObjectsAndKeys:
-                                 [NSNumber numberWithInteger:[track seasonNumber]],@"season",
-                                 [NSNumber numberWithInteger:[track episodeNumber]],@"episode",
-                                 nil];
-                    
-                    id scrobbleVideo = [video getVideoByType:track type:iTunesEVdKTVShow];
-                    
-                    if(firstImport)
-                        [api seen:[NSArray arrayWithObject:videoDict] type:iTunesEVdKTVShow video:scrobbleVideo];
-                    else
-                        [api updateState:scrobbleVideo state:@"scrobble"];
-                    
-                    videoDict = nil;
+                if ([s next]) {
+                    playedCount = [s objectForColumnName:@"playedCount"];
                 }
                 
-                if(videoDict != nil)
-                    [seenVideos addObject:videoDict];
+                [s close];
+            }];          
+            
+            if(playedCount == nil) {
+      
+                [self updateTrackCount:track scrobbled:NO];
+                
+                if([track playedCount] > 0) {
+                    
+                    NSDictionary *videoDict;
+                    
+                    if([track videoKind] == iTunesEVdKMovie) {
+                        
+                        videoDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                                     [track name], @"title",
+                                     [NSNumber numberWithInteger:[track year]],@"year",
+                                     [NSNumber numberWithInteger:[track playedCount]],@"plays",
+                                     [NSNumber numberWithInteger:[[track playedDate] timeIntervalSince1970]],@"last_played",
+                                     nil];
+                        
+                    } else if([track videoKind] == iTunesEVdKTVShow) {
+                        
+                        videoDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                                     [NSNumber numberWithInteger:[track seasonNumber]],@"season",
+                                     [NSNumber numberWithInteger:[track episodeNumber]],@"episode",
+                                     nil];
+                        
+                        id scrobbleVideo = [video getVideoByType:track type:iTunesEVdKTVShow];
+                        
+                        if(firstImport)
+                            [api seen:[NSArray arrayWithObject:videoDict] type:iTunesEVdKTVShow video:scrobbleVideo];
+                        else
+                            [api updateState:scrobbleVideo state:@"scrobble"];
+                        
+                        videoDict = nil;
+                    }
+                    
+                    if(videoDict != nil)
+                        [seenVideos addObject:videoDict];
+                }
+                
+            } else if([playedCount integerValue] < [track playedCount]) {
+                
+                id scrobbleVideo = [video getVideoByType:track type:[track videoKind]];
+                [api updateState:scrobbleVideo state:@"scrobble"];
+                
+                [self updateTrackCount:track scrobbled:YES];
             }
-            
-        } else if([playedCount integerValue] < [track playedCount]) {
-            
-            id scrobbleVideo = [video getVideoByType:track type:[track videoKind]];
-            [api updateState:scrobbleVideo state:@"scrobble"];
-            
-            [self updateTrackCount:track scrobbled:YES];
-        }
+         }];
+         
+        [queue addOperation: operation];
     }
+    
+    [queue waitUntilAllOperationsAreFinished];
     
     return seenVideos;
 }
@@ -209,8 +223,9 @@
     
     NSLog(@"id: %@, played: %@", [argsDict objectForKey:@"id"], [argsDict objectForKey:@"played"]);
 
-    [self.db open];
-    [self.db executeUpdate:@"REPLACE INTO library (persistentId, playedCount, scrobbled) VALUES (:id, :played, :scrobble)" withParameterDictionary:argsDict];
+    [self.dbQueue inDatabase:^(FMDatabase *db) {
+        [db executeUpdate:@"REPLACE INTO library (persistentId, playedCount, scrobbled) VALUES (:id, :played, :scrobble)" withParameterDictionary:argsDict];
+    }];
 }
 
 - (void)createDir:(NSString *)dir {
