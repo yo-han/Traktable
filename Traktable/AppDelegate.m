@@ -206,7 +206,9 @@
         _preferencesWindow = [[MASPreferencesWindowController alloc] initWithViewControllers:views title:title];
     }
     [self.preferencesWindow showWindow:self];
-    [self.preferencesWindow.window setLevel: NSStatusWindowLevel];
+    [self.preferencesWindow.window setLevel: NSNormalWindowLevel];
+    
+    [NSApp activateIgnoringOtherApps:YES];
 }
 
 - (void)noAuthAlert {
