@@ -183,7 +183,42 @@
 
 - (void)callURL:(NSString *)requestUrl withParameters:(NSDictionary *)params completionHandler:(void (^)(NSDictionary *, NSError *))completionBlock
 {
-
+    dispatch_queue_t apiQueue = dispatch_queue_create("iTraktor.apiCall", NULL);
+    
+    dispatch_async(apiQueue, ^{
+        
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestUrl]];
+        [request setHTTPMethod: @"POST"];
+        [request setHTTPBody: [NSJSONSerialization dataWithJSONObject:params options:NSJSONWritingPrettyPrinted error:nil]];
+        
+        NSURLResponse *response = nil;
+        NSError *error;
+        
+        NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+        
+        if (error) {
+            
+            dispatch_async(dispatch_get_main_queue(), ^(void) {
+                completionBlock(nil, error);
+            });
+            return;
+        }
+        
+        NSError *errorJSON;
+        NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&errorJSON];
+        
+        if (errorJSON) {
+            dispatch_async(dispatch_get_main_queue(), ^(void) { });
+            return;
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            completionBlock(responseDict, nil);
+        });
+        
+    });
+    
+    /*
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestUrl]];
     [request setHTTPMethod: @"POST"];
     [request setHTTPBody: [NSJSONSerialization dataWithJSONObject:params options:NSJSONWritingPrettyPrinted error:nil]];
@@ -213,6 +248,8 @@
             completionBlock(responseDict, nil);
         });
     }];
+     
+     */
 }
 
 
