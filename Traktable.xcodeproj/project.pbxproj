@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		04044C95172187D9008ED807 /* SBJson.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 04044C94172187D9008ED807 /* SBJson.framework */; };
+		04044CAB17218F17008ED807 /* SBJson.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04044CAA17218F17008ED807 /* SBJson.framework */; };
 		042F07E316BC19DB00A0CE9E /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 042F07E216BC19DB00A0CE9E /* Cocoa.framework */; };
 		042F07ED16BC19DB00A0CE9E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 042F07EB16BC19DB00A0CE9E /* InfoPlist.strings */; };
 		042F07EF16BC19DB00A0CE9E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 042F07EE16BC19DB00A0CE9E /* main.m */; };
@@ -47,7 +47,6 @@
 		04714E2516D2BFBB00A308F7 /* config-example.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04714E2416D2BFBB00A308F7 /* config-example.plist */; };
 		04714E2816D2C59900A308F7 /* ITConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 04714E2716D2C59900A308F7 /* ITConfig.m */; };
 		04714E6216D2D6D500A308F7 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 04714E6116D2D6D500A308F7 /* dsa_pub.pem */; };
-		04714E8016D2DEC000A308F7 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04714E7F16D2DEC000A308F7 /* Sparkle.framework */; };
 		04714E8116D2DEC500A308F7 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 04714E7F16D2DEC000A308F7 /* Sparkle.framework */; };
 		0481386A16CA8C6000E682A0 /* PrefIndexViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0481386916CA8C6000E682A0 /* PrefIndexViewController.m */; };
 		0481386B16CA8DA100E682A0 /* MASPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0481386616CA8BF400E682A0 /* MASPreferencesWindowController.m */; };
@@ -73,7 +72,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				04044C95172187D9008ED807 /* SBJson.framework in CopyFiles */,
 				04714E8116D2DEC500A308F7 /* Sparkle.framework in CopyFiles */,
 				048DF20416DFF676004B064A /* Growl.framework in CopyFiles */,
 			);
@@ -82,7 +80,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		04044C94172187D9008ED807 /* SBJson.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SBJson.framework; sourceTree = "<group>"; };
+		04044CAA17218F17008ED807 /* SBJson.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SBJson.framework; path = Traktable/SBJson.framework; sourceTree = "<group>"; };
 		042F07DE16BC19DB00A0CE9E /* Traktable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Traktable.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		042F07E216BC19DB00A0CE9E /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		042F07E516BC19DB00A0CE9E /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -185,8 +183,8 @@
 				042F081616BD64ED00A0CE9E /* Security.framework in Frameworks */,
 				042F081416BD64C400A0CE9E /* ScriptingBridge.framework in Frameworks */,
 				042F07E316BC19DB00A0CE9E /* Cocoa.framework in Frameworks */,
-				04714E8016D2DEC000A308F7 /* Sparkle.framework in Frameworks */,
 				048DF20316DFF64A004B064A /* Growl.framework in Frameworks */,
+				04044CAB17218F17008ED807 /* SBJson.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -214,7 +212,7 @@
 		042F07E116BC19DB00A0CE9E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				04044C94172187D9008ED807 /* SBJson.framework */,
+				04044CAA17218F17008ED807 /* SBJson.framework */,
 				048DF20216DFF64A004B064A /* Growl.framework */,
 				04714E7F16D2DEC000A308F7 /* Sparkle.framework */,
 				049ACB0816C2AD43007F103C /* CFNetwork.framework */,
@@ -586,6 +584,8 @@
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/../../Library/Developer/Xcode/DerivedData/iTMDb-elomqdgishobeyewfiumjnwailyk/Build/Products/Debug\"",
 					"\"$(SRCROOT)/../../Downloads\"",
+					"\"$(SRCROOT)/..\"",
+					"\"$(SRCROOT)/Traktable\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Traktable/Traktable-Prefix.pch";
@@ -593,6 +593,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Traktable\"",
+					"\"$(SRCROOT)/SBJson.framework/Versions/A\"",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = Traktable;
@@ -610,6 +611,8 @@
 					"\"$(SRCROOT)\"",
 					"\"$(SRCROOT)/../../Library/Developer/Xcode/DerivedData/iTMDb-elomqdgishobeyewfiumjnwailyk/Build/Products/Debug\"",
 					"\"$(SRCROOT)/../../Downloads\"",
+					"\"$(SRCROOT)/..\"",
+					"\"$(SRCROOT)/Traktable\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Traktable/Traktable-Prefix.pch";
@@ -617,6 +620,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Traktable\"",
+					"\"$(SRCROOT)/SBJson.framework/Versions/A\"",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_NAME = Traktable;
