@@ -265,7 +265,7 @@
     }
     
     NSDictionary *notification = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:aState, aVideo, nil] forKeys:[NSArray arrayWithObjects:@"state", @"video", nil]];
-    NSLog(@"!!!!! %@", type);
+
     NSString *url = [NSString stringWithFormat:@"%@/%@/%@/%@", kApiUrl, type, aState, [self apiKey]];
     [self callAPI:url WithParameters:params notification:notification];
 }
