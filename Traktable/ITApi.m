@@ -12,7 +12,7 @@
 #import "ITConfig.h"
 #import "EMKeychainItem.h"
 #import "ITNotification.h"
-#import <SBJson/SBJson.h>
+#import "SBJson.h"
 
 #define kApiUrl @"http://api.trakt.tv"
 
