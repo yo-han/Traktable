@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04044C95172187D9008ED807 /* SBJson.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 04044C94172187D9008ED807 /* SBJson.framework */; };
 		042F07E316BC19DB00A0CE9E /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 042F07E216BC19DB00A0CE9E /* Cocoa.framework */; };
 		042F07ED16BC19DB00A0CE9E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 042F07EB16BC19DB00A0CE9E /* InfoPlist.strings */; };
 		042F07EF16BC19DB00A0CE9E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 042F07EE16BC19DB00A0CE9E /* main.m */; };
@@ -72,6 +73,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				04044C95172187D9008ED807 /* SBJson.framework in CopyFiles */,
 				04714E8116D2DEC500A308F7 /* Sparkle.framework in CopyFiles */,
 				048DF20416DFF676004B064A /* Growl.framework in CopyFiles */,
 			);
@@ -80,6 +82,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		04044C94172187D9008ED807 /* SBJson.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SBJson.framework; sourceTree = "<group>"; };
 		042F07DE16BC19DB00A0CE9E /* Traktable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Traktable.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		042F07E216BC19DB00A0CE9E /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		042F07E516BC19DB00A0CE9E /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -211,6 +214,7 @@
 		042F07E116BC19DB00A0CE9E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				04044C94172187D9008ED807 /* SBJson.framework */,
 				048DF20216DFF64A004B064A /* Growl.framework */,
 				04714E7F16D2DEC000A308F7 /* Sparkle.framework */,
 				049ACB0816C2AD43007F103C /* CFNetwork.framework */,

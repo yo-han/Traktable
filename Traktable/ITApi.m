@@ -12,6 +12,7 @@
 #import "ITConfig.h"
 #import "EMKeychainItem.h"
 #import "ITNotification.h"
+#import <SBJson/SBJson.h>
 
 #define kApiUrl @"http://api.trakt.tv"
 
@@ -170,7 +171,9 @@
 
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestUrl]];
     [request setHTTPMethod: @"POST"];
-    [request setHTTPBody: [NSJSONSerialization dataWithJSONObject:params options:NSJSONWritingPrettyPrinted error:nil]];
+    // Changed for Snow Leopard support
+    //[request setHTTPBody: [NSJSONSerialization dataWithJSONObject:params options:NSJSONWritingPrettyPrinted error:nil]];
+    [request setHTTPBody:[[SBJsonWriter alloc] dataWithObject:params]];
     
     NSURLResponse *response = nil;
     NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
@@ -189,7 +192,10 @@
         
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestUrl]];
         [request setHTTPMethod: @"POST"];
-        [request setHTTPBody: [NSJSONSerialization dataWithJSONObject:params options:NSJSONWritingPrettyPrinted error:nil]];
+        
+        // Changed for Snow Leopard support
+        //[request setHTTPBody: [NSJSONSerialization dataWithJSONObject:params options:NSJSONWritingPrettyPrinted error:nil]];
+        [request setHTTPBody:[[SBJsonWriter alloc] dataWithObject:params]];
         
         NSURLResponse *response = nil;
         NSError *error;
