@@ -10,6 +10,7 @@
 #import "ITLibrary.h"
 #import "FMDatabase.h"
 #import "FMDatabaseQueue.h"
+#import "SBJson.h"
 
 @interface IMDB()
 
@@ -33,8 +34,7 @@
     if(data == nil)
         return @"";
     
-    NSError *errorJSON;
-    NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&errorJSON];
+    NSDictionary *responseDict = [[SBJsonParser alloc] objectWithData:data];
 
     if([[responseDict objectForKey:@"Response"] isEqualToString:@"False"]) {
         return @"";

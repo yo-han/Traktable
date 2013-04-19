@@ -78,7 +78,7 @@
     if (!keychain) {
         return nil;
     }
-    
+
     return [self sha1Hash:keychain.password];
 }
 
@@ -92,8 +92,8 @@
     NSDictionary *params;
     
     if (aTVShow && aBatch == nil) {
-        
-        params = [NSDictionary dictionaryWithObjectsAndKeys:
+
+        params = [[NSDictionary alloc] initWithObjectsAndKeys:
                   self.username, @"username",
                   self.password, @"password",
                   aTVShow.show, @"title",
@@ -106,10 +106,10 @@
                   @"1.0", @"media_center_version",
                   @"31.12.2011", @"media_center_date",
                   nil];
-        
+
     } else if(aTVShow != nil && aBatch != nil){
         
-        params = [NSDictionary dictionaryWithObjectsAndKeys:
+        params = [[NSDictionary alloc] initWithObjectsAndKeys:
                   self.username, @"username",
                   self.password, @"password",
                   aTVShow.show, @"title",
@@ -118,7 +118,7 @@
                   nil];
     } else {
         
-        params = [NSDictionary dictionaryWithObjectsAndKeys:
+        params = [[NSDictionary alloc] initWithObjectsAndKeys:
                   self.username, @"username",
                   self.password, @"password",
                   nil];
@@ -171,15 +171,12 @@
 
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestUrl]];
     [request setHTTPMethod: @"POST"];
-    // Changed for Snow Leopard support
-    //[request setHTTPBody: [NSJSONSerialization dataWithJSONObject:params options:NSJSONWritingPrettyPrinted error:nil]];
     [request setHTTPBody:[[SBJsonWriter alloc] dataWithObject:params]];
     
     NSURLResponse *response = nil;
     NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
-    
-    NSError *errorJSON;
-    NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&errorJSON];
+
+    NSDictionary *responseDict = [[SBJsonParser alloc] objectWithData:data];
     
     return responseDict;
 }
@@ -193,13 +190,11 @@
         NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestUrl]];
         [request setHTTPMethod: @"POST"];
         
-        // Changed for Snow Leopard support
-        //[request setHTTPBody: [NSJSONSerialization dataWithJSONObject:params options:NSJSONWritingPrettyPrinted error:nil]];
         [request setHTTPBody:[[SBJsonWriter alloc] dataWithObject:params]];
         
         NSURLResponse *response = nil;
         NSError *error;
-        
+
         NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
         
         if (error) {
@@ -210,52 +205,13 @@
             return;
         }
         
-        NSError *errorJSON;
-        NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&errorJSON];
-        
-        if (errorJSON) {
-            dispatch_async(dispatch_get_main_queue(), ^(void) { });
-            return;
-        }
+        NSDictionary *responseDict = [[SBJsonParser alloc] objectWithData:data];
         
         dispatch_async(dispatch_get_main_queue(), ^(void) {
             completionBlock(responseDict, nil);
         });
         
     });
-    
-    /*
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestUrl]];
-    [request setHTTPMethod: @"POST"];
-    [request setHTTPBody: [NSJSONSerialization dataWithJSONObject:params options:NSJSONWritingPrettyPrinted error:nil]];
-    
-    NSOperationQueue *queue = [[NSOperationQueue alloc] init];
-    [queue setName:@"com.mustacherious.iTraktor.apiCall"];
-    
-    [NSURLConnection sendAsynchronousRequest:request queue:queue completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-        
-        if (error) {
-            
-            dispatch_async(dispatch_get_main_queue(), ^(void) {
-                completionBlock(nil, error);
-            });
-            return;
-        }
-        
-        NSError *errorJSON;
-        NSDictionary *responseDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&errorJSON];
-        
-        if (errorJSON) {
-            dispatch_async(dispatch_get_main_queue(), ^(void) { });
-            return;
-        }
-        
-        dispatch_async(dispatch_get_main_queue(), ^(void) {
-            completionBlock(responseDict, nil);
-        });
-    }];
-     
-     */
 }
 
 
@@ -309,7 +265,7 @@
     }
     
     NSDictionary *notification = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:aState, aVideo, nil] forKeys:[NSArray arrayWithObjects:@"state", @"video", nil]];
-    
+    NSLog(@"!!!!! %@", type);
     NSString *url = [NSString stringWithFormat:@"%@/%@/%@/%@", kApiUrl, type, aState, [self apiKey]];
     [self callAPI:url WithParameters:params notification:notification];
 }
