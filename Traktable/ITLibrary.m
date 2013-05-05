@@ -141,6 +141,8 @@
     ITApi *api = [ITApi new];
     
     NSOperationQueue *queue = [NSOperationQueue new];
+    [queue setMaxConcurrentOperationCount:1];
+    
     
     int i;
     for(i = 0; i < [tracks count]; i++) {
