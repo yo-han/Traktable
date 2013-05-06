@@ -106,4 +106,12 @@
     [[NSFileManager defaultManager] removeItemAtPath:logPath error:nil];
     freopen([logPath fileSystemRepresentation],"a+",stderr);
 }
+
+- (IBAction)addToCollection:(id)sender {
+    
+    NSButton *cb = (NSButton *) sender;
+    
+    [[NSUserDefaults standardUserDefaults] setBool:cb.state forKey:@"collection"];
+}
+
 @end

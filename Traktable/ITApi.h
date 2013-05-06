@@ -20,6 +20,7 @@
 
 - (NSString*)username;
 - (NSString *)password;
+- (BOOL)collection;
 
 - (void)updateState:(id)aVideo state:(NSString *)aState;
 - (void)seen:(NSArray *)videos type:(iTunesEVdK)videoType video:(id)aVideo;

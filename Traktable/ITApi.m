@@ -82,6 +82,16 @@
     return [self sha1Hash:keychain.password];
 }
 
+- (BOOL)collection {
+    
+    NSString *collection = [[NSUserDefaults standardUserDefaults] objectForKey:@"collection"];
+    if (!collection) {
+        collection = NO;
+    }
+    
+    return collection;
+}
+
 - (void)setPassword:(NSString *)password {
     
     [EMGenericKeychainItem setKeychainPassword:password forUsername:self.username service:@"com.mustacherious.Traktable"];
@@ -293,6 +303,13 @@
     NSString *url = [NSString stringWithFormat:@"%@/%@/seen/%@", kApiUrl, type, [self apiKey]];
 
     [self callAPI:url WithParameters:params notification:nil];
+    
+    if([self collection]) {
+        
+        NSString *url = [NSString stringWithFormat:@"%@/%@/library/%@", kApiUrl, type, [self apiKey]];
+        
+        [self callAPI:url WithParameters:params notification:nil];
+    }
 }
 
 @end
