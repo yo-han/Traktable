@@ -11,7 +11,7 @@
 
 @interface PrefSyncViewController : NSViewController <MASPreferencesViewController>
 
-@property(nonatomic, retain) IBOutlet NSButton *testButton;
+@property(nonatomic, retain) IBOutlet NSButton *collection;
 
 - (IBAction)sync:(id)sender;
 - (IBAction)import:(id)sender;

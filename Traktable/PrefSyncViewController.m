@@ -17,7 +17,7 @@
 
 @implementation PrefSyncViewController
 
-@synthesize testButton;
+@synthesize collection;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -31,6 +31,9 @@
 
 - (void) viewWillAppear {
     
+    ITApi *api = [ITApi new];
+    
+    collection.state = [api collection];
 }
 
 -(NSString *)identifier{
@@ -99,12 +102,17 @@
     NSString *appSupportPath = [ITLibrary applicationSupportFolder];
     NSString *dbFilePath = [appSupportPath stringByAppendingPathComponent:@"iTraktor.db"];
 
+    //ITLibrary *library = [[ITLibrary alloc] init];
+    //[library.dbQueue close];
+    
     [[NSFileManager defaultManager] removeItemAtPath:dbFilePath error:nil];
     
     NSString *logPath = @"/tmp/ITDebug.log";
     
     [[NSFileManager defaultManager] removeItemAtPath:logPath error:nil];
     freopen([logPath fileSystemRepresentation],"a+",stderr);
+    
+
 }
 
 - (IBAction)addToCollection:(id)sender {

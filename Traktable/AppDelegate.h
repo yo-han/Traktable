@@ -10,6 +10,7 @@
 #import <CFNetwork/CFNetwork.h>
 #import <sys/socket.h>
 #import <netinet/in.h>
+#import <Sparkle/Sparkle.h>
 
 @class ITApi, ITVideo, ITLibrary;
 

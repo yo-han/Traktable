@@ -303,13 +303,27 @@
     NSString *url = [NSString stringWithFormat:@"%@/%@/seen/%@", kApiUrl, type, [self apiKey]];
 
     [self callAPI:url WithParameters:params notification:nil];
+}
+
+- (void)library:(NSArray *)videos type:(iTunesEVdK)videoType video:(id)aVideo {
     
-    if([self collection]) {
+    NSDictionary *params;
+    NSString *type;
+    
+    if(videoType == iTunesEVdKTVShow) {
         
-        NSString *url = [NSString stringWithFormat:@"%@/%@/library/%@", kApiUrl, type, [self apiKey]];
+        params = [self TVShow:aVideo batch:videos];
+        type = @"show/episode";
         
-        [self callAPI:url WithParameters:params notification:nil];
+    } else if(videoType == iTunesEVdKMovie) {
+        
+        params = [self Movie:nil batch:videos];
+        type = @"movie";
     }
+
+    NSString *url = [NSString stringWithFormat:@"%@/%@/library/%@", kApiUrl, type, [self apiKey]];
+    
+    [self callAPI:url WithParameters:params notification:nil];
 }
 
 @end

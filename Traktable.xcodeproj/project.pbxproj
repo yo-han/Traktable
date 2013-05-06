@@ -31,6 +31,7 @@
 		042F081616BD64ED00A0CE9E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 042F081516BD64ED00A0CE9E /* Security.framework */; };
 		0437203316CEF3ED003B8AB6 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 0437203216CEF3ED003B8AB6 /* icon.icns */; };
 		0437204316CEF823003B8AB6 /* menuicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0437204216CEF823003B8AB6 /* menuicon.png */; };
+		0446E06D17385349008BC1EB /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04714E7F16D2DEC000A308F7 /* Sparkle.framework */; };
 		045235A416CA9069005D25E4 /* MASPreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0481386416CA8BF400E682A0 /* MASPreferencesWindow.xib */; };
 		0469CC0016CBE010006863B7 /* IMDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 0469CBFF16CBE010006863B7 /* IMDB.m */; };
 		0469CC1616CBF19F006863B7 /* NSString+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0469CC0416CBF19F006863B7 /* NSString+Helper.m */; };
@@ -207,6 +208,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0446E06D17385349008BC1EB /* Sparkle.framework in Frameworks */,
 				049ACB0916C2AD43007F103C /* CFNetwork.framework in Frameworks */,
 				046C9BD116C1685B0003AD64 /* libsqlite3.dylib in Frameworks */,
 				042F081616BD64ED00A0CE9E /* Security.framework in Frameworks */,
