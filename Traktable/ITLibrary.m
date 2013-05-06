@@ -104,7 +104,7 @@
     
     NSArray *movies = [self getVideos:iTunesESpKMovies noCheck:YES];
     NSArray *shows = [self getVideos:iTunesESpKTVShows noCheck:YES];
-    NSLog(@"%@", movies);
+
     NSArray *seenMovies = [self checkTracks:movies];
     if([seenMovies count] > 0)
         [api seen:seenMovies type:iTunesEVdKMovie video:nil];
@@ -164,6 +164,13 @@
                     
                     [s close];
                 }];          
+                                
+                iTunesEVdK *type;
+                
+                if([track seasonNumber] == 0)
+                    type = iTunesEVdKMovie;
+                else
+                    type = iTunesEVdKTVShow;
                 
                 if(playedCount == nil) {
           
@@ -188,9 +195,11 @@
                                      [NSNumber numberWithInteger:[track episodeNumber]],@"episode",
                                      nil];
                         
-                        scrobbleVideo = [video getVideoByType:track type:iTunesEVdKTVShow];
+                        
                     }
 
+                    scrobbleVideo = [video getVideoByType:track type:type];
+                    
                     if([track playedCount] > 0) {
                         
                         if([track seasonNumber] == 0) {
@@ -207,17 +216,10 @@
                     }
                                
                     if([api collection])
-                        [api library:[NSArray arrayWithObject:videoDict] type:iTunesEVdKTVShow video:scrobbleVideo];
+                        [api library:[NSArray arrayWithObject:videoDict] type:type video:scrobbleVideo];
                     
                 } else if([playedCount integerValue] < [track playedCount]) {
-                    
-                    iTunesEVdK *type;
-                    
-                    if([track seasonNumber] == 0)
-                        type = iTunesEVdKMovie;
-                    else
-                        type = iTunesEVdKTVShow;
-                    
+                                       
                     id scrobbleVideo = [video getVideoByType:track type:type];
                     [api updateState:scrobbleVideo state:@"scrobble"];
                     
