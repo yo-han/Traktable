@@ -222,7 +222,8 @@
 
 - (IBAction)openHistory:(id)sender {
     
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://trakt.tv/user/traktable/history"]];
+    NSString *url = [NSString stringWithFormat:@"http://trakt.tv/user/%@/history", [_api username]];
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:url]];
 }
 
 #pragma mark -- NotificationCenter
