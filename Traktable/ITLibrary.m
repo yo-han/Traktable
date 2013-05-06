@@ -43,17 +43,22 @@
     
     if([api testAccount] && b == NO) {
         
-        NSError *err;
-        NSFileManager *fileManager = [[NSFileManager alloc] init];
-        NSString *defaultDbPath = [NSString stringWithFormat:@"%@/iTraktor.db",[[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"Contents/Resources/"]];
-        
-        [fileManager copyItemAtPath:defaultDbPath toPath:dbFilePath error:&err];
-        
-        NSLog(@"DB Create error: %@",err);
+        [self resetDb];
     }
     
     _dbQueue = [FMDatabaseQueue databaseQueueWithPath:dbFilePath];
     _queue = dispatch_queue_create("traktable.sync.queue", NULL);
+    
+    [self.dbQueue inDatabase:^(FMDatabase *db) {
+        FMResultSet *s = [db executeQuery:@"SELECT playedCount FROM library"];
+        
+        if(s == nil) {
+            [[NSFileManager defaultManager] removeItemAtPath:dbFilePath error:nil];
+            [self resetDb];
+        }
+            
+        [s close];
+    }];
     
     return self;
 }
@@ -61,8 +66,19 @@
 - (BOOL)dbExists {
     
     bool b = [[NSFileManager defaultManager] fileExistsAtPath:dbFilePath];
-    
+      
     return b;
+}
+
+- (void)resetDb {
+        
+    NSError *err;
+    NSFileManager *fileManager = [[NSFileManager alloc] init];
+    NSString *defaultDbPath = [NSString stringWithFormat:@"%@/iTraktor.db",[[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"Contents/Resources/"]];
+    
+    [fileManager copyItemAtPath:defaultDbPath toPath:dbFilePath error:&err];
+    
+    NSLog(@"DB Create error: %@",err);
 }
 
 - (SBElementArray *)getVideos:(iTunesESpK)playlist noCheck:(BOOL)noChecking {
