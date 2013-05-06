@@ -193,7 +193,7 @@
 
 - (void)callURL:(NSString *)requestUrl withParameters:(NSDictionary *)params completionHandler:(void (^)(NSDictionary *, NSError *))completionBlock
 {
-    dispatch_queue_t apiQueue = dispatch_queue_create("iTraktor.apiCall", NULL);
+    dispatch_queue_t apiQueue = dispatch_queue_create("Traktable.apiCall", NULL);
     
     dispatch_async(apiQueue, ^{
         
@@ -217,13 +217,12 @@
         
         NSDictionary *responseDict = [[SBJsonParser alloc] objectWithData:data];
         
-        dispatch_async(dispatch_get_main_queue(), ^(void) {
+        //dispatch_async(dispatch_get_main_queue(), ^(void) {
             completionBlock(responseDict, nil);
-        });
+        //});
         
     });
 }
-
 
 - (void)callAPI:(NSString*)apiCall WithParameters:(NSDictionary *)params notification:(NSDictionary *)notification {
     
@@ -323,6 +322,7 @@
 
     NSString *url = [NSString stringWithFormat:@"%@/%@/library/%@", kApiUrl, type, [self apiKey]];
     NSLog(@"%@", url);
+    
     [self callAPI:url WithParameters:params notification:nil];
 }
 

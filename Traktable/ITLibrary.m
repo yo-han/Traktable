@@ -152,7 +152,8 @@
             dispatch_async(queue, ^{
                 
                 iTunesTrack *track = [tracks objectAtIndex:i];
-            
+                
+                sleep(2);
 
                 [self.dbQueue inDatabase:^(FMDatabase *db) {
                     FMResultSet *s = [db executeQuery:@"SELECT playedCount FROM library WHERE persistentId = ?", [[track persistentID] description]];
@@ -204,7 +205,7 @@
                                 [api updateState:scrobbleVideo state:@"scrobble"];
                         }                        
                     }
-                                    NSLog(@"dfdf %@",videoDict);
+                               
                     if([api collection])
                         [api library:[NSArray arrayWithObject:videoDict] type:iTunesEVdKTVShow video:scrobbleVideo];
                     
