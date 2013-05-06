@@ -244,7 +244,7 @@
     NSString *url = [NSString stringWithFormat:@"%@/account/test/%@", kApiUrl, [self apiKey]];
     NSDictionary *data = [self callURLSync:url withParameters:params];
 
-    if(data == nil || [[data objectForKey:@"status"] isEqualToString:@"failure"])
+    if([[data objectForKey:@"status"] isEqualToString:@"failure"])
         return NO;
     else
         return YES;
