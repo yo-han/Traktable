@@ -22,6 +22,7 @@
 
 - (IBAction)showLog:(id)sender;
 - (IBAction)feedback:(id)sender;
+- (IBAction)openHistory:(id)sender;
 - (IBAction)displayPreferences:(id)sender;
 
 @end
@@ -217,6 +218,11 @@
     [alert setMessageText:@"Can't scrobble right now"];
     [alert setInformativeText:@"You didn't submit your authentication data yet or it is incorrect. Without the right username and password it's pretty hard to scrobble..."];
     [alert runModal];
+}
+
+- (IBAction)openHistory:(id)sender {
+    
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://trakt.tv/user/traktable/history"]];
 }
 
 #pragma mark -- NotificationCenter

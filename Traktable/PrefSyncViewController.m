@@ -93,4 +93,17 @@
     [ITNotification showNotification:[NSString stringWithFormat:@"iTunes library import done"]];
 
 }
+
+- (IBAction)reset:(id)sender {
+    
+    NSString *appSupportPath = [ITLibrary applicationSupportFolder];
+    NSString *dbFilePath = [appSupportPath stringByAppendingPathComponent:@"iTraktor.db"];
+    
+    [[NSFileManager defaultManager] removeItemAtPath:dbFilePath error:nil];
+    
+    NSString *logPath = @"/tmp/ITDebug.log";
+    
+    [[NSFileManager defaultManager] removeItemAtPath:logPath error:nil];
+    freopen([logPath fileSystemRepresentation],"a+",stderr);
+}
 @end

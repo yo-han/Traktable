@@ -15,5 +15,6 @@
 
 - (IBAction)sync:(id)sender;
 - (IBAction)import:(id)sender;
+- (IBAction)reset:(id)sender;
 
 @end
