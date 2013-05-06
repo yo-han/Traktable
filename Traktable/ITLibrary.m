@@ -104,7 +104,7 @@
     
     NSArray *movies = [self getVideos:iTunesESpKMovies noCheck:YES];
     NSArray *shows = [self getVideos:iTunesESpKTVShows noCheck:YES];
-    NSLog(@"%@", movies);
+
     NSArray *seenMovies = [self checkTracks:movies];
     if([seenMovies count] > 0)
         [api seen:seenMovies type:iTunesEVdKMovie video:nil];
