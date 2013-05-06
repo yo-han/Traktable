@@ -203,7 +203,7 @@
                             [api updateState:scrobbleVideo state:@"scrobble"];
                     }                        
                 }
-                                NSLog(@"dfdf %@",videoDict);
+              
                 if([api collection])
                     [api library:[NSArray arrayWithObject:videoDict] type:iTunesEVdKTVShow video:scrobbleVideo];
                 

@@ -322,7 +322,7 @@
     }
 
     NSString *url = [NSString stringWithFormat:@"%@/%@/library/%@", kApiUrl, type, [self apiKey]];
-    
+    NSLog(@"%@", url);
     [self callAPI:url WithParameters:params notification:nil];
 }
 
