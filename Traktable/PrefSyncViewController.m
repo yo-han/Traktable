@@ -98,7 +98,7 @@
     
     NSString *appSupportPath = [ITLibrary applicationSupportFolder];
     NSString *dbFilePath = [appSupportPath stringByAppendingPathComponent:@"iTraktor.db"];
-    
+
     [[NSFileManager defaultManager] removeItemAtPath:dbFilePath error:nil];
     
     NSString *logPath = @"/tmp/ITDebug.log";
