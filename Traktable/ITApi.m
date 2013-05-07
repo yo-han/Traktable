@@ -100,6 +100,7 @@
 - (NSDictionary *)TVShow:(ITTVShow *)aTVShow batch:(NSArray *)aBatch {
     
     NSDictionary *params;
+    NSString *appVersion = [NSString stringWithFormat:@"Version %@",[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]];
     
     if (aTVShow && aBatch == nil) {
 
@@ -112,7 +113,7 @@
                   [NSNumber numberWithInteger:aTVShow.episodeNumber], @"episode",
                   [NSNumber numberWithInteger:aTVShow.duration], @"duration",
                   [NSNumber numberWithInteger:50], @"progress",
-                  @"1.0", @"plugin_version",
+                  appVersion, @"plugin_version",
                   @"1.0", @"media_center_version",
                   @"31.12.2011", @"media_center_date",
                   nil];
@@ -158,6 +159,7 @@
                   @"1.0", @"media_center_version",
                   @"31.12.2011", @"media_center_date",
                   nil];
+        
     } else if(aMovie == nil && aBatch != nil){
         
         params = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -217,10 +219,7 @@
         
         NSDictionary *responseDict = [[SBJsonParser alloc] objectWithData:data];
         
-        //dispatch_async(dispatch_get_main_queue(), ^(void) {
-            completionBlock(responseDict, nil);
-        //});
-        
+        completionBlock(responseDict, nil);        
     });
 }
 
@@ -286,15 +285,11 @@
     
     if(videoType == iTunesEVdKTVShow) {
         
-        //NSLog(@"Seen shows: %@", videos);
-        
         params = [self TVShow:aVideo batch:videos];
         type = @"show/episode";
         
     } else if(videoType == iTunesEVdKMovie) {
-        
-        //NSLog(@"Seen movies: %@", videos);
-        
+
         params = [self Movie:nil batch:videos];
         type = @"movie";
     }

@@ -85,16 +85,29 @@
     ITLibrary *library = [[ITLibrary alloc] init];
     
     if([api testAccount]) {
-        [library importLibrary];
+        
+        dispatch_queue_t queue;
+        queue = dispatch_queue_create("traktable.import.queue", NULL);
+        
+        dispatch_retain(queue);
+        
+        dispatch_async(queue, ^{
+            
+            [library importLibrary];
+            
+            dispatch_async(queue, ^{
+                [ITNotification showNotification:[NSString stringWithFormat:@"iTunes library import done"]];
+            });
+            
+            dispatch_release(queue);
+        });
+        
     } else {
         //[self noAuthAlert];
         NSLog(@"No auth, no sync");
     }
     
     [btn setEnabled:YES];
-    
-    [ITNotification showNotification:[NSString stringWithFormat:@"iTunes library import done"]];
-
 }
 
 - (IBAction)reset:(id)sender {

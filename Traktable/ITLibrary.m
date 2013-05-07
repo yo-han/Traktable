@@ -130,6 +130,10 @@
         [api seen:seenMovies type:iTunesEVdKMovie video:nil];
     
     [self checkTracks:shows];
+    
+    dispatch_sync(_queue, ^{
+        printf("Import done.");
+    });
 }
 
 - (void)syncLibrary {
