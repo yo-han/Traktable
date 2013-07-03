@@ -3,6 +3,8 @@ Traktable
 
 Trakt Scrobbler for iTunes/AppleTV. Download a binary version [here](http://w3f.nl/traktable/).
 
+<a href='http://www.pledgie.com/campaigns/20766'><img alt='Click here to lend your support to: Traktable and make a donation at www.pledgie.com !' src='http://www.pledgie.com/campaigns/20766.png?skin_name=chrome' border='0' /></a>
+      
 ## Status and bugs
 
 Any feedback or bug reports are welcome. Please use the [`issues`](https://github.com/yo-han/Traktable/issues) page or the feedback option in the app to report your feedback.
