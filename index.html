@@ -3,7 +3,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>iTraktor</title>
+    <title>Traktable</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -44,9 +44,14 @@
     
     .main .headerImg {
     	
-    	height:500px;
+    	height:300px;
     	overflow: hidden;
     	text-align: center;
+    }
+    
+    .main .headerImg img {
+    	
+    	height:760px;
     }
     
     .main .line {
@@ -67,10 +72,11 @@
   </head>
 
   <body>
-    <div id="iTrakor" class="main">
+  	<a href="https://github.com/yo-han/Traktable"><img style="position: absolute; top: 0; right: 0; border: 0; z-index:1001;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
+    <div id="Traktable" class="main">
         <div class="header"><span></span></div>
         <div class="headerImg">
-	        <img src="img/itraktorHeader.png" alt="">
+	        <img src="img/TraktableHeader.png" alt="">
         </div>
         <div class="line">&nbsp;</div>
     </div>
@@ -78,10 +84,23 @@
 
       <!-- Main hero unit for a primary marketing message or call to action -->
       <div class="hero-unit" style="background-color:white;">
-        <h1 style="color:black;">iTraktor</h1>
-        <p>"Take it for a spin..."</p>
-        <p><a href="iTraktor.zip" class="btn btn-primary btn-large">download</a></p>
+        <h1 style="color:black;">Traktable</h1>
+        <p>A <a href="http://www.trakt.tv" target="_blank">Trakt.tv</a> scrobbler for iTunes and AppleTV.</p>
+        <p><a href="http://bit.ly/10ELUAx" class="btn btn-primary btn-large">download (v0.4)</a></p>
+        <p><a href="https://github.com/yo-han/Traktable" target="_blank" class="muted">source code</a> and <a href="https://github.com/yo-han/Traktable/issues" target="_blank" class="muted">feedback</a> on GitHub. Or just send me a <a href="http://www.twitter.com/johankuijt" target="_blank">tweet</a></p>
+        <p>
+        	<div class="muted">Do you like it? Support it!</div>
+        	<br>
+        	<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+			<input type="hidden" name="cmd" value="_s-xclick">
+			<input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
+			">
+			<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+			<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+			</form>
+        </p>
       </div>
-
+      <div class="muted" style="text-align:center; font-size:11px;"><p>iTunes and AppleTV are trademarks of Apple Computer, Inc., registered in the U.S. and other countries.</p></div>
+     </div>
   </body>
 </html>
