@@ -2,14 +2,22 @@
 <rss version="2.0" xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle"  xmlns:dc="http://purl.org/dc/elements/1.1/">
    <channel>
       <title>Traktable Changelog</title>
-      <link>http://w3f.nl/traktable/</link>
+      <link>http://yo-han.github.io/Traktable</link>
       <description>Some updates to the Traktable scrobbler.</description>
       <language>en</language>
       
       	<item>
+            <title>Version 0.4.1</title>
+			<sparkle:releaseNotesLink>
+				http://yo-han.github.io/Traktable/changelog/0.4.1.html
+			</sparkle:releaseNotesLink>
+            <pubDate>Tue, 7 May 2013 23:00:00 +0100</pubDate>
+            <enclosure url="http://bit.ly/1dzRDz0" sparkle:version="0.4.1" length="1623481" type="application/octet-stream" sparkle:dsaSignature="MCwCFAmHIV3WpkrCNVlpTo6GxEMi0FdsAhRho5iMRiNQN/o5SKYd3wQBNDJMVg==" />
+         </item>
+      	<item>
             <title>Version 0.4</title>
 			<sparkle:releaseNotesLink>
-				http://w3f.nl/traktable/changelog/0.4.html
+				http://yo-han.github.io/Traktable/changelog/0.4.html
 			</sparkle:releaseNotesLink>
             <pubDate>Tue, 7 May 2013 23:00:00 +0100</pubDate>
             <enclosure url="http://w3f.nl/traktable/Traktable-0.4.zip" sparkle:version="0.4" length="1623481" type="application/octet-stream" sparkle:dsaSignature="MCwCFHu6pNhF9sRAPwEQxcG67lbo7vpFAhR68JEp0wRUJ36F8lYD+vlC2EGizQ==" />
@@ -17,7 +25,7 @@
       	<item>
             <title>Version 0.3.2</title>
 			<sparkle:releaseNotesLink>
-				http://w3f.nl/traktable/changelog/0.3.2.html
+				http://yo-han.github.io/Traktable/changelog/0.3.2.html
 			</sparkle:releaseNotesLink>
             <pubDate>Mon, 22 Apr 2013 00:00:00 +0100</pubDate>
             <enclosure url="http://w3f.nl/traktable/Traktable-0.3.2.zip" sparkle:version="0.3.2" length="1623481" type="application/octet-stream" sparkle:dsaSignature="MCwCFGoXAIGfbP6Nvb6UEH5VuQA/WJtUAhQMQ1t+BgX7XMyi3yDLpdae+sKcVg==" />
@@ -25,7 +33,7 @@
       	<item>
             <title>Version 0.3.1</title>
 			<sparkle:releaseNotesLink>
-				http://w3f.nl/traktable/changelog/0.3.1.html
+				http://yo-han.github.io/Traktable/changelog/0.3.1.html
 			</sparkle:releaseNotesLink>
             <pubDate>Fri, 19 Apr 2013 00:00:00 +0100</pubDate>
             <enclosure url="http://w3f.nl/traktable/Traktable-0.3.1.zip" sparkle:version="0.3.1" length="1623481" type="application/octet-stream" sparkle:dsaSignature="MCwCFHMczMZLXnM8qR9G/xjV4FnbLwFAAhRLPR457b4NwwHCwt7JmFRrlFIOjQ==" />
@@ -33,7 +41,7 @@
          <item>
             <title>Version 0.3</title>
 			<sparkle:releaseNotesLink>
-				http://w3f.nl/traktable/changelog/0.3.html
+				http://yo-han.github.io/Traktable/changelog/0.3.html
 			</sparkle:releaseNotesLink>
             <pubDate>Mon, 20 Mar 2013 20:00:00 +0100</pubDate>
             <enclosure url="http://w3f.nl/traktable/Traktable-0.3.zip" sparkle:version="0.3" length="1623481" type="application/octet-stream" sparkle:dsaSignature="MCwCFHohF2+EvaNB9BaEXqUXeZ0Bz5mGAhRcjuGfvLEmVZ/o70wuPgAieZtjwQ==" />
@@ -41,7 +49,7 @@
       	<item>
             <title>Version 0.2.4</title>
 			<sparkle:releaseNotesLink>
-				http://w3f.nl/traktable/changelog/0.2.4.html
+				http://yo-han.github.io/Traktable/changelog/0.2.4.html
 			</sparkle:releaseNotesLink>
             <pubDate>Mon, 3 Mar 2013 00:00:00 +0000</pubDate>
             <enclosure url="http://w3f.nl/traktable/Traktable-0.2.4.zip" sparkle:version="0.2.4" length="1623481" type="application/octet-stream" sparkle:dsaSignature="MCwCFCAWKitJFAebOJ9XLAmkPsBwLiUDAhRv0D0W1njArQYtjStOYQwruQqHDw==" />
@@ -49,7 +57,7 @@
          <item>
             <title>Version 0.2.3</title>
 			<sparkle:releaseNotesLink>
-				http://w3f.nl/traktable/changelog/0.2.3.html
+				http://yo-han.github.io/Traktable/changelog/0.2.3.html
 			</sparkle:releaseNotesLink>
             <pubDate>Fri, 28 Feb 2013 00:00:00 +0000</pubDate>
             <enclosure url="http://w3f.nl/traktable/Traktable-0.2.3.zip" sparkle:version="0.2.3" length="1623481" type="application/octet-stream" sparkle:dsaSignature="MCwCFHabRHHqJib49sxxIh8D4XldERLzAhRD2qw14R/batKsmd52GAQx9g8UWQ==" />
@@ -57,7 +65,7 @@
          <item>
             <title>Version 0.2.2</title>
 			<sparkle:releaseNotesLink>
-				http://w3f.nl/traktable/changelog/0.2.2.html
+				http://yo-han.github.io/Traktable/changelog/0.2.2.html
 			</sparkle:releaseNotesLink>
             <pubDate>Fri, 27 Feb 2013 21:00:00 +0000</pubDate>
             <enclosure url="http://w3f.nl/traktable/Traktable-0.2.2.zip" sparkle:version="0.2.2" length="1623481" type="application/octet-stream" sparkle:dsaSignature="MCwCFBCU6TPHad1ROlc9SkCYsoMJFKfUAhQ1AW18Y/+al/DOvfYLhevtLz7brQ==" />
@@ -65,7 +73,7 @@
       	<item>
             <title>Version 0.2.1</title>
 			<sparkle:releaseNotesLink>
-				http://w3f.nl/traktable/changelog/0.2.1.html
+				http://yo-han.github.io/Traktable/changelog/0.2.1.html
 			</sparkle:releaseNotesLink>
             <pubDate>Fri, 22 Feb 2013 11:19:12 +0000</pubDate>
             <enclosure url="http://w3f.nl/traktable/Traktable-0.2.1.zip" sparkle:version="0.2.1" length="1623481" type="application/octet-stream" sparkle:dsaSignature="MC0CFD/zPGO3458bj/GxuvBhdw9uIPPJAhUAgIwjWtmv8ncKjf/rXw94FKhzZUc=" />
@@ -73,7 +81,7 @@
          <item>
             <title>Version 0.2 (1 new feature)</title>
 						<sparkle:releaseNotesLink>
-							http://w3f.nl/traktable/changelog/0.1.1.html
+							http://yo-han.github.io/Traktable/changelog/0.1.1.html
 						</sparkle:releaseNotesLink>
             <pubDate>Mon, 18 Feb 2013 19:20:11 +0000</pubDate>
             <enclosure url="http://w3f.nl/traktable/Traktable.zip" sparkle:version="0.2" length="1623481" type="application/octet-stream" sparkle:dsaSignature="MCwCFE2jjx+u8ZGW+Wain9f84W4TgPHfAhR/ClczP1tI/P72zJoQQ1NDVB7cwA==" />
