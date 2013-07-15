@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>traktApiKey</key>
+	<string>cb0f83e7b22cc84f7263e83379c44e779b68a398</string>
+	<key>tvdbApiKey</key>
+	<string>495DCA99115C8253</string>
+</dict>
+</plist>
