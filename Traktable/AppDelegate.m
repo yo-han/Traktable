@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "MainWindowController.h"
 #import "MASPreferencesWindowController.h"
 #import "PrefIndexViewController.h"
 #import "PrefSyncViewController.h"
@@ -24,6 +25,9 @@
 - (IBAction)feedback:(id)sender;
 - (IBAction)openHistory:(id)sender;
 - (IBAction)displayPreferences:(id)sender;
+- (IBAction)showWindow:(id)sender;
+
+@property(strong) MainWindowController *mainWindow;
 
 @end
 
@@ -66,6 +70,14 @@
 - (IBAction)showLog:(id)sender {
     
     [[NSWorkspace sharedWorkspace] openFile:@"/tmp/ITDebug.log"];
+}
+
+- (IBAction)showWindow:(id)sender {
+    
+    _mainWindow = [[MainWindowController alloc] initWithWindowNibName:@"MainWindowController"];
+    
+    [self.mainWindow showWindow:self];
+
 }
 
 - (IBAction)feedback:(id)sender {
