@@ -13,6 +13,7 @@
 #import "EMKeychainItem.h"
 #import "ITNotification.h"
 #import "SBJson.h"
+#import "Unirest.h"
 
 #define kApiUrl @"http://api.trakt.tv"
 
@@ -180,15 +181,18 @@
 }
 
 - (NSDictionary *)callURLSync:(NSString *)requestUrl withParameters:(NSDictionary *)params {
-
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestUrl]];
-    [request setHTTPMethod: @"POST"];
-    [request setHTTPBody:[[SBJsonWriter alloc] dataWithObject:params]];
     
-    NSURLResponse *response = nil;
-    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
-
-    NSDictionary *responseDict = [[SBJsonParser alloc] objectWithData:data];
+    NSDictionary* headers = [NSDictionary dictionaryWithObjectsAndKeys:@"application/json", @"accept", nil];
+    
+    HttpJsonResponse* response = [[Unirest post:^(MultipartRequest* request) {
+        [request setUrl:requestUrl];
+        [request setHeaders:headers];
+        [request setParameters:params];
+    }] asJson];
+    
+    JsonNode* body = [response body];
+    
+    NSDictionary *responseDict = [body JSONObject];
     
     return responseDict;
 }
@@ -199,25 +203,17 @@
     
     dispatch_async(apiQueue, ^{
         
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestUrl]];
-        [request setHTTPMethod: @"POST"];
+        NSDictionary* headers = [NSDictionary dictionaryWithObjectsAndKeys:@"application/json", @"accept", nil];
         
-        [request setHTTPBody:[[SBJsonWriter alloc] dataWithObject:params]];
+        HttpJsonResponse* response = [[Unirest post:^(MultipartRequest* request) {
+            [request setUrl:requestUrl];
+            [request setHeaders:headers];
+            [request setParameters:params];
+        }] asJson];
         
-        NSURLResponse *response = nil;
-        NSError *error;
-
-        NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+        JsonNode* body = [response body];
         
-        if (error) {
-            
-            dispatch_async(dispatch_get_main_queue(), ^(void) {
-                completionBlock(nil, error);
-            });
-            return;
-        }
-        
-        NSDictionary *responseDict = [[SBJsonParser alloc] objectWithData:data];
+        NSDictionary *responseDict = [body JSONObject];
         
         completionBlock(responseDict, nil);        
     });
