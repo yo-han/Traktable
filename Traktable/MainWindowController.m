@@ -28,8 +28,28 @@
 - (void)windowDidLoad
 {
     [super windowDidLoad];
-    
-    // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
+}
+
+- (void)awakeFromNib
+{
+    [selectedItemLabel setStringValue:@"(none)"];
+	
+	sourceListItems = [[NSMutableArray alloc] init];
+	
+	SourceListItem *traktableItem = [SourceListItem itemWithTitle:@"Traktable" identifier:@"traktable"];
+	SourceListItem *historyItem = [SourceListItem itemWithTitle:@"History" identifier:@"history"];
+	[historyItem setIcon:[NSImage imageNamed:@"menuicon.png"]];
+	SourceListItem *moviesItem = [SourceListItem itemWithTitle:@"Movies" identifier:@"movies"];
+	[moviesItem setIcon:[NSImage imageNamed:@"movies.png"]];
+    SourceListItem *tvShowsItem = [SourceListItem itemWithTitle:@"TV Shows" identifier:@"tvshows"];
+	[tvShowsItem setIcon:[NSImage imageNamed:@"movies.png"]];
+	
+    [historyItem setChildren:[NSArray arrayWithObjects:moviesItem, tvShowsItem, nil]];
+	[traktableItem setChildren:[NSArray arrayWithObjects:historyItem, nil]];
+	
+	[sourceListItems addObject:traktableItem];
+	
+	[sourceList reloadData];
 }
 
 #pragma mark -
@@ -119,7 +139,7 @@
 
 - (BOOL)sourceList:(PXSourceList*)aSourceList isGroupAlwaysExpanded:(id)group
 {
-	if([[group identifier] isEqualToString:@"library"])
+	if([[group identifier] isEqualToString:@"traktable"])
 		return YES;
 	
 	return NO;

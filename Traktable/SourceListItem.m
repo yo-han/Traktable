@@ -43,23 +43,13 @@
 
 + (id)itemWithTitle:(NSString*)aTitle identifier:(NSString*)anIdentifier icon:(NSImage*)anIcon
 {
-	SourceListItem *item = [[[SourceListItem alloc] init] autorelease];
+	SourceListItem *item = [[SourceListItem alloc] init];
 	
 	[item setTitle:aTitle];
 	[item setIdentifier:anIdentifier];
 	[item setIcon:anIcon];
 	
 	return item;
-}
-
-- (void)dealloc
-{
-	[title release];
-	[identifier release];
-	[icon release];
-	[children release];
-	
-	[super dealloc];
 }
 
 - (void)finalize

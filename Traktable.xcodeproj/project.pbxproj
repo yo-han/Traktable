@@ -76,6 +76,8 @@
 		04B68CA917A5600D006760D0 /* MainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B68CA717A5600D006760D0 /* MainWindowController.m */; };
 		04B68CAA17A5600D006760D0 /* MainWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B68CA817A5600D006760D0 /* MainWindowController.xib */; };
 		04B68CB317A56E20006760D0 /* PXSourceList.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B68CB017A56E20006760D0 /* PXSourceList.m */; };
+		04B68CB817A572B3006760D0 /* movies.png in Resources */ = {isa = PBXBuildFile; fileRef = 04B68CB717A572B3006760D0 /* movies.png */; };
+		04B68CBA17A57351006760D0 /* SourceListItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B68CB617A56F60006760D0 /* SourceListItem.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -213,6 +215,7 @@
 		04B68CB217A56E20006760D0 /* PXSourceListDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXSourceListDelegate.h; sourceTree = "<group>"; };
 		04B68CB517A56F60006760D0 /* SourceListItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SourceListItem.h; sourceTree = "<group>"; };
 		04B68CB617A56F60006760D0 /* SourceListItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SourceListItem.m; sourceTree = "<group>"; };
+		04B68CB717A572B3006760D0 /* movies.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = movies.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -349,6 +352,7 @@
 				048DF20916DFFF17004B064A /* sync.png */,
 				04714E2416D2BFBB00A308F7 /* config-example.plist */,
 				0437204216CEF823003B8AB6 /* menuicon.png */,
+				04B68CB717A572B3006760D0 /* movies.png */,
 				046C9BCF16C167B80003AD64 /* iTraktor.db */,
 				042F07EA16BC19DB00A0CE9E /* Traktable-Info.plist */,
 				042F07EB16BC19DB00A0CE9E /* InfoPlist.strings */,
@@ -537,6 +541,7 @@
 				04B68C9F17A55E63006760D0 /* config.plist in Resources */,
 				04B68CA017A55E63006760D0 /* dsa_pub.pem in Resources */,
 				04B68CAA17A5600D006760D0 /* MainWindowController.xib in Resources */,
+				04B68CB817A572B3006760D0 /* movies.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -547,6 +552,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04B68CBA17A57351006760D0 /* SourceListItem.m in Sources */,
 				0481386B16CA8DA100E682A0 /* MASPreferencesWindowController.m in Sources */,
 				046C9BD316C168880003AD64 /* FMDatabase.m in Sources */,
 				046C9BD516C168880003AD64 /* FMDatabaseAdditions.m in Sources */,
