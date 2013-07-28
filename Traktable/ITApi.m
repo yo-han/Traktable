@@ -203,19 +203,27 @@
     
     dispatch_async(apiQueue, ^{
         
-        NSDictionary* headers = [NSDictionary dictionaryWithObjectsAndKeys:@"application/json", @"accept", nil];
+        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestUrl]];
+        [request setHTTPMethod: @"POST"];
         
-        HttpJsonResponse* response = [[Unirest post:^(MultipartRequest* request) {
-            [request setUrl:requestUrl];
-            [request setHeaders:headers];
-            [request setParameters:params];
-        }] asJson];
+        [request setHTTPBody:[[SBJsonWriter alloc] dataWithObject:params]];
         
-        JsonNode* body = [response body];
+        NSURLResponse *response = nil;
+        NSError *error;
         
-        NSDictionary *responseDict = [body JSONObject];
+        NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
         
-        completionBlock(responseDict, nil);        
+        if (error) {
+            
+            dispatch_async(dispatch_get_main_queue(), ^(void) {
+                completionBlock(nil, error);
+            });
+            return;
+        }
+        
+        NSDictionary *responseDict = [[SBJsonParser alloc] objectWithData:data];
+        
+        completionBlock(responseDict, nil);
     });
 }
 
