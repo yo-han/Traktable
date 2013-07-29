@@ -127,7 +127,7 @@
                         NSData* data = [NSData dataWithContentsOfURL:value];
                         
                         [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@\"\r\n", key, filename] dataUsingEncoding:NSUTF8StringEncoding]];
-                        [body appendData:[[NSString stringWithFormat:@"Content-Length: %d\r\n\r\n", data.length] dataUsingEncoding:NSUTF8StringEncoding]];
+                        [body appendData:[[NSString stringWithFormat:@"Content-Length: %ld\r\n\r\n", (unsigned long)data.length] dataUsingEncoding:NSUTF8StringEncoding]];
                         [body appendData:data];
                     } else {
                         [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", BOUNDARY] dataUsingEncoding:NSUTF8StringEncoding]];

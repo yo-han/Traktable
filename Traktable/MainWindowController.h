@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "PXSourceList.h"
 
-@interface MainWindowController : NSWindowController <PXSourceListDataSource, PXSourceListDelegate> {
+@interface MainWindowController : NSWindowController <PXSourceListDataSource, PXSourceListDelegate, NSTableViewDataSource, NSTableViewDelegate> {
 
     IBOutlet PXSourceList *sourceList;
     IBOutlet NSTextField *selectedItemLabel;
