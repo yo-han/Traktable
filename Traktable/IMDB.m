@@ -25,6 +25,7 @@
 + (NSString * )callAPI:(NSString *)title year:(NSString *)aYear {
 
     NSString *requestUrl = [NSString stringWithFormat:@"http://www.omdbapi.com/?t=%@&y=%@", [title stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding], aYear];
+
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestUrl]];
     [request setHTTPMethod: @"GET"];
     
@@ -34,18 +35,32 @@
     if(data == nil)
         return @"";
     
-    NSDictionary *responseDict = [[SBJsonParser alloc] objectWithData:data];
-
-    if([[responseDict objectForKey:@"Response"] isEqualToString:@"False"]) {
-        return @"";
-    } else {
-        NSString *responseD = [responseDict objectForKey:@"imdbID"];
-        
-        if(responseD == nil)
-            return @"";
-        
-        return responseD;
+    id responseDict;
+    
+    
+    responseDict = [[SBJsonParser alloc] objectWithData:data];
+    
+    Class hasNSJSON = NSClassFromString(@"NSJSONSerialization");
+    
+    if(hasNSJSON != nil) {
+        responseDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
     }
+
+    if([responseDict isKindOfClass:[NSDictionary class]]) {
+        
+        if([[responseDict objectForKey:@"Response"] isEqualToString:@"False"]) {
+            return @"";
+        } else {
+            NSString *responseD = [responseDict objectForKey:@"imdbID"];
+            
+            if(responseD == nil)
+                return @"";
+            
+            return responseD;
+        }
+    }
+    
+    return @"";
 }
 
 + (NSString * )getImdbIdByTitle:(NSString *)title year:(NSString *)aYear {
