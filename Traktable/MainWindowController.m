@@ -19,7 +19,7 @@
 {
     self = [super initWithWindow:window];
     if (self) {
-        // Initialization code here.
+
     }
     
     return self;
@@ -36,7 +36,6 @@
 	
 	sourceListItems = [[NSMutableArray alloc] init];
 	
-	SourceListItem *traktableItem = [SourceListItem itemWithTitle:@"Traktable" identifier:@"traktable"];
 	SourceListItem *historyItem = [SourceListItem itemWithTitle:@"History" identifier:@"history"];
 	[historyItem setIcon:[NSImage imageNamed:@"menuicon.png"]];
 	SourceListItem *moviesItem = [SourceListItem itemWithTitle:@"Movies" identifier:@"movies"];
@@ -45,12 +44,12 @@
 	[tvShowsItem setIcon:[NSImage imageNamed:@"movies.png"]];
 	
     [historyItem setChildren:[NSArray arrayWithObjects:moviesItem, tvShowsItem, nil]];
-	[traktableItem setChildren:[NSArray arrayWithObjects:historyItem, nil]];
 	
-	[sourceListItems addObject:traktableItem];
+	[sourceListItems addObject:historyItem];
 	
 	[sourceList reloadData];
 }
+
 
 #pragma mark -
 #pragma mark Source List Data Source Methods
@@ -139,7 +138,7 @@
 
 - (BOOL)sourceList:(PXSourceList*)aSourceList isGroupAlwaysExpanded:(id)group
 {
-	if([[group identifier] isEqualToString:@"traktable"])
+	if([[group identifier] isEqualToString:@"history"])
 		return YES;
 	
 	return NO;

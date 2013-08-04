@@ -74,10 +74,12 @@
 
 - (IBAction)showWindow:(id)sender {
     
-    _mainWindow = [[MainWindowController alloc] initWithWindowNibName:@"MainWindowController"];
+    if(!self.mainWindow)
+        _mainWindow = [[MainWindowController alloc] initWithWindowNibName:@"MainWindowController"];
     
-    [self.mainWindow showWindow:self];
-
+    [self.mainWindow.window makeKeyAndOrderFront:self];
+    
+    [NSApp activateIgnoringOtherApps:YES];
 }
 
 - (IBAction)feedback:(id)sender {

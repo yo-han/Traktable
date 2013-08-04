@@ -25,6 +25,7 @@
 + (NSString * )callAPI:(NSString *)title year:(NSString *)aYear {
 
     NSString *requestUrl = [NSString stringWithFormat:@"http://www.omdbapi.com/?t=%@&y=%@", [title stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding], aYear];
+    
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestUrl]];
     [request setHTTPMethod: @"GET"];
     
