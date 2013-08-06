@@ -10,6 +10,7 @@
 #import "ITApi.h"
 #import "ITVideo.h"
 #import "AppDelegate.h"
+#import "ITConstants.h"
 
 @interface ITLibrary()
 
@@ -34,7 +35,7 @@
     iTunesBridge = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
     ITApi *api = [ITApi new];
     
-    NSString *appSupportPath = [ITLibrary applicationSupportFolder];
+    NSString *appSupportPath = [ITConstants applicationSupportFolder];
     [self createDir:appSupportPath];
     
     dbFilePath = [appSupportPath stringByAppendingPathComponent:@"iTraktor.db"];
@@ -65,9 +66,16 @@
 
 - (BOOL)dbExists {
     
+    NSLog(@"Need to write an update meganism for the database");
+    
     bool b = [[NSFileManager defaultManager] fileExistsAtPath:dbFilePath];
       
     return b;
+}
+
+- (void)migrateDb {
+    
+    
 }
 
 - (void)resetDb {
@@ -156,6 +164,24 @@
     [self checkTracks:shows];
     
     [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"ITLastSyncDate"];
+}
+
+- (void)syncTrakt {
+    
+    ITApi *api = [ITApi new];
+
+    NSArray *movies = [api watchedSync:iTunesEVdKMovie extended:@"1"];
+
+    for(NSDictionary *movie in movies) {
+       
+        NSDictionary *argsDict = [NSDictionary dictionaryWithObjectsAndKeys:[movie objectForKey:@"tmdb_id"], @"tmdb_id", [movie objectForKey:@"imdb_id"],@"imdb_id",[movie objectForKey:@"year"],@"year",@"1",@"hasPoster",[movie objectForKey:@"plays"],@"traktPlays",[movie objectForKey:@"released"],@"released",[movie objectForKey:@"runtime"],@"runtime",[movie objectForKey:@"title"],@"title",[movie objectForKey:@"overview"],@"overview",[movie objectForKey:@"tagline"],@"tagline",[movie objectForKey:@"url"],@"traktUrl",[movie objectForKey:@"trailer"],@"trailer",[movie objectForKey:@"genres"],@"genres", nil];
+        
+        [self.dbQueue inDatabase:^(FMDatabase *db) {
+            NSLog(@"f");
+            [db executeUpdate:@"REPLACE INTO movies (tmdb_id, imdb_id, year, hasPoster, traktPlays, released, runtime, title, overview, tagline, traktUrl, trailer, genres) VALUES (:tmdb_id, :imdb_id, :year, :hasPoster, :traktPlays, :released, :runtime, :title, :overview, :tagline, :traktUrl, :trailer, :genres)" withParameterDictionary:argsDict];
+            NSLog(@"%@", [db lastErrorMessage]);
+        }];
+    }
 }
 
 - (NSArray *)checkTracks:(NSArray *)tracks {
@@ -271,19 +297,6 @@
     if(![fileManager fileExistsAtPath:dir])
         if(![fileManager createDirectoryAtPath:dir withIntermediateDirectories:YES attributes:nil error:NULL])
             NSLog(@"Error: Create folder failed %@", dir);
-}
-
-+ (NSString *)applicationSupportFolder {
-    
-    NSArray *paths =
-    NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory,
-                                        NSUserDomainMask, YES);
-    NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:
-                                                0] : NSTemporaryDirectory();
-    NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"];
-    
-    return [basePath
-            stringByAppendingPathComponent:appName];
 }
 
 @end

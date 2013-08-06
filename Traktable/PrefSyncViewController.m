@@ -10,6 +10,7 @@
 #import "ITLibrary.h"
 #import "ITApi.h"
 #import "ITNotification.h"
+#import "ITConstants.h"
 
 @interface PrefSyncViewController()
 
@@ -112,7 +113,7 @@
 
 - (IBAction)reset:(id)sender {
     
-    NSString *appSupportPath = [ITLibrary applicationSupportFolder];
+    NSString *appSupportPath = [ITConstants applicationSupportFolder];
     NSString *dbFilePath = [appSupportPath stringByAppendingPathComponent:@"iTraktor.db"];
 
     //ITLibrary *library = [[ITLibrary alloc] init];

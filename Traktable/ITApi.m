@@ -14,10 +14,14 @@
 #import "ITNotification.h"
 #import "SBJson.h"
 #import "Unirest.h"
+#import "FMDatabase.h"
+#import "FMDatabaseQueue.h"
 
 #define kApiUrl @"http://api.trakt.tv"
 
 @interface ITApi()
+
+@property (nonatomic, retain) FMDatabaseQueue *dbQueue;
 
 - (NSString *)sha1Hash:(NSString *)input;
 - (NSString *)apiKey;
@@ -26,8 +30,8 @@
 - (NSDictionary *)Movie:(ITMovie *)aMovie batch:(NSArray *)aBatch;
 
 - (void)callAPI:(NSString*)apiCall WithParameters:(NSDictionary *)params notification:(NSDictionary *)notification;
-- (NSDictionary *)callURLSync:(NSString *)requestUrl withParameters:(NSDictionary *)params;
-- (void)callURL:(NSString *)requestUrl withParameters:(NSDictionary *)params completionHandler:(void (^)(NSDictionary *, NSError *))completionBlock;
+- (id)callURLSync:(NSString *)requestUrl withParameters:(NSDictionary *)params;
+- (void)callURL:(NSString *)requestUrl withParameters:(NSDictionary *)params completionHandler:(void (^)(id, NSError *))completionBlock;
 - (void)callAPISucces:(NSDictionary *)notification;
 
 @end
@@ -180,10 +184,10 @@
     return params;
 }
 
-- (NSDictionary *)callURLSync:(NSString *)requestUrl withParameters:(NSDictionary *)params {
+- (id)callURLSync:(NSString *)requestUrl withParameters:(NSDictionary *)params {
     
     NSDictionary* headers = [NSDictionary dictionaryWithObjectsAndKeys:@"application/json", @"accept", nil];
-    
+
     HttpJsonResponse* response = [[Unirest post:^(MultipartRequest* request) {
         [request setUrl:requestUrl];
         [request setHeaders:headers];
@@ -191,13 +195,13 @@
     }] asJson];
     
     JsonNode* body = [response body];
+
+    id responseObject = [body JSONObject];
     
-    NSDictionary *responseDict = [body JSONObject];
-    
-    return responseDict;
+    return responseObject;
 }
 
-- (void)callURL:(NSString *)requestUrl withParameters:(NSDictionary *)params completionHandler:(void (^)(NSDictionary *, NSError *))completionBlock
+- (void)callURL:(NSString *)requestUrl withParameters:(NSDictionary *)params completionHandler:(void (^)(id , NSError *))completionBlock
 {
     dispatch_queue_t apiQueue = dispatch_queue_create("Traktable.apiCall", NULL);
     
@@ -221,18 +225,33 @@
             return;
         }
         
-        NSDictionary *responseDict = [[SBJsonParser alloc] objectWithData:data];
+        id responseObject;
         
-        completionBlock(responseDict, nil);
+        response = [[SBJsonParser alloc] objectWithData:data];
+        
+        Class hasNSJSON = NSClassFromString(@"NSJSONSerialization");
+        
+        if(hasNSJSON != nil) {
+            responseObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+        }
+        
+        completionBlock(responseObject, nil);
     });
 }
 
 - (void)callAPI:(NSString*)apiCall WithParameters:(NSDictionary *)params notification:(NSDictionary *)notification {
-    
-    [self callURL:apiCall withParameters:params completionHandler:^(NSDictionary *dict, NSError *err) {
-        if ([[dict objectForKey:@"status"] isEqualToString:@"success"]){
+
+    [self callURL:apiCall withParameters:params completionHandler:^(id repsonse, NSError *err) {
+        
+        if(![repsonse isKindOfClass:[NSDictionary class]]) {
             
-            NSLog(@"Succes: %@",[dict objectForKey:@"message"]);
+            NSLog(@"Repsonse is not an NSDictionary");
+            return;
+        }
+            
+        if ([[repsonse objectForKey:@"status"] isEqualToString:@"success"]){
+            
+            NSLog(@"Succes: %@",[repsonse objectForKey:@"message"]);
             
             if(notification != nil)
                 [self callAPISucces:notification];
@@ -322,6 +341,39 @@
     NSString *url = [NSString stringWithFormat:@"%@/%@/library/%@", kApiUrl, type, [self apiKey]];
     
     [self callAPI:url WithParameters:params notification:nil];
+}
+
+- (NSArray *)watchedSync:(iTunesEVdK)videoType extended:(NSString *)ext {
+    
+    NSDictionary *params = [NSDictionary dictionaryWithObject:ext forKey:@"extended"];
+    NSString *type;
+        
+    if(videoType == iTunesEVdKTVShow) {
+        
+        type = @"shows";
+        
+    } else if(videoType == iTunesEVdKMovie) {
+        
+        type = @"movies";
+    }
+    
+    NSString *url = [NSString stringWithFormat:@"%@/user/library/%@/watched.json/%@/%@/%@", kApiUrl, type, [self apiKey], self.username, ext];
+    
+    NSDictionary* headers = [NSDictionary dictionaryWithObjectsAndKeys:@"application/json", @"accept", nil];
+    
+    HttpJsonResponse* response = [[Unirest get:^(SimpleRequest* request) {
+        [request setUrl:url];
+        [request setHeaders:headers];
+    }] asJson];
+    
+    JsonNode* body = [response body];
+    
+    id responseObject = [body JSONArray];
+
+    if([responseObject isKindOfClass:[NSArray class]])
+        return (NSArray *) responseObject;
+    
+    return nil;
 }
 
 @end

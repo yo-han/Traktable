@@ -19,6 +19,18 @@
 @property (nonatomic) NSInteger duration;
 @property (nonatomic) iTunesEVdK videoKind;
 
+// Db only
+@property (nonatomic, strong) NSString *tagline;
+@property (nonatomic, strong) NSString *overview;
+@property (nonatomic, strong) NSString *trailer;
+@property (nonatomic, strong) NSString *url;
+@property (nonatomic, strong) NSString *image;
+@property (nonatomic, strong) NSArray *genres;
+@property (nonatomic) NSInteger released;
+@property (nonatomic) NSInteger tmdbId;
+@property (nonatomic) NSInteger hasPoster;
+
 +(ITMovie *)movieWithCurrentTunesTrack:(iTunesTrack *)iTunesTrack;
++(ITMovie *)movieWithDatabaseRecord:(NSDictionary *)record;
 
 @end

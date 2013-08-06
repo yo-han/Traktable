@@ -10,7 +10,7 @@
 #import "ITLibrary.h"
 #import "FMDatabase.h"
 #import "FMDatabaseQueue.h"
-#import "SBJson.h"
+#import "ITConstants.h"
 
 @interface IMDB()
 
@@ -35,17 +35,8 @@
     if(data == nil)
         return @"";
     
-    id responseDict;
+    id responseDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
     
-    
-    responseDict = [[SBJsonParser alloc] objectWithData:data];
-    
-    Class hasNSJSON = NSClassFromString(@"NSJSONSerialization");
-    
-    if(hasNSJSON != nil) {
-        responseDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-    }
-
     if([responseDict isKindOfClass:[NSDictionary class]]) {
         
         if([[responseDict objectForKey:@"Response"] isEqualToString:@"False"]) {
@@ -100,7 +91,7 @@
 
 + (void)setCache:(NSString *)imdbId title:(NSString *)aTitle {
     
-    NSString *dbFilePath = [[ITLibrary applicationSupportFolder] stringByAppendingPathComponent:@"iTraktor.db"];
+    NSString *dbFilePath = [[ITConstants applicationSupportFolder] stringByAppendingPathComponent:@"iTraktor.db"];
     FMDatabaseQueue *dbQueue = [FMDatabaseQueue databaseQueueWithPath:dbFilePath];
     
     [dbQueue inDatabase:^(FMDatabase *db) {
@@ -111,7 +102,7 @@
 + (NSString *)checkCache:(NSString *)title {
     
     __block NSString *imdbId = nil;
-    NSString *dbFilePath = [[ITLibrary applicationSupportFolder] stringByAppendingPathComponent:@"iTraktor.db"];
+    NSString *dbFilePath = [[ITConstants applicationSupportFolder] stringByAppendingPathComponent:@"iTraktor.db"];
     FMDatabaseQueue *dbQueue = [FMDatabaseQueue databaseQueueWithPath:dbFilePath];
     
     [dbQueue inDatabase:^(FMDatabase *db) {

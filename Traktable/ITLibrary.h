@@ -21,12 +21,11 @@
 
 - (void)importLibrary;
 - (void)syncLibrary;
+- (void)syncTrakt;
 - (BOOL)dbExists;
 
 - (void)updateTrackCount:(iTunesTrack *)track scrobbled:(BOOL)scrobble;
 - (iTunesTrack *)getTrack:(NSString *)persistentID type:(iTunesESpK)videoType;
 - (SBElementArray *)getVideos:(iTunesESpK)playlist noCheck:(BOOL)noChecking;
-
-+ (NSString *)applicationSupportFolder;
 
 @end

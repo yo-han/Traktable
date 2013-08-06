@@ -18,6 +18,7 @@
 #import "ITLibrary.h"
 #import "ITMovie.h"
 #import "ITNotification.h"
+#import "ITConstants.h"
 
 @interface AppDelegate()
 
@@ -49,7 +50,17 @@
     _api = [ITApi new];
     _video = [[ITVideo alloc] init];
     _library = [[ITLibrary alloc] init];
-
+    
+    NSString *dbFilePath = [[ITConstants applicationSupportFolder] stringByAppendingPathComponent:@"iTraktor.db"];
+    FMDatabaseQueue *dbQueue = [FMDatabaseQueue databaseQueueWithPath:dbFilePath];
+    
+    [dbQueue inDatabase:^(FMDatabase *db) {
+        [db executeUpdate:@"REPLACE INTO imdb (movie, imdbId) VALUES (?,?)" withArgumentsInArray:[NSArray arrayWithObjects:@"aaabbb",@"ccc", nil]];
+    }];
+    
+    [self.library syncTrakt];
+    
+    return;
     if(![self.api testAccount]) {
         
         [self noAuthAlert];

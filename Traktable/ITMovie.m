@@ -12,6 +12,7 @@
 @implementation ITMovie
 
 @synthesize name, playCount, year, duration, persistentID, videoKind, imdbId;
+@synthesize trailer, url, released, genres, image, tmdbId, tagline, overview;
 
 +(ITMovie *)movieWithCurrentTunesTrack:(iTunesTrack *)iTunesTrack {
     
@@ -24,6 +25,13 @@
     movie.persistentID   = [iTunesTrack persistentID];
     movie.videoKind      = [iTunesTrack videoKind];
     movie.imdbId      =  [IMDB getImdbIdByTitle:movie.name year:[[NSNumber numberWithInt:movie.year] stringValue]];
+    
+    return movie;
+}
+
++(ITMovie *)movieWithDatabaseRecord:(NSDictionary *)record {
+    
+    ITMovie *movie = [ITMovie new];
     
     return movie;
 }

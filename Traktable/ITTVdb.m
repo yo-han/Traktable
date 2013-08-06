@@ -12,6 +12,7 @@
 #import "FMDatabase.h"
 #import "FMDatabaseQueue.h"
 #import "iTVDb/iTVDb.h"
+#import "ITConstants.h"
 
 @interface ITTVdb()
 
@@ -63,7 +64,7 @@
 
 + (void)setCache:(NSString *)imdbId title:(NSString *)aTitle {
     
-    NSString *dbFilePath = [[ITLibrary applicationSupportFolder] stringByAppendingPathComponent:@"iTraktor.db"];
+    NSString *dbFilePath = [[ITConstants applicationSupportFolder] stringByAppendingPathComponent:@"iTraktor.db"];
     FMDatabaseQueue *dbQueue = [FMDatabaseQueue databaseQueueWithPath:dbFilePath];
     
     [dbQueue inDatabase:^(FMDatabase *db) {
@@ -74,7 +75,7 @@
 + (NSString *)checkCache:(NSString *)title {
     
     __block NSString *_imdbId = nil;
-    NSString *dbFilePath = [[ITLibrary applicationSupportFolder] stringByAppendingPathComponent:@"iTraktor.db"];
+    NSString *dbFilePath = [[ITConstants applicationSupportFolder] stringByAppendingPathComponent:@"iTraktor.db"];
     FMDatabaseQueue *dbQueue = [FMDatabaseQueue databaseQueueWithPath:dbFilePath];
     
     [dbQueue inDatabase:^(FMDatabase *db) {
