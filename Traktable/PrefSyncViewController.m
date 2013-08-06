@@ -10,7 +10,7 @@
 #import "ITLibrary.h"
 #import "ITApi.h"
 #import "ITNotification.h"
-#import "ITConstants.h"
+#import "ITDb.h"
 
 @interface PrefSyncViewController()
 
@@ -113,19 +113,14 @@
 
 - (IBAction)reset:(id)sender {
     
-    NSString *appSupportPath = [ITConstants applicationSupportFolder];
-    NSString *dbFilePath = [appSupportPath stringByAppendingPathComponent:@"iTraktor.db"];
-
-    //ITLibrary *library = [[ITLibrary alloc] init];
-    //[library.dbQueue close];
+    ITDb *db = [ITDb new];
     
-    [[NSFileManager defaultManager] removeItemAtPath:dbFilePath error:nil];
+    [[NSFileManager defaultManager] removeItemAtPath:[db getDbFilePath] error:nil];
     
     NSString *logPath = @"/tmp/ITDebug.log";
     
     [[NSFileManager defaultManager] removeItemAtPath:logPath error:nil];
     freopen([logPath fileSystemRepresentation],"a+",stderr);
-    
 
 }
 

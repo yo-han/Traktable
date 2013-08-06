@@ -12,16 +12,11 @@
 #import "ITConfig.h"
 #import "EMKeychainItem.h"
 #import "ITNotification.h"
-#import "SBJson.h"
 #import "Unirest.h"
-#import "FMDatabase.h"
-#import "FMDatabaseQueue.h"
 
 #define kApiUrl @"http://api.trakt.tv"
 
 @interface ITApi()
-
-@property (nonatomic, retain) FMDatabaseQueue *dbQueue;
 
 - (NSString *)sha1Hash:(NSString *)input;
 - (NSString *)apiKey;
@@ -113,11 +108,11 @@
                   self.username, @"username",
                   self.password, @"password",
                   aTVShow.show, @"title",
-                  [NSNumber numberWithInteger:aTVShow.year], @"year",
-                  [NSNumber numberWithInteger:aTVShow.seasonNumber], @"season",
-                  [NSNumber numberWithInteger:aTVShow.episodeNumber], @"episode",
-                  [NSNumber numberWithInteger:aTVShow.duration], @"duration",
-                  [NSNumber numberWithInteger:50], @"progress",
+                  [NSString stringWithFormat:@"%ld", aTVShow.seasonNumber], @"season",
+                  [NSString stringWithFormat:@"%ld", aTVShow.episodeNumber], @"episode",
+                  [NSString stringWithFormat:@"%ld", aTVShow.year], @"year",
+                  [NSString stringWithFormat:@"%ld", aTVShow.duration], @"duration",
+                  @"50", @"progress",
                   appVersion, @"plugin_version",
                   @"1.0", @"media_center_version",
                   @"31.12.2011", @"media_center_date",
@@ -157,9 +152,9 @@
                   self.password, @"password",
                   aMovie.name, @"title",
                   aMovie.imdbId, @"imdb_id",
-                  [NSNumber numberWithInteger:aMovie.year], @"year",
-                  [NSNumber numberWithInteger:aMovie.duration], @"duration",
-                  [NSNumber numberWithInteger:50], @"progress",
+                  [NSString stringWithFormat:@"%ld", aMovie.year], @"year",
+                  [NSString stringWithFormat:@"%ld", aMovie.duration], @"duration",
+                  @"50", @"progress",
                   appVersion, @"plugin_version",
                   @"1.0", @"media_center_version",
                   @"31.12.2011", @"media_center_date",
@@ -194,49 +189,27 @@
         [request setParameters:params];
     }] asJson];
     
-    JsonNode* body = [response body];
-
-    id responseObject = [body JSONObject];
+    id responseObject = [NSJSONSerialization JSONObjectWithData:[response rawBody] options:0 error:nil];
     
     return responseObject;
 }
 
 - (void)callURL:(NSString *)requestUrl withParameters:(NSDictionary *)params completionHandler:(void (^)(id , NSError *))completionBlock
 {
-    dispatch_queue_t apiQueue = dispatch_queue_create("Traktable.apiCall", NULL);
-    
-    dispatch_async(apiQueue, ^{
+    NSDictionary* headers = [NSDictionary dictionaryWithObjectsAndKeys:@"application/json", @"accept", nil];
+
+    [[Unirest post:^(MultipartRequest* request) {
         
-        NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestUrl]];
-        [request setHTTPMethod: @"POST"];
+        [request setUrl:requestUrl];
+        [request setHeaders:headers];
+        [request setParameters:params];
         
-        [request setHTTPBody:[[SBJsonWriter alloc] dataWithObject:params]];
+    }] asJsonAsync:^(HttpJsonResponse* response) {
         
-        NSURLResponse *response = nil;
-        NSError *error;
-        
-        NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-        
-        if (error) {
-            
-            dispatch_async(dispatch_get_main_queue(), ^(void) {
-                completionBlock(nil, error);
-            });
-            return;
-        }
-        
-        id responseObject;
-        
-        response = [[SBJsonParser alloc] objectWithData:data];
-        
-        Class hasNSJSON = NSClassFromString(@"NSJSONSerialization");
-        
-        if(hasNSJSON != nil) {
-            responseObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-        }
+        id responseObject = [NSJSONSerialization JSONObjectWithData:[response rawBody] options:0 error:nil];
         
         completionBlock(responseObject, nil);
-    });
+    }];
 }
 
 - (void)callAPI:(NSString*)apiCall WithParameters:(NSDictionary *)params notification:(NSDictionary *)notification {

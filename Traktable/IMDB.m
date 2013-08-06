@@ -7,10 +7,7 @@
 //
 
 #import "IMDB.h"
-#import "ITLibrary.h"
-#import "FMDatabase.h"
-#import "FMDatabaseQueue.h"
-#import "ITConstants.h"
+#import "ITDb.h"
 
 @interface IMDB()
 
@@ -91,34 +88,25 @@
 
 + (void)setCache:(NSString *)imdbId title:(NSString *)aTitle {
     
-    NSString *dbFilePath = [[ITConstants applicationSupportFolder] stringByAppendingPathComponent:@"iTraktor.db"];
-    FMDatabaseQueue *dbQueue = [FMDatabaseQueue databaseQueueWithPath:dbFilePath];
+    ITDb *db = [ITDb new];
     
-    [dbQueue inDatabase:^(FMDatabase *db) {
-        [db executeUpdate:@"REPLACE INTO imdb (movie, imdbId) VALUES (?,?)", aTitle, imdbId];
-    }];    
+    NSArray *args = [NSArray arrayWithObjects:aTitle, imdbId, nil];
+    
+    [db executeUpdateUsingQueue:@"REPLACE INTO imdb (movie, imdbId) VALUES (?,?)" arguments:args];
+
 }
 
 + (NSString *)checkCache:(NSString *)title {
     
-    __block NSString *imdbId = nil;
-    NSString *dbFilePath = [[ITConstants applicationSupportFolder] stringByAppendingPathComponent:@"iTraktor.db"];
-    FMDatabaseQueue *dbQueue = [FMDatabaseQueue databaseQueueWithPath:dbFilePath];
+    ITDb *db = [ITDb new];
     
-    [dbQueue inDatabase:^(FMDatabase *db) {
-        FMResultSet *s = [db executeQuery:@"SELECT imdbId FROM imdb WHERE movie = ?", title];
+    NSDictionary *result = [db executeAndGetOneResult:@"SELECT imdbId FROM imdb WHERE movie = ?" arguments:[NSArray arrayWithObject:title]];
+
+    NSString *imdbId = @"";
+
+    if(result != nil)
+        imdbId = [result objectForKey:@"imdbId"];
         
-        if ([s next])
-            imdbId = [s objectForColumnName:@"imdbId"];
-        else
-            imdbId = @"";
-    
-        [s close];
-    }];
-    
-    if(imdbId == nil)
-        imdbId = @"";
-    
     return imdbId;
 }
 

@@ -11,5 +11,6 @@
 @interface IMDB : NSObject
 
 + (NSString * )getImdbIdByTitle:(NSString *)title year:(NSString *)aYear;
++ (NSString *)checkCache:(NSString *)title;
 
 @end

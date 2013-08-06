@@ -7,12 +7,9 @@
 //
 
 #import "ITTVdb.h"
-#import "ITLibrary.h"
 #import "ITConfig.h"
-#import "FMDatabase.h"
-#import "FMDatabaseQueue.h"
+#import "ITDb.h"
 #import "iTVDb/iTVDb.h"
-#import "ITConstants.h"
 
 @interface ITTVdb()
 
@@ -64,33 +61,25 @@
 
 + (void)setCache:(NSString *)imdbId title:(NSString *)aTitle {
     
-    NSString *dbFilePath = [[ITConstants applicationSupportFolder] stringByAppendingPathComponent:@"iTraktor.db"];
-    FMDatabaseQueue *dbQueue = [FMDatabaseQueue databaseQueueWithPath:dbFilePath];
+    ITDb *db = [ITDb new];
     
-    [dbQueue inDatabase:^(FMDatabase *db) {
-        [db executeUpdate:@"REPLACE INTO tvdbCache (show, imdbId) VALUES (%@, %@)", aTitle, imdbId];
-    }];
+    NSArray *args = [NSArray arrayWithObjects:aTitle, imdbId, nil];
+    
+    [db executeUpdateUsingQueue:@"REPLACE INTO tvdbCache (show, imdbId) VALUES (?,?)" arguments:args];
 }
 
 + (NSString *)checkCache:(NSString *)title {
     
-    __block NSString *_imdbId = nil;
-    NSString *dbFilePath = [[ITConstants applicationSupportFolder] stringByAppendingPathComponent:@"iTraktor.db"];
-    FMDatabaseQueue *dbQueue = [FMDatabaseQueue databaseQueueWithPath:dbFilePath];
+    ITDb *db = [ITDb new];
     
-    [dbQueue inDatabase:^(FMDatabase *db) {
-            
-        FMResultSet *s = [db executeQuery:@"SELECT imdbId FROM tvdbCache WHERE show = ?", title];
-        
-        if ([s next])
-            _imdbId = [s objectForColumnName:@"imdbId"];
-        else
-            _imdbId = @"";
-        
-        [s close];
-    }];
+    NSDictionary *result = [db executeAndGetOneResult:@"SELECT imdbId FROM tvdbCache WHERE show = ?" arguments:[NSArray arrayWithObject:title]];
     
-    return _imdbId;
+    NSString *imdbId = @"";
+    
+    if(result != nil)
+        imdbId = [result objectForKey:@"imdbId"];
+    
+    return imdbId;
 }
 
 @end

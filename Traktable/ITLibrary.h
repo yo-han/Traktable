@@ -8,13 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "iTunes.h"
-#import "FMDatabase.h"
-#import "FMDatabaseQueue.h"
 
 @interface ITLibrary : NSObject
 
 @property (nonatomic, retain) iTunesApplication *iTunesBridge;
-@property (nonatomic, retain) FMDatabaseQueue *dbQueue;
 
 @property (nonatomic) NSString *dbFilePath;
 @property (nonatomic) BOOL firstImport;

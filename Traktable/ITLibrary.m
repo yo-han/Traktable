@@ -11,6 +11,7 @@
 #import "ITVideo.h"
 #import "AppDelegate.h"
 #import "ITConstants.h"
+#import "ITDb.h"
 
 @interface ITLibrary()
 
@@ -25,7 +26,6 @@
 @implementation ITLibrary
 
 @synthesize iTunesBridge;
-@synthesize dbQueue=_dbQueue;
 @synthesize queue=_queue;
 @synthesize dbFilePath;
 @synthesize firstImport;
@@ -47,19 +47,15 @@
         [self resetDb];
     }
     
-    _dbQueue = [FMDatabaseQueue databaseQueueWithPath:dbFilePath];
     _queue = dispatch_queue_create("traktable.sync.queue", NULL);
     
-    [self.dbQueue inDatabase:^(FMDatabase *db) {
-        FMResultSet *s = [db executeQuery:@"SELECT playedCount FROM library"];
-        
-        if(s == nil) {
-            [[NSFileManager defaultManager] removeItemAtPath:dbFilePath error:nil];
-            [self resetDb];
-        }
-            
-        [s close];
-    }];
+    ITDb *db = [ITDb new];
+    NSDictionary *result = [db executeAndGetOneResult:@"SELECT playedCount FROM library" arguments:nil];
+    
+    if(result == nil) {
+        [[NSFileManager defaultManager] removeItemAtPath:dbFilePath error:nil];
+        [self resetDb];
+    }
     
     return self;
 }
@@ -127,7 +123,7 @@
 
 - (void)importLibrary {
     
-    ITApi *api = [[ITApi alloc] init];
+    ITApi *api = [ITApi new];
     firstImport = YES;
     
     NSArray *movies = [self getVideos:iTunesESpKMovies noCheck:YES];
@@ -176,11 +172,11 @@
        
         NSDictionary *argsDict = [NSDictionary dictionaryWithObjectsAndKeys:[movie objectForKey:@"tmdb_id"], @"tmdb_id", [movie objectForKey:@"imdb_id"],@"imdb_id",[movie objectForKey:@"year"],@"year",@"1",@"hasPoster",[movie objectForKey:@"plays"],@"traktPlays",[movie objectForKey:@"released"],@"released",[movie objectForKey:@"runtime"],@"runtime",[movie objectForKey:@"title"],@"title",[movie objectForKey:@"overview"],@"overview",[movie objectForKey:@"tagline"],@"tagline",[movie objectForKey:@"url"],@"traktUrl",[movie objectForKey:@"trailer"],@"trailer",[movie objectForKey:@"genres"],@"genres", nil];
         
-        [self.dbQueue inDatabase:^(FMDatabase *db) {
-            NSLog(@"f");
-            [db executeUpdate:@"REPLACE INTO movies (tmdb_id, imdb_id, year, hasPoster, traktPlays, released, runtime, title, overview, tagline, traktUrl, trailer, genres) VALUES (:tmdb_id, :imdb_id, :year, :hasPoster, :traktPlays, :released, :runtime, :title, :overview, :tagline, :traktUrl, :trailer, :genres)" withParameterDictionary:argsDict];
-            NSLog(@"%@", [db lastErrorMessage]);
-        }];
+        ITDb *db = [ITDb new];
+        
+        [db executeUpdateUsingQueue:@"REPLACE INTO movies (tmdb_id, imdb_id, year, hasPoster, traktPlays, released, runtime, title, overview, tagline, traktUrl, trailer, genres) VALUES (:tmdb_id, :imdb_id, :year, :hasPoster, :traktPlays, :released, :runtime, :title, :overview, :tagline, :traktUrl, :trailer, :genres)"  arguments:argsDict];
+        
+        NSLog(@"%@", [db lastErrorMessage]);
     }
 }
 
@@ -200,16 +196,12 @@
             iTunesTrack *track = [tracks objectAtIndex:i];
             
             sleep(2);
-
-            [self.dbQueue inDatabase:^(FMDatabase *db) {
-                FMResultSet *s = [db executeQuery:@"SELECT playedCount FROM library WHERE persistentId = ?", [[track persistentID] description]];
-                
-                if ([s next]) {
-                    playedCount = [s objectForColumnName:@"playedCount"];
-                }
-                
-                [s close];
-            }];          
+            
+            ITDb *db = [ITDb new];
+            
+            NSDictionary *result = [db executeAndGetOneResult:@"SELECT playedCount FROM library WHERE persistentId = ?" arguments:[NSArray arrayWithObject:[[track persistentID] description]]];
+            
+            playedCount = [result objectForKey:@"playedCount"];
                             
             iTunesEVdK *type;
             
@@ -284,10 +276,10 @@
     NSDictionary *argsDict = [NSDictionary dictionaryWithObjectsAndKeys:[[track persistentID] description], @"id", [NSNumber numberWithInt:(int) [track playedCount]], @"played", [NSNumber numberWithBool:scrobble], @"scrobble", nil];
     
     NSLog(@"id: %@, played: %@", [argsDict objectForKey:@"id"], [argsDict objectForKey:@"played"]);
-        
-    [self.dbQueue inDatabase:^(FMDatabase *db) {
-        [db executeUpdate:@"REPLACE INTO library (persistentId, playedCount, scrobbled) VALUES (:id, :played, :scrobble)" withParameterDictionary:argsDict];
-    }];
+    
+    ITDb *db = [ITDb new];
+    
+    [db executeUpdateUsingQueue:@"REPLACE INTO library (persistentId, playedCount, scrobbled) VALUES (?, ?, ?)" arguments:[NSArray arrayWithObjects:[[track persistentID] description], [NSNumber numberWithInt:(int) [track playedCount]], [NSNumber numberWithBool:scrobble], nil]];
 }
 
 - (void)createDir:(NSString *)dir {

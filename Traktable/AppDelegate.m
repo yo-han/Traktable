@@ -18,7 +18,7 @@
 #import "ITLibrary.h"
 #import "ITMovie.h"
 #import "ITNotification.h"
-#import "ITConstants.h"
+#import "IMDB.h"
 
 @interface AppDelegate()
 
@@ -51,13 +51,8 @@
     _video = [[ITVideo alloc] init];
     _library = [[ITLibrary alloc] init];
     
-    NSString *dbFilePath = [[ITConstants applicationSupportFolder] stringByAppendingPathComponent:@"iTraktor.db"];
-    FMDatabaseQueue *dbQueue = [FMDatabaseQueue databaseQueueWithPath:dbFilePath];
-    
-    [dbQueue inDatabase:^(FMDatabase *db) {
-        [db executeUpdate:@"REPLACE INTO imdb (movie, imdbId) VALUES (?,?)" withArgumentsInArray:[NSArray arrayWithObjects:@"aaabbb",@"ccc", nil]];
-    }];
-    
+    NSLog(@"TESTING MODE - REMOVE CODE BELOW");
+    NSLog(@"%@",[IMDB checkCache:@"aaabbb"]);
     [self.library syncTrakt];
     
     return;
