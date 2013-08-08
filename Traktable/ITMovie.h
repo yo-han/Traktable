@@ -28,9 +28,11 @@
 @property (nonatomic, strong) NSArray *genres;
 @property (nonatomic) NSInteger released;
 @property (nonatomic) NSInteger tmdbId;
-@property (nonatomic) NSInteger hasPoster;
+@property (nonatomic, strong) NSImage *poster;
 
 +(ITMovie *)movieWithCurrentTunesTrack:(iTunesTrack *)iTunesTrack;
 +(ITMovie *)movieWithDatabaseRecord:(NSDictionary *)record;
+
++ (NSImage *)cacheImage;
 
 @end

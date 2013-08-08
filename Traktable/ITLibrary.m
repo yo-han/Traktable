@@ -9,6 +9,7 @@
 #import "ITLibrary.h"
 #import "ITApi.h"
 #import "ITVideo.h"
+#import "ITMovie.h"
 #import "AppDelegate.h"
 #import "ITConstants.h"
 #import "ITDb.h"
@@ -135,7 +136,7 @@
     
     [self checkTracks:shows];
     
-    dispatch_sync(_queue, ^{
+    dispatch_sync(self.queue, ^{
         printf("Import done.");
     });
 }
@@ -167,21 +168,38 @@
     ITApi *api = [ITApi new];
 
     NSArray *movies = [api watchedSync:iTunesEVdKMovie extended:@"1"];
-
+    
+    [self createDir:[[ITConstants applicationSupportFolder] stringByAppendingPathComponent:[NSString stringWithFormat:@"images/movies"]]];
+     
     for(NSDictionary *movie in movies) {
-       
-        NSDictionary *argsDict = [NSDictionary dictionaryWithObjectsAndKeys:[movie objectForKey:@"tmdb_id"], @"tmdb_id", [movie objectForKey:@"imdb_id"],@"imdb_id",[movie objectForKey:@"year"],@"year",@"1",@"hasPoster",[movie objectForKey:@"plays"],@"traktPlays",[movie objectForKey:@"released"],@"released",[movie objectForKey:@"runtime"],@"runtime",[movie objectForKey:@"title"],@"title",[movie objectForKey:@"overview"],@"overview",[movie objectForKey:@"tagline"],@"tagline",[movie objectForKey:@"url"],@"traktUrl",[movie objectForKey:@"trailer"],@"trailer",[movie objectForKey:@"genres"],@"genres", nil];
+        
+        NSString *poster = [[movie objectForKey:@"images"] objectForKey:@"poster"];
+        
+        NSDictionary *argsDict = [NSDictionary dictionaryWithObjectsAndKeys:[movie objectForKey:@"tmdb_id"], @"tmdb_id", [movie objectForKey:@"imdb_id"],@"imdb_id",[movie objectForKey:@"year"],@"year", poster,@"poster",[movie objectForKey:@"plays"],@"traktPlays",[movie objectForKey:@"released"],@"released",[movie objectForKey:@"runtime"],@"runtime",[movie objectForKey:@"title"],@"title",[movie objectForKey:@"overview"],@"overview",[movie objectForKey:@"tagline"],@"tagline",[movie objectForKey:@"url"],@"traktUrl",[movie objectForKey:@"trailer"],@"trailer",[movie objectForKey:@"genres"],@"genres", nil];
         
         ITDb *db = [ITDb new];
         
-        [db executeUpdateUsingQueue:@"REPLACE INTO movies (tmdb_id, imdb_id, year, hasPoster, traktPlays, released, runtime, title, overview, tagline, traktUrl, trailer, genres) VALUES (:tmdb_id, :imdb_id, :year, :hasPoster, :traktPlays, :released, :runtime, :title, :overview, :tagline, :traktUrl, :trailer, :genres)"  arguments:argsDict];
+        [db executeUpdateUsingQueue:@"REPLACE INTO movies (tmdb_id, imdb_id, year, poster, traktPlays, released, runtime, title, overview, tagline, traktUrl, trailer, genres) VALUES (:tmdb_id, :imdb_id, :year, :poster, :traktPlays, :released, :runtime, :title, :overview, :tagline, :traktUrl, :trailer, :genres)"  arguments:argsDict];
         
-        NSLog(@"%@", [db lastErrorMessage]);
+        NSNumber *lastId = [db lastInsertRowId];
+        
+        dispatch_async(self.queue,
+        ^{
+            NSString *imagePath = [[ITConstants applicationSupportFolder] stringByAppendingPathComponent:[NSString stringWithFormat:@"images/movies/%@.jpg", lastId]];
+            
+            if([[NSFileManager defaultManager] fileExistsAtPath:imagePath])
+                return;
+            
+            NSURL *url = [NSURL URLWithString:poster];
+            NSData *imageData = [NSData dataWithContentsOfURL:url];
+
+            [imageData writeToFile:imagePath atomically:YES];
+        });
     }
 }
 
 - (NSArray *)checkTracks:(NSArray *)tracks {
-    
+
     NSMutableArray *seenVideos = [[NSMutableArray alloc] init];
     ITVideo *video = [ITVideo new];
     ITApi *api = [ITApi new];
@@ -191,7 +209,7 @@
         
         __block id playedCount;
         
-        dispatch_async(_queue, ^{
+        dispatch_async(self.queue, ^{
             
             iTunesTrack *track = [tracks objectAtIndex:i];
             
@@ -272,14 +290,14 @@
 }
 
 - (void)updateTrackCount:(iTunesTrack *)track scrobbled:(BOOL)scrobble {
-    
+ 
     NSDictionary *argsDict = [NSDictionary dictionaryWithObjectsAndKeys:[[track persistentID] description], @"id", [NSNumber numberWithInt:(int) [track playedCount]], @"played", [NSNumber numberWithBool:scrobble], @"scrobble", nil];
     
     NSLog(@"id: %@, played: %@", [argsDict objectForKey:@"id"], [argsDict objectForKey:@"played"]);
     
     ITDb *db = [ITDb new];
     
-    [db executeUpdateUsingQueue:@"REPLACE INTO library (persistentId, playedCount, scrobbled) VALUES (?, ?, ?)" arguments:[NSArray arrayWithObjects:[[track persistentID] description], [NSNumber numberWithInt:(int) [track playedCount]], [NSNumber numberWithBool:scrobble], nil]];
+    [db executeUpdateUsingQueue:@"REPLACE INTO library (persistentId, playedCount, scrobbled) VALUES (:id, :played, :scrobble)" arguments:argsDict];
 }
 
 - (void)createDir:(NSString *)dir {

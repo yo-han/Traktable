@@ -52,7 +52,7 @@
     _library = [[ITLibrary alloc] init];
     
     NSLog(@"TESTING MODE - REMOVE CODE BELOW");
-    NSLog(@"%@",[IMDB checkCache:@"aaabbb"]);
+
     [self.library syncTrakt];
     
     return;

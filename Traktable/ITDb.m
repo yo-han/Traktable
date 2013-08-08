@@ -18,6 +18,7 @@ static NSString *dbFile = @"iTraktor.db";
 @property (nonatomic, strong) NSString *dbFilePath;
 @property (nonatomic, strong) FMDatabaseQueue *dbQueue;
 @property (nonatomic, strong) NSString *errorMessage;
+@property (nonatomic) int lastInsertId;
 
 @end
 
@@ -41,6 +42,11 @@ static NSString *dbFile = @"iTraktor.db";
     return self.errorMessage;
 }
 
+- (NSNumber *)lastInsertRowId {
+    
+    return [NSNumber numberWithInt:self.lastInsertId];
+}
+
 - (void)executeUpdateUsingQueue:(NSString *)sql arguments:(id)args {
     
     [self.dbQueue inDatabase:^(FMDatabase *db) {
@@ -51,6 +57,7 @@ static NSString *dbFile = @"iTraktor.db";
             [db executeUpdate:sql withParameterDictionary:args];
         
         self.errorMessage = [db lastErrorMessage];
+        self.lastInsertId = [db lastInsertRowId];
     }];
 }
 

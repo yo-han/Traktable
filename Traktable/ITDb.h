@@ -14,6 +14,7 @@
 
 - (NSString *)getDbFilePath;
 - (NSString *)lastErrorMessage;
+- (NSNumber *)lastInsertRowId;
 
 - (void)executeUpdateUsingQueue:(NSString *)sql arguments:(id)args;
 
