@@ -214,21 +214,25 @@
 
 - (void)callAPI:(NSString*)apiCall WithParameters:(NSDictionary *)params notification:(NSDictionary *)notification {
 
-    [self callURL:apiCall withParameters:params completionHandler:^(id repsonse, NSError *err) {
+    [self callURL:apiCall withParameters:params completionHandler:^(id response, NSError *err) {
         
-        if(![repsonse isKindOfClass:[NSDictionary class]]) {
+        if(![response isKindOfClass:[NSDictionary class]]) {
             
             NSLog(@"Repsonse is not an NSDictionary");
             return;
         }
             
-        if ([[repsonse objectForKey:@"status"] isEqualToString:@"success"]){
+        if ([[response objectForKey:@"status"] isEqualToString:@"success"]){
             
-            NSLog(@"Succes: %@",[repsonse objectForKey:@"message"]);
+            NSLog(@"Succes: %@",[response objectForKey:@"message"]);
             
             if(notification != nil)
                 [self callAPISucces:notification];
+        } else {
+            
+            NSLog(@"%@ got error: %@", apiCall, response);
         }
+        
         if (err) NSLog(@"Error: %@",[err description]);
     }];
 }

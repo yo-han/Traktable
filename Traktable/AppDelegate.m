@@ -53,9 +53,9 @@
     
     NSLog(@"TESTING MODE - REMOVE CODE BELOW");
 
-    [self.library syncTrakt];
+    //[self.library syncTrakt];
     
-    return;
+    //return;
     if(![self.api testAccount]) {
         
         [self noAuthAlert];
