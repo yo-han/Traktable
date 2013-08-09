@@ -187,9 +187,17 @@
     
     NSURLResponse *response = nil;
     NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:nil];
-
-    NSDictionary *responseDict = [[SBJsonParser alloc] objectWithData:data];
     
+    id responseDict = nil;
+    
+    responseDict = [[SBJsonParser alloc] objectWithData:data];
+    
+    Class hasNSJSON = NSClassFromString(@"NSJSONSerialization");
+    
+    if(hasNSJSON != nil) {
+        responseDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+    }
+        
     return responseDict;
 }
 
@@ -217,7 +225,15 @@
             return;
         }
         
-        NSDictionary *responseDict = [[SBJsonParser alloc] objectWithData:data];
+        id responseDict = nil;
+        
+        responseDict = [[SBJsonParser alloc] objectWithData:data];
+        
+        Class hasNSJSON = NSClassFromString(@"NSJSONSerialization");
+        
+        if(hasNSJSON != nil) {
+            responseDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+        }
         
         completionBlock(responseDict, nil);        
     });
@@ -251,7 +267,7 @@
     
     NSString *url = [NSString stringWithFormat:@"%@/account/test/%@", kApiUrl, [self apiKey]];
     NSDictionary *data = [self callURLSync:url withParameters:params];
-
+    NSLog(@"%@",data);
     if([[data objectForKey:@"status"] isEqualToString:@"failure"])
         return NO;
     else

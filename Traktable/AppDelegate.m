@@ -46,7 +46,7 @@
     _video = [[ITVideo alloc] init];
     _library = [[ITLibrary alloc] init];
 
-    if(![self.api testAccount]) {
+    if(![self.api username] || ![self.api testAccount]) {
         
         [self noAuthAlert];
         [self displayPreferences:self];
