@@ -9,12 +9,11 @@
 #import <Cocoa/Cocoa.h>
 #import "PXSourceList.h"
 
-@interface MainWindowController : NSWindowController <PXSourceListDataSource, PXSourceListDelegate, NSTableViewDataSource, NSTableViewDelegate> {
+@class ITTableView;
 
-    IBOutlet PXSourceList *sourceList;
-    IBOutlet NSTextField *selectedItemLabel;
+@interface MainWindowController : NSWindowController <PXSourceListDataSource, PXSourceListDelegate, NSTableViewDataSource, NSTableViewDelegate>
 
-    NSMutableArray *sourceListItems;
-}
+@property (nonatomic, strong) IBOutlet ITTableView *tableView;
+@property (nonatomic, strong) IBOutlet PXSourceList *sourceList;
 
 @end

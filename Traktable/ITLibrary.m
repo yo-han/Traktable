@@ -12,13 +12,14 @@
 #import "ITMovie.h"
 #import "AppDelegate.h"
 #import "ITConstants.h"
+#import "ITMoviePoster.h"
 #import "ITDb.h"
+#import "ITUtil.h"
 
 @interface ITLibrary()
 
 - (id)init;
 - (NSArray *)checkTracks:(NSArray *)tracks;
-- (void)createDir:(NSString *)dir;
 
 @property dispatch_queue_t queue;
 
@@ -37,7 +38,7 @@
     ITApi *api = [ITApi new];
     
     NSString *appSupportPath = [ITConstants applicationSupportFolder];
-    [self createDir:appSupportPath];
+    [ITUtil createDir:appSupportPath];
     
     dbFilePath = [appSupportPath stringByAppendingPathComponent:@"iTraktor.db"];
     
@@ -51,11 +52,18 @@
     _queue = dispatch_queue_create("traktable.sync.queue", NULL);
     
     ITDb *db = [ITDb new];
-    NSDictionary *result = [db executeAndGetOneResult:@"SELECT playedCount FROM library" arguments:nil];
-    
-    if(result == nil) {
+    [db executeAndGetOneResult:@"SELECT playedCount FROM library" arguments:nil];
+
+    if([db error]) {
+        
+        NSLog(@"Reset db is caused by error: %@", [db lastErrorMessage]);
+        
         [[NSFileManager defaultManager] removeItemAtPath:dbFilePath error:nil];
         [self resetDb];
+        
+    } else if([db databaseNeedsMigration]) {
+        
+        [db migrateDatabase];
     }
     
     return self;
@@ -63,16 +71,9 @@
 
 - (BOOL)dbExists {
     
-    NSLog(@"Need to write an update meganism for the database");
-    
     bool b = [[NSFileManager defaultManager] fileExistsAtPath:dbFilePath];
       
     return b;
-}
-
-- (void)migrateDb {
-    
-    
 }
 
 - (void)resetDb {
@@ -168,32 +169,32 @@
     ITApi *api = [ITApi new];
 
     NSArray *movies = [api watchedSync:iTunesEVdKMovie extended:@"1"];
-    
-    [self createDir:[[ITConstants applicationSupportFolder] stringByAppendingPathComponent:[NSString stringWithFormat:@"images/movies"]]];
-     
+        
     for(NSDictionary *movie in movies) {
         
-        NSString *poster = [[movie objectForKey:@"images"] objectForKey:@"poster"];
+        NSString *posterUrl = [[movie objectForKey:@"images"] objectForKey:@"poster"];
         
-        NSDictionary *argsDict = [NSDictionary dictionaryWithObjectsAndKeys:[movie objectForKey:@"tmdb_id"], @"tmdb_id", [movie objectForKey:@"imdb_id"],@"imdb_id",[movie objectForKey:@"year"],@"year", poster,@"poster",[movie objectForKey:@"plays"],@"traktPlays",[movie objectForKey:@"released"],@"released",[movie objectForKey:@"runtime"],@"runtime",[movie objectForKey:@"title"],@"title",[movie objectForKey:@"overview"],@"overview",[movie objectForKey:@"tagline"],@"tagline",[movie objectForKey:@"url"],@"traktUrl",[movie objectForKey:@"trailer"],@"trailer",[movie objectForKey:@"genres"],@"genres", nil];
+        NSDictionary *argsDict = [NSDictionary dictionaryWithObjectsAndKeys:[movie objectForKey:@"tmdb_id"], @"tmdb_id", [movie objectForKey:@"imdb_id"],@"imdb_id",[movie objectForKey:@"year"],@"year", posterUrl,@"poster",[movie objectForKey:@"plays"],@"traktPlays",[movie objectForKey:@"released"],@"released",[movie objectForKey:@"runtime"],@"runtime",[movie objectForKey:@"title"],@"title",[movie objectForKey:@"overview"],@"overview",[movie objectForKey:@"tagline"],@"tagline",[movie objectForKey:@"url"],@"traktUrl",[movie objectForKey:@"trailer"],@"trailer",[movie objectForKey:@"genres"],@"genres", nil];
         
         ITDb *db = [ITDb new];
         
-        [db executeUpdateUsingQueue:@"REPLACE INTO movies (tmdb_id, imdb_id, year, poster, traktPlays, released, runtime, title, overview, tagline, traktUrl, trailer, genres) VALUES (:tmdb_id, :imdb_id, :year, :poster, :traktPlays, :released, :runtime, :title, :overview, :tagline, :traktUrl, :trailer, :genres)"  arguments:argsDict];
+        if([db executeAndGetOneResult:@"SELECT 'x' FROM movies WHERE tmdb_id = :id" arguments:[NSArray arrayWithObject:[movie objectForKey:@"tmdb_id"]]] != nil)
+            continue;
+        
+        [db executeUpdateUsingQueue:@"INSERT INTO movies (tmdb_id, imdb_id, year, poster, traktPlays, released, runtime, title, overview, tagline, traktUrl, trailer, genres) VALUES (:tmdb_id, :imdb_id, :year, :poster, :traktPlays, :released, :runtime, :title, :overview, :tagline, :traktUrl, :trailer, :genres)"  arguments:argsDict];
         
         NSNumber *lastId = [db lastInsertRowId];
         
+        if([lastId intValue] == 0)
+            continue;
+        
         dispatch_async(self.queue,
         ^{
-            NSString *imagePath = [[ITConstants applicationSupportFolder] stringByAppendingPathComponent:[NSString stringWithFormat:@"images/movies/%@.jpg", lastId]];
-            
-            if([[NSFileManager defaultManager] fileExistsAtPath:imagePath])
-                return;
-            
-            NSURL *url = [NSURL URLWithString:poster];
-            NSData *imageData = [NSData dataWithContentsOfURL:url];
-
-            [imageData writeToFile:imagePath atomically:YES];
+            ITMoviePoster *poster = [ITMoviePoster new];
+       
+            [poster poster:lastId withUrl:posterUrl size:ITMoviePosterSizeSmall];
+            [poster poster:lastId withUrl:posterUrl size:ITMoviePosterSizeMedium];
+            [poster poster:lastId withUrl:posterUrl size:ITMoviePosterSizeOriginal];
         });
     }
 }
@@ -298,15 +299,6 @@
     ITDb *db = [ITDb new];
     
     [db executeUpdateUsingQueue:@"REPLACE INTO library (persistentId, playedCount, scrobbled) VALUES (:id, :played, :scrobble)" arguments:argsDict];
-}
-
-- (void)createDir:(NSString *)dir {
-    
-    NSFileManager *fileManager = [[NSFileManager alloc] init];
-    
-    if(![fileManager fileExistsAtPath:dir])
-        if(![fileManager createDirectoryAtPath:dir withIntermediateDirectories:YES attributes:nil error:NULL])
-            NSLog(@"Error: Create folder failed %@", dir);
 }
 
 @end

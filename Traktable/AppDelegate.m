@@ -18,7 +18,7 @@
 #import "ITLibrary.h"
 #import "ITMovie.h"
 #import "ITNotification.h"
-#import "IMDB.h"
+#import "ITDb.h"
 
 @interface AppDelegate()
 
@@ -54,8 +54,8 @@
     NSLog(@"TESTING MODE - REMOVE CODE BELOW");
 
     //[self.library syncTrakt];
-    
     //return;
+    
     if(![self.api testAccount]) {
         
         [self noAuthAlert];

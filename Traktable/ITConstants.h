@@ -10,6 +10,11 @@
 
 @interface ITConstants : NSObject
 
+typedef enum ITSourceListIdentifier : NSUInteger {
+    ITHistoryMovies,
+    ITHistoryTVShows
+} ITSourceListIdentifier;
+
 + (NSString *)applicationSupportFolder;
 
 @end

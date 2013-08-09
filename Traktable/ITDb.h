@@ -15,10 +15,15 @@
 - (NSString *)getDbFilePath;
 - (NSString *)lastErrorMessage;
 - (NSNumber *)lastInsertRowId;
+- (int)lastErrorCode;
+- (BOOL)error;
 
 - (void)executeUpdateUsingQueue:(NSString *)sql arguments:(id)args;
 
 - (NSDictionary *)executeAndGetOneResult:(NSString *)sql arguments:(NSArray *)args;
 - (NSArray *)executeAndGetResults:(NSString *)sql arguments:(NSArray *)args;
+
+- (void)migrateDatabase;
+- (BOOL)databaseNeedsMigration;
 
 @end

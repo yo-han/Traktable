@@ -8,8 +8,12 @@
 
 #import "MainWindowController.h"
 #import "SourceListItem.h"
+#import "ITTableView.h"
+#import "ITConstants.h"
 
 @interface MainWindowController ()
+
+@property (nonatomic, strong) NSMutableArray *sourceListItems;
 
 @end
 
@@ -31,10 +35,8 @@
 }
 
 - (void)awakeFromNib
-{
-    [selectedItemLabel setStringValue:@"(none)"];
-	
-	sourceListItems = [[NSMutableArray alloc] init];
+{	
+	_sourceListItems = [[NSMutableArray alloc] init];
 	
 	SourceListItem *historyItem = [SourceListItem itemWithTitle:@"History" identifier:@"history"];
 	[historyItem setIcon:[NSImage imageNamed:@"menuicon.png"]];
@@ -45,9 +47,11 @@
 	
     [historyItem setChildren:[NSArray arrayWithObjects:moviesItem, tvShowsItem, nil]];
 	
-	[sourceListItems addObject:historyItem];
+	[self.sourceListItems addObject:historyItem];
 	
-	[sourceList reloadData];
+	[self.sourceList reloadData];
+    
+    [self.tableView refreshTableData:ITHistoryMovies];
 }
 
 
@@ -58,7 +62,7 @@
 {
 	//Works the same way as the NSOutlineView data source: `nil` means a parent item
 	if(item==nil) {
-		return [sourceListItems count];
+		return [self.sourceListItems count];
 	}
 	else {
 		return [[item children] count];
@@ -70,7 +74,7 @@
 {
 	//Works the same way as the NSOutlineView data source: `nil` means a parent item
 	if(item==nil) {
-		return [sourceListItems objectAtIndex:index];
+		return [self.sourceListItems objectAtIndex:index];
 	}
 	else {
 		return [[item children] objectAtIndex:index];
@@ -147,18 +151,35 @@
 
 - (void)sourceListSelectionDidChange:(NSNotification *)notification
 {
-	NSIndexSet *selectedIndexes = [sourceList selectedRowIndexes];
+	NSIndexSet *selectedIndexes = [self.sourceList selectedRowIndexes];
 	
 	//Set the label text to represent the new selection
-	if([selectedIndexes count]>1)
-		[selectedItemLabel setStringValue:@"(multiple)"];
-	else if([selectedIndexes count]==1) {
-		NSString *identifier = [[sourceList itemAtRow:[selectedIndexes firstIndex]] identifier];
+	if([selectedIndexes count]>1) {
+	
+        // multiple
+	} else if([selectedIndexes count]==1) {
+
+		NSString *identifier = [[self.sourceList itemAtRow:[selectedIndexes firstIndex]] identifier];
 		
-		[selectedItemLabel setStringValue:identifier];
-	}
-	else {
-		[selectedItemLabel setStringValue:@"(none)"];
+		NSDictionary *identifiers = [NSDictionary dictionaryWithObjectsAndKeys:
+                                        [NSNumber numberWithInteger:ITHistoryMovies],@"movies",
+                                        [NSNumber numberWithInteger:ITHistoryTVShows],@"tvshows",
+                                        nil];
+        
+        switch ([[identifiers objectForKey:identifier] intValue]) {
+            case ITHistoryMovies: 
+                [self.tableView refreshTableData:ITHistoryMovies];
+                break;
+            case ITHistoryTVShows:
+                [self.tableView refreshTableData:ITHistoryTVShows];
+                break;
+            default:
+                [self.tableView refreshTableData:ITHistoryMovies];
+                break;
+        }
+        
+    } else {
+		// none
 	}
 }
 

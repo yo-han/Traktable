@@ -71,7 +71,10 @@
 		048DF20A16DFFF17004B064A /* sync.png in Resources */ = {isa = PBXBuildFile; fileRef = 048DF20916DFFF17004B064A /* sync.png */; };
 		049ACB0916C2AD43007F103C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 049ACB0816C2AD43007F103C /* CFNetwork.framework */; };
 		049C48BE16C0223B00CC9A0E /* ITMovie.m in Sources */ = {isa = PBXBuildFile; fileRef = 049C48BD16C0223B00CC9A0E /* ITMovie.m */; };
-		04AB88D317A70F270086D5CD /* HistoryTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AB88D217A70F270086D5CD /* HistoryTableView.m */; };
+		04A9FE5017B43A69006CD129 /* ITMoviePoster.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A9FE4F17B43A69006CD129 /* ITMoviePoster.m */; };
+		04A9FE5317B43E0C006CD129 /* NSImage+MGCropExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A9FE5217B43E0C006CD129 /* NSImage+MGCropExtensions.m */; };
+		04A9FE5617B448C7006CD129 /* ITUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A9FE5517B448C7006CD129 /* ITUtil.m */; };
+		04AB88D317A70F270086D5CD /* ITTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AB88D217A70F270086D5CD /* ITTableView.m */; };
 		04B68C9F17A55E63006760D0 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04B68C9D17A55E63006760D0 /* config.plist */; };
 		04B68CA017A55E63006760D0 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 04B68C9E17A55E63006760D0 /* dsa_pub.pem */; };
 		04B68CA917A5600D006760D0 /* MainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B68CA717A5600D006760D0 /* MainWindowController.m */; };
@@ -221,8 +224,14 @@
 		049ACB0816C2AD43007F103C /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		049C48BC16C0223B00CC9A0E /* ITMovie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITMovie.h; sourceTree = "<group>"; };
 		049C48BD16C0223B00CC9A0E /* ITMovie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITMovie.m; sourceTree = "<group>"; };
-		04AB88D117A70F270086D5CD /* HistoryTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryTableView.h; sourceTree = "<group>"; };
-		04AB88D217A70F270086D5CD /* HistoryTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryTableView.m; sourceTree = "<group>"; };
+		04A9FE4E17B43A69006CD129 /* ITMoviePoster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITMoviePoster.h; sourceTree = "<group>"; };
+		04A9FE4F17B43A69006CD129 /* ITMoviePoster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITMoviePoster.m; sourceTree = "<group>"; };
+		04A9FE5117B43E0C006CD129 /* NSImage+MGCropExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSImage+MGCropExtensions.h"; sourceTree = "<group>"; };
+		04A9FE5217B43E0C006CD129 /* NSImage+MGCropExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSImage+MGCropExtensions.m"; sourceTree = "<group>"; };
+		04A9FE5417B448C7006CD129 /* ITUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITUtil.h; sourceTree = "<group>"; };
+		04A9FE5517B448C7006CD129 /* ITUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITUtil.m; sourceTree = "<group>"; };
+		04AB88D117A70F270086D5CD /* ITTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITTableView.h; sourceTree = "<group>"; };
+		04AB88D217A70F270086D5CD /* ITTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITTableView.m; sourceTree = "<group>"; };
 		04B68C9D17A55E63006760D0 /* config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = config.plist; path = "../../Traktable-NonGit/config.plist"; sourceTree = "<group>"; };
 		04B68C9E17A55E63006760D0 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = dsa_pub.pem; path = "../../Traktable-NonGit/dsa_pub.pem"; sourceTree = "<group>"; };
 		04B68CA617A5600D006760D0 /* MainWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainWindowController.h; sourceTree = "<group>"; };
@@ -359,8 +368,8 @@
 				042F07F516BC19DB00A0CE9E /* AppDelegate.m */,
 				04B68CA617A5600D006760D0 /* MainWindowController.h */,
 				04B68CA717A5600D006760D0 /* MainWindowController.m */,
-				04AB88D117A70F270086D5CD /* HistoryTableView.h */,
-				04AB88D217A70F270086D5CD /* HistoryTableView.m */,
+				04AB88D117A70F270086D5CD /* ITTableView.h */,
+				04AB88D217A70F270086D5CD /* ITTableView.m */,
 				0481386816CA8C6000E682A0 /* PrefIndexViewController.h */,
 				0481386916CA8C6000E682A0 /* PrefIndexViewController.m */,
 				048DF1F416DEBF54004B064A /* PrefSyncViewController.h */,
@@ -377,10 +386,14 @@
 				042F080E16BC1E4C00A0CE9E /* ITTVShow.m */,
 				049C48BC16C0223B00CC9A0E /* ITMovie.h */,
 				049C48BD16C0223B00CC9A0E /* ITMovie.m */,
+				04A9FE4E17B43A69006CD129 /* ITMoviePoster.h */,
+				04A9FE4F17B43A69006CD129 /* ITMoviePoster.m */,
 				046C9BB816C159BA0003AD64 /* ITLibrary.h */,
 				046C9BB916C159BA0003AD64 /* ITLibrary.m */,
 				04BCC5ED17B1879300D8DE7A /* ITDb.h */,
 				04BCC5EE17B1879300D8DE7A /* ITDb.m */,
+				04A9FE5417B448C7006CD129 /* ITUtil.h */,
+				04A9FE5517B448C7006CD129 /* ITUtil.m */,
 				04BCC5F017B1885A00D8DE7A /* ITConstants.h */,
 				04BCC5F117B1885A00D8DE7A /* ITConstants.m */,
 				04714E2616D2C59900A308F7 /* ITConfig.h */,
@@ -427,6 +440,8 @@
 		042F080416BC1A3100A0CE9E /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				04A9FE5117B43E0C006CD129 /* NSImage+MGCropExtensions.h */,
+				04A9FE5217B43E0C006CD129 /* NSImage+MGCropExtensions.m */,
 				04B68CF917A5BE74006760D0 /* Unirest */,
 				04B68CB417A56E25006760D0 /* PXSourceList */,
 				04044CAC17218FA6008ED807 /* SBJson */,
@@ -717,10 +732,13 @@
 				04B68CF617A5BE65006760D0 /* HttpStringResponse.m in Sources */,
 				04B68CF717A5BE65006760D0 /* JsonNode.m in Sources */,
 				04B68CF817A5BE65006760D0 /* Unirest.m in Sources */,
-				04AB88D317A70F270086D5CD /* HistoryTableView.m in Sources */,
+				04AB88D317A70F270086D5CD /* ITTableView.m in Sources */,
 				04BCC5E417B03DBB00D8DE7A /* ITHistory.m in Sources */,
 				04BCC5EF17B1879300D8DE7A /* ITDb.m in Sources */,
 				04BCC5F217B1885A00D8DE7A /* ITConstants.m in Sources */,
+				04A9FE5017B43A69006CD129 /* ITMoviePoster.m in Sources */,
+				04A9FE5317B43E0C006CD129 /* NSImage+MGCropExtensions.m in Sources */,
+				04A9FE5617B448C7006CD129 /* ITUtil.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
