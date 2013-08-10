@@ -370,12 +370,6 @@
 				04B68CA717A5600D006760D0 /* MainWindowController.m */,
 				04AB88D117A70F270086D5CD /* ITTableView.h */,
 				04AB88D217A70F270086D5CD /* ITTableView.m */,
-				0481386816CA8C6000E682A0 /* PrefIndexViewController.h */,
-				0481386916CA8C6000E682A0 /* PrefIndexViewController.m */,
-				048DF1F416DEBF54004B064A /* PrefSyncViewController.h */,
-				048DF1F516DEBF54004B064A /* PrefSyncViewController.m */,
-				048DF1F916DECC6B004B064A /* PrefUpdateViewController.h */,
-				048DF1FB16DECC99004B064A /* PrefUpdateViewController.m */,
 				04BCC5E217B03DBB00D8DE7A /* ITHistory.h */,
 				04BCC5E317B03DBB00D8DE7A /* ITHistory.m */,
 				042F080916BC1E4C00A0CE9E /* ITApi.h */,
@@ -407,10 +401,8 @@
 				04B68CB517A56F60006760D0 /* SourceListItem.h */,
 				04B68CB617A56F60006760D0 /* SourceListItem.m */,
 				04B68CA817A5600D006760D0 /* MainWindowController.xib */,
-				0481386C16CA8DB300E682A0 /* PrefIndexViewController.xib */,
-				048DF1F716DEC3ED004B064A /* PrefSyncViewController.xib */,
-				048DF1FD16DECD14004B064A /* PrefUpdateViewController.xib */,
 				042F07F716BC19DB00A0CE9E /* MainMenu.xib */,
+				04A9FE5717B62C20006CD129 /* Preferences */,
 				042F080416BC1A3100A0CE9E /* Lib */,
 				042F07E916BC19DB00A0CE9E /* Supporting Files */,
 			);
@@ -531,6 +523,30 @@
 				0481386616CA8BF400E682A0 /* MASPreferencesWindowController.m */,
 			);
 			name = MASPreferences;
+			sourceTree = "<group>";
+		};
+		04A9FE5717B62C20006CD129 /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				0481386816CA8C6000E682A0 /* PrefIndexViewController.h */,
+				0481386916CA8C6000E682A0 /* PrefIndexViewController.m */,
+				048DF1F416DEBF54004B064A /* PrefSyncViewController.h */,
+				048DF1F516DEBF54004B064A /* PrefSyncViewController.m */,
+				048DF1F916DECC6B004B064A /* PrefUpdateViewController.h */,
+				048DF1FB16DECC99004B064A /* PrefUpdateViewController.m */,
+				04A9FE5817B62C32006CD129 /* views */,
+			);
+			name = Preferences;
+			sourceTree = "<group>";
+		};
+		04A9FE5817B62C32006CD129 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				0481386C16CA8DB300E682A0 /* PrefIndexViewController.xib */,
+				048DF1F716DEC3ED004B064A /* PrefSyncViewController.xib */,
+				048DF1FD16DECD14004B064A /* PrefUpdateViewController.xib */,
+			);
+			name = views;
 			sourceTree = "<group>";
 		};
 		04B68CB417A56E25006760D0 /* PXSourceList */ = {

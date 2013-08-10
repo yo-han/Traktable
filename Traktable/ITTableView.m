@@ -7,6 +7,7 @@
 //
 
 #import "ITTableView.h"
+#import "ITHistory.h"
 
 @interface ITTableView()
 
