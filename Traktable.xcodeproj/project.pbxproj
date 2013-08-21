@@ -861,7 +861,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Traktable\"",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = Traktable;
 				WRAPPER_EXTENSION = app;
 			};
@@ -885,7 +885,7 @@
 					"$(inherited)",
 					"\"$(SRCROOT)/Traktable\"",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = Traktable;
 				WRAPPER_EXTENSION = app;
 			};

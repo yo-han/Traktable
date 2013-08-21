@@ -35,7 +35,6 @@
 - (id)init {
     
     iTunesBridge = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
-    ITApi *api = [ITApi new];
     
     NSString *appSupportPath = [ITConstants applicationSupportFolder];
     [ITUtil createDir:appSupportPath];
@@ -44,7 +43,7 @@
     
     bool b = [self dbExists];
     
-    if([api testAccount] && b == NO) {
+    if(b == NO) {
         
         [self resetDb];
     }

@@ -55,8 +55,8 @@
 
     //[self.library syncTrakt];
     //return;
-    
-    if(![self.api testAccount]) {
+
+    if(![self.api username] || ![self.api testAccount]) {
         
         [self noAuthAlert];
         [self displayPreferences:self];
