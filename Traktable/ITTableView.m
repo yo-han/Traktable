@@ -8,11 +8,18 @@
 
 #import "ITTableView.h"
 #import "ITHistory.h"
+#import "ITHistoryTableCellView.h"
 
 @interface ITTableView()
 
+typedef NS_ENUM(NSUInteger, ITTableViewCellType) {
+    ITTableViewHistoryCell = 0,
+    ITTableViewUnknownCell = NSUIntegerMax
+};
+
 @property (nonatomic, strong) NSMutableArray *items;
 
+@property (nonatomic, assign) ITTableViewCellType tableViewCellType;
 @property (nonatomic, assign, readwrite) ITSourceListIdentifier tableType;
 
 @end
@@ -32,7 +39,7 @@
     
     switch (tableType) {
         case ITHistoryMovies:
-            _items = self;
+            _items = a;
             break;
             
         default:
@@ -49,9 +56,18 @@
 
 - (id)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
     
-    NSTableCellView *cellView = [tableView makeViewWithIdentifier:@"MainCell" owner:self];
+    NSString *cellType = [[self class] tableViewCellTypes][@(self.tableViewCellType)];
+    ITHistoryTableCellView *cellView = [tableView makeViewWithIdentifier:cellType owner:self];
   
+    [cellView.label setStringValue:@"123"];
+    
     return cellView;
+}
+
++ (NSDictionary *)tableViewCellTypes
+{
+    return @{@(ITTableViewHistoryCell) : @"HistoryCell",
+             @(ITTableViewUnknownCell) : @"DefaultCell"};
 }
 
 @end

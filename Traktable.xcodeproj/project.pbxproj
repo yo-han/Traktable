@@ -74,6 +74,7 @@
 		04A9FE5017B43A69006CD129 /* ITMoviePoster.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A9FE4F17B43A69006CD129 /* ITMoviePoster.m */; };
 		04A9FE5317B43E0C006CD129 /* NSImage+MGCropExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A9FE5217B43E0C006CD129 /* NSImage+MGCropExtensions.m */; };
 		04A9FE5617B448C7006CD129 /* ITUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A9FE5517B448C7006CD129 /* ITUtil.m */; };
+		04AB5F1F17C56A3200A2B1AC /* ITHistoryTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AB5F1E17C56A3200A2B1AC /* ITHistoryTableCellView.m */; };
 		04AB88D317A70F270086D5CD /* ITTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AB88D217A70F270086D5CD /* ITTableView.m */; };
 		04B68C9F17A55E63006760D0 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04B68C9D17A55E63006760D0 /* config.plist */; };
 		04B68CA017A55E63006760D0 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 04B68C9E17A55E63006760D0 /* dsa_pub.pem */; };
@@ -230,6 +231,8 @@
 		04A9FE5217B43E0C006CD129 /* NSImage+MGCropExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSImage+MGCropExtensions.m"; sourceTree = "<group>"; };
 		04A9FE5417B448C7006CD129 /* ITUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITUtil.h; sourceTree = "<group>"; };
 		04A9FE5517B448C7006CD129 /* ITUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITUtil.m; sourceTree = "<group>"; };
+		04AB5F1D17C56A3200A2B1AC /* ITHistoryTableCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITHistoryTableCellView.h; sourceTree = "<group>"; };
+		04AB5F1E17C56A3200A2B1AC /* ITHistoryTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITHistoryTableCellView.m; sourceTree = "<group>"; };
 		04AB88D117A70F270086D5CD /* ITTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITTableView.h; sourceTree = "<group>"; };
 		04AB88D217A70F270086D5CD /* ITTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITTableView.m; sourceTree = "<group>"; };
 		04B68C9D17A55E63006760D0 /* config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = config.plist; path = "../../Traktable-NonGit/config.plist"; sourceTree = "<group>"; };
@@ -366,12 +369,7 @@
 			children = (
 				042F07F416BC19DB00A0CE9E /* AppDelegate.h */,
 				042F07F516BC19DB00A0CE9E /* AppDelegate.m */,
-				04B68CA617A5600D006760D0 /* MainWindowController.h */,
-				04B68CA717A5600D006760D0 /* MainWindowController.m */,
-				04AB88D117A70F270086D5CD /* ITTableView.h */,
-				04AB88D217A70F270086D5CD /* ITTableView.m */,
-				04BCC5E217B03DBB00D8DE7A /* ITHistory.h */,
-				04BCC5E317B03DBB00D8DE7A /* ITHistory.m */,
+				04AB5F1C17C569CF00A2B1AC /* Window */,
 				042F080916BC1E4C00A0CE9E /* ITApi.h */,
 				042F080A16BC1E4C00A0CE9E /* ITApi.m */,
 				042F080B16BC1E4C00A0CE9E /* ITVideo.h */,
@@ -398,9 +396,6 @@
 				0469CBFF16CBE010006863B7 /* IMDB.m */,
 				048DF1FF16DFEE69004B064A /* ITNotification.h */,
 				048DF20016DFEE69004B064A /* ITNotification.m */,
-				04B68CB517A56F60006760D0 /* SourceListItem.h */,
-				04B68CB617A56F60006760D0 /* SourceListItem.m */,
-				04B68CA817A5600D006760D0 /* MainWindowController.xib */,
 				042F07F716BC19DB00A0CE9E /* MainMenu.xib */,
 				04A9FE5717B62C20006CD129 /* Preferences */,
 				042F080416BC1A3100A0CE9E /* Lib */,
@@ -547,6 +542,24 @@
 				048DF1FD16DECD14004B064A /* PrefUpdateViewController.xib */,
 			);
 			name = views;
+			sourceTree = "<group>";
+		};
+		04AB5F1C17C569CF00A2B1AC /* Window */ = {
+			isa = PBXGroup;
+			children = (
+				04B68CA617A5600D006760D0 /* MainWindowController.h */,
+				04B68CA717A5600D006760D0 /* MainWindowController.m */,
+				04BCC5E217B03DBB00D8DE7A /* ITHistory.h */,
+				04BCC5E317B03DBB00D8DE7A /* ITHistory.m */,
+				04B68CB517A56F60006760D0 /* SourceListItem.h */,
+				04B68CB617A56F60006760D0 /* SourceListItem.m */,
+				04AB88D117A70F270086D5CD /* ITTableView.h */,
+				04AB88D217A70F270086D5CD /* ITTableView.m */,
+				04AB5F1D17C56A3200A2B1AC /* ITHistoryTableCellView.h */,
+				04AB5F1E17C56A3200A2B1AC /* ITHistoryTableCellView.m */,
+				04B68CA817A5600D006760D0 /* MainWindowController.xib */,
+			);
+			name = Window;
 			sourceTree = "<group>";
 		};
 		04B68CB417A56E25006760D0 /* PXSourceList */ = {
@@ -755,6 +768,7 @@
 				04A9FE5017B43A69006CD129 /* ITMoviePoster.m in Sources */,
 				04A9FE5317B43E0C006CD129 /* NSImage+MGCropExtensions.m in Sources */,
 				04A9FE5617B448C7006CD129 /* ITUtil.m in Sources */,
+				04AB5F1F17C56A3200A2B1AC /* ITHistoryTableCellView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
