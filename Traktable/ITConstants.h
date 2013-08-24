@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#define kITHistoryNeedsUpdateNotification @"ITHistoryNeedsUpdate"
+
 @interface ITConstants : NSObject
 
 typedef enum ITSourceListIdentifier : NSUInteger {

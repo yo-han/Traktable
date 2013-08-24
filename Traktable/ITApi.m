@@ -14,6 +14,7 @@
 #import "EMKeychainItem.h"
 #import "ITNotification.h"
 #import "Unirest.h"
+#import "ITConstants.h"
 
 #define kApiUrl @"http://api.trakt.tv"
 
@@ -198,7 +199,7 @@
 - (void)callURL:(NSString *)requestUrl withParameters:(NSDictionary *)params completionHandler:(void (^)(id , NSError *))completionBlock
 {
     NSDictionary* headers = [NSDictionary dictionaryWithObjectsAndKeys:@"application/json", @"accept", nil];
-
+ 
     [[Unirest post:^(MultipartRequest* request) {
         
         [request setUrl:requestUrl];
@@ -207,7 +208,11 @@
         
     }] asJsonAsync:^(HttpJsonResponse* response) {
         
-        id responseObject = [NSJSONSerialization JSONObjectWithData:[response rawBody] options:0 error:nil];
+        NSError *error;
+        id responseObject = [NSJSONSerialization JSONObjectWithData:[response rawBody] options:0 error:&error];
+
+        if(error)
+            NSLog(@"API Call JSON error: %@",error);
         
         completionBlock(responseObject, nil);
     }];
@@ -218,7 +223,7 @@
     [self callURL:apiCall withParameters:params completionHandler:^(id response, NSError *err) {
         
         if(![response isKindOfClass:[NSDictionary class]]) {
-            
+
             NSLog(@"Repsonse is not an NSDictionary");
             return;
         }
@@ -365,14 +370,14 @@
         NSDictionary *argsDict = [NSDictionary dictionaryWithObjectsAndKeys:[[update objectForKey:@"show"] objectForKey:@"tvdb_id" ], @"tvdb_id", [[update objectForKey:@"show"] objectForKey:@"imdb_id" ], @"imdb_id", @"show", @"type", [update objectForKey:@"status"], @"success", nil];
         
         [db executeUpdateUsingQueue:@"INSERT INTO history (tvdb_id, imdb_id, type, success, timestamp) VALUES (:tmdb_id, :imdb_id, :type, :success, datetime('now'))" arguments:argsDict];
-        NSLog(@"%@",[db lastErrorMessage]);
+        //NSLog(@"%@",[db lastErrorMessage]);
         
     } else if([update objectForKey:@"movie"] != nil) {
         
         NSDictionary *argsDict = [NSDictionary dictionaryWithObjectsAndKeys:[[update objectForKey:@"movie"] objectForKey:@"tmdb_id" ], @"tmdb_id", [[update objectForKey:@"movie"] objectForKey:@"imdb_id" ], @"imdb_id", @"movie", @"type", [update objectForKey:@"status"], @"success", nil];
         
         [db executeUpdateUsingQueue:@"INSERT INTO history (tmdb_id, imdb_id, type, success, timestamp) VALUES (:tmdb_id, :imdb_id, :type, :success, datetime('now'))" arguments:argsDict];
-        NSLog(@"%@",[db lastErrorMessage]);
+        //NSLog(@"%@",[db lastErrorMessage]);
         
     } else if([update objectForKey:@"error"] != nil) {
      
@@ -382,8 +387,10 @@
         
         [db executeUpdateUsingQueue:@"INSERT INTO history (tmdb_id, imdb_id, type, success, comment, timestamp) VALUES (:tmdb_id, :imdb_id, :type, :success, :comment, datetime('now'))" arguments:argsDict];
         
-        NSLog(@"%@",[db lastErrorMessage]);
+        //NSLog(@"%@",[db lastErrorMessage]);
     }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kITHistoryNeedsUpdateNotification object:nil];
 }
 
 @end

@@ -15,6 +15,8 @@
 
 @property (nonatomic, strong) IBOutlet NSTableView *tableView;
 
+- (void)setup;
+- (void)reloadTableData;
 - (void)refreshTableData:(ITSourceListIdentifier)tableType;
     
 @end

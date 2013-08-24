@@ -23,7 +23,7 @@
 {
     self = [super initWithWindow:window];
     if (self) {
-
+        
     }
     
     return self;
@@ -52,6 +52,7 @@
 	
 	[self.sourceList reloadData];
     
+    [self.tableView setup];
     [self.tableView refreshTableData:ITHistoryMovies];
 }
 

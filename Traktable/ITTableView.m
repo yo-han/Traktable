@@ -31,14 +31,15 @@ typedef NS_ENUM(NSUInteger, ITTableViewCellType) {
 
 @synthesize tableView=_tableView;
 
-- (id) init {
+- (void)setup {
     
     _tableViewCellType = ITTableViewMovieHistoryCell;
-    
+
     if(self.items == nil)
         _items = [NSMutableArray array];
-    
-    return self;
+
+    // Register an observer for history updates
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:kITHistoryNeedsUpdateNotification object:nil];
 }
 
 - (ITHistory *)getHistory {
@@ -50,10 +51,12 @@ typedef NS_ENUM(NSUInteger, ITTableViewCellType) {
 }
 
 - (void)refreshTableData:(ITSourceListIdentifier)tableType {
-       
+    
+    _tableType = tableType;
+    
     [self.items removeAllObjects];
     
-    switch (tableType) {
+    switch (self.tableType) {
         case ITHistoryMovies:
             _items = (NSMutableArray *) [[self getHistory] fetchMovieHistory];
             break;
@@ -64,6 +67,11 @@ typedef NS_ENUM(NSUInteger, ITTableViewCellType) {
     }
 
     [self.tableView reloadData];
+}
+
+- (void)reloadTableData {
+
+    [self refreshTableData:self.tableType];
 }
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
