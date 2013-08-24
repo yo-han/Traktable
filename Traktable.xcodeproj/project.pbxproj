@@ -99,6 +99,7 @@
 		04BCC5E417B03DBB00D8DE7A /* ITHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BCC5E317B03DBB00D8DE7A /* ITHistory.m */; };
 		04BCC5EF17B1879300D8DE7A /* ITDb.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BCC5EE17B1879300D8DE7A /* ITDb.m */; };
 		04BCC5F217B1885A00D8DE7A /* ITConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BCC5F117B1885A00D8DE7A /* ITConstants.m */; };
+		04D74BB617C7AC5700B135BF /* ITTableRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D74BB517C7AC5700B135BF /* ITTableRowView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -280,6 +281,8 @@
 		04BCC5EE17B1879300D8DE7A /* ITDb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITDb.m; sourceTree = "<group>"; };
 		04BCC5F017B1885A00D8DE7A /* ITConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITConstants.h; sourceTree = "<group>"; };
 		04BCC5F117B1885A00D8DE7A /* ITConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITConstants.m; sourceTree = "<group>"; };
+		04D74BB417C7AC5700B135BF /* ITTableRowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITTableRowView.h; sourceTree = "<group>"; };
+		04D74BB517C7AC5700B135BF /* ITTableRowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITTableRowView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -557,6 +560,8 @@
 				04AB88D217A70F270086D5CD /* ITTableView.m */,
 				04AB5F1D17C56A3200A2B1AC /* ITHistoryTableCellView.h */,
 				04AB5F1E17C56A3200A2B1AC /* ITHistoryTableCellView.m */,
+				04D74BB417C7AC5700B135BF /* ITTableRowView.h */,
+				04D74BB517C7AC5700B135BF /* ITTableRowView.m */,
 				04B68CA817A5600D006760D0 /* MainWindowController.xib */,
 			);
 			name = Window;
@@ -769,6 +774,7 @@
 				04A9FE5317B43E0C006CD129 /* NSImage+MGCropExtensions.m in Sources */,
 				04A9FE5617B448C7006CD129 /* ITUtil.m in Sources */,
 				04AB5F1F17C56A3200A2B1AC /* ITHistoryTableCellView.m in Sources */,
+				04D74BB617C7AC5700B135BF /* ITTableRowView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

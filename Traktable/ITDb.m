@@ -155,7 +155,7 @@ static int dbVersion = 1;
             [db executeUpdate:@"CREATE TABLE \"movies\" (\"movieId\" INTEGER PRIMARY KEY AUTOINCREMENT,\"tmdb_id\" INTEGER,\"imdb_id\" INTEGER,\"year\" INTEGER,\"traktPlays\" INTEGER,\"released\" INTEGER,\"runtime\" INTEGER,\"poster\" TEXT,\"title\" TEXT,\"tagline\" TEXT,\"overview\" TEXT,\"trailer\" TEXT,\"traktUrl\" TEXT,\"genres\" BLOB);"];
             
             [db executeUpdate:@"CREATE UNIQUE INDEX \"uid\" ON \"movies\" (\"tmdb_id\");"];            
-            [db executeUpdate:@"CREATE TABLE \"history\" (\"tmdb_id\" INTEGER,\"imdb_id\" TEXT,\"type\" TEXT,\"success\" TEXT,\"comment\" TEXT,\"timestamp\" DATETIME);"];
+            [db executeUpdate:@"CREATE TABLE \"history\" (\"tvdb_id\" INTEGER,\"tmdb_id\" INTEGER,\"imdb_id\" TEXT,\"type\" TEXT,\"success\" TEXT,\"comment\" TEXT,\"timestamp\" DATETIME);"];
         }
     }];
     

@@ -69,7 +69,11 @@
 				destX = round(scaledWidth - targetWidth);
 				destY = round((scaledHeight - targetHeight) / 2.0);
             }
+        } else {
+            destX = 0.0;
+            destY = 0.0;
         }
+        
         sourceRect = NSMakeRect(destX / scaleFactor, destY / scaleFactor, 
                                 targetWidth / scaleFactor, targetHeight / scaleFactor);
     } else {

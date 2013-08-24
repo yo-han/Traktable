@@ -44,6 +44,7 @@
 	[moviesItem setIcon:[NSImage imageNamed:@"movies.png"]];
     SourceListItem *tvShowsItem = [SourceListItem itemWithTitle:@"TV Shows" identifier:@"tvshows"];
 	[tvShowsItem setIcon:[NSImage imageNamed:@"movies.png"]];
+    [tvShowsItem setBadgeValue:10];
 	
     [historyItem setChildren:[NSArray arrayWithObjects:moviesItem, tvShowsItem, nil]];
 	

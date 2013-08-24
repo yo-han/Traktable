@@ -20,6 +20,7 @@
 @property (nonatomic) iTunesEVdK videoKind;
 
 // Db only
+@property (nonatomic, strong) NSNumber *movieId;
 @property (nonatomic, strong) NSString *tagline;
 @property (nonatomic, strong) NSString *overview;
 @property (nonatomic, strong) NSString *trailer;
@@ -30,9 +31,13 @@
 @property (nonatomic) NSInteger tmdbId;
 @property (nonatomic, strong) NSImage *poster;
 
+// History items
+@property (nonatomic, strong) NSString *type;
+@property (nonatomic, strong) NSString *success;
+@property (nonatomic, strong) NSString *comment;
+@property (nonatomic, strong) NSString *timestamp;
+
 +(ITMovie *)movieWithCurrentTunesTrack:(iTunesTrack *)iTunesTrack;
 +(ITMovie *)movieWithDatabaseRecord:(NSDictionary *)record;
-
-+ (NSImage *)cacheImage;
 
 @end

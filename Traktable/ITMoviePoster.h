@@ -16,6 +16,7 @@ typedef enum {
     ITMoviePosterSizeOriginal
 } ITMoviePosterSize;
 
+- (NSImage *)getPoster:(NSNumber *)movieId withSize:(ITMoviePosterSize)size;
 - (NSImage *)poster:(NSNumber *)movieId withUrl:(NSString *)urlString size:(ITMoviePosterSize)size;
 
 @end

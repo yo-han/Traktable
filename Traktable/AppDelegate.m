@@ -54,6 +54,8 @@
     NSLog(@"TESTING MODE - REMOVE CODE BELOW");
     
     /**
+     # NOTE:
+     
      Need to build a sync system which syncs the extended data of the user the first time and small portions the other
      times. Try to build in a way to add the movie/tv show data when a video is scrobbled to we don't have to do the big 
      extended syncs every time. Or do one check for missing metadata a day.
@@ -63,6 +65,8 @@
      **/
     //[self.library syncTrakt];
     //return;
+    
+    [self showWindow:self];
 
     if(![self.api username] || ![self.api testAccount]) {
         

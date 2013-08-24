@@ -8,6 +8,15 @@
 
 #import "ITHistoryTableCellView.h"
 
+@interface ITHistoryTableCellView()
+
+@property (nonatomic, strong) NSArray *colors;
+
+@end
 @implementation ITHistoryTableCellView
+
+- (void)awakeFromNib {
+   
+}
 
 @end

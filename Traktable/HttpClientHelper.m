@@ -164,7 +164,7 @@
     NSData * data = [NSURLConnection sendSynchronousRequest:requestObj returningResponse:&response error:&error];
     
     HttpResponse* res = [[HttpResponse alloc] init];
-    [res setCode:[response statusCode]];
+    [res setCode:(int) [response statusCode]];
     [res setHeaders:[response allHeaderFields]];
     [res setRawBody:data];
     

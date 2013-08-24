@@ -9,7 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import "ITConstants.h"
 
-@interface ITTableView : NSViewController <NSTableViewDataSource, NSTableViewDelegate>
+@interface ITTableView : NSTableView <NSTableViewDataSource, NSTableViewDelegate>
 
 @property (nonatomic, assign, readonly) ITSourceListIdentifier tableType;
 

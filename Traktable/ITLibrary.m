@@ -144,8 +144,7 @@
 - (void)syncLibrary {
 
     if(![self dbExists]) {
-        [self init];
-        return;
+        [self resetDb];
     }
        
     ITApi *api = [[ITApi alloc] init];
@@ -168,7 +167,7 @@
     ITApi *api = [ITApi new];
 
     NSArray *movies = [api watchedSync:iTunesEVdKMovie extended:@"1"];
-        
+   
     for(NSDictionary *movie in movies) {
         
         NSString *posterUrl = [[movie objectForKey:@"images"] objectForKey:@"poster"];
@@ -181,6 +180,8 @@
             continue;
         
         [db executeUpdateUsingQueue:@"INSERT INTO movies (tmdb_id, imdb_id, year, poster, traktPlays, released, runtime, title, overview, tagline, traktUrl, trailer, genres) VALUES (:tmdb_id, :imdb_id, :year, :poster, :traktPlays, :released, :runtime, :title, :overview, :tagline, :traktUrl, :trailer, :genres)"  arguments:argsDict];
+
+        NSLog(@"%@",[db lastErrorMessage]);
         
         NSNumber *lastId = [db lastInsertRowId];
         
@@ -189,11 +190,14 @@
         
         dispatch_async(self.queue,
         ^{
+            NSLog(@"Sd");
             ITMoviePoster *poster = [ITMoviePoster new];
        
             [poster poster:lastId withUrl:posterUrl size:ITMoviePosterSizeSmall];
             [poster poster:lastId withUrl:posterUrl size:ITMoviePosterSizeMedium];
-            [poster poster:lastId withUrl:posterUrl size:ITMoviePosterSizeOriginal];
+            
+            // NOTE: No originals till we really need it. The image cache becomes very large very quicly with all these big images.
+            //[poster poster:lastId withUrl:posterUrl size:ITMoviePosterSizeOriginal];
         });
     }
 }

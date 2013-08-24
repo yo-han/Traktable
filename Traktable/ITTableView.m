@@ -9,15 +9,18 @@
 #import "ITTableView.h"
 #import "ITHistory.h"
 #import "ITHistoryTableCellView.h"
+#import "ITTableRowView.h"
 
 @interface ITTableView()
 
 typedef NS_ENUM(NSUInteger, ITTableViewCellType) {
-    ITTableViewHistoryCell = 0,
+    ITTableViewMovieHistoryCell = 0,
     ITTableViewUnknownCell = NSUIntegerMax
 };
 
 @property (nonatomic, strong) NSMutableArray *items;
+@property (nonatomic, strong) ITHistory *history;
+
 
 @property (nonatomic, assign) ITTableViewCellType tableViewCellType;
 @property (nonatomic, assign, readwrite) ITSourceListIdentifier tableType;
@@ -28,25 +31,38 @@ typedef NS_ENUM(NSUInteger, ITTableViewCellType) {
 
 @synthesize tableView=_tableView;
 
-- (void)refreshTableData:(ITSourceListIdentifier)tableType {
-
+- (id) init {
+    
+    _tableViewCellType = ITTableViewMovieHistoryCell;
+    
     if(self.items == nil)
         _items = [NSMutableArray array];
     
-    NSMutableArray *a = [NSMutableArray arrayWithObjects:@"1",@"2",@"3",nil];
+    return self;
+}
+
+- (ITHistory *)getHistory {
+
+    if(self.history == nil)
+        _history = [ITHistory new];
     
+    return self.history;
+}
+
+- (void)refreshTableData:(ITSourceListIdentifier)tableType {
+       
     [self.items removeAllObjects];
     
     switch (tableType) {
         case ITHistoryMovies:
-            _items = a;
+            _items = (NSMutableArray *) [[self getHistory] fetchMovieHistory];
             break;
             
         default:
             NSLog(@"1!");
             break;
     }
-    
+
     [self.tableView reloadData];
 }
 
@@ -58,15 +74,34 @@ typedef NS_ENUM(NSUInteger, ITTableViewCellType) {
     
     NSString *cellType = [[self class] tableViewCellTypes][@(self.tableViewCellType)];
     ITHistoryTableCellView *cellView = [tableView makeViewWithIdentifier:cellType owner:self];
-  
-    [cellView.label setStringValue:@"123"];
+    
+    ITHistory *entry = [self _entryForRow:row];
+   
+    [cellView.title setStringValue:entry.title];
+    [cellView.scrobble setStringValue:entry.success];
+    [cellView.timestamp setStringValue:entry.timestamp];
+    [cellView.imageView setImage:entry.poster];
     
     return cellView;
 }
 
+- (NSTableRowView *)tableView:(NSTableView *)tableView rowViewForRow:(NSInteger)row {
+
+    ITTableRowView *result = [[ITTableRowView alloc] init];
+    result.objectValue = [self.items objectAtIndex:row];
+    return result;
+}
+
+- (ITHistory *)_entryForRow:(NSInteger)row {
+    
+    ITHistory *entry = [ITHistory historyEntityWithHistoryObject:[self.items objectAtIndex:row]];
+
+    return entry;
+}
+
 + (NSDictionary *)tableViewCellTypes
 {
-    return @{@(ITTableViewHistoryCell) : @"HistoryCell",
+    return @{@(ITTableViewMovieHistoryCell) : @"MovieHistoryCell",
              @(ITTableViewUnknownCell) : @"DefaultCell"};
 }
 
