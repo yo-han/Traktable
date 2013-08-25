@@ -258,7 +258,7 @@
                     
                 }
 
-                scrobbleVideo = [video getVideoByType:track type:type];
+                scrobbleVideo = [video getITunesVideoByType:track type:type];
                 
                 if([track playedCount] > 0) {
                     
@@ -280,7 +280,7 @@
                 
             } else if([playedCount integerValue] < [track playedCount]) {
                                    
-                id scrobbleVideo = [video getVideoByType:track type:type];
+                id scrobbleVideo = [video getITunesVideoByType:track type:type];
                 [api updateState:scrobbleVideo state:@"scrobble"];
                 
                 [self updateTrackCount:track scrobbled:YES];

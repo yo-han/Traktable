@@ -12,13 +12,16 @@
 #import "PrefIndexViewController.h"
 #import "PrefSyncViewController.h"
 #import "PrefUpdateViewController.h"
-#import "iTunes.h"
 #import "ITApi.h"
 #import "ITVideo.h"
 #import "ITLibrary.h"
 #import "ITMovie.h"
 #import "ITNotification.h"
 #import "ITDb.h"
+
+// Scripting Bridge
+#import "iTunes.h"
+#import "VLC.h"
 
 @interface AppDelegate()
 
@@ -83,6 +86,8 @@
     [[NSDistributedNotificationCenter defaultCenter] addObserver:self selector:@selector(iTunesChangedState:) name:@"com.apple.iTunes.playerInfo" object:@"com.apple.iTunes.player" suspensionBehavior:NSNotificationSuspensionBehaviorCoalesce];
     
     [[NSDistributedNotificationCenter defaultCenter] addObserver:self selector:@selector(iTunesSourceSaved:) name:@"com.apple.iTunes.sourceSaved" object:@"com.apple.iTunes.sources" suspensionBehavior:NSNotificationSuspensionBehaviorCoalesce];
+    
+    [[NSDistributedNotificationCenter defaultCenter] addObserver:self selector:@selector(VLCPlayerStateDidChange) name:@"VLCPlayerStateDidChange" object:nil suspensionBehavior:NSNotificationSuspensionBehaviorCoalesce];
 }
 
 - (IBAction)showLog:(id)sender {
@@ -135,6 +140,13 @@
     [statusItem setHighlightMode:YES];
 }
 
+- (void)VLCPlayerStateDidChange {
+    
+    NSLog(@"Go VLC");
+    
+    [self.video getCurrentlyPlaying:ITPlayerVLC];
+}
+
 - (void)iTunesChangedState:(NSNotification*)notification {
 
     if(![self.api testAccount]) {
@@ -151,13 +163,13 @@
         
         NSLog(@"iTunes started playing");
                 
-        if (![self.video isVideoPlaying]) {
+        if (![self.video isVideoPlaying:ITPlayerITunes]) {
          
             [self checkProgress];
             return;
         }
         
-        currentlyPlaying = [self.video getCurrentlyPlaying];
+        currentlyPlaying = [self.video getCurrentlyPlaying:ITPlayerITunes];
         
         [self watching];
         

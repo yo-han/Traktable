@@ -11,32 +11,49 @@
 #import "ITMovie.h"
 #import "ITLibrary.h"
 
-@implementation ITVideo
+#import <CoreServices/CoreServices.h>
 
-@synthesize iTunesBridge;
+
+@interface ITVideo()
+
+@property (nonatomic, retain) iTunesApplication *iTunesBridge;
+@property (nonatomic, retain) VLCApplication *VLCBridge;
+
+@end
+
+@implementation ITVideo
 
 - (id)init {
    
-    iTunesBridge = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
+    _iTunesBridge = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
+    _VLCBridge = [SBApplication applicationWithBundleIdentifier:@"org.videolan.vlc"];
     
     return self;
 }
 
-- (id)getCurrentlyPlaying {
+- (id)getCurrentlyPlaying:(ITVideoPlayer)player {
     
-    return [self getVideoByType:[iTunesBridge currentTrack] type:[[iTunesBridge currentTrack] videoKind]];
+    if(player == ITPlayerITunes)
+        return [self getITunesVideoByType:[self.iTunesBridge currentTrack] type:[[self.iTunesBridge currentTrack] videoKind]];
+    else if(player == ITPlayerVLC)
+        return [self getVLCVideo:[self.VLCBridge pathOfCurrentItem]];
+    else
+        return nil;
 }
 
-- (BOOL)isVideoPlaying {
+- (BOOL)isVideoPlaying:(ITVideoPlayer)player {
     
-    iTunesEVdK type = [[iTunesBridge currentTrack] videoKind];
-    if(type != iTunesEVdKTVShow && type != iTunesEVdKMovie)
-        return false;
+    if(player == ITPlayerITunes) {
     
-    return true;
+        iTunesEVdK type = [[self.iTunesBridge currentTrack] videoKind];
+        if(type == iTunesEVdKTVShow || type == iTunesEVdKMovie)
+            return YES;
+    }
+    
+    return NO;
 }
 
-- (id)getVideoByType:(iTunesTrack *)track type:(iTunesEVdK)aType {
+- (id)getITunesVideoByType:(iTunesTrack *)track type:(iTunesEVdK)aType {
     
     id video;
     
@@ -50,6 +67,15 @@
         
         
     }
+    
+    return video;
+}
+
+- (id)getVLCVideo:(NSString *)track {
+    
+    id video;
+    
+    NSLog(@"To build a VLC MetaData reader using Guessit and something iTunes metadata readerish?");
     
     return video;
 }

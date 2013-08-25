@@ -9,13 +9,18 @@
 #import <Foundation/Foundation.h>
 
 #import "iTunes.h"
+#import "VLC.h"
+
+typedef NS_ENUM(NSUInteger, ITVideoPlayer) {
+    ITPlayerITunes = 0,
+    ITPlayerVLC = 1,
+    ITPlayerUnknown = NSIntegerMax
+};
 
 @interface ITVideo : NSObject
 
-@property (nonatomic, retain) iTunesApplication *iTunesBridge;
-
-- (id)getCurrentlyPlaying;
-- (BOOL)isVideoPlaying;
-- (id)getVideoByType:(iTunesTrack *)track type:(iTunesEVdK)aType;
+- (id)getCurrentlyPlaying:(ITVideoPlayer)player;
+- (BOOL)isVideoPlaying:(ITVideoPlayer)player;
+- (id)getITunesVideoByType:(iTunesTrack *)track type:(iTunesEVdK)aType;
 
 @end

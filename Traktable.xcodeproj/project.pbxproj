@@ -81,7 +81,6 @@
 		04B68CA917A5600D006760D0 /* MainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B68CA717A5600D006760D0 /* MainWindowController.m */; };
 		04B68CAA17A5600D006760D0 /* MainWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04B68CA817A5600D006760D0 /* MainWindowController.xib */; };
 		04B68CB317A56E20006760D0 /* PXSourceList.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B68CB017A56E20006760D0 /* PXSourceList.m */; };
-		04B68CB817A572B3006760D0 /* movies.png in Resources */ = {isa = PBXBuildFile; fileRef = 04B68CB717A572B3006760D0 /* movies.png */; };
 		04B68CBA17A57351006760D0 /* SourceListItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B68CB617A56F60006760D0 /* SourceListItem.m */; };
 		04B68CEC17A5BE65006760D0 /* HttpClientHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B68CD017A5BE65006760D0 /* HttpClientHelper.m */; };
 		04B68CED17A5BE65006760D0 /* BaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B68CD317A5BE65006760D0 /* BaseRequest.m */; };
@@ -100,6 +99,8 @@
 		04BCC5EF17B1879300D8DE7A /* ITDb.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BCC5EE17B1879300D8DE7A /* ITDb.m */; };
 		04BCC5F217B1885A00D8DE7A /* ITConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BCC5F117B1885A00D8DE7A /* ITConstants.m */; };
 		04D74BB617C7AC5700B135BF /* ITTableRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D74BB517C7AC5700B135BF /* ITTableRowView.m */; };
+		04D74BC217CA9FB800B135BF /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04D74BC117CA9FB800B135BF /* CoreServices.framework */; };
+		04D74BC417CAB18B00B135BF /* movies.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D74BC317CAB18B00B135BF /* movies.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -247,7 +248,6 @@
 		04B68CB217A56E20006760D0 /* PXSourceListDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PXSourceListDelegate.h; sourceTree = "<group>"; };
 		04B68CB517A56F60006760D0 /* SourceListItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SourceListItem.h; sourceTree = "<group>"; };
 		04B68CB617A56F60006760D0 /* SourceListItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SourceListItem.m; sourceTree = "<group>"; };
-		04B68CB717A572B3006760D0 /* movies.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = movies.png; sourceTree = "<group>"; };
 		04B68CCF17A5BE65006760D0 /* HttpClientHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpClientHelper.h; sourceTree = "<group>"; };
 		04B68CD017A5BE65006760D0 /* HttpClientHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpClientHelper.m; sourceTree = "<group>"; };
 		04B68CD217A5BE65006760D0 /* BaseRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseRequest.h; sourceTree = "<group>"; };
@@ -283,6 +283,9 @@
 		04BCC5F117B1885A00D8DE7A /* ITConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITConstants.m; sourceTree = "<group>"; };
 		04D74BB417C7AC5700B135BF /* ITTableRowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITTableRowView.h; sourceTree = "<group>"; };
 		04D74BB517C7AC5700B135BF /* ITTableRowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITTableRowView.m; sourceTree = "<group>"; };
+		04D74BBC17CA88A200B135BF /* VLC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLC.h; sourceTree = "<group>"; };
+		04D74BC117CA9FB800B135BF /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
+		04D74BC317CAB18B00B135BF /* movies.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = movies.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -290,6 +293,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04D74BC217CA9FB800B135BF /* CoreServices.framework in Frameworks */,
 				0446E06D17385349008BC1EB /* Sparkle.framework in Frameworks */,
 				049ACB0916C2AD43007F103C /* CFNetwork.framework in Frameworks */,
 				046C9BD116C1685B0003AD64 /* libsqlite3.dylib in Frameworks */,
@@ -353,6 +357,7 @@
 		042F07E116BC19DB00A0CE9E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				04D74BC117CA9FB800B135BF /* CoreServices.framework */,
 				048DF20216DFF64A004B064A /* Growl.framework */,
 				04714E7F16D2DEC000A308F7 /* Sparkle.framework */,
 				049ACB0816C2AD43007F103C /* CFNetwork.framework */,
@@ -415,7 +420,7 @@
 				048DF20916DFFF17004B064A /* sync.png */,
 				04714E2416D2BFBB00A308F7 /* config-example.plist */,
 				0437204216CEF823003B8AB6 /* menuicon.png */,
-				04B68CB717A572B3006760D0 /* movies.png */,
+				04D74BC317CAB18B00B135BF /* movies.png */,
 				046C9BCF16C167B80003AD64 /* iTraktor.db */,
 				042F07EA16BC19DB00A0CE9E /* Traktable-Info.plist */,
 				042F07EB16BC19DB00A0CE9E /* InfoPlist.strings */,
@@ -440,6 +445,7 @@
 				046C9BCC16C166B30003AD64 /* FMDB */,
 				042F080816BC1A5500A0CE9E /* EMKeychain */,
 				042F080516BC1A3B00A0CE9E /* iTunes.h */,
+				04D74BBC17CA88A200B135BF /* VLC.h */,
 			);
 			name = Lib;
 			sourceTree = "<group>";
@@ -701,7 +707,7 @@
 				04B68C9F17A55E63006760D0 /* config.plist in Resources */,
 				04B68CA017A55E63006760D0 /* dsa_pub.pem in Resources */,
 				04B68CAA17A5600D006760D0 /* MainWindowController.xib in Resources */,
-				04B68CB817A572B3006760D0 /* movies.png in Resources */,
+				04D74BC417CAB18B00B135BF /* movies.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
