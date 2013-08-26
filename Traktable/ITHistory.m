@@ -52,7 +52,7 @@
     
     NSArray *results = [self.db executeAndGetResults:@"select * from (select m.*, h.type, h.success, h.comment, h.timestamp from history h left join movies m on h.imdb_id = m.imdb_id WHERE movieId IS NOT NULL UNION select m.*, h.type, h.success, h.comment, h.timestamp from history h left join movies m on h.tmdb_id = m.tmdb_id WHERE movieId IS NOT NULL) ORDER BY timestamp DESC" arguments:nil];
     
-    NSLog(@"%@",[self.db lastErrorMessage]);
+    //NSLog(@"%@",[self.db lastErrorMessage]);
     
     for (NSDictionary *result in results) {
         

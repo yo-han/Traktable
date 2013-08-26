@@ -66,7 +66,7 @@
      - my sync thoughts so far
      
      **/
-    //[self.library syncTrakt];
+    [self.library syncTrakt];
     //return;
     
     [self showWindow:self];

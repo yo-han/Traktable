@@ -13,6 +13,7 @@
 #import "AppDelegate.h"
 #import "ITConstants.h"
 #import "ITMoviePoster.h"
+#import "ITTVShowPoster.h"
 #import "ITDb.h"
 #import "ITUtil.h"
 
@@ -166,6 +167,8 @@
     
     ITApi *api = [ITApi new];
 
+    /** Sync movies **/
+    
     NSArray *movies = [api watchedSync:iTunesEVdKMovie extended:@"1"];
    
     for(NSDictionary *movie in movies) {
@@ -190,7 +193,6 @@
         
         dispatch_async(self.queue,
         ^{
-            NSLog(@"Sd");
             ITMoviePoster *poster = [ITMoviePoster new];
        
             [poster poster:lastId withUrl:posterUrl size:ITMoviePosterSizeSmall];
@@ -199,6 +201,43 @@
             // NOTE: No originals till we really need it. The image cache becomes very large very quicly with all these big images.
             //[poster poster:lastId withUrl:posterUrl size:ITMoviePosterSizeOriginal];
         });
+    }
+    
+    /** Sync series **/
+    NSArray *series = [api watchedSync:iTunesEVdKTVShow extended:@"1"];
+    
+    for(NSDictionary *serie in series) {
+
+        NSString *posterUrl = [[serie objectForKey:@"images"] objectForKey:@"poster"];
+        NSInteger seasons = [[[serie objectForKey:@"seasons"] objectAtIndex:0] objectForKey:@"season"];
+        NSString *episodes = [[[serie objectForKey:@"seasons"] objectAtIndex:0] objectForKey:@"episodes"];
+
+        NSDictionary *argsDict = [NSDictionary dictionaryWithObjectsAndKeys:[serie objectForKey:@"tvdb_id"], @"tvdb_id", [serie objectForKey:@"tvrage_id"],@"tvrage_id", [serie objectForKey:@"imdb_id"],@"imdb_id",[serie objectForKey:@"year"],@"year", posterUrl,@"poster",seasons,@"seasons",episodes,@"episodes",[serie objectForKey:@"first_aired"],@"firstAired",[serie objectForKey:@"runtime"],@"runtime",[serie objectForKey:@"title"],@"title",[serie objectForKey:@"overview"],@"overview",[serie objectForKey:@"status"],@"status",[serie objectForKey:@"url"],@"traktUrl",[serie objectForKey:@"network"],@"network",[serie objectForKey:@"country"],@"country",[serie objectForKey:@"certification"],@"rating",[serie objectForKey:@"air_time"],@"airTime",[serie objectForKey:@"air_day"],@"airDay",[serie objectForKey:@"genres"],@"genres", nil];
+  
+        ITDb *db = [ITDb new];
+        
+        if([db executeAndGetOneResult:@"SELECT 'x' FROM tvshows WHERE tvdb_id = :id" arguments:[NSArray arrayWithObject:[serie objectForKey:@"tvdb_id"]]] != nil)
+            continue;
+        
+        [db executeUpdateUsingQueue:@"INSERT INTO tvshows (tvdb_id, tvrage_id, imdb_id, year, poster, seasons, episodes, firstAired, runtime, title, overview, status, traktUrl,network, country, rating, airTime, airDay, genres) VALUES (:tvdb_id, :tvrage_id, :imdb_id, :year, :poster, :seasons, :episodes, :firstAired, :runtime, :title, :overview, :status, :traktUrl, :network, :country, :rating, :airTime, :airDay, :genres)"  arguments:argsDict];
+        
+        NSLog(@"%@",[db lastErrorMessage]);
+        
+        NSNumber *lastId = [db lastInsertRowId];
+        
+        if([lastId intValue] == 0)
+            continue;
+        
+        dispatch_async(self.queue,
+           ^{
+               ITTVShowPoster *poster = [ITTVShowPoster new];
+               
+               [poster poster:lastId withUrl:posterUrl size:ITTVShowPosterSizeSmall];
+               [poster poster:lastId withUrl:posterUrl size:ITTVShowPosterSizeMedium];
+               
+               // NOTE: No originals till we really need it. The image cache becomes very large very quicly with all these big images.
+               //[poster poster:lastId withUrl:posterUrl size:ITTVShowPosterSizeOriginal];
+           });
     }
 }
 

@@ -26,7 +26,7 @@
 - (id)init {
    
     _iTunesBridge = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
-    _VLCBridge = [SBApplication applicationWithBundleIdentifier:@"org.videolan.vlc"];
+    //_VLCBridge = [SBApplication applicationWithBundleIdentifier:@"org.videolan.vlc"];
     
     return self;
 }

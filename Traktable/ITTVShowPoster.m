@@ -1,17 +1,17 @@
 //
-//  ITMoviePoster.m
+//  ITTVShowPoster.m
 //  Traktable
 //
-//  Created by Johan Kuijt on 08-08-13.
+//  Created by Johan Kuijt on 26-08-13.
 //  Copyright (c) 2013 Mustacherious. All rights reserved.
 //
 
-#import "ITMoviePoster.h"
+#import "ITTVShowPoster.h"
 #import "ITConstants.h"
 #import "ITUtil.h"
 #import "NSImage+MGCropExtensions.h"
 
-@interface ITMoviePoster()
+@interface ITTVShowPoster()
 
 struct ITPosterSize {
     float width;
@@ -23,16 +23,16 @@ struct ITPosterSize {
 
 @end
 
-@implementation ITMoviePoster
+@implementation ITTVShowPoster
 
-struct ITPosterSize ITMoviePosterSizeSmallSize = {100.0, 150.0};
-struct ITPosterSize ITMoviePosterSizeMediumSize = {500.0, 750.0};
+struct ITPosterSize ITTVShowPosterSizeSmallSize = {100.0, 150.0};
+struct ITPosterSize ITTVShowPosterSizeMediumSize = {500.0, 750.0};
 
-- (NSImage *)getPoster:(NSNumber *)movieId withSize:(ITMoviePosterSize)size {
+- (NSImage *)getPoster:(NSNumber *)showId withSize:(ITTVShowPosterSize)size {
     
     [self setSize:size];
     
-    NSString *imagePath = [[ITConstants applicationSupportFolder] stringByAppendingPathComponent:[NSString stringWithFormat:@"images/movies/%@/%@.jpg", movieId, self.sizeName]];
+    NSString *imagePath = [[ITConstants applicationSupportFolder] stringByAppendingPathComponent:[NSString stringWithFormat:@"images/tvshows/%@/%@.jpg", showId, self.sizeName]];
     
     if([[NSFileManager defaultManager] fileExistsAtPath:imagePath])
         return [[NSImage alloc] initWithContentsOfFile:imagePath];
@@ -40,16 +40,16 @@ struct ITPosterSize ITMoviePosterSizeMediumSize = {500.0, 750.0};
         return nil;
 }
 
-- (NSImage *)poster:(NSNumber *)movieId withUrl:(NSString *)urlString size:(ITMoviePosterSize)size {
+- (NSImage *)poster:(NSNumber *)showId withUrl:(NSString *)urlString size:(ITTVShowPosterSize)size {
     
     [self setSize:size];
     
-    NSString *imagePath = [[ITConstants applicationSupportFolder] stringByAppendingPathComponent:[NSString stringWithFormat:@"images/movies/%@/%@.jpg", movieId, self.sizeName]];
-
+    NSString *imagePath = [[ITConstants applicationSupportFolder] stringByAppendingPathComponent:[NSString stringWithFormat:@"images/tvshows/%@/%@.jpg", showId, self.sizeName]];
+    
     if([[NSFileManager defaultManager] fileExistsAtPath:imagePath])
         return [[NSImage alloc] initWithContentsOfFile:imagePath];
     
-    [ITUtil createDir:[[ITConstants applicationSupportFolder] stringByAppendingPathComponent:[NSString stringWithFormat:@"images/movies/%@", movieId]]];
+    [ITUtil createDir:[[ITConstants applicationSupportFolder] stringByAppendingPathComponent:[NSString stringWithFormat:@"images/tvshows/%@", showId]]];
     
     NSURL *url = [NSURL URLWithString:urlString];
     NSData *imageData = [NSData dataWithContentsOfURL:url];
@@ -57,7 +57,7 @@ struct ITPosterSize ITMoviePosterSizeMediumSize = {500.0, 750.0};
     NSImage *image = [[NSImage alloc] initWithData:imageData];
     NSImage *imageScaled;
     
-    if(size != ITMoviePosterSizeOriginal)
+    if(size != ITTVShowPosterSizeOriginal)
         imageScaled = [image imageScaledToFitSize:NSMakeSize(self.sizeValues.width, self.sizeValues.height)];
     else
         imageScaled = image;
@@ -72,20 +72,21 @@ struct ITPosterSize ITMoviePosterSizeMediumSize = {500.0, 750.0};
     return imageScaled;
 }
 
-- (void)setSize:(ITMoviePosterSize)size {
+- (void)setSize:(ITTVShowPosterSize)size {
     
     switch (size) {
-        case ITMoviePosterSizeSmall:
+        case ITTVShowPosterSizeSmall:
             _sizeName = @"small";
-            _sizeValues = ITMoviePosterSizeSmallSize;
+            _sizeValues = ITTVShowPosterSizeSmallSize;
             break;
-        case ITMoviePosterSizeMedium:
+        case ITTVShowPosterSizeMedium:
             _sizeName = @"medium";
-            _sizeValues = ITMoviePosterSizeMediumSize;
+            _sizeValues = ITTVShowPosterSizeMediumSize;
             break;
         default:
             _sizeName = @"original";
             break;
     }
 }
+
 @end

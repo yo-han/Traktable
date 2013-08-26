@@ -156,6 +156,10 @@ static int dbVersion = 1;
             
             [db executeUpdate:@"CREATE UNIQUE INDEX \"uid\" ON \"movies\" (\"tmdb_id\");"];            
             [db executeUpdate:@"CREATE TABLE \"history\" (\"tvdb_id\" INTEGER,\"tmdb_id\" INTEGER,\"imdb_id\" TEXT,\"type\" TEXT,\"success\" TEXT,\"comment\" TEXT,\"timestamp\" DATETIME);"];
+            
+            [db executeUpdate:@"CREATE TABLE \"tvshows\" (\"showId\" INTEGER,\"tvdb_id\" INTEGER,\"tvrage_id\" INTEGER,\"imdb_id\" TEXT,\"year\" INTEGER,\"runtime\" INTEGER,\"seasons\" INTEGER,\"episodes\" INTEGER,\"firstAired\" INTEGER,\"title\" TEXT,\"status\" TEXT,\"traktUrl\" TEXT,\"overview\" TEXT,\"network\" TEXT,\"poster\" TEXT,\"genres\" TEXT,\"country\" TEXT,\"rating\" TEXT,\"airTime\" TEXT,\"airDay\" TEXT)"];
+            
+            [db executeUpdate:@"CREATE UNIQUE INDEX \"uid\" ON \"tvshows\" (\"tvdb_id\");"];
         }
     }];
     

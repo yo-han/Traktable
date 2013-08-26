@@ -101,6 +101,7 @@
 		04D74BB617C7AC5700B135BF /* ITTableRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D74BB517C7AC5700B135BF /* ITTableRowView.m */; };
 		04D74BC217CA9FB800B135BF /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04D74BC117CA9FB800B135BF /* CoreServices.framework */; };
 		04D74BC417CAB18B00B135BF /* movies.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D74BC317CAB18B00B135BF /* movies.png */; };
+		04D74BC717CB49FE00B135BF /* ITTVShowPoster.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D74BC617CB49FE00B135BF /* ITTVShowPoster.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -286,6 +287,8 @@
 		04D74BBC17CA88A200B135BF /* VLC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLC.h; sourceTree = "<group>"; };
 		04D74BC117CA9FB800B135BF /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
 		04D74BC317CAB18B00B135BF /* movies.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = movies.png; sourceTree = "<group>"; };
+		04D74BC517CB49FD00B135BF /* ITTVShowPoster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITTVShowPoster.h; sourceTree = "<group>"; };
+		04D74BC617CB49FE00B135BF /* ITTVShowPoster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITTVShowPoster.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -384,6 +387,8 @@
 				042F080C16BC1E4C00A0CE9E /* ITVideo.m */,
 				042F080D16BC1E4C00A0CE9E /* ITTVShow.h */,
 				042F080E16BC1E4C00A0CE9E /* ITTVShow.m */,
+				04D74BC517CB49FD00B135BF /* ITTVShowPoster.h */,
+				04D74BC617CB49FE00B135BF /* ITTVShowPoster.m */,
 				049C48BC16C0223B00CC9A0E /* ITMovie.h */,
 				049C48BD16C0223B00CC9A0E /* ITMovie.m */,
 				04A9FE4E17B43A69006CD129 /* ITMoviePoster.h */,
@@ -781,6 +786,7 @@
 				04A9FE5617B448C7006CD129 /* ITUtil.m in Sources */,
 				04AB5F1F17C56A3200A2B1AC /* ITHistoryTableCellView.m in Sources */,
 				04D74BB617C7AC5700B135BF /* ITTableRowView.m in Sources */,
+				04D74BC717CB49FE00B135BF /* ITTVShowPoster.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
