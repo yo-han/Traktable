@@ -33,7 +33,7 @@
         ITMovie *movie = (ITMovie *) object;
 
         history.title = movie.name;
-        history.poster = [poster getPoster:movie.movieId withSize:ITMoviePosterSizeSmall];
+        history.poster = [poster getPoster:movie.movieId withSize:ITTVShowPosterSizeMedium];
         history.success = movie.success;
         history.timestamp = movie.timestamp;
         
@@ -43,7 +43,7 @@
         ITTVShow *show = (ITTVShow *) object;
         
         history.title = show.title;
-        history.poster = [poster getPoster:show.showId withSize:ITTVShowPosterSizeSmall];
+        history.poster = [poster getPoster:show.showId withSize:ITTVShowPosterSizeMedium];
         history.success = show.success;
         history.timestamp = show.timestamp;
     }
@@ -62,7 +62,7 @@
 
     NSMutableArray *movies = [NSMutableArray array];
     
-    NSArray *results = [self.db executeAndGetResults:@"select * from (select m.*, h.type, h.success, h.comment, h.timestamp from history h left join movies m on h.imdb_id = m.imdb_id WHERE movieId IS NOT NULL UNION select m.*, h.type, h.success, h.comment, h.timestamp from history h left join movies m on h.tmdb_id = m.tmdb_id WHERE movieId IS NOT NULL) ORDER BY timestamp DESC" arguments:nil];
+    NSArray *results = [self.db executeAndGetResults:@"select * from (select m.*, h.type, h.success, h.comment, h.timestamp from history h left join movies m on h.imdb_id = m.imdb_id WHERE movieId IS NOT NULL AND h.type = 'movie' UNION select m.*, h.type, h.success, h.comment, h.timestamp from history h left join movies m on h.tmdb_id = m.tmdb_id WHERE movieId IS NOT NULL AND h.type = 'movie') ORDER BY timestamp DESC" arguments:nil];
     
     //NSLog(@"%@",[self.db lastErrorMessage]);
     
@@ -79,7 +79,7 @@
     
     NSMutableArray *shows = [NSMutableArray array];
     
-    NSArray *results = [self.db executeAndGetResults:@"select * from (select t.*, h.type, h.success, h.comment, h.timestamp from history h left join tvshows t on h.imdb_id = t.imdb_id WHERE showId IS NOT NULL UNION select t.*, h.type, h.success, h.comment, h.timestamp from history h left join tvshows t on h.tvdb_id = t.tvdb_id WHERE showId IS NOT NULL) ORDER BY timestamp DESC" arguments:nil];
+    NSArray *results = [self.db executeAndGetResults:@"select * from (select t.*, h.type, h.success, h.comment, h.timestamp from history h left join tvshows t on h.imdb_id = t.imdb_id WHERE showId IS NOT NULL AND h.type = 'show' UNION select t.*, h.type, h.success, h.comment, h.timestamp from history h left join tvshows t on h.tvdb_id = t.tvdb_id WHERE showId IS NOT NULL AND h.type = 'show') ORDER BY timestamp DESC" arguments:nil];
     
     //NSLog(@"%@",[self.db lastErrorMessage]);
     

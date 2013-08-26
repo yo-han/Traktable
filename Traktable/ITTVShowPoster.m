@@ -33,7 +33,7 @@ struct ITPosterSize ITTVShowPosterSizeMediumSize = {500.0, 750.0};
     [self setSize:size];
     
     NSString *imagePath = [[ITConstants applicationSupportFolder] stringByAppendingPathComponent:[NSString stringWithFormat:@"images/tvshows/%@/%@.jpg", showId, self.sizeName]];
-    
+
     if([[NSFileManager defaultManager] fileExistsAtPath:imagePath])
         return [[NSImage alloc] initWithContentsOfFile:imagePath];
     else

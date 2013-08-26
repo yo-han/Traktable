@@ -154,12 +154,16 @@ static int dbVersion = 1;
         if (version < 1) {
             [db executeUpdate:@"CREATE TABLE \"movies\" (\"movieId\" INTEGER PRIMARY KEY AUTOINCREMENT,\"tmdb_id\" INTEGER,\"imdb_id\" INTEGER,\"year\" INTEGER,\"traktPlays\" INTEGER,\"released\" INTEGER,\"runtime\" INTEGER,\"poster\" TEXT,\"title\" TEXT,\"tagline\" TEXT,\"overview\" TEXT,\"trailer\" TEXT,\"traktUrl\" TEXT,\"genres\" BLOB);"];
             
-            [db executeUpdate:@"CREATE UNIQUE INDEX \"uid\" ON \"movies\" (\"tmdb_id\");"];            
-            [db executeUpdate:@"CREATE TABLE \"history\" (\"tvdb_id\" INTEGER,\"tmdb_id\" INTEGER,\"imdb_id\" TEXT,\"type\" TEXT,\"success\" TEXT,\"comment\" TEXT,\"timestamp\" DATETIME);"];
+            [db executeUpdate:@"CREATE UNIQUE INDEX \"uid_movie\" ON \"movies\" (\"tmdb_id\");"];            
             
-            [db executeUpdate:@"CREATE TABLE \"tvshows\" (\"showId\" INTEGER,\"tvdb_id\" INTEGER,\"tvrage_id\" INTEGER,\"imdb_id\" TEXT,\"year\" INTEGER,\"runtime\" INTEGER,\"seasons\" INTEGER,\"episodes\" INTEGER,\"firstAired\" INTEGER,\"title\" TEXT,\"status\" TEXT,\"traktUrl\" TEXT,\"overview\" TEXT,\"network\" TEXT,\"poster\" TEXT,\"genres\" TEXT,\"country\" TEXT,\"rating\" TEXT,\"airTime\" TEXT,\"airDay\" TEXT)"];
+            [db executeUpdate:@"CREATE TABLE \"tvshows\" (\"showId\" INTEGER PRIMARY KEY AUTOINCREMENT,\"tvdb_id\" INTEGER,\"tvrage_id\" INTEGER,\"imdb_id\" TEXT,\"year\" INTEGER,\"runtime\" INTEGER,\"seasons\" INTEGER,\"episodes\" INTEGER,\"firstAired\" INTEGER,\"title\" TEXT,\"status\" TEXT,\"traktUrl\" TEXT,\"overview\" TEXT,\"network\" TEXT,\"poster\" TEXT,\"genres\" TEXT,\"country\" TEXT,\"rating\" TEXT,\"airTime\" TEXT,\"airDay\" TEXT)"];
             
-            [db executeUpdate:@"CREATE UNIQUE INDEX \"uid\" ON \"tvshows\" (\"tvdb_id\");"];
+            [db executeUpdate:@"CREATE UNIQUE INDEX \"uid_show\" ON \"tvshows\" (\"tvdb_id\");"];
+            
+            [db executeUpdate:@"CREATE TABLE \"history\" (\"tvdb_id\" INTEGER,\"tmdb_id\" INTEGER,\"imdb_id\" TEXT,\"type\" TEXT,\"success\" TEXT,\"comment\" TEXT,\"timestamp\" DATETIME,\"season\" INTEGER,\"episode\" INTEGER,\"episodeName\" TEXT);"];
+            
+            [db executeUpdate:@"CREATE TABLE \"errors\" (\"errorId\" INTEGER PRIMARY KEY AUTOINCREMENT,\"description\" TEXT,\"timestamp\" DATETIME);"];
+            
         }
     }];
     

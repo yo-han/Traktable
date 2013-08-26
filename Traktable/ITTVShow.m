@@ -36,7 +36,7 @@
     
     ITTVShow *show = [ITTVShow new];
     
-    show.showId = [record objectForKey:@"movieId"];
+    show.showId = [record objectForKey:@"showId"];
     show.title = [record objectForKey:@"title"];
     show.poster = [record objectForKey:@"poster"];
     

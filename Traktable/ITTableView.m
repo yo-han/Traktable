@@ -68,7 +68,7 @@ typedef NS_ENUM(NSUInteger, ITTableViewCellType) {
             _items = (NSMutableArray *) [[self getHistory] fetchTvShowHistory];
             break;
     }
-
+ 
     [self.tableView reloadData];
 }
 
