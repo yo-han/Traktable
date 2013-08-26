@@ -18,7 +18,6 @@
 
 - (void)importLibrary;
 - (void)syncLibrary;
-- (void)syncTrakt;
 - (BOOL)dbExists;
 
 - (void)updateTrackCount:(iTunesTrack *)track scrobbled:(BOOL)scrobble;

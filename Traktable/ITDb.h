@@ -18,6 +18,8 @@
 - (int)lastErrorCode;
 - (BOOL)error;
 
+- (NSString *)getInsertFromDictionary:(NSDictionary *)dict forTable:(NSString *)table;
+
 - (void)executeUpdateUsingQueue:(NSString *)sql arguments:(id)args;
 
 - (NSDictionary *)executeAndGetOneResult:(NSString *)sql arguments:(NSArray *)args;

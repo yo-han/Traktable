@@ -102,6 +102,7 @@
 		04D74BC217CA9FB800B135BF /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04D74BC117CA9FB800B135BF /* CoreServices.framework */; };
 		04D74BC417CAB18B00B135BF /* movies.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D74BC317CAB18B00B135BF /* movies.png */; };
 		04D74BC717CB49FE00B135BF /* ITTVShowPoster.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D74BC617CB49FE00B135BF /* ITTVShowPoster.m */; };
+		04D74BCA17CBA18C00B135BF /* ITSync.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D74BC917CBA18B00B135BF /* ITSync.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -289,6 +290,8 @@
 		04D74BC317CAB18B00B135BF /* movies.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = movies.png; sourceTree = "<group>"; };
 		04D74BC517CB49FD00B135BF /* ITTVShowPoster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITTVShowPoster.h; sourceTree = "<group>"; };
 		04D74BC617CB49FE00B135BF /* ITTVShowPoster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITTVShowPoster.m; sourceTree = "<group>"; };
+		04D74BC817CBA18A00B135BF /* ITSync.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITSync.h; sourceTree = "<group>"; };
+		04D74BC917CBA18B00B135BF /* ITSync.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITSync.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -381,22 +384,17 @@
 				042F07F416BC19DB00A0CE9E /* AppDelegate.h */,
 				042F07F516BC19DB00A0CE9E /* AppDelegate.m */,
 				04AB5F1C17C569CF00A2B1AC /* Window */,
+				04BAD1A217CBA2AE00AA815A /* Models */,
 				042F080916BC1E4C00A0CE9E /* ITApi.h */,
 				042F080A16BC1E4C00A0CE9E /* ITApi.m */,
 				042F080B16BC1E4C00A0CE9E /* ITVideo.h */,
 				042F080C16BC1E4C00A0CE9E /* ITVideo.m */,
-				042F080D16BC1E4C00A0CE9E /* ITTVShow.h */,
-				042F080E16BC1E4C00A0CE9E /* ITTVShow.m */,
-				04D74BC517CB49FD00B135BF /* ITTVShowPoster.h */,
-				04D74BC617CB49FE00B135BF /* ITTVShowPoster.m */,
-				049C48BC16C0223B00CC9A0E /* ITMovie.h */,
-				049C48BD16C0223B00CC9A0E /* ITMovie.m */,
-				04A9FE4E17B43A69006CD129 /* ITMoviePoster.h */,
-				04A9FE4F17B43A69006CD129 /* ITMoviePoster.m */,
 				046C9BB816C159BA0003AD64 /* ITLibrary.h */,
 				046C9BB916C159BA0003AD64 /* ITLibrary.m */,
 				04BCC5ED17B1879300D8DE7A /* ITDb.h */,
 				04BCC5EE17B1879300D8DE7A /* ITDb.m */,
+				04D74BC817CBA18A00B135BF /* ITSync.h */,
+				04D74BC917CBA18B00B135BF /* ITSync.m */,
 				04A9FE5417B448C7006CD129 /* ITUtil.h */,
 				04A9FE5517B448C7006CD129 /* ITUtil.m */,
 				04BCC5F017B1885A00D8DE7A /* ITConstants.h */,
@@ -639,6 +637,21 @@
 			name = Unirest;
 			sourceTree = "<group>";
 		};
+		04BAD1A217CBA2AE00AA815A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				042F080D16BC1E4C00A0CE9E /* ITTVShow.h */,
+				042F080E16BC1E4C00A0CE9E /* ITTVShow.m */,
+				04D74BC517CB49FD00B135BF /* ITTVShowPoster.h */,
+				04D74BC617CB49FE00B135BF /* ITTVShowPoster.m */,
+				049C48BC16C0223B00CC9A0E /* ITMovie.h */,
+				049C48BD16C0223B00CC9A0E /* ITMovie.m */,
+				04A9FE4E17B43A69006CD129 /* ITMoviePoster.h */,
+				04A9FE4F17B43A69006CD129 /* ITMoviePoster.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -787,6 +800,7 @@
 				04AB5F1F17C56A3200A2B1AC /* ITHistoryTableCellView.m in Sources */,
 				04D74BB617C7AC5700B135BF /* ITTableRowView.m in Sources */,
 				04D74BC717CB49FE00B135BF /* ITTVShowPoster.m in Sources */,
+				04D74BCA17CBA18C00B135BF /* ITSync.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

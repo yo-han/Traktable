@@ -18,6 +18,7 @@
 #import "ITMovie.h"
 #import "ITNotification.h"
 #import "ITDb.h"
+#import "ITSync.h"
 
 // Scripting Bridge
 #import "iTunes.h"
@@ -25,22 +26,24 @@
 
 @interface AppDelegate()
 
+@property(strong) MainWindowController *mainWindow;
+
+@property(nonatomic, retain) ITApi *api;
+@property(nonatomic, retain) ITVideo *video;
+@property(nonatomic, retain) ITLibrary *library;
+@property(nonatomic, retain) ITSync *sync;
+
 - (IBAction)showLog:(id)sender;
 - (IBAction)feedback:(id)sender;
 - (IBAction)openHistory:(id)sender;
 - (IBAction)displayPreferences:(id)sender;
 - (IBAction)showWindow:(id)sender;
 
-@property(strong) MainWindowController *mainWindow;
-
 @end
 
 @implementation AppDelegate
 
 @synthesize currentlyPlaying, statusItem, statusMenu, showLog, timer;
-@synthesize api=_api;
-@synthesize video=_video;
-@synthesize library=_library;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
@@ -53,21 +56,7 @@
     _api = [ITApi new];
     _video = [[ITVideo alloc] init];
     _library = [[ITLibrary alloc] init];
-    
-    NSLog(@"TESTING MODE - REMOVE CODE BELOW");
-    
-    /**
-     # NOTE:
-     
-     Need to build a sync system which syncs the extended data of the user the first time and small portions the other
-     times. Try to build in a way to add the movie/tv show data when a video is scrobbled to we don't have to do the big 
-     extended syncs every time. Or do one check for missing metadata a day.
-     
-     - my sync thoughts so far
-     
-     **/
-    [self.library syncTrakt];
-    //return;
+    _sync = [[ITSync alloc] init];
     
     [self showWindow:self];
 
@@ -81,6 +70,8 @@
     } else {
         
         NSLog(@"Startup normal, loggedin.");
+        
+        [self.sync performSelectorInBackground:@selector(syncTrakt) withObject:nil];
     }
     
     [[NSDistributedNotificationCenter defaultCenter] addObserver:self selector:@selector(iTunesChangedState:) name:@"com.apple.iTunes.playerInfo" object:@"com.apple.iTunes.player" suspensionBehavior:NSNotificationSuspensionBehaviorCoalesce];

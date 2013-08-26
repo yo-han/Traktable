@@ -22,9 +22,6 @@
 @property (strong) NSStatusItem * statusItem;
 
 @property(nonatomic, retain) id currentlyPlaying;
-@property(nonatomic, retain) ITApi *api;
-@property(nonatomic, retain) ITVideo *video;
-@property(nonatomic, retain) ITLibrary *library;
 @property(nonatomic, retain) NSTimer *timer;
 
 @end

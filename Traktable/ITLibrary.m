@@ -12,8 +12,6 @@
 #import "ITMovie.h"
 #import "AppDelegate.h"
 #import "ITConstants.h"
-#import "ITMoviePoster.h"
-#import "ITTVShowPoster.h"
 #import "ITDb.h"
 #import "ITUtil.h"
 
@@ -35,35 +33,39 @@
 
 - (id)init {
     
-    iTunesBridge = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
-    
-    NSString *appSupportPath = [ITConstants applicationSupportFolder];
-    [ITUtil createDir:appSupportPath];
-    
-    dbFilePath = [appSupportPath stringByAppendingPathComponent:@"iTraktor.db"];
-    
-    bool b = [self dbExists];
-    
-    if(b == NO) {
+    self = [super init];
+	if (self) {
         
-        [self resetDb];
-    }
-    
-    _queue = dispatch_queue_create("traktable.sync.queue", NULL);
-    
-    ITDb *db = [ITDb new];
-    [db executeAndGetOneResult:@"SELECT playedCount FROM library" arguments:nil];
+        iTunesBridge = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
+        
+        NSString *appSupportPath = [ITConstants applicationSupportFolder];
+        [ITUtil createDir:appSupportPath];
+        
+        dbFilePath = [appSupportPath stringByAppendingPathComponent:@"iTraktor.db"];
+        
+        bool b = [self dbExists];
+        
+        if(b == NO) {
+            
+            [self resetDb];
+        }
+        
+        _queue = dispatch_queue_create("traktable.library.queue", NULL);
+        
+        ITDb *db = [ITDb new];
+        [db executeAndGetOneResult:@"SELECT playedCount FROM library" arguments:nil];
 
-    if([db error]) {
-        
-        NSLog(@"Reset db is caused by error: %@", [db lastErrorMessage]);
-        
-        [[NSFileManager defaultManager] removeItemAtPath:dbFilePath error:nil];
-        [self resetDb];
-        
-    } else if([db databaseNeedsMigration]) {
-        
-        [db migrateDatabase];
+        if([db error]) {
+            
+            NSLog(@"Reset db is caused by error: %@", [db lastErrorMessage]);
+            
+            [[NSFileManager defaultManager] removeItemAtPath:dbFilePath error:nil];
+            [self resetDb];
+            
+        } else if([db databaseNeedsMigration]) {
+            
+            [db migrateDatabase];
+        }
     }
     
     return self;
@@ -161,86 +163,6 @@
     [self checkTracks:shows];
     
     [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"ITLastSyncDate"];
-}
-
-- (void)syncTrakt {
-    
-    ITApi *api = [ITApi new];
-
-    /** Sync movies **/
-    
-    NSArray *movies = [api watchedSync:iTunesEVdKMovie extended:@"1"];
-   
-    for(NSDictionary *movie in movies) {
-        
-        NSString *posterUrl = [[movie objectForKey:@"images"] objectForKey:@"poster"];
-        NSString *genres = [[movie objectForKey:@"genres"] componentsJoinedByString:@","];
-        
-        NSDictionary *argsDict = [NSDictionary dictionaryWithObjectsAndKeys:[movie objectForKey:@"tmdb_id"], @"tmdb_id", [movie objectForKey:@"imdb_id"],@"imdb_id",[movie objectForKey:@"year"],@"year", posterUrl,@"poster",[movie objectForKey:@"plays"],@"traktPlays",[movie objectForKey:@"released"],@"released",[movie objectForKey:@"runtime"],@"runtime",[movie objectForKey:@"title"],@"title",[movie objectForKey:@"overview"],@"overview",[movie objectForKey:@"tagline"],@"tagline",[movie objectForKey:@"url"],@"traktUrl",[movie objectForKey:@"trailer"],@"trailer",genres,@"genres", nil];
-        
-        ITDb *db = [ITDb new];
-        
-        if([db executeAndGetOneResult:@"SELECT 'x' FROM movies WHERE tmdb_id = :id" arguments:[NSArray arrayWithObject:[movie objectForKey:@"tmdb_id"]]] != nil)
-            continue;
-        
-        [db executeUpdateUsingQueue:@"INSERT INTO movies (tmdb_id, imdb_id, year, poster, traktPlays, released, runtime, title, overview, tagline, traktUrl, trailer, genres) VALUES (:tmdb_id, :imdb_id, :year, :poster, :traktPlays, :released, :runtime, :title, :overview, :tagline, :traktUrl, :trailer, :genres)"  arguments:argsDict];
-
-        NSLog(@"%@",[db lastErrorMessage]);
-        
-        NSNumber *lastId = [db lastInsertRowId];
-        
-        if([lastId intValue] == 0)
-            continue;
-        
-        dispatch_async(self.queue,
-        ^{
-            ITMoviePoster *poster = [ITMoviePoster new];
-       
-            [poster poster:lastId withUrl:posterUrl size:ITMoviePosterSizeSmall];
-            [poster poster:lastId withUrl:posterUrl size:ITMoviePosterSizeMedium];
-            
-            // NOTE: No originals till we really need it. The image cache becomes very large very quicly with all these big images.
-            //[poster poster:lastId withUrl:posterUrl size:ITMoviePosterSizeOriginal];
-        });
-    }
-    
-    /** Sync series **/
-    NSArray *series = [api watchedSync:iTunesEVdKTVShow extended:@"1"];
-    
-    for(NSDictionary *serie in series) {
-
-        NSString *posterUrl = [[serie objectForKey:@"images"] objectForKey:@"poster"];
-        NSInteger seasons = [[[serie objectForKey:@"seasons"] objectAtIndex:0] objectForKey:@"season"];
-        NSString *episodes = [[[[serie objectForKey:@"seasons"] objectAtIndex:0] objectForKey:@"episodes"] componentsJoinedByString:@","];
-        NSString *genres = [[serie objectForKey:@"genres"] componentsJoinedByString:@","];
-        
-        NSDictionary *argsDict = [NSDictionary dictionaryWithObjectsAndKeys:[serie objectForKey:@"tvdb_id"], @"tvdb_id", [serie objectForKey:@"tvrage_id"],@"tvrage_id", [serie objectForKey:@"imdb_id"],@"imdb_id",[serie objectForKey:@"year"],@"year", posterUrl,@"poster",seasons,@"seasons",episodes,@"episodes",[serie objectForKey:@"first_aired"],@"firstAired",[serie objectForKey:@"runtime"],@"runtime",[serie objectForKey:@"title"],@"title",[serie objectForKey:@"overview"],@"overview",[serie objectForKey:@"status"],@"status",[serie objectForKey:@"url"],@"traktUrl",[serie objectForKey:@"network"],@"network",[serie objectForKey:@"country"],@"country",[serie objectForKey:@"certification"],@"rating",[serie objectForKey:@"air_time"],@"airTime",[serie objectForKey:@"air_day"],@"airDay",genres,@"genres", nil];
-  
-        ITDb *db = [ITDb new];
-        
-        if([db executeAndGetOneResult:@"SELECT 'x' FROM tvshows WHERE tvdb_id = :id" arguments:[NSArray arrayWithObject:[serie objectForKey:@"tvdb_id"]]] != nil)
-            continue;
-        
-        [db executeUpdateUsingQueue:@"INSERT INTO tvshows (tvdb_id, tvrage_id, imdb_id, year, poster, seasons, episodes, firstAired, runtime, title, overview, status, traktUrl,network, country, rating, airTime, airDay, genres) VALUES (:tvdb_id, :tvrage_id, :imdb_id, :year, :poster, :seasons, :episodes, :firstAired, :runtime, :title, :overview, :status, :traktUrl, :network, :country, :rating, :airTime, :airDay, :genres)"  arguments:argsDict];
-        
-        NSLog(@"%@",[db lastErrorMessage]);
-        
-        NSNumber *lastId = [db lastInsertRowId];
-        
-        if([lastId intValue] == 0)
-            continue;
-        
-        dispatch_async(self.queue,
-           ^{
-               ITTVShowPoster *poster = [ITTVShowPoster new];
-               
-               [poster poster:lastId withUrl:posterUrl size:ITTVShowPosterSizeSmall];
-               [poster poster:lastId withUrl:posterUrl size:ITTVShowPosterSizeMedium];
-               
-               // NOTE: No originals till we really need it. The image cache becomes very large very quicly with all these big images.
-               //[poster poster:lastId withUrl:posterUrl size:ITTVShowPosterSizeOriginal];
-           });
-    }
 }
 
 - (NSArray *)checkTracks:(NSArray *)tracks {

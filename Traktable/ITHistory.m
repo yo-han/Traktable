@@ -12,6 +12,7 @@
 #import "ITTVShow.h"
 #import "ITTVShowPoster.h"
 #import "ITDb.h"
+#import "ITConstants.h"
 
 @interface ITHistory()
 
@@ -37,6 +38,16 @@
         history.success = movie.success;
         history.timestamp = movie.timestamp;
         
+        if(history.poster == nil) {
+            
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+                
+                [poster poster:movie.movieId withUrl:movie.image size:ITMoviePosterSizeMedium];
+                [[NSNotificationCenter defaultCenter] postNotificationName:kITHistoryNeedsUpdateNotification object:nil];
+                
+            });
+        }
+        
     } else if([object isKindOfClass:[ITTVShow class]]) {
         
         ITTVShowPoster *poster = [ITTVShowPoster new];
@@ -46,6 +57,16 @@
         history.poster = [poster getPoster:show.showId withSize:ITTVShowPosterSizeMedium];
         history.success = show.success;
         history.timestamp = show.timestamp;
+        
+        if(history.poster == nil) {
+
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+            
+                [poster poster:show.showId withUrl:show.poster size:ITTVShowPosterSizeMedium];
+                [[NSNotificationCenter defaultCenter] postNotificationName:kITHistoryNeedsUpdateNotification object:nil];
+            
+            });
+        }
     }
     
     return history;

@@ -10,6 +10,7 @@
 #import "ITHistory.h"
 #import "ITHistoryTableCellView.h"
 #import "ITTableRowView.h"
+#import "ITTVShowPoster.h"
 
 @interface ITTableView()
 
@@ -91,8 +92,10 @@ typedef NS_ENUM(NSUInteger, ITTableViewCellType) {
     [cellView.title setStringValue:entry.title];
     [cellView.scrobble setStringValue:entry.success];
     [cellView.timestamp setStringValue:entry.timestamp];
-    [cellView.imageView setImage:entry.poster];
     
+    if(entry.poster != nil)
+        [cellView.imageView setImage:entry.poster];
+        
     return cellView;
 }
 

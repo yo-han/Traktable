@@ -29,11 +29,15 @@ static int dbVersion = 1;
 
 - (id)init {
     
-    _dbFilePath = [[ITConstants applicationSupportFolder] stringByAppendingPathComponent:dbFile];
-    
-    _dbQueue = [FMDatabaseQueue databaseQueueWithPath:self.dbFilePath];
-    
-    return self;
+    self = [super init];
+    if (self) {
+        
+        _dbFilePath = [[ITConstants applicationSupportFolder] stringByAppendingPathComponent:dbFile];
+        
+        _dbQueue = [FMDatabaseQueue databaseQueueWithPath:self.dbFilePath];
+        
+        return self;
+    }
 }
 
 - (NSString *)getDbFilePath {
@@ -59,6 +63,25 @@ static int dbVersion = 1;
 - (NSNumber *)lastInsertRowId {
     
     return [NSNumber numberWithInt:self.lastInsertId];
+}
+
+- (NSString *)getInsertFromDictionary:(NSDictionary *)dict forTable:(NSString *)table {
+    
+    NSMutableArray *cols = [NSMutableArray array];
+    NSMutableArray *bind = [NSMutableArray array];
+    
+    for (id key in dict) {
+        
+        [cols addObject:key];
+        [bind addObject:[NSString stringWithFormat:@":%@",key]];
+    }
+    
+    NSString *columnNames = [cols componentsJoinedByString:@","];
+    NSString *bindValues = [bind componentsJoinedByString:@","];
+    
+    NSString *qry = [NSString stringWithFormat:@"INSERT INTO %@ (%@) VALUES (%@)", table, columnNames, bindValues];
+    
+    return qry;
 }
 
 - (void)executeUpdateUsingQueue:(NSString *)sql arguments:(id)args {

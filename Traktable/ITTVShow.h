@@ -25,7 +25,7 @@
 // Db only
 @property (nonatomic, strong) NSNumber *showId;
 @property (nonatomic, strong) NSString *title;
-@property (nonatomic, strong) NSImage *poster;
+@property (nonatomic, strong) NSString *poster;
 
 // History items
 @property (nonatomic, strong) NSString *type;
