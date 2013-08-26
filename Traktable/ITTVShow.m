@@ -12,6 +12,7 @@
 @implementation ITTVShow
 
 @synthesize show, episodeName, seasonNumber, episodeNumber, playCount, year, duration, persistentID, videoKind, imdbId;
+@synthesize showId, title, poster;
 
 +(ITTVShow *)showWithCurrentTunesTrack:(iTunesTrack *)iTunesTrack {
     
@@ -28,6 +29,26 @@
     show.videoKind      = [iTunesTrack videoKind];
     show.imdbId         = [ITTVdb getTVDBId:show.show];
 
+    return show;
+}
+
++(ITTVShow *)showWithDatabaseRecord:(NSDictionary *)record {
+    
+    ITTVShow *show = [ITTVShow new];
+    
+    show.showId = [record objectForKey:@"movieId"];
+    show.title = [record objectForKey:@"title"];
+    show.poster = [record objectForKey:@"poster"];
+    
+    if([record objectForKey:@"success"] != nil) {
+        
+        show.type = [record objectForKey:@"type"];
+        show.comment = [record objectForKey:@"comment"];
+        show.success = [record objectForKey:@"success"];
+        show.timestamp = [record objectForKey:@"timestamp"];
+        
+    }
+    
     return show;
 }
 

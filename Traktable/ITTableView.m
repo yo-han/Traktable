@@ -15,6 +15,7 @@
 
 typedef NS_ENUM(NSUInteger, ITTableViewCellType) {
     ITTableViewMovieHistoryCell = 0,
+    ITTableViewTVShowHistoryCell = 1,
     ITTableViewUnknownCell = NSUIntegerMax
 };
 
@@ -58,11 +59,13 @@ typedef NS_ENUM(NSUInteger, ITTableViewCellType) {
     
     switch (self.tableType) {
         case ITHistoryMovies:
+            _tableViewCellType = ITTableViewMovieHistoryCell;
             _items = (NSMutableArray *) [[self getHistory] fetchMovieHistory];
             break;
             
         default:
-            NSLog(@"1!");
+            _tableViewCellType = ITTableViewTVShowHistoryCell;
+            _items = (NSMutableArray *) [[self getHistory] fetchTvShowHistory];
             break;
     }
 
@@ -110,6 +113,7 @@ typedef NS_ENUM(NSUInteger, ITTableViewCellType) {
 + (NSDictionary *)tableViewCellTypes
 {
     return @{@(ITTableViewMovieHistoryCell) : @"MovieHistoryCell",
+             @(ITTableViewTVShowHistoryCell) : @"TVShowHistoryCell",
              @(ITTableViewUnknownCell) : @"DefaultCell"};
 }
 

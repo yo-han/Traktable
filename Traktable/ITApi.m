@@ -364,12 +364,12 @@
 - (void)updateHistory:(NSDictionary *)update parameters:(NSDictionary *)params {
       
     ITDb *db = [ITDb new];
-    
+
     if([update objectForKey:@"show"] != nil) {
         
-        NSDictionary *argsDict = [NSDictionary dictionaryWithObjectsAndKeys:[[update objectForKey:@"show"] objectForKey:@"tvdb_id" ], @"tvdb_id", [[update objectForKey:@"show"] objectForKey:@"imdb_id" ], @"imdb_id", @"show", @"type", [update objectForKey:@"status"], @"success", nil];
+        NSDictionary *argsDict = [NSDictionary dictionaryWithObjectsAndKeys:[[update objectForKey:@"show"] objectForKey:@"tvdb_id"], @"tvdb_id", [[update objectForKey:@"show"] objectForKey:@"imdb_id" ], @"imdb_id", @"show", @"type", [update objectForKey:@"status"], @"success", nil];
         
-        [db executeUpdateUsingQueue:@"INSERT INTO history (tvdb_id, imdb_id, type, success, timestamp) VALUES (:tmdb_id, :imdb_id, :type, :success, datetime('now'))" arguments:argsDict];
+        [db executeUpdateUsingQueue:@"INSERT INTO history (tvdb_id, imdb_id, type, success, timestamp) VALUES (:tvdb_id, :imdb_id, :type, :success, datetime('now'))" arguments:argsDict];
         //NSLog(@"%@",[db lastErrorMessage]);
         
     } else if([update objectForKey:@"movie"] != nil) {

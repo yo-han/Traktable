@@ -22,6 +22,18 @@
 @property (nonatomic) NSInteger duration;
 @property (nonatomic) iTunesEVdK videoKind;
 
+// Db only
+@property (nonatomic, strong) NSNumber *showId;
+@property (nonatomic, strong) NSString *title;
+@property (nonatomic, strong) NSImage *poster;
+
+// History items
+@property (nonatomic, strong) NSString *type;
+@property (nonatomic, strong) NSString *success;
+@property (nonatomic, strong) NSString *comment;
+@property (nonatomic, strong) NSString *timestamp;
+
 +(ITTVShow *)showWithCurrentTunesTrack:(iTunesTrack *)iTunesTrack;
++(ITTVShow *)showWithDatabaseRecord:(NSDictionary *)record;
 
 @end

@@ -17,5 +17,6 @@
 
 + (ITHistory *)historyEntityWithHistoryObject:(id)object;
 - (NSArray *)fetchMovieHistory;
+- (NSArray *)fetchTvShowHistory;
 
 @end
