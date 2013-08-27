@@ -19,6 +19,7 @@
 #import "ITNotification.h"
 #import "ITDb.h"
 #import "ITSync.h"
+#import "ITConstants.h"
 
 // Scripting Bridge
 #import "iTunes.h"
@@ -71,7 +72,8 @@
         
         NSLog(@"Startup normal, loggedin.");
         
-        [self.sync performSelectorInBackground:@selector(syncTrakt) withObject:nil];
+        //if([ITConstants firstBoot])
+            [self.sync performSelectorInBackground:@selector(syncTraktExtended) withObject:nil];
     }
     
     [[NSDistributedNotificationCenter defaultCenter] addObserver:self selector:@selector(iTunesChangedState:) name:@"com.apple.iTunes.playerInfo" object:@"com.apple.iTunes.player" suspensionBehavior:NSNotificationSuspensionBehaviorCoalesce];
@@ -79,6 +81,8 @@
     [[NSDistributedNotificationCenter defaultCenter] addObserver:self selector:@selector(iTunesSourceSaved:) name:@"com.apple.iTunes.sourceSaved" object:@"com.apple.iTunes.sources" suspensionBehavior:NSNotificationSuspensionBehaviorCoalesce];
     
     [[NSDistributedNotificationCenter defaultCenter] addObserver:self selector:@selector(VLCPlayerStateDidChange) name:@"VLCPlayerStateDidChange" object:nil suspensionBehavior:NSNotificationSuspensionBehaviorCoalesce];
+    
+    [NSTimer timerWithTimeInterval:86400 target:self.sync selector:@selector(syncTraktExtended) userInfo:nil repeats:YES];
 }
 
 - (IBAction)showLog:(id)sender {

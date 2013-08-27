@@ -12,7 +12,6 @@
 
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSImage *poster;
-@property (nonatomic, strong) NSString *success;
 @property (nonatomic, strong) NSString *timestamp;
 
 + (ITHistory *)historyEntityWithHistoryObject:(id)object;

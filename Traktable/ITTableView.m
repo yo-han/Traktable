@@ -69,7 +69,7 @@ typedef NS_ENUM(NSUInteger, ITTableViewCellType) {
             _items = (NSMutableArray *) [[self getHistory] fetchTvShowHistory];
             break;
     }
- 
+
     [self.tableView reloadData];
 }
 
@@ -90,7 +90,6 @@ typedef NS_ENUM(NSUInteger, ITTableViewCellType) {
     ITHistory *entry = [self _entryForRow:row];
    
     [cellView.title setStringValue:entry.title];
-    [cellView.scrobble setStringValue:entry.success];
     [cellView.timestamp setStringValue:entry.timestamp];
     
     if(entry.poster != nil)

@@ -40,11 +40,9 @@
     show.title = [record objectForKey:@"title"];
     show.poster = [record objectForKey:@"poster"];
     
-    if([record objectForKey:@"success"] != nil) {
+    if([record objectForKey:@"timestamp"] != nil) {
         
         show.type = [record objectForKey:@"type"];
-        show.comment = [record objectForKey:@"comment"];
-        show.success = [record objectForKey:@"success"];
         show.timestamp = [record objectForKey:@"timestamp"];
         
     }

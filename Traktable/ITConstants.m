@@ -23,4 +23,17 @@
             stringByAppendingPathComponent:appName];
 }
 
++ (BOOL)firstBoot {
+    
+    BOOL firstBoot = [[NSUserDefaults standardUserDefaults] boolForKey:@"traktable.FirstBoot"];
+
+    if (!firstBoot) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"traktable.FirstBoot"];
+        
+        return YES;
+    }
+    
+    return NO;
+}
+
 @end

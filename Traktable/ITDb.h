@@ -18,7 +18,7 @@
 - (int)lastErrorCode;
 - (BOOL)error;
 
-- (NSString *)getInsertFromDictionary:(NSDictionary *)dict forTable:(NSString *)table;
+- (NSString *)getQueryFromDictionary:(NSDictionary *)dict queryType:(NSString *)type forTable:(NSString *)table;
 
 - (void)executeUpdateUsingQueue:(NSString *)sql arguments:(id)args;
 

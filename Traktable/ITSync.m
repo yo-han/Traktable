@@ -26,20 +26,30 @@
     
     self = [super init];
 	if (self) {
+        
         _queue = dispatch_queue_create("traktable.sync.queue", NULL);
         _extended = NO;
+        
+        // Register an observer for history updates
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateMovieData:) name:kITMovieNeedsUpdateNotification object:nil];
     }
     
     return self;
 }
 
-- (void)syncTrakt {
+- (void)syncTraktExtended {
+    
+    _extended = YES;
     
     /** Sync movies **/
     [self sync:iTunesEVdKMovie extended:self.extended];
     
     /** Sync series **/
     [self sync:iTunesEVdKTVShow extended:self.extended];
+    
+    /** Sync trakt history **/
+    ITApi *api = [ITApi new];
+    [api historySync];
 }
 
 - (void)sync:(iTunesEVdK)type extended:(BOOL)extended {
@@ -71,7 +81,7 @@
                 continue;
         }
         
-        [db executeUpdateUsingQueue:[db getInsertFromDictionary:argsDict forTable:table] arguments:argsDict];
+        [db executeUpdateUsingQueue:[db getQueryFromDictionary:argsDict queryType:@"INSERT" forTable:table] arguments:argsDict];
         
         NSLog(@"%@",[db lastErrorMessage]);
         
@@ -91,6 +101,11 @@
     }
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kITHistoryNeedsUpdateNotification object:nil];
+}
+
+- (void) updateMovieData:(NSNotification *)notification {
+ 
+    NSLog(@"%@",notification.object);
 }
 
 - (NSDictionary *)getMovieParameters:(NSDictionary *)movie extended:(BOOL)extended {
@@ -134,7 +149,7 @@
 
 - (void)getMoviePoster:(NSNumber *)movieId poster:(NSString *)url {
     
-    ITTVShowPoster *poster = [ITTVShowPoster new];
+    ITMoviePoster *poster = [ITMoviePoster new];
     
     [poster poster:movieId withUrl:url size:ITMoviePosterSizeSmall];
     [poster poster:movieId withUrl:url size:ITMoviePosterSizeMedium];
@@ -145,7 +160,7 @@
 
 - (void)getTVShowPoster:(NSNumber *)showId poster:(NSString *)url {
     
-    ITMoviePoster *poster = [ITMoviePoster new];
+    ITTVShowPoster *poster = [ITTVShowPoster new];
     
     [poster poster:showId withUrl:url size:ITTVShowPosterSizeSmall];
     [poster poster:showId withUrl:url size:ITTVShowPosterSizeMedium];
@@ -153,5 +168,6 @@
     // NOTE: No originals till we really need it. The image cache becomes very large very quicly with all these big images.
     //[poster poster:showId withUrl:url size:ITTVShowPosterSizeOriginal];
 }
+
 
 @end

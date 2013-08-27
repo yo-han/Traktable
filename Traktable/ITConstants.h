@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 #define kITHistoryNeedsUpdateNotification @"ITHistoryNeedsUpdate"
+#define kITMovieNeedsUpdateNotification @"ITSyncUpdateMovie"
+#define kITTVShowNeedsUpdateNotification @"ITSyncUpdateShow"
 
 @interface ITConstants : NSObject
 
@@ -18,5 +20,7 @@ typedef enum ITSourceListIdentifier : NSUInteger {
 } ITSourceListIdentifier;
 
 + (NSString *)applicationSupportFolder;
+
++ (BOOL)firstBoot;
 
 @end

@@ -10,6 +10,6 @@
 
 @interface ITSync : NSObject
 
-- (void)syncTrakt;
+- (void)syncTraktExtended;
 
 @end

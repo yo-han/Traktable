@@ -29,8 +29,6 @@
 
 // History items
 @property (nonatomic, strong) NSString *type;
-@property (nonatomic, strong) NSString *success;
-@property (nonatomic, strong) NSString *comment;
 @property (nonatomic, strong) NSString *timestamp;
 
 +(ITTVShow *)showWithCurrentTunesTrack:(iTunesTrack *)iTunesTrack;

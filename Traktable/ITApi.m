@@ -29,7 +29,6 @@
 - (void)callAPI:(NSString*)apiCall WithParameters:(NSDictionary *)params notification:(NSDictionary *)notification;
 - (id)callURLSync:(NSString *)requestUrl withParameters:(NSDictionary *)params;
 - (void)callURL:(NSString *)requestUrl withParameters:(NSDictionary *)params completionHandler:(void (^)(id, NSError *))completionBlock;
-- (void)callAPISucces:(NSDictionary *)notification;
 
 @end
 
@@ -227,29 +226,25 @@
             NSLog(@"Repsonse is not an NSDictionary");
             return;
         }
-        
-        if([[notification objectForKey:@"state"] isEqual: @"scrobble"])
-            [self updateHistory:response parameters:params];
-        
-        if ([[response objectForKey:@"status"] isEqualToString:@"success"]){
+                
+        if ([[response objectForKey:@"status"] isEqualToString:@"success"] && [response objectForKey:@"error"] == nil){
             
             NSLog(@"Succes: %@",[response objectForKey:@"message"]);
+    
+            if([[notification objectForKey:@"state"] isEqual: @"scrobble"])
+                [ITNotification showNotification:[NSString stringWithFormat:@"Scrobbled: %@", [notification objectForKey:@"video"]]];
             
-            if(notification != nil)
-                [self callAPISucces:notification];
+            [self historySync];
+            
         } else {
+            
+            [self traktError:response];
             
             NSLog(@"%@ got error: %@", apiCall, response);
         }
         
         if (err) NSLog(@"Error: %@",[err description]);
     }];
-}
-
-- (void)callAPISucces:(NSDictionary *)notification {
-    
-    if([[notification objectForKey:@"state"] isEqual: @"scrobble"])
-        [ITNotification showNotification:[NSString stringWithFormat:@"Scrobbled: %@", [notification objectForKey:@"video"]]];
 }
 
 - (BOOL)testAccount {
@@ -361,34 +356,100 @@
     return nil;
 }
 
-- (void)updateHistory:(NSDictionary *)update parameters:(NSDictionary *)params {
-      
-    ITDb *db = [ITDb new];
+- (void)historySync {
+   
+    NSInteger lastSync = [[NSUserDefaults standardUserDefaults] boolForKey:@"traktable.ITHistorySyncLast"];
+        
+    NSString *url = [NSString stringWithFormat:@"%@/activity/user.json/%@/%@/movie,show,episode/scrobble,seen/%ld?min=1", kApiUrl, [self apiKey], self.username, (long)lastSync];
 
-    if([update objectForKey:@"show"] != nil) {
-        NSLog(@"%@",update);
-        NSDictionary *argsDict = [NSDictionary dictionaryWithObjectsAndKeys:[[update objectForKey:@"show"] objectForKey:@"tvdb_id"], @"tvdb_id", [[update objectForKey:@"show"] objectForKey:@"imdb_id" ], @"imdb_id", @"show", @"type", [update objectForKey:@"status"], @"success", [update objectForKey:@"season"], @"season", [[update objectForKey:@"episode"] objectForKey:@"number"], @"episode", [[update objectForKey:@"episode"] objectForKey:@"title"], @"episodeName", nil];
+    NSDictionary* headers = [NSDictionary dictionaryWithObjectsAndKeys:@"application/json", @"accept", nil];
+    
+    HttpJsonResponse* response = [[Unirest get:^(SimpleRequest* request) {
+        [request setUrl:url];
+        [request setHeaders:headers];
+    }] asJson];
+    
+    JsonNode* body = [response body];
+    
+    id responseObject = [body JSONObject];
+    
+    if([responseObject isKindOfClass:[NSDictionary class]]) {
         
-        [db executeUpdateUsingQueue:@"INSERT INTO history (tvdb_id, imdb_id, type, success, timestamp, season, episode, episodeName) VALUES (:tvdb_id, :imdb_id, :type, :success, datetime('now'), :season, :episode, :episodeName)" arguments:argsDict];
-        //NSLog(@"%@",[db lastErrorMessage]);
+        //[[NSUserDefaults standardUserDefaults] setInteger:lastSync forKey:@"traktable.ITHistorySyncLast"];
         
-    } else if([update objectForKey:@"movie"] != nil) {
-        
-        NSDictionary *argsDict = [NSDictionary dictionaryWithObjectsAndKeys:[[update objectForKey:@"movie"] objectForKey:@"tmdb_id" ], @"tmdb_id", [[update objectForKey:@"movie"] objectForKey:@"imdb_id" ], @"imdb_id", @"movie", @"type", [update objectForKey:@"status"], @"success", nil];
-        
-        [db executeUpdateUsingQueue:@"INSERT INTO history (tmdb_id, imdb_id, type, success, timestamp) VALUES (:tmdb_id, :imdb_id, :type, :success, datetime('now'))" arguments:argsDict];
-        //NSLog(@"%@",[db lastErrorMessage]);
-        
-    } else if([update objectForKey:@"error"] != nil) {
-        
-        NSDictionary *argsDict = [NSDictionary dictionaryWithObjectsAndKeys:[update objectForKey:@"error"], @"description", nil];
-        
-        [db executeUpdateUsingQueue:@"INSERT INTO errors (description, timestamp) VALUES (:description, datetime('now'))" arguments:argsDict];
-        
-        //NSLog(@"%@",[db lastErrorMessage]);
+        for(NSDictionary *activity in [responseObject objectForKey:@"activity"]) {
+            
+            [self updateHistory:activity parameters:nil];
+        }
     }
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kITHistoryNeedsUpdateNotification object:nil];
+}
+
+- (void)updateHistory:(NSDictionary *)update parameters:(NSDictionary *)params {
+      
+    ITDb *db = [ITDb new];
+    NSString *uid = [self sha1Hash:[update description]];
+    
+    if([update objectForKey:@"type"] != nil && [[update objectForKey:@"type"] isEqualToString:@"episode"]) {
+        
+        NSDate *timestamp = [NSDate dateWithTimeIntervalSince1970:[[update objectForKey:@"timestamp"] doubleValue]];
+        NSDictionary *argsDict;
+        
+        if([update objectForKey:@"episode"] != nil) {
+
+             argsDict = [NSDictionary dictionaryWithObjectsAndKeys:uid, @"uid",[[update objectForKey:@"show"] objectForKey:@"tvdb_id"], @"tvdb_id", [[update objectForKey:@"show"] objectForKey:@"imdb_id" ], @"imdb_id", @"show", @"type",[update objectForKey:@"action"], @"action", [[update objectForKey:@"episode"] objectForKey:@"season"], @"season", [[update objectForKey:@"episode"] objectForKey:@"number"], @"episode", [timestamp descriptionWithCalendarFormat:@"%Y-%m-%d %H:%M" timeZone:nil locale:nil], @"timestamp", nil];
+            
+            NSString *qry = [db getQueryFromDictionary:argsDict queryType:@"REPLACE" forTable:@"history"];
+            
+            [db executeUpdateUsingQueue:qry arguments:argsDict];
+            
+            //NSLog(@"%@",[db lastErrorMessage]);
+        
+        } else if([update objectForKey:@"episodes"] != nil) {
+            
+            for(NSDictionary *episode in [update objectForKey:@"episodes"]) {
+                
+                uid = [self sha1Hash:[NSString stringWithFormat:@"%@-%@",uid,episode]];
+                
+                argsDict = [NSDictionary dictionaryWithObjectsAndKeys:uid, @"uid",[[update objectForKey:@"show"] objectForKey:@"tvdb_id"], @"tvdb_id", [[update objectForKey:@"show"] objectForKey:@"imdb_id" ], @"imdb_id", @"show", @"type",[update objectForKey:@"action"], @"action", [episode objectForKey:@"season"], @"season", [episode objectForKey:@"number"], @"episode", [timestamp descriptionWithCalendarFormat:@"%Y-%m-%d %H:%M" timeZone:nil locale:nil], @"timestamp", nil];
+                
+                NSString *qry = [db getQueryFromDictionary:argsDict queryType:@"REPLACE" forTable:@"history"];
+                
+                [db executeUpdateUsingQueue:qry arguments:argsDict];
+                
+                //NSLog(@"%@",[db lastErrorMessage]);
+            }
+        }    
+        
+    } else if([update objectForKey:@"movie"] != nil) {
+        
+        NSDate *timestamp = [NSDate dateWithTimeIntervalSince1970:[[update objectForKey:@"timestamp"] doubleValue]];
+        
+        NSDictionary *argsDict = [NSDictionary dictionaryWithObjectsAndKeys:uid, @"uid",[[update objectForKey:@"movie"] objectForKey:@"tmdb_id" ], @"tmdb_id", [[update objectForKey:@"movie"] objectForKey:@"imdb_id" ], @"imdb_id", @"movie", @"type", [update objectForKey:@"action"], @"action", [timestamp descriptionWithCalendarFormat:@"%Y-%m-%d %H:%M" timeZone:nil locale:nil], @"timestamp", nil];
+        
+        NSString *qry = [db getQueryFromDictionary:argsDict queryType:@"REPLACE" forTable:@"history"];
+        
+        [db executeUpdateUsingQueue:qry arguments:argsDict];
+        
+        //NSLog(@"%@",[db lastErrorMessage]);
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:kITMovieNeedsUpdateNotification object:self userInfo:argsDict];
+        
+    } 
+}
+
+- (void)traktError:(NSDictionary *)response {
+    
+    ITDb *db = [ITDb new];
+    
+    NSDictionary *argsDict = [NSDictionary dictionaryWithObjectsAndKeys:[response objectForKey:@"error"], @"description", [[NSDate date] descriptionWithCalendarFormat:@"%Y-%m-%d %H:%M" timeZone:nil locale:nil], @"timestamp", nil];
+    
+    NSString *qry = [db getQueryFromDictionary:argsDict queryType:@"INSERT" forTable:@"errors"];
+    
+    [db executeUpdateUsingQueue:qry arguments:argsDict];
+    
+    //NSLog(@"%@",[db lastErrorMessage]);
 }
 
 @end

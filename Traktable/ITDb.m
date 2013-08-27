@@ -35,9 +35,9 @@ static int dbVersion = 1;
         _dbFilePath = [[ITConstants applicationSupportFolder] stringByAppendingPathComponent:dbFile];
         
         _dbQueue = [FMDatabaseQueue databaseQueueWithPath:self.dbFilePath];
-        
-        return self;
     }
+    
+    return self;
 }
 
 - (NSString *)getDbFilePath {
@@ -65,7 +65,7 @@ static int dbVersion = 1;
     return [NSNumber numberWithInt:self.lastInsertId];
 }
 
-- (NSString *)getInsertFromDictionary:(NSDictionary *)dict forTable:(NSString *)table {
+- (NSString *)getQueryFromDictionary:(NSDictionary *)dict queryType:(NSString *)type forTable:(NSString *)table {
     
     NSMutableArray *cols = [NSMutableArray array];
     NSMutableArray *bind = [NSMutableArray array];
@@ -79,7 +79,7 @@ static int dbVersion = 1;
     NSString *columnNames = [cols componentsJoinedByString:@","];
     NSString *bindValues = [bind componentsJoinedByString:@","];
     
-    NSString *qry = [NSString stringWithFormat:@"INSERT INTO %@ (%@) VALUES (%@)", table, columnNames, bindValues];
+    NSString *qry = [NSString stringWithFormat:@"%@ INTO %@ (%@) VALUES (%@)", type, table, columnNames, bindValues];
     
     return qry;
 }
@@ -183,7 +183,7 @@ static int dbVersion = 1;
             
             [db executeUpdate:@"CREATE UNIQUE INDEX \"uid_show\" ON \"tvshows\" (\"tvdb_id\");"];
             
-            [db executeUpdate:@"CREATE TABLE \"history\" (\"tvdb_id\" INTEGER,\"tmdb_id\" INTEGER,\"imdb_id\" TEXT,\"type\" TEXT,\"success\" TEXT,\"comment\" TEXT,\"timestamp\" DATETIME,\"season\" INTEGER,\"episode\" INTEGER,\"episodeName\" TEXT);"];
+            [db executeUpdate:@"CREATE TABLE \"history\" (\"uid\" TEXT PRIMARY KEY,\"tvdb_id\" INTEGER,\"tmdb_id\" INTEGER,\"imdb_id\" TEXT,\"type\" TEXT,\"action\" TEXT,\"timestamp\" DATETIME,\"season\" INTEGER,\"episode\" INTEGER);"];
             
             [db executeUpdate:@"CREATE TABLE \"errors\" (\"errorId\" INTEGER PRIMARY KEY AUTOINCREMENT,\"description\" TEXT,\"timestamp\" DATETIME);"];
             
