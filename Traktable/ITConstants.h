@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+#define kITHistoryTableReloadNotification @"ITHistoryTableReload"
 #define kITHistoryNeedsUpdateNotification @"ITHistoryNeedsUpdate"
 #define kITMovieNeedsUpdateNotification @"ITSyncUpdateMovie"
 #define kITTVShowNeedsUpdateNotification @"ITSyncUpdateShow"

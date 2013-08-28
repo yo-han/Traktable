@@ -105,18 +105,39 @@
 
 - (void) updateMovieData:(NSNotification *)notification {
  
-    NSLog(@"%@",notification.object);
+    ITDb *db = [ITDb new];
+    ITApi *api = [ITApi new];
+    
+    NSDictionary *item = notification.userInfo;
+    NSNumber *videoId = [item objectForKey:@"tmdb_id"];
+    NSString *imdbId = [item objectForKey:@"imdb_id"];
+    
+    NSDictionary *result = [db executeAndGetOneResult:@"SELECT extended FROM movies WHERE tmdb_id = :id OR imdb_id = :imdb" arguments:[NSArray arrayWithObjects:videoId,imdbId, nil]];
+
+    if(result == nil || [[result objectForKey:@"extended"] isKindOfClass:[NSNull class]] || [[result objectForKey:@"extended"] intValue] == 1) {
+
+        NSDictionary *movie = [api getSummary:@"movie" videoId:videoId];
+        NSDictionary *argsDict = [self getMovieParameters:movie extended:YES];
+
+        [db executeUpdateUsingQueue:[db getQueryFromDictionary:argsDict queryType:@"REPLACE" forTable:@"movies"] arguments:argsDict];
+        
+        //NSLog(@"%@",[db lastErrorMessage]);
+    }
 }
 
 - (NSDictionary *)getMovieParameters:(NSDictionary *)movie extended:(BOOL)extended {
     
     NSString *posterUrl = [[movie objectForKey:@"images"] objectForKey:@"poster"];
     NSString *genres = [[movie objectForKey:@"genres"] componentsJoinedByString:@","];
+    NSString *plays = [movie objectForKey:@"plays"];
     NSDictionary *argsDict;
+    
+    if(plays == nil)
+        plays = @"0";
     
     if(extended) {
         
-        argsDict = [NSDictionary dictionaryWithObjectsAndKeys:[movie objectForKey:@"tmdb_id"], @"tmdb_id", [movie objectForKey:@"imdb_id"],@"imdb_id",[movie objectForKey:@"year"],@"year", posterUrl,@"poster",[movie objectForKey:@"plays"],@"traktPlays",[movie objectForKey:@"released"],@"released",[movie objectForKey:@"runtime"],@"runtime",[movie objectForKey:@"title"],@"title",[movie objectForKey:@"overview"],@"overview",[movie objectForKey:@"tagline"],@"tagline",[movie objectForKey:@"url"],@"traktUrl",[movie objectForKey:@"trailer"],@"trailer",genres,@"genres", nil];
+        argsDict = [NSDictionary dictionaryWithObjectsAndKeys:[movie objectForKey:@"tmdb_id"], @"tmdb_id", [movie objectForKey:@"imdb_id"],@"imdb_id",@"1",@"extended",[movie objectForKey:@"year"],@"year", posterUrl,@"poster",plays,@"traktPlays",[movie objectForKey:@"released"],@"released",[movie objectForKey:@"runtime"],@"runtime",[movie objectForKey:@"title"],@"title",[movie objectForKey:@"overview"],@"overview",[movie objectForKey:@"tagline"],@"tagline",[movie objectForKey:@"url"],@"traktUrl",[movie objectForKey:@"trailer"],@"trailer",genres,@"genres", nil];
         
     } else {
         
@@ -137,7 +158,7 @@
     
     if(extended) {
         
-        argsDict = [NSDictionary dictionaryWithObjectsAndKeys:[serie objectForKey:@"tvdb_id"], @"tvdb_id", [serie objectForKey:@"tvrage_id"],@"tvrage_id", [serie objectForKey:@"imdb_id"],@"imdb_id",[serie objectForKey:@"year"],@"year", posterUrl,@"poster",seasons,@"seasons",episodes,@"episodes",[serie objectForKey:@"first_aired"],@"firstAired",[serie objectForKey:@"runtime"],@"runtime",[serie objectForKey:@"title"],@"title",[serie objectForKey:@"overview"],@"overview",[serie objectForKey:@"status"],@"status",[serie objectForKey:@"url"],@"traktUrl",[serie objectForKey:@"network"],@"network",[serie objectForKey:@"country"],@"country",[serie objectForKey:@"certification"],@"rating",[serie objectForKey:@"air_time"],@"airTime",[serie objectForKey:@"air_day"],@"airDay",genres,@"genres", nil];
+        argsDict = [NSDictionary dictionaryWithObjectsAndKeys:[serie objectForKey:@"tvdb_id"], @"tvdb_id", [serie objectForKey:@"tvrage_id"],@"tvrage_id", [serie objectForKey:@"imdb_id"],@"imdb_id",@"1",@"extended",[serie objectForKey:@"year"],@"year", posterUrl,@"poster",seasons,@"seasons",episodes,@"episodes",[serie objectForKey:@"first_aired"],@"firstAired",[serie objectForKey:@"runtime"],@"runtime",[serie objectForKey:@"title"],@"title",[serie objectForKey:@"overview"],@"overview",[serie objectForKey:@"status"],@"status",[serie objectForKey:@"url"],@"traktUrl",[serie objectForKey:@"network"],@"network",[serie objectForKey:@"country"],@"country",[serie objectForKey:@"certification"],@"rating",[serie objectForKey:@"air_time"],@"airTime",[serie objectForKey:@"air_day"],@"airDay",genres,@"genres", nil];
         
     } else {
         

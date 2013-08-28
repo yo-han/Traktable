@@ -324,6 +324,27 @@
     [self callAPI:url WithParameters:params notification:nil];
 }
 
+- (NSDictionary *)getSummary:(NSString *)videoType videoId:(NSNumber *)videoId {
+     
+    NSString *url = [NSString stringWithFormat:@"%@/%@/summary.json/%@/%@", kApiUrl, videoType, [self apiKey], videoId];
+
+    NSDictionary* headers = [NSDictionary dictionaryWithObjectsAndKeys:@"application/json", @"accept", nil];
+    
+    HttpJsonResponse* response = [[Unirest get:^(SimpleRequest* request) {
+        [request setUrl:url];
+        [request setHeaders:headers];
+    }] asJson];
+    
+    JsonNode* body = [response body];
+    
+    id responseObject = [body JSONObject];
+    
+    if([responseObject isKindOfClass:[NSDictionary class]])
+        return (NSDictionary *) responseObject;
+    
+    return nil;
+}
+
 - (NSArray *)watchedSync:(iTunesEVdK)videoType extended:(NSString *)ext {
     
     NSString *type;

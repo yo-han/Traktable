@@ -27,6 +27,8 @@
 - (void)library:(NSArray *)videos type:(iTunesEVdK)videoType video:(id)aVideo;
 - (void)updateHistory:(NSDictionary *)update parameters:(NSDictionary *)params;
 
+- (NSDictionary *)getSummary:(NSString *)videoType videoId:(NSNumber *)videoId;
+
 - (NSArray *)watchedSync:(iTunesEVdK)videoType extended:(NSString *)ext;
 - (void)historySync;
 

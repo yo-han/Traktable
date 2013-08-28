@@ -41,9 +41,7 @@
             
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
                 
-                [poster poster:movie.movieId withUrl:movie.image size:ITMoviePosterSizeMedium];
-                [[NSNotificationCenter defaultCenter] postNotificationName:kITHistoryNeedsUpdateNotification object:nil];
-                
+                [poster poster:movie.movieId withUrl:movie.image size:ITMoviePosterSizeMedium];                
             });
         }
         
@@ -61,8 +59,6 @@
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
             
                 [poster poster:show.showId withUrl:show.poster size:ITTVShowPosterSizeMedium];
-                [[NSNotificationCenter defaultCenter] postNotificationName:kITHistoryNeedsUpdateNotification object:nil];
-            
             });
         }
     }

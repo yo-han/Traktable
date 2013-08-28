@@ -23,7 +23,6 @@ typedef NS_ENUM(NSUInteger, ITTableViewCellType) {
 @property (nonatomic, strong) NSMutableArray *items;
 @property (nonatomic, strong) ITHistory *history;
 
-
 @property (nonatomic, assign) ITTableViewCellType tableViewCellType;
 @property (nonatomic, assign, readwrite) ITSourceListIdentifier tableType;
 
@@ -36,12 +35,15 @@ typedef NS_ENUM(NSUInteger, ITTableViewCellType) {
 - (void)setup {
     
     _tableViewCellType = ITTableViewMovieHistoryCell;
-
+    
     if(self.items == nil)
         _items = [NSMutableArray array];
 
     // Register an observer for history updates
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:kITHistoryNeedsUpdateNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableView) name:kITHistoryTableReloadNotification object:nil];
+    
 }
 
 - (ITHistory *)getHistory {
@@ -70,12 +72,16 @@ typedef NS_ENUM(NSUInteger, ITTableViewCellType) {
             break;
     }
 
-    [self.tableView reloadData];
+    [self reloadTableView];
 }
 
 - (void)reloadTableData {
 
     [self refreshTableData:self.tableType];
+}
+
+- (void)reloadTableView {
+    [self.tableView reloadData];
 }
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
@@ -94,15 +100,14 @@ typedef NS_ENUM(NSUInteger, ITTableViewCellType) {
     
     if(entry.poster != nil)
         [cellView.imageView setImage:entry.poster];
-        
+    else
+        [cellView.imageView setImage:[NSImage imageNamed:@"movies.png"]];
+    
     return cellView;
 }
 
-- (NSTableRowView *)tableView:(NSTableView *)tableView rowViewForRow:(NSInteger)row {
-
-    ITTableRowView *result = [[ITTableRowView alloc] init];
-    result.objectValue = [self.items objectAtIndex:row];
-    return result;
+- (void)tableView:(NSTableView *)tableView didRemoveRowView:(NSTableRowView *)rowView forRow:(NSInteger)row {
+    
 }
 
 - (ITHistory *)_entryForRow:(NSInteger)row {

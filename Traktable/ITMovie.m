@@ -38,7 +38,7 @@
     movie.name = [record objectForKey:@"title"];
     movie.image = [record objectForKey:@"poster"];
     movie.playCount = [record objectForKey:@"traktPlays"];
-    
+
     if([record objectForKey:@"timestamp"] != nil) {
         
         movie.type = [record objectForKey:@"type"];
