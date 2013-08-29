@@ -32,6 +32,8 @@
         
         // Register an observer for history updates
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateMovieData:) name:kITMovieNeedsUpdateNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateTVShowData:) name:kITTVShowNeedsUpdateNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateEpisodeData:) name:kITTVShowEpisodeNeedsUpdateNotification object:nil];        
     }
     
     return self;
@@ -81,9 +83,9 @@
                 continue;
         }
         
-        [db executeUpdateUsingQueue:[db getQueryFromDictionary:argsDict queryType:@"INSERT" forTable:table] arguments:argsDict];
+        [db executeUpdateUsingQueue:[db getInsertQueryFromDictionary:argsDict queryType:@"INSERT" forTable:table] arguments:argsDict];
         
-        NSLog(@"%@",[db lastErrorMessage]);
+        //NSLog(@"%@",[db lastErrorMessage]);
         
         NSNumber *lastId = [db lastInsertRowId];
         
@@ -112,14 +114,76 @@
     NSNumber *videoId = [item objectForKey:@"tmdb_id"];
     NSString *imdbId = [item objectForKey:@"imdb_id"];
     
-    NSDictionary *result = [db executeAndGetOneResult:@"SELECT extended FROM movies WHERE tmdb_id = :id OR imdb_id = :imdb" arguments:[NSArray arrayWithObjects:videoId,imdbId, nil]];
+    NSDictionary *result = [db executeAndGetOneResult:@"SELECT extended, movieId FROM movies WHERE tmdb_id = :id OR imdb_id = :imdb" arguments:[NSArray arrayWithObjects:videoId,imdbId, nil]];
 
-    if(result == nil || [[result objectForKey:@"extended"] isKindOfClass:[NSNull class]] || [[result objectForKey:@"extended"] intValue] == 1) {
+    if(result == nil || [[result objectForKey:@"extended"] isKindOfClass:[NSNull class]] || [[result objectForKey:@"extended"] intValue] == 0) {
 
         NSDictionary *movie = [api getSummary:@"movie" videoId:videoId];
         NSDictionary *argsDict = [self getMovieParameters:movie extended:YES];
+        NSMutableDictionary *argsDictWhere = [NSMutableDictionary dictionaryWithDictionary:argsDict];
+        
+        if(result == nil)
+            [db executeUpdateUsingQueue:[db getInsertQueryFromDictionary:argsDict queryType:@"REPLACE" forTable:@"movies"] arguments:argsDict];
+        else {
+            [argsDictWhere setObject:[result objectForKey:@"movieId"] forKey:@"where"];
+            [db executeUpdateUsingQueue:[db getUpdateQueryFromDictionary:argsDict forTable:@"movies" whereCol:@"movieId"] arguments:argsDictWhere];
+        }
+        //NSLog(@"%@",[db lastErrorMessage]);
+    }
+}
 
-        [db executeUpdateUsingQueue:[db getQueryFromDictionary:argsDict queryType:@"REPLACE" forTable:@"movies"] arguments:argsDict];
+- (void) updateTVShowData:(NSNotification *)notification {
+    
+    ITDb *db = [ITDb new];
+    ITApi *api = [ITApi new];
+    
+    NSDictionary *item = notification.userInfo;
+    NSNumber *videoId = [item objectForKey:@"tvdb_id"];
+    NSString *imdbId = [item objectForKey:@"imdb_id"];
+
+    NSDictionary *result = [db executeAndGetOneResult:@"SELECT extended,showId FROM tvshows WHERE (tvdb_id = :id OR imdb_id = :imdb)" arguments:[NSArray arrayWithObjects:videoId,imdbId, nil]];
+    
+    if(result == nil || [[result objectForKey:@"extended"] isKindOfClass:[NSNull class]] || [[result objectForKey:@"extended"] intValue] == 0) {
+        
+        NSDictionary *show = [api getSummary:@"show" videoId:videoId];
+        NSDictionary *argsDict = [self getTVShowParameters:show extended:YES];
+        NSMutableDictionary *argsDictWhere = [NSMutableDictionary dictionaryWithDictionary:argsDict];
+        
+        if(result == nil)
+            [db executeUpdateUsingQueue:[db getInsertQueryFromDictionary:argsDict queryType:@"REPLACE" forTable:@"tvshows"] arguments:argsDict];
+        else {
+            [argsDictWhere setObject:[result objectForKey:@"showId"] forKey:@"where"];
+            [db executeUpdateUsingQueue:[db getUpdateQueryFromDictionary:argsDict forTable:@"tvshows" whereCol:@"showId"] arguments:argsDictWhere];
+        }
+        
+        //NSLog(@"%@",[db lastErrorMessage]);
+    }
+}
+
+- (void) updateEpisodeData:(NSNotification *)notification {
+    
+    ITDb *db = [ITDb new];
+    ITApi *api = [ITApi new];
+    
+    NSDictionary *item = notification.userInfo;
+    NSNumber *videoId = [item objectForKey:@"tvdb_id"];
+    NSNumber *episode = [item objectForKey:@"episode"];
+    NSNumber *season = [item objectForKey:@"season"];
+
+    NSDictionary *result = [db executeAndGetOneResult:@"SELECT episodeId FROM episodes WHERE showTvdb_id = :id AND season = :season AND episode = :episode" arguments:[NSArray arrayWithObjects:videoId, season, episode, nil]];
+
+    if(result == nil) {
+        
+        NSDictionary *show = [api getSummary:@"show/episode" videoId:videoId season:season episode:episode];
+        NSDictionary *argsDict = [self getEpisodeParameters:show];
+        NSMutableDictionary *argsDictWhere = [NSMutableDictionary dictionaryWithDictionary:argsDict];
+        
+        if(result == nil)
+            [db executeUpdateUsingQueue:[db getInsertQueryFromDictionary:argsDict queryType:@"REPLACE" forTable:@"episodes"] arguments:argsDict];
+        else {
+            [argsDictWhere setObject:[result objectForKey:@"episodeId"] forKey:@"where"];
+            [db executeUpdateUsingQueue:[db getUpdateQueryFromDictionary:argsDict forTable:@"episodes" whereCol:@"episodeId"] arguments:argsDictWhere];
+        }
         
         //NSLog(@"%@",[db lastErrorMessage]);
     }
@@ -141,7 +205,7 @@
         
     } else {
         
-        argsDict = [NSDictionary dictionaryWithObjectsAndKeys:[movie objectForKey:@"tmdb_id"], @"tmdb_id", [movie objectForKey:@"imdb_id"],@"imdb_id",[movie objectForKey:@"year"],@"year", posterUrl,@"poster",[movie objectForKey:@"plays"],@"traktPlays",[movie objectForKey:@"title"],@"title",genres,@"genres",[movie objectForKey:@"url"],@"traktUrl", nil];
+        argsDict = [NSDictionary dictionaryWithObjectsAndKeys:[movie objectForKey:@"tmdb_id"], @"tmdb_id", [movie objectForKey:@"imdb_id"],@"imdb_id",[movie objectForKey:@"year"],@"year", posterUrl,@"poster",plays,@"traktPlays",[movie objectForKey:@"title"],@"title",genres,@"genres",[movie objectForKey:@"url"],@"traktUrl", nil];
     }
     
     return argsDict;
@@ -150,12 +214,11 @@
 - (NSDictionary *)getTVShowParameters:(NSDictionary *)serie extended:(BOOL)extended {
     
     NSString *posterUrl = [[serie objectForKey:@"images"] objectForKey:@"poster"];
-    NSInteger seasons = [[[serie objectForKey:@"seasons"] objectAtIndex:0] objectForKey:@"season"];
+    NSString *seasons = [[[serie objectForKey:@"seasons"] objectAtIndex:0] objectForKey:@"season"];
     NSString *episodes = [[[[serie objectForKey:@"seasons"] objectAtIndex:0] objectForKey:@"episodes"] componentsJoinedByString:@","];
     NSString *genres = [[serie objectForKey:@"genres"] componentsJoinedByString:@","];
-    
     NSDictionary *argsDict;
-    
+
     if(extended) {
         
         argsDict = [NSDictionary dictionaryWithObjectsAndKeys:[serie objectForKey:@"tvdb_id"], @"tvdb_id", [serie objectForKey:@"tvrage_id"],@"tvrage_id", [serie objectForKey:@"imdb_id"],@"imdb_id",@"1",@"extended",[serie objectForKey:@"year"],@"year", posterUrl,@"poster",seasons,@"seasons",episodes,@"episodes",[serie objectForKey:@"first_aired"],@"firstAired",[serie objectForKey:@"runtime"],@"runtime",[serie objectForKey:@"title"],@"title",[serie objectForKey:@"overview"],@"overview",[serie objectForKey:@"status"],@"status",[serie objectForKey:@"url"],@"traktUrl",[serie objectForKey:@"network"],@"network",[serie objectForKey:@"country"],@"country",[serie objectForKey:@"certification"],@"rating",[serie objectForKey:@"air_time"],@"airTime",[serie objectForKey:@"air_day"],@"airDay",genres,@"genres", nil];
@@ -165,6 +228,19 @@
         argsDict = [NSDictionary dictionaryWithObjectsAndKeys:[serie objectForKey:@"tvdb_id"], @"tvdb_id", [serie objectForKey:@"tvrage_id"],@"tvrage_id", [serie objectForKey:@"imdb_id"],@"imdb_id",[serie objectForKey:@"year"],@"year", posterUrl,@"poster",seasons,@"seasons",episodes,@"episodes",[serie objectForKey:@"title"],@"title",[serie objectForKey:@"overview"],@"overview",[serie objectForKey:@"status"],@"status",[serie objectForKey:@"url"],@"traktUrl",genres,@"genres", nil];
     }
 
+    return argsDict;
+}
+
+- (NSDictionary *)getEpisodeParameters:(NSDictionary *)showEpisode {
+    
+    NSDictionary *argsDict;
+    NSDictionary *episode = [showEpisode objectForKey:@"episode"];
+    NSDictionary *show = [showEpisode objectForKey:@"show"];
+    
+    NSString *screen = [[episode objectForKey:@"images"] objectForKey:@"screen"];    
+    
+    argsDict = [NSDictionary dictionaryWithObjectsAndKeys:[show objectForKey:@"tvdb_id"], @"showTvdb_id",[episode objectForKey:@"tvdb_id"], @"tvdb_id",[show objectForKey:@"imdb_id"], @"showImdb_id",[episode objectForKey:@"season"], @"season",[episode objectForKey:@"number"], @"episode",screen, @"screenImage",[episode objectForKey:@"overview"], @"overview",[episode objectForKey:@"title"], @"title",[episode objectForKey:@"url"], @"traktUrl", nil];
+    
     return argsDict;
 }
 

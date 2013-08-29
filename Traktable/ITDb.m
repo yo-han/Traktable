@@ -65,7 +65,7 @@ static int dbVersion = 1;
     return [NSNumber numberWithInt:self.lastInsertId];
 }
 
-- (NSString *)getQueryFromDictionary:(NSDictionary *)dict queryType:(NSString *)type forTable:(NSString *)table {
+- (NSString *)getInsertQueryFromDictionary:(NSDictionary *)dict queryType:(NSString *)type forTable:(NSString *)table {
     
     NSMutableArray *cols = [NSMutableArray array];
     NSMutableArray *bind = [NSMutableArray array];
@@ -80,6 +80,24 @@ static int dbVersion = 1;
     NSString *bindValues = [bind componentsJoinedByString:@","];
     
     NSString *qry = [NSString stringWithFormat:@"%@ INTO %@ (%@) VALUES (%@)", type, table, columnNames, bindValues];
+    
+    return qry;
+}
+
+- (NSString *)getUpdateQueryFromDictionary:(NSDictionary *)dict forTable:(NSString *)table whereCol:(NSString *)where {
+    
+    NSMutableArray *cols = [NSMutableArray array];
+    
+    for (id key in dict) {
+        
+        NSString *col = [NSString stringWithFormat:@"%@ = :%@", key, key];
+        [cols addObject:col];
+    }
+    
+    NSString *columnNames = [cols componentsJoinedByString:@","];
+    
+    NSString *qry = [NSString stringWithFormat:@"UPDATE %@ SET %@ WHERE %@ = :where", table, columnNames, where];
+
     
     return qry;
 }
@@ -103,7 +121,7 @@ static int dbVersion = 1;
     NSArray *results = [self executeAndGetResults:sql arguments:args];
     
     if([results count] > 0) {
-        
+       
         NSDictionary *dict = [results objectAtIndex:0];
         
         return dict;
@@ -182,6 +200,10 @@ static int dbVersion = 1;
             [db executeUpdate:@"CREATE TABLE \"tvshows\" (\"showId\" INTEGER PRIMARY KEY AUTOINCREMENT,\"tvdb_id\" INTEGER,\"tvrage_id\" INTEGER,\"imdb_id\" TEXT,\"extended\" INTEGER,\"year\" INTEGER,\"runtime\" INTEGER,\"seasons\" INTEGER,\"episodes\" INTEGER,\"firstAired\" INTEGER,\"title\" TEXT,\"status\" TEXT,\"traktUrl\" TEXT,\"overview\" TEXT,\"network\" TEXT,\"poster\" TEXT,\"genres\" TEXT,\"country\" TEXT,\"rating\" TEXT,\"airTime\" TEXT,\"airDay\" TEXT)"];
             
             [db executeUpdate:@"CREATE UNIQUE INDEX \"uid_show\" ON \"tvshows\" (\"tvdb_id\");"];
+            
+            [db executeUpdate:@"CREATE TABLE \"episodes\" (\"episodeId\" INTEGER PRIMARY KEY AUTOINCREMENT,\"showTvdb_id\" INTEGER,\"tvdb_id\" INTEGER,\"showImdb_id\" TEXT,\"season\" INTEGER,\"episode\" INTEGER,\"screenImage\" TEXT,\"overview\" TEXT,\"title\" TEXT,\"traktUrl\" TEXT);"];
+            
+            [db executeUpdate:@"CREATE UNIQUE INDEX \"uid_episode\" ON \"episodes\" (\"tvdb_id\");"];
             
             [db executeUpdate:@"CREATE TABLE \"history\" (\"uid\" TEXT PRIMARY KEY,\"tvdb_id\" INTEGER,\"tmdb_id\" INTEGER,\"imdb_id\" TEXT,\"type\" TEXT,\"action\" TEXT,\"timestamp\" DATETIME,\"season\" INTEGER,\"episode\" INTEGER);"];
             

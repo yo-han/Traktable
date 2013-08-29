@@ -18,7 +18,8 @@
 - (int)lastErrorCode;
 - (BOOL)error;
 
-- (NSString *)getQueryFromDictionary:(NSDictionary *)dict queryType:(NSString *)type forTable:(NSString *)table;
+- (NSString *)getInsertQueryFromDictionary:(NSDictionary *)dict queryType:(NSString *)type forTable:(NSString *)table;
+- (NSString *)getUpdateQueryFromDictionary:(NSDictionary *)dict forTable:(NSString *)table whereCol:(NSString *)where;
 
 - (void)executeUpdateUsingQueue:(NSString *)sql arguments:(id)args;
 

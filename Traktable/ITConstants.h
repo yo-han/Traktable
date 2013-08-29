@@ -12,6 +12,7 @@
 #define kITHistoryNeedsUpdateNotification @"ITHistoryNeedsUpdate"
 #define kITMovieNeedsUpdateNotification @"ITSyncUpdateMovie"
 #define kITTVShowNeedsUpdateNotification @"ITSyncUpdateShow"
+#define kITTVShowEpisodeNeedsUpdateNotification @"ITSyncUpdateEpisode"
 
 @interface ITConstants : NSObject
 

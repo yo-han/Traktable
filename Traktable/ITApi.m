@@ -325,9 +325,19 @@
 }
 
 - (NSDictionary *)getSummary:(NSString *)videoType videoId:(NSNumber *)videoId {
-     
-    NSString *url = [NSString stringWithFormat:@"%@/%@/summary.json/%@/%@", kApiUrl, videoType, [self apiKey], videoId];
+    
+    return [self getSummary:videoType videoId:videoId season:nil episode:nil];
+}
 
+- (NSDictionary *)getSummary:(NSString *)videoType videoId:(NSNumber *)videoId season:(NSNumber *)seasonNumber episode:(NSNumber *)episodeNumber {
+    
+    NSString *url;
+    
+    if(!seasonNumber)
+        url = [NSString stringWithFormat:@"%@/%@/summary.json/%@/%@", kApiUrl, videoType, [self apiKey], videoId];
+    else
+       url = [NSString stringWithFormat:@"%@/%@/summary.json/%@/%@/%@/%@", kApiUrl, videoType, [self apiKey], videoId, seasonNumber, episodeNumber];
+    
     NSDictionary* headers = [NSDictionary dictionaryWithObjectsAndKeys:@"application/json", @"accept", nil];
     
     HttpJsonResponse* response = [[Unirest get:^(SimpleRequest* request) {
@@ -421,11 +431,13 @@
 
              argsDict = [NSDictionary dictionaryWithObjectsAndKeys:uid, @"uid",[[update objectForKey:@"show"] objectForKey:@"tvdb_id"], @"tvdb_id", [[update objectForKey:@"show"] objectForKey:@"imdb_id" ], @"imdb_id", @"show", @"type",[update objectForKey:@"action"], @"action", [[update objectForKey:@"episode"] objectForKey:@"season"], @"season", [[update objectForKey:@"episode"] objectForKey:@"number"], @"episode", [timestamp descriptionWithCalendarFormat:@"%Y-%m-%d %H:%M" timeZone:nil locale:nil], @"timestamp", nil];
             
-            NSString *qry = [db getQueryFromDictionary:argsDict queryType:@"REPLACE" forTable:@"history"];
+            NSString *qry = [db getInsertQueryFromDictionary:argsDict queryType:@"REPLACE" forTable:@"history"];
             
             [db executeUpdateUsingQueue:qry arguments:argsDict];
             
             //NSLog(@"%@",[db lastErrorMessage]);
+
+            [[NSNotificationCenter defaultCenter] postNotificationName:kITTVShowNeedsUpdateNotification object:self userInfo:argsDict];
         
         } else if([update objectForKey:@"episodes"] != nil) {
             
@@ -435,11 +447,13 @@
                 
                 argsDict = [NSDictionary dictionaryWithObjectsAndKeys:uid, @"uid",[[update objectForKey:@"show"] objectForKey:@"tvdb_id"], @"tvdb_id", [[update objectForKey:@"show"] objectForKey:@"imdb_id" ], @"imdb_id", @"show", @"type",[update objectForKey:@"action"], @"action", [episode objectForKey:@"season"], @"season", [episode objectForKey:@"number"], @"episode", [timestamp descriptionWithCalendarFormat:@"%Y-%m-%d %H:%M" timeZone:nil locale:nil], @"timestamp", nil];
                 
-                NSString *qry = [db getQueryFromDictionary:argsDict queryType:@"REPLACE" forTable:@"history"];
+                NSString *qry = [db getInsertQueryFromDictionary:argsDict queryType:@"REPLACE" forTable:@"history"];
                 
                 [db executeUpdateUsingQueue:qry arguments:argsDict];
                 
                 //NSLog(@"%@",[db lastErrorMessage]);
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:kITTVShowEpisodeNeedsUpdateNotification object:self userInfo:argsDict];
             }
         }    
         
@@ -449,7 +463,7 @@
         
         NSDictionary *argsDict = [NSDictionary dictionaryWithObjectsAndKeys:uid, @"uid",[[update objectForKey:@"movie"] objectForKey:@"tmdb_id" ], @"tmdb_id", [[update objectForKey:@"movie"] objectForKey:@"imdb_id" ], @"imdb_id", @"movie", @"type", [update objectForKey:@"action"], @"action", [timestamp descriptionWithCalendarFormat:@"%Y-%m-%d %H:%M" timeZone:nil locale:nil], @"timestamp", nil];
         
-        NSString *qry = [db getQueryFromDictionary:argsDict queryType:@"REPLACE" forTable:@"history"];
+        NSString *qry = [db getInsertQueryFromDictionary:argsDict queryType:@"REPLACE" forTable:@"history"];
         
         [db executeUpdateUsingQueue:qry arguments:argsDict];
         
@@ -466,7 +480,7 @@
     
     NSDictionary *argsDict = [NSDictionary dictionaryWithObjectsAndKeys:[response objectForKey:@"error"], @"description", [[NSDate date] descriptionWithCalendarFormat:@"%Y-%m-%d %H:%M" timeZone:nil locale:nil], @"timestamp", nil];
     
-    NSString *qry = [db getQueryFromDictionary:argsDict queryType:@"INSERT" forTable:@"errors"];
+    NSString *qry = [db getInsertQueryFromDictionary:argsDict queryType:@"INSERT" forTable:@"errors"];
     
     [db executeUpdateUsingQueue:qry arguments:argsDict];
     
