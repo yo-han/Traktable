@@ -33,9 +33,9 @@
 		0437204316CEF823003B8AB6 /* menuicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0437204216CEF823003B8AB6 /* menuicon.png */; };
 		043942A817D00499009C160F /* clock_32x32.png in Resources */ = {isa = PBXBuildFile; fileRef = 043942A617D00499009C160F /* clock_32x32.png */; };
 		043942A917D00499009C160F /* eye_32x24.png in Resources */ = {isa = PBXBuildFile; fileRef = 043942A717D00499009C160F /* eye_32x24.png */; };
-		043942AF17D07650009C160F /* MainWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 043942B117D07650009C160F /* MainWindowController.xib */; };
 		043942B417D076F2009C160F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 043942B617D076F2009C160F /* Localizable.strings */; };
 		043942BF17D07B92009C160F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 043942BD17D07B92009C160F /* Localizable.strings */; };
+		043942C517D07D74009C160F /* MainWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 043942C317D07D74009C160F /* MainWindowController.xib */; };
 		0446E06D17385349008BC1EB /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04714E7F16D2DEC000A308F7 /* Sparkle.framework */; };
 		045235A416CA9069005D25E4 /* MASPreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0481386416CA8BF400E682A0 /* MASPreferencesWindow.xib */; };
 		0469CC0016CBE010006863B7 /* IMDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 0469CBFF16CBE010006863B7 /* IMDB.m */; };
@@ -173,9 +173,9 @@
 		0437204216CEF823003B8AB6 /* menuicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menuicon.png; sourceTree = "<group>"; };
 		043942A617D00499009C160F /* clock_32x32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clock_32x32.png; sourceTree = "<group>"; };
 		043942A717D00499009C160F /* eye_32x24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = eye_32x24.png; sourceTree = "<group>"; };
-		043942B017D07650009C160F /* en */ = {isa = PBXFileReference; lastKnownFileType = file; name = en; path = en.lproj/MainWindowController.xib; sourceTree = "<group>"; };
 		043942B517D076F2009C160F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		043942BE17D07B92009C160F /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = Localizable.strings; sourceTree = "<group>"; };
+		043942C417D07D74009C160F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindowController.xib; sourceTree = "<group>"; };
 		0469CBFE16CBE010006863B7 /* IMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMDB.h; sourceTree = "<group>"; };
 		0469CBFF16CBE010006863B7 /* IMDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMDB.m; sourceTree = "<group>"; };
 		0469CC0316CBF19F006863B7 /* NSString+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Helper.h"; sourceTree = "<group>"; };
@@ -599,7 +599,7 @@
 				04AB5F1E17C56A3200A2B1AC /* ITHistoryTableCellView.m */,
 				04D74BB417C7AC5700B135BF /* ITTableRowView.h */,
 				04D74BB517C7AC5700B135BF /* ITTableRowView.m */,
-				043942B117D07650009C160F /* MainWindowController.xib */,
+				043942C317D07D74009C160F /* MainWindowController.xib */,
 			);
 			name = Window;
 			sourceTree = "<group>";
@@ -753,12 +753,12 @@
 				048DF20A16DFFF17004B064A /* sync.png in Resources */,
 				04B68C9F17A55E63006760D0 /* config.plist in Resources */,
 				04B68CA017A55E63006760D0 /* dsa_pub.pem in Resources */,
-				043942AF17D07650009C160F /* MainWindowController.xib in Resources */,
 				04D74BC417CAB18B00B135BF /* movies.png in Resources */,
 				043942A817D00499009C160F /* clock_32x32.png in Resources */,
 				043942A917D00499009C160F /* eye_32x24.png in Resources */,
 				043942B417D076F2009C160F /* Localizable.strings in Resources */,
 				043942BF17D07B92009C160F /* Localizable.strings in Resources */,
+				043942C517D07D74009C160F /* MainWindowController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -864,14 +864,6 @@
 			name = MainMenu.xib;
 			sourceTree = "<group>";
 		};
-		043942B117D07650009C160F /* MainWindowController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				043942B017D07650009C160F /* en */,
-			);
-			name = MainWindowController.xib;
-			sourceTree = "<group>";
-		};
 		043942B617D076F2009C160F /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -886,6 +878,14 @@
 				043942BE17D07B92009C160F /* nl */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		043942C317D07D74009C160F /* MainWindowController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				043942C417D07D74009C160F /* en */,
+			);
+			name = MainWindowController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
