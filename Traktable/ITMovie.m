@@ -13,7 +13,7 @@
 
 @synthesize name, playCount, year, duration, persistentID, videoKind, imdbId;
 @synthesize movieId, trailer, url, released, genres, image, tmdbId, tagline, overview, poster;
-@synthesize type, timestamp;
+@synthesize timestamp, action;
 
 +(ITMovie *)movieWithCurrentTunesTrack:(iTunesTrack *)iTunesTrack {
     
@@ -38,11 +38,13 @@
     movie.name = [record objectForKey:@"title"];
     movie.image = [record objectForKey:@"poster"];
     movie.playCount = [record objectForKey:@"traktPlays"];
-
+    movie.year = [[record objectForKey:@"year"] intValue];
+    movie.overview = [record objectForKey:@"overview"];
+    
     if([record objectForKey:@"timestamp"] != nil) {
         
-        movie.type = [record objectForKey:@"type"];
         movie.timestamp = [record objectForKey:@"timestamp"];
+        movie.action = [record objectForKey:@"action"];
         
     } 
     

@@ -32,7 +32,7 @@
 @property (nonatomic, strong) NSImage *poster;
 
 // History items
-@property (nonatomic, strong) NSString *type;
+@property (nonatomic, strong) NSString *action;
 @property (nonatomic, strong) NSString *timestamp;
 
 +(ITMovie *)movieWithCurrentTunesTrack:(iTunesTrack *)iTunesTrack;

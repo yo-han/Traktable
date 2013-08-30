@@ -72,7 +72,7 @@
         
         NSLog(@"Startup normal, loggedin.");
         
-        //if([ITConstants firstBoot])
+        if([ITConstants firstBoot])
             [self.sync performSelectorInBackground:@selector(syncTraktExtended) withObject:nil];
     }
     

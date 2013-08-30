@@ -13,6 +13,8 @@
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSImage *poster;
 @property (nonatomic, strong) NSString *timestamp;
+@property (nonatomic, strong) NSString *year;
+@property (nonatomic, strong) NSString *action;
 
 + (ITHistory *)historyEntityWithHistoryObject:(id)object;
 - (NSArray *)fetchMovieHistory;

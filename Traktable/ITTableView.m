@@ -41,7 +41,6 @@ typedef NS_ENUM(NSUInteger, ITTableViewCellType) {
 
     // Register an observer for history updates
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:kITHistoryNeedsUpdateNotification object:nil];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableView) name:kITHistoryTableReloadNotification object:nil];
     
 }
@@ -103,11 +102,23 @@ typedef NS_ENUM(NSUInteger, ITTableViewCellType) {
     else
         [cellView.imageView setImage:[NSImage imageNamed:@"movies.png"]];
     
+    if(self.tableViewCellType == ITTableViewMovieHistoryCell) {
+        [cellView.year setStringValue:entry.year];
+        [cellView.scrobble setStringValue:entry.action];
+    }
+    
     return cellView;
 }
 
 - (void)tableView:(NSTableView *)tableView didRemoveRowView:(NSTableRowView *)rowView forRow:(NSInteger)row {
     
+}
+
+- (NSTableRowView *)tableView:(NSTableView *)tableView rowViewForRow:(NSInteger)row {
+    
+    ITTableRowView *result = [[ITTableRowView alloc] init];
+    result.objectValue = [self.items objectAtIndex:row];
+    return result;
 }
 
 - (ITHistory *)_entryForRow:(NSInteger)row {

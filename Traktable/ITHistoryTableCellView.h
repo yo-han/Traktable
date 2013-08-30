@@ -11,6 +11,7 @@
 @interface ITHistoryTableCellView : NSTableCellView
 
 @property (nonatomic, strong) IBOutlet NSTextField *title;
+@property (nonatomic, strong) IBOutlet NSTextField *year;
 @property (nonatomic, strong) IBOutlet NSTextField *scrobble;
 @property (nonatomic, strong) IBOutlet NSTextField *timestamp;
 

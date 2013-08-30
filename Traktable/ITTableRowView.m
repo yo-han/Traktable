@@ -30,6 +30,23 @@
     }
 }
 
+static NSGradient *gradientWithTargetColor(NSColor *targetColor) {
+    NSArray *colors = [NSArray arrayWithObjects:[targetColor colorWithAlphaComponent:0], targetColor, [targetColor colorWithAlphaComponent:0], nil];
+    const CGFloat locations[4] = { 0.0, 1.0 };
+    return [[NSGradient alloc] initWithColors:colors atLocations:locations colorSpace:[NSColorSpace sRGBColorSpace]];
+}
+
+- (void)drawBackgroundInRect:(NSRect)dirtyRect {
+
+    [self.backgroundColor set];
+
+    NSRectFill(self.bounds);
+    
+    NSGradient *gradient = gradientWithTargetColor([NSColor colorWithDeviceWhite:0.95 alpha:0.9]);
+    [gradient drawInRect:self.bounds angle:90];
+
+}
+
 - (NSBackgroundStyle)interiorBackgroundStyle {
     return NSBackgroundStyleLight;
 }

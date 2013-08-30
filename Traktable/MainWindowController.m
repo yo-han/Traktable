@@ -38,7 +38,7 @@
 {	
 	_sourceListItems = [[NSMutableArray alloc] init];
 	
-	SourceListItem *historyItem = [SourceListItem itemWithTitle:@"History" identifier:@"history"];
+	SourceListItem *historyItem = [SourceListItem itemWithTitle:NSLocalizedString(@"History", nil) identifier:@"history"];
 	[historyItem setIcon:[NSImage imageNamed:@"menuicon.png"]];
 	SourceListItem *moviesItem = [SourceListItem itemWithTitle:@"Movies" identifier:@"movies"];
 	[moviesItem setIcon:[NSImage imageNamed:@"movies.png"]];
