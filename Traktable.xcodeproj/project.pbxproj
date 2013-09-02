@@ -36,6 +36,9 @@
 		043942B417D076F2009C160F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 043942B617D076F2009C160F /* Localizable.strings */; };
 		043942BF17D07B92009C160F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 043942BD17D07B92009C160F /* Localizable.strings */; };
 		043942C517D07D74009C160F /* MainWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 043942C317D07D74009C160F /* MainWindowController.xib */; };
+		0441839517D0DA5200F9FCA2 /* trakttv.png in Resources */ = {isa = PBXBuildFile; fileRef = 0441839417D0DA5200F9FCA2 /* trakttv.png */; };
+		0441839717D0DA9D00F9FCA2 /* trakttv_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 0441839617D0DA9D00F9FCA2 /* trakttv_pressed.png */; };
+		0441839D17D0EDB800F9FCA2 /* ITEpisodeScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 0441839C17D0EDB800F9FCA2 /* ITEpisodeScreen.m */; };
 		0446E06D17385349008BC1EB /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04714E7F16D2DEC000A308F7 /* Sparkle.framework */; };
 		045235A416CA9069005D25E4 /* MASPreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0481386416CA8BF400E682A0 /* MASPreferencesWindow.xib */; };
 		0469CC0016CBE010006863B7 /* IMDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 0469CBFF16CBE010006863B7 /* IMDB.m */; };
@@ -176,6 +179,10 @@
 		043942B517D076F2009C160F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		043942BE17D07B92009C160F /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = Localizable.strings; sourceTree = "<group>"; };
 		043942C417D07D74009C160F /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindowController.xib; sourceTree = "<group>"; };
+		0441839417D0DA5200F9FCA2 /* trakttv.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trakttv.png; sourceTree = "<group>"; };
+		0441839617D0DA9D00F9FCA2 /* trakttv_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trakttv_pressed.png; sourceTree = "<group>"; };
+		0441839B17D0EDB800F9FCA2 /* ITEpisodeScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITEpisodeScreen.h; sourceTree = "<group>"; };
+		0441839C17D0EDB800F9FCA2 /* ITEpisodeScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITEpisodeScreen.m; sourceTree = "<group>"; };
 		0469CBFE16CBE010006863B7 /* IMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMDB.h; sourceTree = "<group>"; };
 		0469CBFF16CBE010006863B7 /* IMDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMDB.m; sourceTree = "<group>"; };
 		0469CC0316CBF19F006863B7 /* NSString+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Helper.h"; sourceTree = "<group>"; };
@@ -474,6 +481,8 @@
 		043942A517D0006C009C160F /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				0441839417D0DA5200F9FCA2 /* trakttv.png */,
+				0441839617D0DA9D00F9FCA2 /* trakttv_pressed.png */,
 				043942A617D00499009C160F /* clock_32x32.png */,
 				043942A717D00499009C160F /* eye_32x24.png */,
 				0437204216CEF823003B8AB6 /* menuicon.png */,
@@ -672,6 +681,8 @@
 				042F080E16BC1E4C00A0CE9E /* ITTVShow.m */,
 				04D74BC517CB49FD00B135BF /* ITTVShowPoster.h */,
 				04D74BC617CB49FE00B135BF /* ITTVShowPoster.m */,
+				0441839B17D0EDB800F9FCA2 /* ITEpisodeScreen.h */,
+				0441839C17D0EDB800F9FCA2 /* ITEpisodeScreen.m */,
 				049C48BC16C0223B00CC9A0E /* ITMovie.h */,
 				049C48BD16C0223B00CC9A0E /* ITMovie.m */,
 				04A9FE4E17B43A69006CD129 /* ITMoviePoster.h */,
@@ -759,6 +770,8 @@
 				043942B417D076F2009C160F /* Localizable.strings in Resources */,
 				043942BF17D07B92009C160F /* Localizable.strings in Resources */,
 				043942C517D07D74009C160F /* MainWindowController.xib in Resources */,
+				0441839517D0DA5200F9FCA2 /* trakttv.png in Resources */,
+				0441839717D0DA9D00F9FCA2 /* trakttv_pressed.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -834,6 +847,7 @@
 				04D74BB617C7AC5700B135BF /* ITTableRowView.m in Sources */,
 				04D74BC717CB49FE00B135BF /* ITTVShowPoster.m in Sources */,
 				04D74BCA17CBA18C00B135BF /* ITSync.m in Sources */,
+				0441839D17D0EDB800F9FCA2 /* ITEpisodeScreen.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

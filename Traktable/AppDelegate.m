@@ -36,7 +36,7 @@
 
 - (IBAction)showLog:(id)sender;
 - (IBAction)feedback:(id)sender;
-- (IBAction)openHistory:(id)sender;
+- (IBAction)openTraktProfile:(id)sender;
 - (IBAction)displayPreferences:(id)sender;
 - (IBAction)showWindow:(id)sender;
 
@@ -53,6 +53,8 @@
     
     // Register this class as the NotificationCenter delegate
     [[NSUserNotificationCenter defaultUserNotificationCenter] setDelegate:self];
+    
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"NSConstraintBasedLayoutVisualizeMutuallyExclusiveConstraints"];
     
     _api = [ITApi new];
     _video = [[ITVideo alloc] init];
@@ -72,7 +74,7 @@
         
         NSLog(@"Startup normal, loggedin.");
         
-        if([ITConstants firstBoot])
+        //if([ITConstants firstBoot])
             [self.sync performSelectorInBackground:@selector(syncTraktExtended) withObject:nil];
     }
     
@@ -110,6 +112,12 @@
     [[NSWorkspace sharedWorkspace] openURL:mailtoURL];
 }
 
+- (IBAction)openTraktProfile:(id)sender {
+    
+    NSString *url = [NSString stringWithFormat:@"http://trakt.tv/user/%@", [_api username]];
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:url]];
+}
+
 - (void) redirectConsoleLogToDocumentFolder
 {
     NSString *currentPath = [[NSBundle mainBundle] bundlePath];
@@ -130,9 +138,10 @@
     [showLog setAlternate:YES];
     
     statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
-    [statusItem setMenu:statusMenu];
+    //[statusItem setMenu:statusMenu];
     [statusItem setImage:icon];
     [statusItem setHighlightMode:YES];
+    [statusItem setAction:@selector(showWindow:)];
 }
 
 - (void)VLCPlayerStateDidChange {
@@ -258,12 +267,6 @@
     [alert setMessageText:@"Can't scrobble right now"];
     [alert setInformativeText:@"You didn't submit your authentication data yet or it is incorrect. Without the right username and password it's pretty hard to scrobble..."];
     [alert runModal];
-}
-
-- (IBAction)openHistory:(id)sender {
-    
-    NSString *url = [NSString stringWithFormat:@"http://trakt.tv/user/%@/history", [_api username]];
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:url]];
 }
 
 #pragma mark -- NotificationCenter

@@ -59,7 +59,7 @@
     
     if(aType == iTunesEVdKTVShow) {
         
-        video = [ITTVShow showWithCurrentTunesTrack:track];
+        video = [ITTVShow showWithCurrentITunesTrack:track];
         
     } else if (aType == iTunesEVdKMovie) {
         

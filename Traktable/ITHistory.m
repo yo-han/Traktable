@@ -10,7 +10,7 @@
 #import "ITMovie.h"
 #import "ITMoviePoster.h"
 #import "ITTVShow.h"
-#import "ITTVShowPoster.h"
+#import "ITEpisodeScreen.h"
 #import "ITDb.h"
 #import "ITConstants.h"
 
@@ -22,7 +22,7 @@
 
 @implementation ITHistory
 
-@synthesize title, timestamp, poster, action;
+@synthesize title, timestamp, poster, action, episodeTitle, episode, season;
 
 + (ITHistory *)historyEntityWithHistoryObject:(id)object {
 
@@ -34,10 +34,11 @@
         ITMovie *movie = (ITMovie *) object;
 
         history.title = movie.name;
-        history.poster = [poster getPoster:movie.movieId withSize:ITTVShowPosterSizeMedium];
+        history.poster = [poster getPoster:movie.movieId withSize:ITMoviePosterSizeMedium];
         history.timestamp = movie.timestamp;
         history.year = [NSString stringWithFormat:@"%ld", movie.year];
         history.action = movie.action;
+        history.traktUrl = movie.url;
 
         if(history.poster == nil) {
             
@@ -49,18 +50,23 @@
         
     } else if([object isKindOfClass:[ITTVShow class]]) {
         
-        ITTVShowPoster *poster = [ITTVShowPoster new];
+        ITEpisodeScreen *screen = [ITEpisodeScreen new];
         ITTVShow *show = (ITTVShow *) object;
         
         history.title = show.title;
-        history.poster = [poster getPoster:show.showId withSize:ITTVShowPosterSizeMedium];
+        history.poster = [screen getScreen:show.showId season:[NSNumber numberWithInt:show.seasonNumber] episode:[NSNumber numberWithInt:show.episodeNumber] withSize:ITEpisodeScreenSizeMedium];
         history.timestamp = show.timestamp;
+        history.episodeTitle = show.episodeName;
+        history.episode = show.episodeNumber;
+        history.season = show.seasonNumber;
+        history.action = show.action;
+        history.traktUrl = show.url;
         
         if(history.poster == nil) {
 
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-            
-                [poster poster:show.showId withUrl:show.poster size:ITTVShowPosterSizeMedium];
+
+                [screen screen:show.showId season:[NSNumber numberWithUnsignedLong:show.seasonNumber] episode:[NSNumber numberWithUnsignedLong:show.episodeNumber] withUrl:show.screen size:ITEpisodeScreenSizeMedium];
             });
         }
     }
@@ -96,7 +102,7 @@
     
     NSMutableArray *shows = [NSMutableArray array];
     
-    NSArray *results = [self.db executeAndGetResults:@"select * from (select t.*, h.type, h.timestamp, h.action from history h left join tvshows t on h.imdb_id = t.imdb_id WHERE showId IS NOT NULL AND h.type = 'show' UNION select t.*, h.type, h.timestamp, h.action from history h left join tvshows t on h.tvdb_id = t.tvdb_id WHERE showId IS NOT NULL AND h.type = 'show') ORDER BY timestamp DESC" arguments:nil];
+    NSArray *results = [self.db executeAndGetResults:@"select (SELECT screenImage FROM episodes WHERE showTvdb_id = shows.tvdb_id AND episode = shows.episode AND season = shows.season) screen, (SELECT title FROM episodes WHERE showTvdb_id = shows.tvdb_id AND episode = shows.episode AND season = shows.season) episodeTitle, * from (select t.*, h.type, h.timestamp, h.action,h.episode,h.season from history h left join tvshows t on h.imdb_id = t.imdb_id WHERE showId IS NOT NULL AND h.type = 'show' UNION select t.*, h.type, h.timestamp, h.action,h.episode,h.season from history h left join tvshows t on h.tvdb_id = t.tvdb_id WHERE showId IS NOT NULL AND h.type = 'show') as shows  ORDER BY timestamp DESC" arguments:nil];
     
     //NSLog(@"%@",[self.db lastErrorMessage]);
     

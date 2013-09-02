@@ -12,4 +12,6 @@
 
 + (void)createDir:(NSString *)dir;
 
++ (NSDate *)stringToDateTime:(NSString *)dateStr;
+
 @end

@@ -12,9 +12,9 @@
 @implementation ITTVShow
 
 @synthesize show, episodeName, seasonNumber, episodeNumber, playCount, year, duration, persistentID, videoKind, imdbId;
-@synthesize showId, title, poster;
+@synthesize showId, title, poster, screen, action, url;
 
-+(ITTVShow *)showWithCurrentTunesTrack:(iTunesTrack *)iTunesTrack {
++(ITTVShow *)showWithCurrentITunesTrack:(iTunesTrack *)iTunesTrack {
     
     ITTVShow *show = [ITTVShow new];
     show.show           = [iTunesTrack show];
@@ -38,11 +38,16 @@
     
     show.showId = [record objectForKey:@"showId"];
     show.title = [record objectForKey:@"title"];
+    show.episodeName = [record objectForKey:@"episodeTitle"];
     show.poster = [record objectForKey:@"poster"];
+    show.screen = [record objectForKey:@"screen"];
+    show.seasonNumber = [[record objectForKey:@"season"] intValue];
+    show.episodeNumber = [[record objectForKey:@"episode"] intValue];
+    show.url = [record objectForKey:@"traktUrl"];
     
     if([record objectForKey:@"timestamp"] != nil) {
         
-        show.type = [record objectForKey:@"type"];
+        show.action = [record objectForKey:@"action"];
         show.timestamp = [record objectForKey:@"timestamp"];
         
     }

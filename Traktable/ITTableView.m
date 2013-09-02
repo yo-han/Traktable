@@ -11,6 +11,7 @@
 #import "ITHistoryTableCellView.h"
 #import "ITTableRowView.h"
 #import "ITTVShowPoster.h"
+#import "ITUtil.h"
 
 @interface ITTableView()
 
@@ -93,18 +94,42 @@ typedef NS_ENUM(NSUInteger, ITTableViewCellType) {
     ITHistoryTableCellView *cellView = [tableView makeViewWithIdentifier:cellType owner:self];
     
     ITHistory *entry = [self _entryForRow:row];
-   
-    [cellView.title setStringValue:entry.title];
-    [cellView.timestamp setStringValue:entry.timestamp];
+         
+    if(entry.traktUrl)
+        [cellView.traktUrl setTag:row];
+    else
+        [cellView.traktUrl setHidden:YES];
     
     if(entry.poster != nil)
         [cellView.imageView setImage:entry.poster];
     else
         [cellView.imageView setImage:[NSImage imageNamed:@"movies.png"]];
     
+    NSDate *date = [ITUtil stringToDateTime:entry.timestamp];
+    
+    NSDateFormatter* weekDayFormatter = [[NSDateFormatter alloc] init];
+    [weekDayFormatter setFormatterBehavior:NSDateFormatterBehavior10_4];
+    [weekDayFormatter setDateFormat:@"EEEE dd MMM yyyy"];
+    NSString *weekDay =  [weekDayFormatter stringFromDate:date];
+    
+    [cellView.timestamp setStringValue:weekDay];
+
+    
     if(self.tableViewCellType == ITTableViewMovieHistoryCell) {
+        
+        [cellView.title setStringValue:entry.title];
         [cellView.year setStringValue:entry.year];
-        [cellView.scrobble setStringValue:entry.action];
+        [cellView.scrobble setStringValue: NSLocalizedString(entry.action, nil)];
+                        
+    } else if (self.tableType == ITTableViewTVShowHistoryCell) {
+        
+        [cellView.title setStringValue:[NSString stringWithFormat:@"%@ - %@",entry.title,entry.episodeTitle]];
+        [cellView.seasonLabel setBackgroundColor:[NSColor blackColor]];
+        [cellView.seasonLabel setDrawsBackground:YES];        
+        [cellView.seasonLabel setBordered:NO];
+        [cellView.episodeSeasonNumber setStringValue:[NSString stringWithFormat:@"S%02ldE%02ld", (long)entry.season, (long)entry.episode]];
+        
+        [cellView.scrobble setStringValue: NSLocalizedString(entry.action, nil)];
     }
     
     return cellView;
@@ -126,6 +151,16 @@ typedef NS_ENUM(NSUInteger, ITTableViewCellType) {
     ITHistory *entry = [ITHistory historyEntityWithHistoryObject:[self.items objectAtIndex:row]];
 
     return entry;
+}
+
+- (IBAction)openTraktUrl:(id)sender {
+    
+    NSButton *btn = (NSButton *) sender;
+    ITHistory *entry = [self _entryForRow:btn.tag];
+    
+    NSString *url = entry.traktUrl;
+    NSLog(@"%@",url);
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:url]];
 }
 
 + (NSDictionary *)tableViewCellTypes

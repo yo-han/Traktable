@@ -438,6 +438,7 @@
             //NSLog(@"%@",[db lastErrorMessage]);
 
             [[NSNotificationCenter defaultCenter] postNotificationName:kITTVShowNeedsUpdateNotification object:self userInfo:argsDict];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kITTVShowEpisodeNeedsUpdateNotification object:self userInfo:argsDict];
         
         } else if([update objectForKey:@"episodes"] != nil) {
             

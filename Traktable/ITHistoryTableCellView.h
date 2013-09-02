@@ -14,5 +14,9 @@
 @property (nonatomic, strong) IBOutlet NSTextField *year;
 @property (nonatomic, strong) IBOutlet NSTextField *scrobble;
 @property (nonatomic, strong) IBOutlet NSTextField *timestamp;
+@property (nonatomic, strong) IBOutlet NSTextField *seasonLabel;
+@property (nonatomic, strong) IBOutlet NSTextField *episodeSeasonNumber;
+
+@property (nonatomic, strong) IBOutlet NSButton *traktUrl;
 
 @end

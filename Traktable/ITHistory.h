@@ -15,6 +15,10 @@
 @property (nonatomic, strong) NSString *timestamp;
 @property (nonatomic, strong) NSString *year;
 @property (nonatomic, strong) NSString *action;
+@property (nonatomic, strong) NSString *traktUrl;
+@property (nonatomic, strong) NSString *episodeTitle;
+@property (nonatomic) NSInteger episode;
+@property (nonatomic) NSInteger season;
 
 + (ITHistory *)historyEntityWithHistoryObject:(id)object;
 - (NSArray *)fetchMovieHistory;

@@ -40,6 +40,7 @@
     movie.playCount = [record objectForKey:@"traktPlays"];
     movie.year = [[record objectForKey:@"year"] intValue];
     movie.overview = [record objectForKey:@"overview"];
+    movie.url = [record objectForKey:@"traktUrl"];
     
     if([record objectForKey:@"timestamp"] != nil) {
         

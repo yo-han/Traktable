@@ -31,7 +31,7 @@
 		<string>en</string>
 	</array>
 	<key>LSUIElement</key>
-	<true/>
+	<false/>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2013 Mustacherious. All rights reserved.</string>
 	<key>NSMainNibFile</key>

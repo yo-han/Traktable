@@ -26,12 +26,14 @@
 @property (nonatomic, strong) NSNumber *showId;
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *poster;
+@property (nonatomic, strong) NSString *screen;
+@property (nonatomic, strong) NSString *url;
 
 // History items
-@property (nonatomic, strong) NSString *type;
+@property (nonatomic, strong) NSString *action;
 @property (nonatomic, strong) NSString *timestamp;
 
-+(ITTVShow *)showWithCurrentTunesTrack:(iTunesTrack *)iTunesTrack;
++(ITTVShow *)showWithCurrentITunesTrack:(iTunesTrack *)iTunesTrack;
 +(ITTVShow *)showWithDatabaseRecord:(NSDictionary *)record;
 
 @end

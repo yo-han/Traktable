@@ -19,4 +19,15 @@
             NSLog(@"Error: Create folder failed %@", dir);
 }
 
++ (NSDate *)stringToDateTime:(NSString *)dateStr {
+        
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm +0000"];
+    
+    NSDate *date = [dateFormat dateFromString:dateStr];
+
+    return date;
+}
+
 @end
