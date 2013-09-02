@@ -18,7 +18,8 @@
 
 typedef enum ITSourceListIdentifier : NSUInteger {
     ITHistoryMovies,
-    ITHistoryTVShows
+    ITHistoryTVShows,
+    ITErrorList
 } ITSourceListIdentifier;
 
 + (NSString *)applicationSupportFolder;

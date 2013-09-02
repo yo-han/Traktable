@@ -13,6 +13,7 @@
 @property (nonatomic, strong) NSArray *colors;
 
 @end
+
 @implementation ITHistoryTableCellView
 
 - (void)awakeFromNib {

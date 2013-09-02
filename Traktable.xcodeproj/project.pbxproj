@@ -84,6 +84,10 @@
 		04A9FE5617B448C7006CD129 /* ITUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A9FE5517B448C7006CD129 /* ITUtil.m */; };
 		04AB5F1F17C56A3200A2B1AC /* ITHistoryTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AB5F1E17C56A3200A2B1AC /* ITHistoryTableCellView.m */; };
 		04AB88D317A70F270086D5CD /* ITTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AB88D217A70F270086D5CD /* ITTableView.m */; };
+		04B5BE7317D5266F001F0705 /* ITErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B5BE7217D5266F001F0705 /* ITErrors.m */; };
+		04B5BE7617D53081001F0705 /* ITErrorTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B5BE7517D53081001F0705 /* ITErrorTableCellView.m */; };
+		04B5BE7817D53644001F0705 /* error.png in Resources */ = {isa = PBXBuildFile; fileRef = 04B5BE7717D53644001F0705 /* error.png */; };
+		04B5BE7B17D5401B001F0705 /* ITToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B5BE7A17D5401B001F0705 /* ITToolbar.m */; };
 		04B68C9F17A55E63006760D0 /* config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04B68C9D17A55E63006760D0 /* config.plist */; };
 		04B68CA017A55E63006760D0 /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 04B68C9E17A55E63006760D0 /* dsa_pub.pem */; };
 		04B68CA917A5600D006760D0 /* MainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B68CA717A5600D006760D0 /* MainWindowController.m */; };
@@ -255,6 +259,13 @@
 		04AB5F1E17C56A3200A2B1AC /* ITHistoryTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITHistoryTableCellView.m; sourceTree = "<group>"; };
 		04AB88D117A70F270086D5CD /* ITTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITTableView.h; sourceTree = "<group>"; };
 		04AB88D217A70F270086D5CD /* ITTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITTableView.m; sourceTree = "<group>"; };
+		04B5BE7117D5266F001F0705 /* ITErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITErrors.h; sourceTree = "<group>"; };
+		04B5BE7217D5266F001F0705 /* ITErrors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITErrors.m; sourceTree = "<group>"; };
+		04B5BE7417D53081001F0705 /* ITErrorTableCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITErrorTableCellView.h; sourceTree = "<group>"; };
+		04B5BE7517D53081001F0705 /* ITErrorTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITErrorTableCellView.m; sourceTree = "<group>"; };
+		04B5BE7717D53644001F0705 /* error.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = error.png; sourceTree = "<group>"; };
+		04B5BE7917D5401B001F0705 /* ITToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITToolbar.h; sourceTree = "<group>"; };
+		04B5BE7A17D5401B001F0705 /* ITToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITToolbar.m; sourceTree = "<group>"; };
 		04B68C9D17A55E63006760D0 /* config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = config.plist; path = "../../Traktable-NonGit/config.plist"; sourceTree = "<group>"; };
 		04B68C9E17A55E63006760D0 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = dsa_pub.pem; path = "../../Traktable-NonGit/dsa_pub.pem"; sourceTree = "<group>"; };
 		04B68CA617A5600D006760D0 /* MainWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainWindowController.h; sourceTree = "<group>"; };
@@ -481,6 +492,7 @@
 		043942A517D0006C009C160F /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				04B5BE7717D53644001F0705 /* error.png */,
 				0441839417D0DA5200F9FCA2 /* trakttv.png */,
 				0441839617D0DA9D00F9FCA2 /* trakttv_pressed.png */,
 				043942A617D00499009C160F /* clock_32x32.png */,
@@ -598,16 +610,22 @@
 			children = (
 				04B68CA617A5600D006760D0 /* MainWindowController.h */,
 				04B68CA717A5600D006760D0 /* MainWindowController.m */,
-				04BCC5E217B03DBB00D8DE7A /* ITHistory.h */,
-				04BCC5E317B03DBB00D8DE7A /* ITHistory.m */,
 				04B68CB517A56F60006760D0 /* SourceListItem.h */,
 				04B68CB617A56F60006760D0 /* SourceListItem.m */,
+				04BCC5E217B03DBB00D8DE7A /* ITHistory.h */,
+				04BCC5E317B03DBB00D8DE7A /* ITHistory.m */,
+				04B5BE7117D5266F001F0705 /* ITErrors.h */,
+				04B5BE7217D5266F001F0705 /* ITErrors.m */,
 				04AB88D117A70F270086D5CD /* ITTableView.h */,
 				04AB88D217A70F270086D5CD /* ITTableView.m */,
 				04AB5F1D17C56A3200A2B1AC /* ITHistoryTableCellView.h */,
 				04AB5F1E17C56A3200A2B1AC /* ITHistoryTableCellView.m */,
+				04B5BE7417D53081001F0705 /* ITErrorTableCellView.h */,
+				04B5BE7517D53081001F0705 /* ITErrorTableCellView.m */,
 				04D74BB417C7AC5700B135BF /* ITTableRowView.h */,
 				04D74BB517C7AC5700B135BF /* ITTableRowView.m */,
+				04B5BE7917D5401B001F0705 /* ITToolbar.h */,
+				04B5BE7A17D5401B001F0705 /* ITToolbar.m */,
 				043942C317D07D74009C160F /* MainWindowController.xib */,
 			);
 			name = Window;
@@ -772,6 +790,7 @@
 				043942C517D07D74009C160F /* MainWindowController.xib in Resources */,
 				0441839517D0DA5200F9FCA2 /* trakttv.png in Resources */,
 				0441839717D0DA9D00F9FCA2 /* trakttv_pressed.png in Resources */,
+				04B5BE7817D53644001F0705 /* error.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -848,6 +867,9 @@
 				04D74BC717CB49FE00B135BF /* ITTVShowPoster.m in Sources */,
 				04D74BCA17CBA18C00B135BF /* ITSync.m in Sources */,
 				0441839D17D0EDB800F9FCA2 /* ITEpisodeScreen.m in Sources */,
+				04B5BE7317D5266F001F0705 /* ITErrors.m in Sources */,
+				04B5BE7617D53081001F0705 /* ITErrorTableCellView.m in Sources */,
+				04B5BE7B17D5401B001F0705 /* ITToolbar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

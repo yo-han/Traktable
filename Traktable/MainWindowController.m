@@ -10,6 +10,7 @@
 #import "SourceListItem.h"
 #import "ITTableView.h"
 #import "ITConstants.h"
+#import "ITToolbar.h"
 
 @interface MainWindowController ()
 
@@ -18,6 +19,8 @@
 @end
 
 @implementation MainWindowController
+
+@synthesize toolbar=_toolbar;
 
 - (id)initWithWindow:(NSWindow *)window
 {
@@ -59,6 +62,9 @@
     
     [self.tableView setup];
     [self.tableView refreshTableData:ITHistoryMovies];
+    
+    [self.toolbar setHidden:YES];
+    [self.tableViewBottomConstraint setConstant:0];
 }
 
 
@@ -171,19 +177,30 @@
 		NSDictionary *identifiers = [NSDictionary dictionaryWithObjectsAndKeys:
                                         [NSNumber numberWithInteger:ITHistoryMovies],@"movies",
                                         [NSNumber numberWithInteger:ITHistoryTVShows],@"tvshows",
+                                        [NSNumber numberWithInteger:ITErrorList],@"errors",
                                         nil];
         
         switch ([[identifiers objectForKey:identifier] intValue]) {
             case ITHistoryMovies: 
                 [self.tableView refreshTableData:ITHistoryMovies];
+                [self.tableViewBottomConstraint setConstant:0];
+                [self.toolbar setHidden:YES];
                 break;
             case ITHistoryTVShows:
                 [self.tableView refreshTableData:ITHistoryTVShows];
+                [self.tableViewBottomConstraint setConstant:0];
+                [self.toolbar setHidden:YES];
+                break;
+            case ITErrorList:
+                [self.tableView refreshTableData:ITErrorList];
+                [self.tableViewBottomConstraint setConstant:41.0];
+                [self.toolbar setHidden:NO];
                 break;
             default:
-                [self.tableView refreshTableData:ITHistoryMovies];
-                break;
+                [self.tableViewBottomConstraint setConstant:0];
+                [self.toolbar setHidden:YES];
         }
+        
         
     } else {
 		// none
@@ -199,6 +216,5 @@
 	
 	//Do something here
 }
-
 
 @end

@@ -9,15 +9,18 @@
 #import "ITTableView.h"
 #import "ITHistory.h"
 #import "ITHistoryTableCellView.h"
+#import "ITErrorTableCellView.h"
 #import "ITTableRowView.h"
 #import "ITTVShowPoster.h"
 #import "ITUtil.h"
+#import "ITErrors.h"
 
 @interface ITTableView()
 
 typedef NS_ENUM(NSUInteger, ITTableViewCellType) {
     ITTableViewMovieHistoryCell = 0,
     ITTableViewTVShowHistoryCell = 1,
+    ITTableViewErrorCell = 2,
     ITTableViewUnknownCell = NSUIntegerMax
 };
 
@@ -65,11 +68,16 @@ typedef NS_ENUM(NSUInteger, ITTableViewCellType) {
             _tableViewCellType = ITTableViewMovieHistoryCell;
             _items = (NSMutableArray *) [[self getHistory] fetchMovieHistory];
             break;
-            
-        default:
+        case ITHistoryTVShows:
             _tableViewCellType = ITTableViewTVShowHistoryCell;
             _items = (NSMutableArray *) [[self getHistory] fetchTvShowHistory];
             break;
+        case ITErrorList:
+            _tableViewCellType = ITTableViewErrorCell;
+            _items = (NSMutableArray *) [[ITErrors new] fetchErrors];
+            break;
+        default:
+            return;
     }
 
     [self reloadTableView];
@@ -91,48 +99,78 @@ typedef NS_ENUM(NSUInteger, ITTableViewCellType) {
 - (id)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
     
     NSString *cellType = [[self class] tableViewCellTypes][@(self.tableViewCellType)];
-    ITHistoryTableCellView *cellView = [tableView makeViewWithIdentifier:cellType owner:self];
-    
-    ITHistory *entry = [self _entryForRow:row];
-         
-    if(entry.traktUrl)
-        [cellView.traktUrl setTag:row];
-    else
-        [cellView.traktUrl setHidden:YES];
-    
-    if(entry.poster != nil)
-        [cellView.imageView setImage:entry.poster];
-    else
-        [cellView.imageView setImage:[NSImage imageNamed:@"movies.png"]];
-    
-    NSDate *date = [ITUtil stringToDateTime:entry.timestamp];
     
     NSDateFormatter* weekDayFormatter = [[NSDateFormatter alloc] init];
     [weekDayFormatter setFormatterBehavior:NSDateFormatterBehavior10_4];
     [weekDayFormatter setDateFormat:@"EEEE dd MMM yyyy"];
-    NSString *weekDay =  [weekDayFormatter stringFromDate:date];
     
-    [cellView.timestamp setStringValue:weekDay];
+    if(self.tableViewCellType == ITTableViewMovieHistoryCell || self.tableType == ITTableViewTVShowHistoryCell) {
+        
+        ITHistoryTableCellView *cellView = [tableView makeViewWithIdentifier:cellType owner:self];
+        
+        ITHistory *entry = [self _entryForRow:row];
+        
+        NSDate *date = [ITUtil stringToDateTime:entry.timestamp];
+        NSString *weekDay =  [weekDayFormatter stringFromDate:date];
+        
+        [cellView.timestamp setStringValue:weekDay];
+        
+        if(entry.traktUrl)
+            [cellView.traktUrl setTag:row];
+        else
+            [cellView.traktUrl setHidden:YES];
+        
+        if(entry.poster != nil)
+            [cellView.imageView setImage:entry.poster];
+        else
+            [cellView.imageView setImage:[NSImage imageNamed:@"movies.png"]];
+    
+        if(self.tableViewCellType == ITTableViewMovieHistoryCell) {    
+            
+            [cellView.title setStringValue:entry.title];
+            [cellView.year setStringValue:entry.year];
+            [cellView.scrobble setStringValue: NSLocalizedString(entry.action, nil)];
+                            
+        } else if (self.tableType == ITTableViewTVShowHistoryCell) {
+            
+            [cellView.title setStringValue:[NSString stringWithFormat:@"%@ - %@",entry.title,entry.episodeTitle]];
+            [cellView.seasonLabel setBackgroundColor:[NSColor blackColor]];
+            [cellView.seasonLabel setDrawsBackground:YES];        
+            [cellView.seasonLabel setBordered:NO];
+            [cellView.episodeSeasonNumber setStringValue:[NSString stringWithFormat:@"S%02ldE%02ld", (long)entry.season, (long)entry.episode]];
+            
+            [cellView.scrobble setStringValue: NSLocalizedString(entry.action, nil)];
+            
+        }
+        
+        return cellView;
+    
+    } else if(self.tableType == ITTableViewErrorCell) {
+        
+        ITErrorTableCellView *cellView = [tableView makeViewWithIdentifier:cellType owner:self];
 
-    
-    if(self.tableViewCellType == ITTableViewMovieHistoryCell) {
+        NSDictionary *entry = [self.items objectAtIndex:row];
         
-        [cellView.title setStringValue:entry.title];
-        [cellView.year setStringValue:entry.year];
-        [cellView.scrobble setStringValue: NSLocalizedString(entry.action, nil)];
-                        
-    } else if (self.tableType == ITTableViewTVShowHistoryCell) {
+        NSDate *date = [ITUtil stringToDateTime:[entry objectForKey:@"timestamp"]];
+        NSString *weekDay =  [weekDayFormatter stringFromDate:date];
         
-        [cellView.title setStringValue:[NSString stringWithFormat:@"%@ - %@",entry.title,entry.episodeTitle]];
-        [cellView.seasonLabel setBackgroundColor:[NSColor blackColor]];
-        [cellView.seasonLabel setDrawsBackground:YES];        
-        [cellView.seasonLabel setBordered:NO];
-        [cellView.episodeSeasonNumber setStringValue:[NSString stringWithFormat:@"S%02ldE%02ld", (long)entry.season, (long)entry.episode]];
+        [cellView.timestamp setStringValue:weekDay];
+        [cellView.textField setStringValue:[entry objectForKey:@"description"]];
         
-        [cellView.scrobble setStringValue: NSLocalizedString(entry.action, nil)];
+        return cellView;
     }
     
-    return cellView;
+    return nil;
+}
+
+- (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row {
+    
+    if(self.tableViewCellType == ITTableViewErrorCell) {
+        
+        return 50.0;
+    }
+
+    return 150.0;
 }
 
 - (void)tableView:(NSTableView *)tableView didRemoveRowView:(NSTableRowView *)rowView forRow:(NSInteger)row {
@@ -159,7 +197,7 @@ typedef NS_ENUM(NSUInteger, ITTableViewCellType) {
     ITHistory *entry = [self _entryForRow:btn.tag];
     
     NSString *url = entry.traktUrl;
-    NSLog(@"%@",url);
+
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:url]];
 }
 
@@ -167,6 +205,7 @@ typedef NS_ENUM(NSUInteger, ITTableViewCellType) {
 {
     return @{@(ITTableViewMovieHistoryCell) : @"MovieHistoryCell",
              @(ITTableViewTVShowHistoryCell) : @"TVShowHistoryCell",
+             @(ITTableViewErrorCell) : @"ErrorCell",
              @(ITTableViewUnknownCell) : @"DefaultCell"};
 }
 
