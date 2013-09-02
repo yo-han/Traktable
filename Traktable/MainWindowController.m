@@ -44,10 +44,16 @@
 	[moviesItem setIcon:[NSImage imageNamed:@"movies.png"]];
     SourceListItem *tvShowsItem = [SourceListItem itemWithTitle:NSLocalizedString(@"TVShows", nil) identifier:@"tvshows"];
 	[tvShowsItem setIcon:[NSImage imageNamed:@"movies.png"]];
+    SourceListItem *logItem = [SourceListItem itemWithTitle:NSLocalizedString(@"Log", nil) identifier:@"log"];
+    [logItem setIcon:[NSImage imageNamed:NSImageNameIconViewTemplate]];
+    SourceListItem *errorItem = [SourceListItem itemWithTitle:NSLocalizedString(@"Errors", nil) identifier:@"errors"];
+    [errorItem setIcon:[NSImage imageNamed:NSImageNameIconViewTemplate]];
 	
     [historyItem setChildren:[NSArray arrayWithObjects:moviesItem, tvShowsItem, nil]];
+    [logItem setChildren:[NSArray arrayWithObjects:errorItem, nil]];
 	
 	[self.sourceListItems addObject:historyItem];
+    [self.sourceListItems addObject:logItem];
 	
 	[self.sourceList reloadData];
     
@@ -143,7 +149,7 @@
 
 - (BOOL)sourceList:(PXSourceList*)aSourceList isGroupAlwaysExpanded:(id)group
 {
-	if([[group identifier] isEqualToString:@"history"])
+	if([[group identifier] isEqualToString:@"history"] || [[group identifier] isEqualToString:@"log"])
 		return YES;
 	
 	return NO;
