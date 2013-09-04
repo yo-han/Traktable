@@ -181,6 +181,14 @@
 					<int key="connectionID">495</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">orderFrontStandardAboutPanel:</string>
+						<reference key="source" ref="1021"/>
+						<reference key="destination" ref="228342583"/>
+					</object>
+					<int key="connectionID">577</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">delegate</string>
 						<reference key="source" ref="110575045"/>
@@ -401,7 +409,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">576</int>
+			<int key="maxID">577</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -411,7 +419,6 @@
 					<dictionary class="NSMutableDictionary" key="actions">
 						<string key="displayPreferences:">id</string>
 						<string key="feedback:">id</string>
-						<string key="openHistory:">id</string>
 						<string key="openTraktProfile:">id</string>
 						<string key="showLog:">id</string>
 						<string key="showWindow:">id</string>
@@ -423,10 +430,6 @@
 						</object>
 						<object class="IBActionInfo" key="feedback:">
 							<string key="name">feedback:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="openHistory:">
-							<string key="name">openHistory:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="openTraktProfile:">

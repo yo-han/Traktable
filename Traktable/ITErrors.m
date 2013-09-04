@@ -26,4 +26,13 @@
     return errors;
 }
 
+- (void)clearErrors {
+    
+    ITDb *db = [ITDb new];
+    
+    [db executeAndGetResults:@"delete from errors" arguments:nil];
+    [db executeAndGetResults:@"delete from sqlite_sequence where name='errors'" arguments:nil];
+    
+}
+
 @end

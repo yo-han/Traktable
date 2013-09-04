@@ -16,8 +16,8 @@
 
 @implementation ITHistoryTableCellView
 
-- (void)awakeFromNib {
-   
-}
+@end
+
+@implementation ITHistoryTableGroupCellView
 
 @end

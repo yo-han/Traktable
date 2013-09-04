@@ -12,7 +12,20 @@
 #import "ITTVShow.h"
 #import "ITEpisodeScreen.h"
 #import "ITDb.h"
+#import "ITUtil.h"
 #import "ITConstants.h"
+
+@implementation ITHistoryGroupHeader
+
+- (id)initWithDateString:(NSString *)date {
+    
+    self = [super init];
+    if (self) {
+        _date = date;
+    }
+    return self;
+}
+@end
 
 @interface ITHistory()
 
@@ -27,6 +40,11 @@
 + (ITHistory *)historyEntityWithHistoryObject:(id)object {
 
     ITHistory *history = [ITHistory new];
+    
+    if([object isKindOfClass:[ITHistoryGroupHeader class]]) {
+        
+        return object;
+    }
     
     if([object isKindOfClass:[ITMovie class]]) {
 
@@ -87,12 +105,21 @@
     
     NSArray *results = [self.db executeAndGetResults:@"select * from (select m.*, h.type, h.timestamp, h.action from history h left join movies m on h.imdb_id = m.imdb_id WHERE movieId IS NOT NULL AND h.type = 'movie' UNION select m.*, h.type, h.timestamp, h.action from history h left join movies m on h.tmdb_id = m.tmdb_id WHERE movieId IS NOT NULL AND h.type = 'movie') ORDER BY timestamp DESC" arguments:nil];
     
-    //NSLog(@"%@",[self.db lastErrorMessage]);
+    NSString *lastGroup = nil;
     
     for (NSDictionary *result in results) {
         
+        NSString *date = [ITUtil localeDateString:[result objectForKey:@"timestamp"]];
+        
+        if(![lastGroup isEqualToString:date]) {
+            ITHistoryGroupHeader *header = [[ITHistoryGroupHeader alloc] initWithDateString:date];
+            [movies addObject:header];
+        }
+        
         ITMovie *movie = [ITMovie movieWithDatabaseRecord:result];
         [movies addObject:movie];
+        
+        lastGroup = date;
     }
     
     return movies;
@@ -104,12 +131,21 @@
     
     NSArray *results = [self.db executeAndGetResults:@"select (SELECT screenImage FROM episodes WHERE showTvdb_id = shows.tvdb_id AND episode = shows.episode AND season = shows.season) screen, (SELECT title FROM episodes WHERE showTvdb_id = shows.tvdb_id AND episode = shows.episode AND season = shows.season) episodeTitle, * from (select t.*, h.type, h.timestamp, h.action,h.episode,h.season from history h left join tvshows t on h.imdb_id = t.imdb_id WHERE showId IS NOT NULL AND h.type = 'show' UNION select t.*, h.type, h.timestamp, h.action,h.episode,h.season from history h left join tvshows t on h.tvdb_id = t.tvdb_id WHERE showId IS NOT NULL AND h.type = 'show') as shows  ORDER BY timestamp DESC" arguments:nil];
     
-    //NSLog(@"%@",[self.db lastErrorMessage]);
+    NSString *lastGroup = nil;
     
     for (NSDictionary *result in results) {
         
+        NSString *date = [ITUtil localeDateString:[result objectForKey:@"timestamp"]];
+        
+        if(![lastGroup isEqualToString:date]) {
+            ITHistoryGroupHeader *header = [[ITHistoryGroupHeader alloc] initWithDateString:date];
+            [shows addObject:header];
+        }
+        
         ITTVShow *show = [ITTVShow showWithDatabaseRecord:result];
         [shows addObject:show];
+        
+        lastGroup = date;
     }
     
     return shows;

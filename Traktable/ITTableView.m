@@ -11,6 +11,7 @@
 #import "ITHistoryTableCellView.h"
 #import "ITErrorTableCellView.h"
 #import "ITTableRowView.h"
+#import "ITTableRowGroupView.h"
 #import "ITTVShowPoster.h"
 #import "ITUtil.h"
 #import "ITErrors.h"
@@ -92,6 +93,13 @@ typedef NS_ENUM(NSUInteger, ITTableViewCellType) {
     [self.tableView reloadData];
 }
 
+- (IBAction)clearErrors:(id)sender {
+    
+    [[ITErrors new] clearErrors];
+    
+    [self reloadTableData];
+}
+
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
     return [self.items count];
 }
@@ -100,46 +108,54 @@ typedef NS_ENUM(NSUInteger, ITTableViewCellType) {
     
     NSString *cellType = [[self class] tableViewCellTypes][@(self.tableViewCellType)];
     
-    NSDateFormatter* weekDayFormatter = [[NSDateFormatter alloc] init];
-    [weekDayFormatter setFormatterBehavior:NSDateFormatterBehavior10_4];
-    [weekDayFormatter setDateFormat:@"EEEE dd MMM yyyy"];
-    
     if(self.tableViewCellType == ITTableViewMovieHistoryCell || self.tableType == ITTableViewTVShowHistoryCell) {
+        
+        id entry = [self _entryForRow:row];
+        
+        if([entry isKindOfClass:[ITHistoryGroupHeader class]]) {
+            
+            ITHistoryTableGroupCellView *cellView = [tableView makeViewWithIdentifier:@"historyGroupCell" owner:self];
+            
+            ITHistoryGroupHeader *_entry = (ITHistoryGroupHeader *) entry;
+            
+            [cellView.timestamp setStringValue:_entry.date];
+            
+            return cellView;
+        }
         
         ITHistoryTableCellView *cellView = [tableView makeViewWithIdentifier:cellType owner:self];
         
-        ITHistory *entry = [self _entryForRow:row];
+        ITHistory *_entry = (ITHistory *) entry;
         
-        NSDate *date = [ITUtil stringToDateTime:entry.timestamp];
-        NSString *weekDay =  [weekDayFormatter stringFromDate:date];
+        NSString *time = [ITUtil stringToTime:_entry.timestamp];
         
-        [cellView.timestamp setStringValue:weekDay];
+        [cellView.timestamp setStringValue:time];
         
-        if(entry.traktUrl)
+        if(_entry.traktUrl)
             [cellView.traktUrl setTag:row];
         else
             [cellView.traktUrl setHidden:YES];
         
-        if(entry.poster != nil)
-            [cellView.imageView setImage:entry.poster];
+        if(_entry.poster != nil)
+            [cellView.imageView setImage:_entry.poster];
         else
             [cellView.imageView setImage:[NSImage imageNamed:@"movies.png"]];
     
         if(self.tableViewCellType == ITTableViewMovieHistoryCell) {    
             
-            [cellView.title setStringValue:entry.title];
-            [cellView.year setStringValue:entry.year];
-            [cellView.scrobble setStringValue: NSLocalizedString(entry.action, nil)];
+            [cellView.title setStringValue:_entry.title];
+            [cellView.year setStringValue:_entry.year];
+            [cellView.scrobble setStringValue: NSLocalizedString(_entry.action, nil)];
                             
         } else if (self.tableType == ITTableViewTVShowHistoryCell) {
             
-            [cellView.title setStringValue:[NSString stringWithFormat:@"%@ - %@",entry.title,entry.episodeTitle]];
+            [cellView.title setStringValue:[NSString stringWithFormat:@"%@ - %@",_entry.title,_entry.episodeTitle]];
             [cellView.seasonLabel setBackgroundColor:[NSColor blackColor]];
             [cellView.seasonLabel setDrawsBackground:YES];        
             [cellView.seasonLabel setBordered:NO];
-            [cellView.episodeSeasonNumber setStringValue:[NSString stringWithFormat:@"S%02ldE%02ld", (long)entry.season, (long)entry.episode]];
+            [cellView.episodeSeasonNumber setStringValue:[NSString stringWithFormat:@"S%02ldE%02ld", (long)_entry.season, (long)_entry.episode]];
             
-            [cellView.scrobble setStringValue: NSLocalizedString(entry.action, nil)];
+            [cellView.scrobble setStringValue: NSLocalizedString(_entry.action, nil)];
             
         }
         
@@ -151,10 +167,9 @@ typedef NS_ENUM(NSUInteger, ITTableViewCellType) {
 
         NSDictionary *entry = [self.items objectAtIndex:row];
         
-        NSDate *date = [ITUtil stringToDateTime:[entry objectForKey:@"timestamp"]];
-        NSString *weekDay =  [weekDayFormatter stringFromDate:date];
+        NSString *date = [ITUtil localeDateString:[entry objectForKey:@"timestamp"]];
         
-        [cellView.timestamp setStringValue:weekDay];
+        [cellView.timestamp setStringValue:date];
         [cellView.textField setStringValue:[entry objectForKey:@"description"]];
         
         return cellView;
@@ -168,25 +183,44 @@ typedef NS_ENUM(NSUInteger, ITTableViewCellType) {
     if(self.tableViewCellType == ITTableViewErrorCell) {
         
         return 50.0;
+        
+    } else {
+        
+        id entry = [self _entryForRow:row];
+        
+        if([entry isKindOfClass:[ITHistoryGroupHeader class]])
+            return 28.0;
     }
 
     return 150.0;
 }
 
-- (void)tableView:(NSTableView *)tableView didRemoveRowView:(NSTableRowView *)rowView forRow:(NSInteger)row {
+- (BOOL)tableView:(NSTableView *)tableView isGroupRow:(NSInteger)row {
     
+    id entry = [self _entryForRow:row];
+    
+    if([entry isKindOfClass:[ITHistoryGroupHeader class]]) {
+        return YES;
+    }
+
+    return NO;
 }
 
 - (NSTableRowView *)tableView:(NSTableView *)tableView rowViewForRow:(NSInteger)row {
+    
+    id entry = [self _entryForRow:row];
+    
+    if([entry isKindOfClass:[ITHistoryGroupHeader class]])
+        return [[ITTableRowGroupView alloc] init];
     
     ITTableRowView *result = [[ITTableRowView alloc] init];
     result.objectValue = [self.items objectAtIndex:row];
     return result;
 }
 
-- (ITHistory *)_entryForRow:(NSInteger)row {
+- (id)_entryForRow:(NSInteger)row {
     
-    ITHistory *entry = [ITHistory historyEntityWithHistoryObject:[self.items objectAtIndex:row]];
+    id entry = [ITHistory historyEntityWithHistoryObject:[self.items objectAtIndex:row]];
 
     return entry;
 }

@@ -11,5 +11,6 @@
 @interface ITErrors : NSObject
 
 - (NSArray *)fetchErrors;
+- (void)clearErrors;
 
 @end

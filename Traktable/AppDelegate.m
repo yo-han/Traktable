@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "MainWindowController.h"
+#import "ProgressWindowController.h"
 #import "MASPreferencesWindowController.h"
 #import "PrefIndexViewController.h"
 #import "PrefSyncViewController.h"
@@ -27,7 +28,10 @@
 
 @interface AppDelegate()
 
+@property(assign) BOOL showProgressWindow;
+
 @property(strong) MainWindowController *mainWindow;
+@property(strong) ProgressWindowController *progressWindow;
 
 @property(nonatomic, retain) ITApi *api;
 @property(nonatomic, retain) ITVideo *video;
@@ -61,8 +65,6 @@
     _library = [[ITLibrary alloc] init];
     _sync = [[ITSync alloc] init];
     
-    [self showWindow:self];
-
     if(![self.api username] || ![self.api testAccount]) {
         
         [self noAuthAlert];
@@ -74,8 +76,19 @@
         
         NSLog(@"Startup normal, loggedin.");
         
-        //if([ITConstants firstBoot])
-            [self.sync performSelectorInBackground:@selector(syncTraktExtended) withObject:nil];
+        if([ITConstants firstBoot]) {
+            
+            _showProgressWindow = YES;
+            
+            [self showProgressWindow:nil];
+            [self.sync performSelectorInBackground:@selector(syncTraktExtended) withObject:nil];            
+            
+        } else {
+            
+            _showProgressWindow = NO;
+            
+            [self showWindow:self];
+        }
     }
     
     [[NSDistributedNotificationCenter defaultCenter] addObserver:self selector:@selector(iTunesChangedState:) name:@"com.apple.iTunes.playerInfo" object:@"com.apple.iTunes.player" suspensionBehavior:NSNotificationSuspensionBehaviorCoalesce];
@@ -83,6 +96,9 @@
     [[NSDistributedNotificationCenter defaultCenter] addObserver:self selector:@selector(iTunesSourceSaved:) name:@"com.apple.iTunes.sourceSaved" object:@"com.apple.iTunes.sources" suspensionBehavior:NSNotificationSuspensionBehaviorCoalesce];
     
     [[NSDistributedNotificationCenter defaultCenter] addObserver:self selector:@selector(VLCPlayerStateDidChange) name:@"VLCPlayerStateDidChange" object:nil suspensionBehavior:NSNotificationSuspensionBehaviorCoalesce];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showProgressWindow:) name:kITUpdateProgressWindowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideProgressWindow) name:kITHideProgressWindowNotification object:nil];
     
     [NSTimer timerWithTimeInterval:86400 target:self.sync selector:@selector(syncTraktExtended) userInfo:nil repeats:YES];
 }
@@ -100,6 +116,44 @@
     [self.mainWindow.window makeKeyAndOrderFront:self];
     
     [NSApp activateIgnoringOtherApps:YES];
+}
+
+- (void)showProgressWindow:(NSNotification *)notification {
+    
+    if(self.showProgressWindow == NO)
+        return;
+    
+    if(!self.progressWindow)
+        _progressWindow = [[ProgressWindowController alloc] initWithWindowNibName:@"ProgressWindowController"];
+    
+    [self.progressWindow.window makeKeyAndOrderFront:self];
+    
+    if(notification == nil)
+        [self.progressWindow.progress setIndeterminate:YES];
+    else {
+        
+        double progress = [[notification.userInfo objectForKey:@"progress"] doubleValue];
+        
+        [self.progressWindow.progress setIndeterminate:NO];
+        [self.progressWindow.progress setDoubleValue:progress];
+        
+        if([[notification.userInfo objectForKey:@"type"] isEqualToString:@"movies"]) {
+            [self.progressWindow.description setStringValue:@"Syncing movies with Trakt.tv"];
+        } else if([[notification.userInfo objectForKey:@"type"] isEqualToString:@"tvshows"]) {
+            [self.progressWindow.description setStringValue:@"Syncing TV Shows with Trakt.tv"];
+        } else if([[notification.userInfo objectForKey:@"type"] isEqualToString:@"history"]) {
+            [self.progressWindow.description setStringValue:@"Syncing history with Trakt.tv"];
+        }
+    }
+    
+    [NSApp requestUserAttention:NSInformationalRequest];
+    [NSApp activateIgnoringOtherApps:YES];
+}
+
+- (void)hideProgressWindow {
+    
+    [self.progressWindow.window orderOut:nil];
+    [self showWindow:self];
 }
 
 - (IBAction)feedback:(id)sender {

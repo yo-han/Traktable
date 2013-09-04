@@ -25,3 +25,11 @@
 - (NSArray *)fetchTvShowHistory;
 
 @end
+
+@interface ITHistoryGroupHeader : NSObject
+
+@property (nonatomic, strong) NSString *date;
+
+- (id)initWithDateString:(NSString *)date;
+
+@end

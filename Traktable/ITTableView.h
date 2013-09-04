@@ -18,5 +18,7 @@
 - (void)setup;
 - (void)reloadTableData;
 - (void)refreshTableData:(ITSourceListIdentifier)tableType;
-    
+
+- (IBAction)clearErrors:(id)sender;
+
 @end

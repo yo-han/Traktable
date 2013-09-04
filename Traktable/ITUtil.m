@@ -30,4 +30,28 @@
     return date;
 }
 
++ (NSString *)localeDateString:(NSString *)dateStr {
+    
+    NSDateFormatter* weekDayFormatter = [[NSDateFormatter alloc] init];
+    [weekDayFormatter setFormatterBehavior:NSDateFormatterBehavior10_4];
+    [weekDayFormatter setDateFormat:@"EEEE dd MMMM, yyyy"];
+    
+    NSDate *date = [self stringToDateTime:dateStr];
+    NSString *weekDay =  [weekDayFormatter stringFromDate:date];
+    
+    return weekDay;
+}
+
++ (NSString *)stringToTime:(NSString *)dateStr {
+    
+    NSDateFormatter* timeFormatter = [[NSDateFormatter alloc] init];
+    [timeFormatter setFormatterBehavior:NSDateFormatterBehavior10_4];
+    [timeFormatter setDateFormat:@"HH:mm"];
+    
+    NSDate *date = [self stringToDateTime:dateStr];
+    NSString *time =  [timeFormatter stringFromDate:date];
+    
+    return time;
+}
+
 @end

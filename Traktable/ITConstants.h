@@ -13,6 +13,8 @@
 #define kITMovieNeedsUpdateNotification @"ITSyncUpdateMovie"
 #define kITTVShowNeedsUpdateNotification @"ITSyncUpdateShow"
 #define kITTVShowEpisodeNeedsUpdateNotification @"ITSyncUpdateEpisode"
+#define kITUpdateProgressWindowNotification @"ITUpdateProgressWindow"
+#define kITHideProgressWindowNotification @"ITHideProgressWindow"
 
 @interface ITConstants : NSObject
 

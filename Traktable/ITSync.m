@@ -52,6 +52,8 @@
     /** Sync trakt history **/
     ITApi *api = [ITApi new];
     [api historySync];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kITHideProgressWindowNotification object:nil];    
 }
 
 - (void)sync:(iTunesEVdK)type extended:(BOOL)extended {
@@ -60,6 +62,7 @@
     ITDb *db = [ITDb new];
     
     NSArray *items = [api watchedSync:type extended:[NSString stringWithFormat:@"%d",extended]];
+    int n = 0;
     
     for(NSDictionary *item in items) {
         
@@ -88,6 +91,13 @@
         //NSLog(@"%@",[db lastErrorMessage]);
         
         NSNumber *lastId = [db lastInsertRowId];
+        
+        n++;
+        
+        int progress = (100 / [items count]) * n;
+        
+        // Update progress
+        [[NSNotificationCenter defaultCenter] postNotificationName:kITUpdateProgressWindowNotification object:self userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:progress],@"progress",table,@"type", nil]];
         
         if([lastId intValue] == 0)
             continue;

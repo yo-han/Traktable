@@ -405,10 +405,19 @@
     id responseObject = [body JSONObject];
     
     if([responseObject isKindOfClass:[NSDictionary class]]) {
-        
+        NSLog(@"DEBUG - PLEASE REMOVE");
         //[[NSUserDefaults standardUserDefaults] setInteger:lastSync forKey:@"traktable.ITHistorySyncLast"];
         
+        int n = 0;
+        
         for(NSDictionary *activity in [responseObject objectForKey:@"activity"]) {
+            
+            n++;
+            
+            int progress = (100 / [[responseObject objectForKey:@"activity"] count]) * n;
+            
+            // Update progress
+            [[NSNotificationCenter defaultCenter] postNotificationName:kITUpdateProgressWindowNotification object:self userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:progress],@"progress",@"history",@"type", nil]];
             
             [self updateHistory:activity parameters:nil];
         }

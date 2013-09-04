@@ -13,5 +13,7 @@
 + (void)createDir:(NSString *)dir;
 
 + (NSDate *)stringToDateTime:(NSString *)dateStr;
++ (NSString *)localeDateString:(NSString *)dateStr;
++ (NSString *)stringToTime:(NSString *)dateStr;
 
 @end
