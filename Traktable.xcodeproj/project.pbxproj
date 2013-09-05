@@ -107,6 +107,7 @@
 		04D74BC417CAB18B00B135BF /* movies.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D74BC317CAB18B00B135BF /* movies.png */; };
 		04D74BC717CB49FE00B135BF /* ITTVShowPoster.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D74BC617CB49FE00B135BF /* ITTVShowPoster.m */; };
 		04D74BCA17CBA18C00B135BF /* ITSync.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D74BC917CBA18B00B135BF /* ITSync.m */; };
+		04FE3AE517D8BBF200497DAD /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FE3AE417D8BBF200497DAD /* SystemConfiguration.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -295,6 +296,7 @@
 		04D74BC617CB49FE00B135BF /* ITTVShowPoster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITTVShowPoster.m; sourceTree = "<group>"; };
 		04D74BC817CBA18A00B135BF /* ITSync.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITSync.h; sourceTree = "<group>"; };
 		04D74BC917CBA18B00B135BF /* ITSync.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITSync.m; sourceTree = "<group>"; };
+		04FE3AE417D8BBF200497DAD /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -302,6 +304,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04FE3AE517D8BBF200497DAD /* SystemConfiguration.framework in Frameworks */,
 				04D74BC217CA9FB800B135BF /* CoreServices.framework in Frameworks */,
 				0446E06D17385349008BC1EB /* Sparkle.framework in Frameworks */,
 				049ACB0916C2AD43007F103C /* CFNetwork.framework in Frameworks */,
@@ -337,6 +340,7 @@
 		042F07E116BC19DB00A0CE9E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				04FE3AE417D8BBF200497DAD /* SystemConfiguration.framework */,
 				04D74BC117CA9FB800B135BF /* CoreServices.framework */,
 				048DF20216DFF64A004B064A /* Growl.framework */,
 				04714E7F16D2DEC000A308F7 /* Sparkle.framework */,

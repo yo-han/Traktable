@@ -52,6 +52,8 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+    NSLog(@"Offline modus inbouwen - check internet en sla offline scrobbles op");
+    
     // Make sure all logging with NSLog is ported to the log file in the compiled version of the app
     [self redirectConsoleLogToDocumentFolder];
     
@@ -66,29 +68,19 @@
     _sync = [[ITSync alloc] init];
     
     if(![self.api username] || ![self.api testAccount]) {
-        
-        [self noAuthAlert];
-        [self displayPreferences:self];
+
+        _showProgressWindow = YES;
+        [self showProgressWindow:nil];
         
         return;
         
     } else {
         
         NSLog(@"Startup normal, loggedin.");
-        
-        if([ITConstants firstBoot]) {
+
+        _showProgressWindow = NO;
             
-            _showProgressWindow = YES;
-            
-            [self showProgressWindow:nil];
-            [self.sync performSelectorInBackground:@selector(syncTraktExtended) withObject:nil];            
-            
-        } else {
-            
-            _showProgressWindow = NO;
-            
-            [self showWindow:self];
-        }
+        [self showWindow:self];
     }
     
     [[NSDistributedNotificationCenter defaultCenter] addObserver:self selector:@selector(iTunesChangedState:) name:@"com.apple.iTunes.playerInfo" object:@"com.apple.iTunes.player" suspensionBehavior:NSNotificationSuspensionBehaviorCoalesce];
@@ -209,7 +201,7 @@
 
     if(![self.api testAccount]) {
         
-        [self noAuthAlert];
+        //[self noAuthAlert];
         NSLog(@"No auth, no sync");
         return;
     }
@@ -253,7 +245,7 @@
     if([self.api testAccount]) {
         [self.library syncLibrary];
     } else {
-        [self noAuthAlert];
+
         NSLog(@"No auth, no sync");
     }
 }
@@ -313,14 +305,6 @@
     [self.preferencesWindow.window setLevel: NSStatusWindowLevel];
     
     [NSApp activateIgnoringOtherApps:YES];
-}
-
-- (void)noAuthAlert {
-    
-    NSAlert *alert = [[NSAlert alloc] init];
-    [alert setMessageText:@"Can't scrobble right now"];
-    [alert setInformativeText:@"You didn't submit your authentication data yet or it is incorrect. Without the right username and password it's pretty hard to scrobble..."];
-    [alert runModal];
 }
 
 #pragma mark -- NotificationCenter

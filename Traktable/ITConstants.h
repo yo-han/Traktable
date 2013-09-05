@@ -27,5 +27,6 @@ typedef enum ITSourceListIdentifier : NSUInteger {
 + (NSString *)applicationSupportFolder;
 
 + (BOOL)firstBoot;
++ (BOOL)traktReachable;
 
 @end

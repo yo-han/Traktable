@@ -7,6 +7,7 @@
 //
 
 #import "ITConstants.h"
+#import <SystemConfiguration/SystemConfiguration.h>
 
 @implementation ITConstants
 
@@ -35,5 +36,28 @@
     
     return NO;
 }
+
++(BOOL)traktReachable
+{
+    SCNetworkReachabilityRef target;
+    SCNetworkConnectionFlags flags = 0;
+    Boolean ok;
+
+    const char *hostName = [@"trakt.tv" cStringUsingEncoding:NSASCIIStringEncoding];
+    
+    target = SCNetworkReachabilityCreateWithName(NULL, hostName);
+    
+    SCNetworkReachabilityGetFlags(target, &flags);
+    
+    CFRelease(target);
+    
+    if(flags & kSCNetworkReachabilityFlagsConnectionRequired)
+        ok = NO;
+    else
+        ok = YES;
+    
+    return ok;
+}
+
 
 @end
