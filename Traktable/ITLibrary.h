@@ -19,6 +19,7 @@
 - (void)importLibrary;
 - (void)syncLibrary;
 - (BOOL)dbExists;
+- (void)resetDb;
 
 - (void)updateTrackCount:(iTunesTrack *)track scrobbled:(BOOL)scrobble;
 - (iTunesTrack *)getTrack:(NSString *)persistentID type:(iTunesESpK)videoType;

@@ -39,6 +39,11 @@
     return self;
 }
 
++ (void)syncTraktExtendedInBackgroundThread {
+    
+    [[self new] performSelectorInBackground:@selector(syncTraktExtended) withObject:nil];
+}
+
 - (void)syncTraktExtended {
     
     _extended = YES;

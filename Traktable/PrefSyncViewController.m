@@ -61,13 +61,12 @@
    
     ITApi *api = [ITApi new];
     ITLibrary *library = [[ITLibrary alloc] init];
-    ITSync *sync = [[ITSync alloc] init];
     
     if([api testAccount]) {
         
         [library syncLibrary];
         
-        [sync syncTraktExtended];
+        [ITSync syncTraktExtendedInBackgroundThread];
         
     } else {
         //[self noAuthAlert];
@@ -123,8 +122,10 @@
 - (IBAction)reset:(id)sender {
     
     ITDb *db = [ITDb new];
+    ITLibrary *library = [[ITLibrary alloc] init];
     
     [[NSFileManager defaultManager] removeItemAtPath:[db getDbFilePath] error:nil];
+    [library resetDb];
     
     NSString *logPath = @"/tmp/ITDebug.log";
     

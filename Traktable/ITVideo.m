@@ -64,8 +64,6 @@
     } else if (aType == iTunesEVdKMovie) {
         
         video = [ITMovie movieWithCurrentTunesTrack:track];
-        
-        
     }
     
     return video;

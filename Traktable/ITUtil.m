@@ -34,6 +34,7 @@
     
     NSDateFormatter* weekDayFormatter = [[NSDateFormatter alloc] init];
     [weekDayFormatter setFormatterBehavior:NSDateFormatterBehavior10_4];
+    [weekDayFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
     [weekDayFormatter setDateFormat:@"EEEE dd MMMM, yyyy"];
     
     NSDate *date = [self stringToDateTime:dateStr];
@@ -46,6 +47,7 @@
     
     NSDateFormatter* timeFormatter = [[NSDateFormatter alloc] init];
     [timeFormatter setFormatterBehavior:NSDateFormatterBehavior10_4];
+    [timeFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
     [timeFormatter setDateFormat:@"HH:mm"];
     
     NSDate *date = [self stringToDateTime:dateStr];

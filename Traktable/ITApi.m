@@ -125,7 +125,7 @@
                   self.username, @"username",
                   self.password, @"password",
                   aTVShow.show, @"title",
-                  [NSNumber numberWithInteger:aTVShow.year], @"year",
+                  [NSString stringWithFormat:@"%ld", aTVShow.year], @"year",
                   aBatch, @"episodes",
                   nil];
     } else {
@@ -184,10 +184,10 @@
     
     NSDictionary* headers = [NSDictionary dictionaryWithObjectsAndKeys:@"application/json", @"accept", nil];
 
-    HttpJsonResponse* response = [[Unirest post:^(MultipartRequest* request) {
+    HttpJsonResponse* response = [[Unirest postEntity:^(BodyRequest* request) {
         [request setUrl:requestUrl];
         [request setHeaders:headers];
-        [request setParameters:params];
+        [request setBody:[NSJSONSerialization dataWithJSONObject:params options:0 error:nil]];
     }] asJson];
     
     id responseObject = [NSJSONSerialization JSONObjectWithData:[response rawBody] options:0 error:nil];
@@ -199,11 +199,11 @@
 {
     NSDictionary* headers = [NSDictionary dictionaryWithObjectsAndKeys:@"application/json", @"accept", nil];
  
-    [[Unirest post:^(MultipartRequest* request) {
+    [[Unirest postEntity:^(BodyRequest* request) {
         
         [request setUrl:requestUrl];
         [request setHeaders:headers];
-        [request setParameters:params];
+        [request setBody:[NSJSONSerialization dataWithJSONObject:params options:0 error:nil]];
         
     }] asJsonAsync:^(HttpJsonResponse* response) {
         
@@ -220,7 +220,7 @@
 - (void)callAPI:(NSString*)apiCall WithParameters:(NSDictionary *)params notification:(NSDictionary *)notification {
 
     [self callURL:apiCall withParameters:params completionHandler:^(id response, NSError *err) {
-        
+
         if(![response isKindOfClass:[NSDictionary class]]) {
 
             NSLog(@"Repsonse is not an NSDictionary");
@@ -434,7 +434,7 @@
     if([update objectForKey:@"type"] != nil && [[update objectForKey:@"type"] isEqualToString:@"episode"]) {
         
         NSDate *timestamp = [NSDate dateWithTimeIntervalSince1970:[[update objectForKey:@"timestamp"] doubleValue]];
-        NSDictionary *argsDict;
+        NSDictionary *argsDict = [NSDictionary dictionary];
         
         if([update objectForKey:@"episode"] != nil) {
 
@@ -446,8 +446,8 @@
             
             //NSLog(@"%@",[db lastErrorMessage]);
 
-            [[NSNotificationCenter defaultCenter] postNotificationName:kITTVShowNeedsUpdateNotification object:self userInfo:argsDict];
-            [[NSNotificationCenter defaultCenter] postNotificationName:kITTVShowEpisodeNeedsUpdateNotification object:self userInfo:argsDict];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kITTVShowNeedsUpdateNotification object:nil userInfo:argsDict];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kITTVShowEpisodeNeedsUpdateNotification object:nil userInfo:argsDict];
         
         } else if([update objectForKey:@"episodes"] != nil) {
             
@@ -463,7 +463,7 @@
                 
                 //NSLog(@"%@",[db lastErrorMessage]);
                 
-                [[NSNotificationCenter defaultCenter] postNotificationName:kITTVShowEpisodeNeedsUpdateNotification object:self userInfo:argsDict];
+                [[NSNotificationCenter defaultCenter] postNotificationName:kITTVShowEpisodeNeedsUpdateNotification object:nil userInfo:argsDict];
             }
         }    
         
@@ -479,7 +479,7 @@
         
         //NSLog(@"%@",[db lastErrorMessage]);
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:kITMovieNeedsUpdateNotification object:self userInfo:argsDict];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kITMovieNeedsUpdateNotification object:nil userInfo:argsDict];
         
     } 
 }

@@ -21,13 +21,13 @@
 - (NSArray *)checkTracks:(NSArray *)tracks;
 
 @property dispatch_queue_t queue;
+@property dispatch_group_t dispatchGroup;
 
 @end
 
 @implementation ITLibrary
 
 @synthesize iTunesBridge;
-@synthesize queue=_queue;
 @synthesize dbFilePath;
 @synthesize firstImport;
 
@@ -51,6 +51,7 @@
         }
         
         _queue = dispatch_queue_create("traktable.library.queue", NULL);
+        _dispatchGroup = dispatch_group_create();
         
         ITDb *db = [ITDb new];
         [db executeAndGetOneResult:@"SELECT playedCount FROM library" arguments:nil];
@@ -154,20 +155,17 @@
     
     NSArray *movies = [self getVideos:iTunesESpKMovies noCheck:NO];
     NSArray *shows = [self getVideos:iTunesESpKTVShows noCheck:NO];
-    firstImport = NO;
-
-    NSArray *seenMovies = [self checkTracks:movies];
-    if([seenMovies count] > 0)
-        [api seen:seenMovies type:iTunesEVdKMovie video:nil];
     
+    firstImport = NO;
+    [self checkTracks:movies];
     [self checkTracks:shows];
     
     [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"ITLastSyncDate"];
 }
 
-- (NSArray *)checkTracks:(NSArray *)tracks {
+- (void)checkTracks:(NSArray *)tracks {
 
-    NSMutableArray *seenVideos = [[NSMutableArray alloc] init];
+    __block NSMutableArray *seenVideos = [NSMutableArray array];
     ITVideo *video = [ITVideo new];
     ITApi *api = [ITApi new];
        
@@ -176,10 +174,11 @@
         
         __block id playedCount;
         
-        dispatch_async(self.queue, ^{
+        dispatch_group_wait(self.dispatchGroup, DISPATCH_TIME_FOREVER);
+        dispatch_group_async(self.dispatchGroup, self.queue, ^{
             
             iTunesTrack *track = [tracks objectAtIndex:i];
-            
+        
             sleep(2);
             
             ITDb *db = [ITDb new];
@@ -187,7 +186,7 @@
             NSDictionary *result = [db executeAndGetOneResult:@"SELECT playedCount FROM library WHERE persistentId = ?" arguments:[NSArray arrayWithObject:[[track persistentID] description]]];
             
             playedCount = [result objectForKey:@"playedCount"];
-                            
+    
             iTunesEVdK *type;
             
             if([track seasonNumber] == 0)
@@ -206,16 +205,16 @@
                     
                     videoDict = [NSDictionary dictionaryWithObjectsAndKeys:
                                  [track name], @"title",
-                                 [NSNumber numberWithInteger:[track year]],@"year",
-                                 [NSNumber numberWithInteger:[track playedCount]],@"plays",
-                                 [NSNumber numberWithInteger:[[track playedDate] timeIntervalSince1970]],@"last_played",
+                                 [NSString stringWithFormat:@"%ld",(long)[track year]],@"year",
+                                 [NSString stringWithFormat:@"%ld",(long)[track playedCount]],@"plays",
+                                 [NSString stringWithFormat:@"%ld",(long)[[track playedDate] timeIntervalSince1970]],@"last_played",
                                  nil];
                     
                 } else {
                     
                     videoDict = [NSDictionary dictionaryWithObjectsAndKeys:
-                                 [NSNumber numberWithInteger:[track seasonNumber]],@"season",
-                                 [NSNumber numberWithInteger:[track episodeNumber]],@"episode",
+                                 [NSString stringWithFormat:@"%ld",(long)[track seasonNumber]],@"season",
+                                 [NSString stringWithFormat:@"%ld",(long)[track episodeNumber]],@"episode",
                                  nil];
                     
                     
@@ -224,9 +223,9 @@
                 scrobbleVideo = [video getITunesVideoByType:track type:type];
                 
                 if([track playedCount] > 0) {
-                    
+          
                     if([track seasonNumber] == 0) {
-                        
+             
                         [seenVideos addObject:videoDict];
                         
                     } else {
@@ -253,7 +252,12 @@
     
     }
     
-    return seenVideos;
+    
+    dispatch_group_notify(self.dispatchGroup, self.queue, ^{
+        
+        if([seenVideos count] > 0)
+            [api seen:seenVideos type:iTunesEVdKMovie video:nil];
+    });
 }
 
 - (void)updateTrackCount:(iTunesTrack *)track scrobbled:(BOOL)scrobble {

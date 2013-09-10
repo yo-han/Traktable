@@ -64,10 +64,6 @@ typedef NS_ENUM(NSUInteger, ITTableViewCellType) {
     [self.items removeAllObjects];
     
     switch (self.tableType) {
-        case ITHistoryMovies:
-            _tableViewCellType = ITTableViewMovieHistoryCell;
-            _items = (NSMutableArray *) [[self getHistory] fetchMovieHistory];
-            break;
         case ITHistoryTVShows:
             _tableViewCellType = ITTableViewTVShowHistoryCell;
             _items = (NSMutableArray *) [[self getHistory] fetchTvShowHistory];
@@ -76,8 +72,10 @@ typedef NS_ENUM(NSUInteger, ITTableViewCellType) {
             _tableViewCellType = ITTableViewErrorCell;
             _items = (NSMutableArray *) [[ITErrors new] fetchErrors];
             break;
+        case ITHistoryMovies:
         default:
-            return;
+            _tableViewCellType = ITTableViewMovieHistoryCell;
+            _items = (NSMutableArray *) [[self getHistory] fetchMovieHistory];
     }
 
     [self reloadTableView];
@@ -89,7 +87,8 @@ typedef NS_ENUM(NSUInteger, ITTableViewCellType) {
 }
 
 - (void)reloadTableView {
-    [self.tableView reloadData];
+   
+    [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
 }
 
 - (IBAction)clearErrors:(id)sender {
@@ -110,6 +109,9 @@ typedef NS_ENUM(NSUInteger, ITTableViewCellType) {
     if(self.tableViewCellType == ITTableViewMovieHistoryCell || self.tableType == ITTableViewTVShowHistoryCell) {
         
         id entry = [self _entryForRow:row];
+        
+        if(entry == nil)
+            return nil;
         
         if([entry isKindOfClass:[ITHistoryGroupHeader class]]) {
             
@@ -163,7 +165,10 @@ typedef NS_ENUM(NSUInteger, ITTableViewCellType) {
     } else if(self.tableType == ITTableViewErrorCell) {
         
         ITErrorTableCellView *cellView = [tableView makeViewWithIdentifier:cellType owner:self];
-
+        
+        if(row >= [self.items count])
+            return nil;
+        
         NSDictionary *entry = [self.items objectAtIndex:row];
         
         NSString *date = [ITUtil localeDateString:[entry objectForKey:@"timestamp"]];
@@ -207,6 +212,9 @@ typedef NS_ENUM(NSUInteger, ITTableViewCellType) {
 
 - (NSTableRowView *)tableView:(NSTableView *)tableView rowViewForRow:(NSInteger)row {
     
+    if (row >= [self.items count])
+        return nil;
+    
     id entry = [self _entryForRow:row];
     
     if([entry isKindOfClass:[ITHistoryGroupHeader class]])
@@ -219,6 +227,9 @@ typedef NS_ENUM(NSUInteger, ITTableViewCellType) {
 
 - (id)_entryForRow:(NSInteger)row {
     
+    if (row >= [self.items count])
+        return nil;
+        
     id entry = [ITHistory historyEntityWithHistoryObject:[self.items objectAtIndex:row]];
 
     return entry;

@@ -32,12 +32,15 @@ struct ITPosterSize ITMoviePosterSizeMediumSize = {500.0, 750.0};
     
     [self setSize:size];
     
-    NSString *imagePath = [[ITConstants applicationSupportFolder] stringByAppendingPathComponent:[NSString stringWithFormat:@"images/movies/%@/%@.jpg", movieId, self.sizeName]];
-    
-    if([[NSFileManager defaultManager] fileExistsAtPath:imagePath])
-        return [[NSImage alloc] initWithContentsOfFile:imagePath];
-    else
-        return nil;
+    @autoreleasepool {
+        
+        NSString *imagePath = [[ITConstants applicationSupportFolder] stringByAppendingPathComponent:[NSString stringWithFormat:@"images/movies/%@/%@.jpg", movieId, self.sizeName]];
+        
+        if([[NSFileManager defaultManager] fileExistsAtPath:imagePath])
+            return [[NSImage alloc] initWithContentsOfFile:imagePath];
+        else
+            return nil;
+    }
 }
 
 - (NSImage *)poster:(NSNumber *)movieId withUrl:(NSString *)urlString size:(ITMoviePosterSize)size {

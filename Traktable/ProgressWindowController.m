@@ -52,7 +52,6 @@
 - (IBAction)login:(id)sender {
     
     ITApi *api = [ITApi new];
-    ITSync *sync = [[ITSync alloc] init];
     
     [self.checking setHidden:NO];
     [self.checking startAnimation:self];
@@ -67,7 +66,7 @@
             
             [self.loginStatus setStringValue:@"Hooray, success!"];
             
-            [sync performSelectorInBackground:@selector(syncTraktExtended) withObject:nil];
+            [ITSync syncTraktExtendedInBackgroundThread];
             
             [self.loginView setHidden:YES];
             [self.progress setHidden:NO];
