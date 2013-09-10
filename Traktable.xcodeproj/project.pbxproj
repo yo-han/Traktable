@@ -90,7 +90,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		04044CAD17218FA6008ED807 /* SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson.h; sourceTree = "<group>"; };
 		04044CAE17218FA6008ED807 /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
 		04044CAF17218FA6008ED807 /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonParser.m; sourceTree = "<group>"; };
 		04044CB017218FA6008ED807 /* SBJsonStreamParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonStreamParser.h; sourceTree = "<group>"; };
@@ -199,6 +198,7 @@
 		049ACB0816C2AD43007F103C /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		049C48BC16C0223B00CC9A0E /* ITMovie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITMovie.h; sourceTree = "<group>"; };
 		049C48BD16C0223B00CC9A0E /* ITMovie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITMovie.m; sourceTree = "<group>"; };
+		04AC34A117DF6D890027A5E2 /* SBJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJson.h; sourceTree = "<group>"; };
 		04B284A517AE62E2005F9197 /* config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = config.plist; path = "../../Traktable-NonGit/config.plist"; sourceTree = "<group>"; };
 		04B284A617AE62E2005F9197 /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = dsa_pub.pem; path = "../../Traktable-NonGit/dsa_pub.pem"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -224,7 +224,7 @@
 		04044CAC17218FA6008ED807 /* SBJson */ = {
 			isa = PBXGroup;
 			children = (
-				04044CAD17218FA6008ED807 /* SBJson.h */,
+				04AC34A117DF6D890027A5E2 /* SBJson.h */,
 				04044CAE17218FA6008ED807 /* SBJsonParser.h */,
 				04044CAF17218FA6008ED807 /* SBJsonParser.m */,
 				04044CB017218FA6008ED807 /* SBJsonStreamParser.h */,
