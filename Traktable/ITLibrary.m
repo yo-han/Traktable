@@ -14,10 +14,11 @@
 @interface ITLibrary()
 
 - (id)init;
-- (NSArray *)checkTracks:(NSArray *)tracks;
+- (void)checkTracks:(NSArray *)tracks;
 - (void)createDir:(NSString *)dir;
 
 @property dispatch_queue_t queue;
+@property dispatch_group_t dispatchGroup;
 
 @end
 
@@ -25,7 +26,6 @@
 
 @synthesize iTunesBridge;
 @synthesize dbQueue=_dbQueue;
-@synthesize queue=_queue;
 @synthesize dbFilePath;
 @synthesize firstImport;
 
@@ -47,6 +47,7 @@
     
     _dbQueue = [FMDatabaseQueue databaseQueueWithPath:dbFilePath];
     _queue = dispatch_queue_create("traktable.sync.queue", NULL);
+    _dispatchGroup = dispatch_group_create();
     
     [self.dbQueue inDatabase:^(FMDatabase *db) {
         FMResultSet *s = [db executeQuery:@"SELECT playedCount FROM library"];
@@ -118,16 +119,12 @@
 
 - (void)importLibrary {
     
-    ITApi *api = [[ITApi alloc] init];
     firstImport = YES;
     
     NSArray *movies = [self getVideos:iTunesESpKMovies noCheck:YES];
     NSArray *shows = [self getVideos:iTunesESpKTVShows noCheck:YES];
 
-    NSArray *seenMovies = [self checkTracks:movies];
-    if([seenMovies count] > 0)
-        [api seen:seenMovies type:iTunesEVdKMovie video:nil];
-    
+    [self checkTracks:movies];
     [self checkTracks:shows];
     
     dispatch_sync(_queue, ^{
@@ -141,23 +138,19 @@
         [self init];
         return;
     }
-       
-    ITApi *api = [[ITApi alloc] init];
-    
+
     NSArray *movies = [self getVideos:iTunesESpKMovies noCheck:NO];
     NSArray *shows = [self getVideos:iTunesESpKTVShows noCheck:NO];
+    
     firstImport = NO;
 
-    NSArray *seenMovies = [self checkTracks:movies];
-    if([seenMovies count] > 0)
-        [api seen:seenMovies type:iTunesEVdKMovie video:nil];
-    
+    [self checkTracks:movies];
     [self checkTracks:shows];
     
     [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:@"ITLastSyncDate"];
 }
 
-- (NSArray *)checkTracks:(NSArray *)tracks {
+- (void)checkTracks:(NSArray *)tracks {
     
     NSMutableArray *seenVideos = [[NSMutableArray alloc] init];
     ITVideo *video = [ITVideo new];
@@ -168,7 +161,8 @@
         
         __block id playedCount;
         
-        dispatch_async(_queue, ^{
+        dispatch_group_wait(self.dispatchGroup, DISPATCH_TIME_FOREVER);
+        dispatch_group_async(self.dispatchGroup, self.queue, ^{
             
             iTunesTrack *track = [tracks objectAtIndex:i];
             
@@ -249,7 +243,10 @@
     
     }
     
-    return seenVideos;
+    dispatch_group_notify(self.dispatchGroup, self.queue, ^{
+        if([seenVideos count] > 0)
+            [api seen:seenVideos type:iTunesEVdKMovie video:nil];
+    });
 }
 
 - (void)updateTrackCount:(iTunesTrack *)track scrobbled:(BOOL)scrobble {
