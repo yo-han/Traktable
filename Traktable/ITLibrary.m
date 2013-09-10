@@ -18,7 +18,7 @@
 @interface ITLibrary()
 
 - (id)init;
-- (NSArray *)checkTracks:(NSArray *)tracks;
+- (void)checkTracks:(NSArray *)tracks;
 
 @property dispatch_queue_t queue;
 @property dispatch_group_t dispatchGroup;
@@ -128,16 +128,12 @@
 
 - (void)importLibrary {
     
-    ITApi *api = [ITApi new];
     firstImport = YES;
     
     NSArray *movies = [self getVideos:iTunesESpKMovies noCheck:YES];
     NSArray *shows = [self getVideos:iTunesESpKTVShows noCheck:YES];
 
-    NSArray *seenMovies = [self checkTracks:movies];
-    if([seenMovies count] > 0)
-        [api seen:seenMovies type:iTunesEVdKMovie video:nil];
-    
+    [self checkTracks:movies];
     [self checkTracks:shows];
     
     dispatch_sync(self.queue, ^{
@@ -150,8 +146,6 @@
     if(![self dbExists]) {
         [self resetDb];
     }
-       
-    ITApi *api = [[ITApi alloc] init];
     
     NSArray *movies = [self getVideos:iTunesESpKMovies noCheck:NO];
     NSArray *shows = [self getVideos:iTunesESpKTVShows noCheck:NO];
