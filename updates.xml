@@ -5,6 +5,15 @@
       <link>http://yo-han.github.io/Traktable</link>
       <description>Some updates to the Traktable scrobbler.</description>
       <language>en</language>
+       
+       <item>
+           <title>Version 0.4.3</title>
+           <sparkle:releaseNotesLink>
+               http://yo-han.github.io/Traktable/changelog/0.4.3.html
+           </sparkle:releaseNotesLink>
+           <pubDate>Tue, 10 Sep 2013 17:00:00 +0100</pubDate>
+           <enclosure url="http://bit.ly/14II511" sparkle:version="0.4.3" length="1623481" type="application/octet-stream" sparkle:dsaSignature="MC0CFAaZ6pqyQGItiglhjY/44EnVunJqAhUAgQUcWRDVhC7MRdsxrpcC7tog0zg=" />
+       </item>
       	<item>
             <title>Version 0.4.2</title>
 			<sparkle:releaseNotesLink>
