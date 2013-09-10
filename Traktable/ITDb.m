@@ -136,7 +136,20 @@ static int dbVersion = 1;
     
     [self.dbQueue inDatabase:^(FMDatabase *db) {
         
-        FMResultSet *s = [db executeQuery:sql withArgumentsInArray:args];
+        FMResultSet *s;
+        
+        if(args == nil) {
+
+            s = [db executeQuery:sql];
+            
+        } else if([args isKindOfClass:[NSArray class]] && [args count] > 0) {
+
+            s = [db executeQuery:sql withArgumentsInArray:args];
+        } else {
+            
+            NSLog(@"Invalid query: %@ with arguments: %@", sql, args);
+            return;
+        }
         
         self.errorMessage = [db lastErrorMessage];
         

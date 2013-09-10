@@ -60,6 +60,9 @@
     // Register this class as the NotificationCenter delegate
     [[NSUserNotificationCenter defaultUserNotificationCenter] setDelegate:self];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showProgressWindow:) name:kITUpdateProgressWindowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideProgressWindow) name:kITHideProgressWindowNotification object:nil];
+    
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"NSConstraintBasedLayoutVisualizeMutuallyExclusiveConstraints"];
     
     _api = [ITApi new];
@@ -88,10 +91,7 @@
     [[NSDistributedNotificationCenter defaultCenter] addObserver:self selector:@selector(iTunesSourceSaved:) name:@"com.apple.iTunes.sourceSaved" object:@"com.apple.iTunes.sources" suspensionBehavior:NSNotificationSuspensionBehaviorCoalesce];
     
     [[NSDistributedNotificationCenter defaultCenter] addObserver:self selector:@selector(VLCPlayerStateDidChange) name:@"VLCPlayerStateDidChange" object:nil suspensionBehavior:NSNotificationSuspensionBehaviorCoalesce];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showProgressWindow:) name:kITUpdateProgressWindowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideProgressWindow) name:kITHideProgressWindowNotification object:nil];
-    
+       
     [NSTimer timerWithTimeInterval:86400 target:self.sync selector:@selector(syncTraktExtended) userInfo:nil repeats:YES];
 }
 
@@ -143,7 +143,7 @@
 }
 
 - (void)hideProgressWindow {
-    
+
     [self.progressWindow.window orderOut:nil];
     [self showWindow:self];
 }

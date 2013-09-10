@@ -46,8 +46,7 @@ typedef NS_ENUM(NSUInteger, ITTableViewCellType) {
 
     // Register an observer for history updates
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:kITHistoryNeedsUpdateNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableView) name:kITHistoryTableReloadNotification object:nil];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableView) name:kITHistoryTableReloadNotification object:nil];    
 }
 
 - (ITHistory *)getHistory {

@@ -11,6 +11,7 @@
 #import "ITApi.h"
 #import "ITNotification.h"
 #import "ITDb.h"
+#import "ITSync.h"
 
 @interface PrefSyncViewController()
 
@@ -60,9 +61,14 @@
    
     ITApi *api = [ITApi new];
     ITLibrary *library = [[ITLibrary alloc] init];
+    ITSync *sync = [[ITSync alloc] init];
     
     if([api testAccount]) {
+        
         [library syncLibrary];
+        
+        [sync syncTraktExtended];
+        
     } else {
         //[self noAuthAlert];
         NSLog(@"No auth, no sync");
@@ -84,6 +90,7 @@
     
     ITApi *api = [ITApi new];
     ITLibrary *library = [[ITLibrary alloc] init];
+    ITSync *sync = [[ITSync alloc] init];
     
     if([api testAccount]) {
         
@@ -95,6 +102,8 @@
         dispatch_async(queue, ^{
             
             [library importLibrary];
+            
+            [sync syncTraktExtended];
             
             dispatch_async(queue, ^{
                 [ITNotification showNotification:[NSString stringWithFormat:@"iTunes library import done"]];
@@ -121,7 +130,8 @@
     
     [[NSFileManager defaultManager] removeItemAtPath:logPath error:nil];
     freopen([logPath fileSystemRepresentation],"a+",stderr);
-
+    
+    
 }
 
 - (IBAction)addToCollection:(id)sender {

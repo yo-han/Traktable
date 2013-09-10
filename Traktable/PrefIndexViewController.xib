@@ -92,7 +92,7 @@
 							<int key="NSCellFlags">-2080374784</int>
 							<int key="NSCellFlags2">134217728</int>
 							<string key="NSContents">test credentials</string>
-							<object class="NSFont" key="NSSupport">
+							<object class="NSFont" key="NSSupport" id="413550066">
 								<string key="NSName">LucidaGrande</string>
 								<double key="NSSize">13</double>
 								<int key="NSfFlags">1044</int>
@@ -101,7 +101,7 @@
 							<reference key="NSControlView" ref="504355942"/>
 							<int key="NSButtonFlags">-2038022144</int>
 							<int key="NSButtonFlags2">129</int>
-							<object class="NSFont" key="NSAlternateImage" id="629413897">
+							<object class="NSFont" key="NSAlternateImage">
 								<string key="NSName">HelveticaNeue</string>
 								<double key="NSSize">13</double>
 								<int key="NSfFlags">16</int>
@@ -127,7 +127,7 @@
 							<int key="NSCellFlags">342884416</int>
 							<int key="NSCellFlags2">272630848</int>
 							<string key="NSContents"/>
-							<reference key="NSSupport" ref="629413897"/>
+							<reference key="NSSupport" ref="413550066"/>
 							<string key="NSPlaceholderString"/>
 							<string key="NSCellIdentifier">_NS:9</string>
 							<reference key="NSControlView" ref="862964143"/>
@@ -170,7 +170,7 @@
 							<int key="NSCellFlags">-1804599231</int>
 							<int key="NSCellFlags2">272630784</int>
 							<string key="NSContents"/>
-							<reference key="NSSupport" ref="629413897"/>
+							<reference key="NSSupport" ref="413550066"/>
 							<string key="NSCellIdentifier">_NS:9</string>
 							<reference key="NSControlView" ref="737190844"/>
 							<bool key="NSDrawsBackground">YES</bool>
@@ -192,7 +192,7 @@
 							<int key="NSCellFlags">68157504</int>
 							<int key="NSCellFlags2">272630784</int>
 							<string key="NSContents">Password:</string>
-							<reference key="NSSupport" ref="629413897"/>
+							<reference key="NSSupport" ref="413550066"/>
 							<string key="NSCellIdentifier">_NS:1535</string>
 							<reference key="NSControlView" ref="434923738"/>
 							<reference key="NSBackgroundColor" ref="528876265"/>
@@ -218,7 +218,7 @@
 							<int key="NSCellFlags">68157504</int>
 							<int key="NSCellFlags2">272630784</int>
 							<string key="NSContents">Username:</string>
-							<reference key="NSSupport" ref="629413897"/>
+							<reference key="NSSupport" ref="413550066"/>
 							<string key="NSCellIdentifier">_NS:1535</string>
 							<reference key="NSControlView" ref="709422095"/>
 							<reference key="NSBackgroundColor" ref="528876265"/>
@@ -455,6 +455,17 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">PrefIndexViewController</string>
 					<string key="superclassName">NSViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">testAuth:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">testAuth:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">testAuth:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="name">NSTextField</string>
 						<string key="password">NSSecureTextField</string>

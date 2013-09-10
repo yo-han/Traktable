@@ -55,7 +55,7 @@
         // tell the main thread
         dispatch_async(dispatch_get_main_queue(), ^{
             if (error != nil) {
-                errorBlock(error);
+                //errorBlock(error);
             } else {
                 resultBlock(result);
             }

@@ -70,7 +70,7 @@
         
         ITEpisodeScreen *screen = [ITEpisodeScreen new];
         ITTVShow *show = (ITTVShow *) object;
-        
+   
         history.title = show.title;
         history.poster = [screen getScreen:show.showId season:[NSNumber numberWithInt:show.seasonNumber] episode:[NSNumber numberWithInt:show.episodeNumber] withSize:ITEpisodeScreenSizeMedium];
         history.timestamp = show.timestamp;

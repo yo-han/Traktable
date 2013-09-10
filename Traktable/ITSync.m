@@ -45,15 +45,16 @@
     
     /** Sync movies **/
     [self sync:iTunesEVdKMovie extended:self.extended];
-    
+
     /** Sync series **/
     [self sync:iTunesEVdKTVShow extended:self.extended];
-    
+
     /** Sync trakt history **/
     ITApi *api = [ITApi new];
     [api historySync];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:kITHideProgressWindowNotification object:nil];    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kITHideProgressWindowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kITHistoryTableReloadNotification object:nil];
 }
 
 - (void)sync:(iTunesEVdK)type extended:(BOOL)extended {
@@ -176,6 +177,10 @@
     ITApi *api = [ITApi new];
     
     NSDictionary *item = notification.userInfo;
+    
+    if(item == nil)
+        return;
+    
     NSNumber *videoId = [item objectForKey:@"tvdb_id"];
     NSNumber *episode = [item objectForKey:@"episode"];
     NSNumber *season = [item objectForKey:@"season"];

@@ -42,6 +42,9 @@ struct ITEpisodeScreenSize ITEpisodeScreenSizeMediumSize = {200.0, 110.0};
 
 - (NSImage *)screen:(NSNumber *)showId season:(NSNumber *)season episode:(NSNumber *)episode withUrl:(NSString *)urlString size:(ITEpisodeScreenSize)size {
     
+    if([urlString isEqualTo:[NSNull null]])
+        return [NSImage imageNamed:@"movies.png"];
+
     [self setSize:size];
     
     NSString *imagePath = [[ITConstants applicationSupportFolder] stringByAppendingPathComponent:[NSString stringWithFormat:@"images/episodes/%@/S%@/E%@_%@.jpg", showId, season, episode, self.sizeName]];
