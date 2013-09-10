@@ -37,7 +37,7 @@
 
 - (NSString *)sha1Hash:(NSString *)input   {
     
-    const char *cstr = [input cStringUsingEncoding:NSUTF8StringEncoding];
+    const char *cstr = [input UTF8String];
     NSData *data = [NSData dataWithBytes:cstr length:input.length];
     uint8_t digest[CC_SHA1_DIGEST_LENGTH];
     
