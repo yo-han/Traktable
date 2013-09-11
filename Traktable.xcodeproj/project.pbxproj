@@ -53,7 +53,6 @@
 		046C9BD916C168880003AD64 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 046C9BC816C166AE0003AD64 /* FMDatabaseQueue.m */; };
 		046C9BDB16C168880003AD64 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 046C9BCB16C166AE0003AD64 /* FMResultSet.m */; };
 		046C9BDC16C16F490003AD64 /* iTraktor.db in Resources */ = {isa = PBXBuildFile; fileRef = 046C9BCF16C167B80003AD64 /* iTraktor.db */; };
-		04714E2516D2BFBB00A308F7 /* config-example.plist in Resources */ = {isa = PBXBuildFile; fileRef = 04714E2416D2BFBB00A308F7 /* config-example.plist */; };
 		04714E2816D2C59900A308F7 /* ITConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 04714E2716D2C59900A308F7 /* ITConfig.m */; };
 		04714E8116D2DEC500A308F7 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 04714E7F16D2DEC000A308F7 /* Sparkle.framework */; };
 		047D985417D67285002E97B8 /* ITTableRowGroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 047D985317D67285002E97B8 /* ITTableRowGroupView.m */; };
@@ -202,7 +201,6 @@
 		046C9BCB16C166AE0003AD64 /* FMResultSet.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
 		046C9BCF16C167B80003AD64 /* iTraktor.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTraktor.db; sourceTree = "<group>"; };
 		046C9BD016C1685B0003AD64 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
-		04714E2416D2BFBB00A308F7 /* config-example.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "config-example.plist"; sourceTree = "<group>"; };
 		04714E2616D2C59900A308F7 /* ITConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITConfig.h; sourceTree = "<group>"; };
 		04714E2716D2C59900A308F7 /* ITConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITConfig.m; sourceTree = "<group>"; };
 		04714E7F16D2DEC000A308F7 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
@@ -407,7 +405,6 @@
 				04B68C9D17A55E63006760D0 /* config.plist */,
 				04B68C9E17A55E63006760D0 /* dsa_pub.pem */,
 				048DF20916DFFF17004B064A /* sync.png */,
-				04714E2416D2BFBB00A308F7 /* config-example.plist */,
 				046C9BCF16C167B80003AD64 /* iTraktor.db */,
 				042F07EA16BC19DB00A0CE9E /* Traktable-Info.plist */,
 				042F07EB16BC19DB00A0CE9E /* InfoPlist.strings */,
@@ -746,7 +743,6 @@
 				0469CC1916CBF19F006863B7 /* README.md in Resources */,
 				0437203316CEF3ED003B8AB6 /* icon.icns in Resources */,
 				0437204316CEF823003B8AB6 /* menuicon.png in Resources */,
-				04714E2516D2BFBB00A308F7 /* config-example.plist in Resources */,
 				048DF1F816DEC3ED004B064A /* PrefSyncViewController.xib in Resources */,
 				048DF1FA16DECC6B004B064A /* PrefUpdateViewController.h in Resources */,
 				048DF1FE16DECD14004B064A /* PrefUpdateViewController.xib in Resources */,

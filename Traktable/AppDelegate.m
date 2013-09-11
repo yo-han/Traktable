@@ -121,6 +121,8 @@
     [self.mainWindow.window makeKeyAndOrderFront:self];
     
     [self.progressWindow.window orderOut:nil];
+    
+    [NSApp activateIgnoringOtherApps:YES];
 }
 
 - (void)migrateProgressWindow {
