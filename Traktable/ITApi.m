@@ -409,8 +409,8 @@
     id responseObject = [body JSONObject];
     
     if([responseObject isKindOfClass:[NSDictionary class]]) {
-        NSLog(@"DEBUG - PLEASE REMOVE");
-        //[[NSUserDefaults standardUserDefaults] setInteger:lastSync forKey:@"traktable.ITHistorySyncLast"];
+        
+        [[NSUserDefaults standardUserDefaults] setInteger:[[NSDate date] timeIntervalSince1970] forKey:@"traktable.ITHistorySyncLast"];
         
         int n = 0;
         
