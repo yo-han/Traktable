@@ -29,9 +29,10 @@
 @interface AppDelegate()
 
 @property(assign) BOOL showProgressWindow;
+@property(assign) double lastProgressValue;
 
 @property(strong) MainWindowController *mainWindow;
-@property(strong) ProgressWindowController *progressWindow;
+@property(strong, nonatomic) ProgressWindowController *progressWindow;
 
 @property(nonatomic, retain) ITApi *api;
 @property(nonatomic, retain) ITVideo *video;
@@ -62,8 +63,13 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showProgressWindow:) name:kITUpdateProgressWindowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideProgressWindow) name:kITHideProgressWindowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(migrateProgressWindow) name:kITMigrateProgressWindowNotification object:nil];
     
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"NSConstraintBasedLayoutVisualizeMutuallyExclusiveConstraints"];
+    
+    // Setup progressWindow
+    if(!self.progressWindow)
+        _progressWindow = [[ProgressWindowController alloc] initWithWindowNibName:@"ProgressWindowController"];
     
     _api = [ITApi new];
     _video = [[ITVideo alloc] init];
@@ -110,22 +116,33 @@
     [NSApp activateIgnoringOtherApps:YES];
 }
 
+- (void)migrateProgressWindow {
+    
+    _showProgressWindow = YES;
+    _lastProgressValue = 0;
+    
+    [self.progressWindow showWindow:self];
+}
+
 - (void)showProgressWindow:(NSNotification *)notification {
     
     if(self.showProgressWindow == NO)
         return;
     
-    if(!self.progressWindow)
-        _progressWindow = [[ProgressWindowController alloc] initWithWindowNibName:@"ProgressWindowController"];
-    
     [self.progressWindow.window makeKeyAndOrderFront:self];
-    
-    if(notification == nil)
+
+    if(notification == nil) {
         [self.progressWindow.progress setIndeterminate:YES];
-    else {
+    } else {
         
         double progress = [[notification.userInfo objectForKey:@"progress"] doubleValue];
         
+        if(self.lastProgressValue > progress) {
+            _lastProgressValue = progress;
+            [self.progressWindow.progress setIndeterminate:YES];
+        }
+        
+        [self.progressWindow.loginView setHidden:YES];
         [self.progressWindow.progress setIndeterminate:NO];
         [self.progressWindow.progress setDoubleValue:progress];
         
@@ -143,7 +160,7 @@
 }
 
 - (void)hideProgressWindow {
-
+   
     [self.progressWindow.window orderOut:nil];
     [self showWindow:self];
 }

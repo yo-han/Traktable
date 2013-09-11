@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>C89403A0-205D-414E-89BC-E7C7003C8678</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Traktable</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>5C56C816-9049-4D98-AE22-C0D6AB7CC085</key>
+		<string>https://github.com/yo-han/Traktable.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Traktable.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>5C56C816-9049-4D98-AE22-C0D6AB7CC085</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/yo-han/Traktable.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>5C56C816-9049-4D98-AE22-C0D6AB7CC085</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>5C56C816-9049-4D98-AE22-C0D6AB7CC085</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Traktable</string>
+		</dict>
+	</array>
+</dict>
+</plist>

@@ -19,13 +19,13 @@
 
 @implementation ProgressWindowController
 
-@synthesize checking, username, password, login, loginView, loginStatus;
+@synthesize checking, username, password, login, loginView, loginStatus, bgImage;
 
 - (id)initWithWindow:(NSWindow *)window
 {
     self = [super initWithWindow:window];
     if (self) {
-        // Initialization code here.
+       
     }
     
     return self;
@@ -35,7 +35,7 @@
 {
     [super windowDidLoad];
     
-    
+    [self.bgImage setAlphaValue:0.3];
 }
 
 - (void)controlTextDidChange:(NSNotification *)notification {

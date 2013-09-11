@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0403609117DFAEA90014D6D6 /* it-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0403609017DFAEA90014D6D6 /* it-icon.png */; };
+		04162D2617DFC90A0086EFB0 /* NSData+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 04162D2517DFC90A0086EFB0 /* NSData+Additions.m */; };
 		042F07E316BC19DB00A0CE9E /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 042F07E216BC19DB00A0CE9E /* Cocoa.framework */; };
 		042F07ED16BC19DB00A0CE9E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 042F07EB16BC19DB00A0CE9E /* InfoPlist.strings */; };
 		042F07EF16BC19DB00A0CE9E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 042F07EE16BC19DB00A0CE9E /* main.m */; };
@@ -125,6 +127,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0403609017DFAEA90014D6D6 /* it-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "it-icon.png"; sourceTree = "<group>"; };
+		04162D2417DFC90A0086EFB0 /* NSData+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Additions.h"; sourceTree = "<group>"; };
+		04162D2517DFC90A0086EFB0 /* NSData+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Additions.m"; sourceTree = "<group>"; };
 		042F07DE16BC19DB00A0CE9E /* Traktable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Traktable.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		042F07E216BC19DB00A0CE9E /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		042F07E516BC19DB00A0CE9E /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -361,10 +366,8 @@
 			children = (
 				042F07F416BC19DB00A0CE9E /* AppDelegate.h */,
 				042F07F516BC19DB00A0CE9E /* AppDelegate.m */,
-				047D985517D67ED7002E97B8 /* ProgressWindowController.h */,
-				047D985617D67ED7002E97B8 /* ProgressWindowController.m */,
-				047D985717D67ED7002E97B8 /* ProgressWindowController.xib */,
-				04AB5F1C17C569CF00A2B1AC /* Window */,
+				04AC34A217DF893B0027A5E2 /* Progress/Login Window */,
+				04AB5F1C17C569CF00A2B1AC /* Main Window */,
 				04BAD1A217CBA2AE00AA815A /* Models */,
 				042F080916BC1E4C00A0CE9E /* ITApi.h */,
 				042F080A16BC1E4C00A0CE9E /* ITApi.m */,
@@ -422,6 +425,8 @@
 			children = (
 				04A9FE5117B43E0C006CD129 /* NSImage+MGCropExtensions.h */,
 				04A9FE5217B43E0C006CD129 /* NSImage+MGCropExtensions.m */,
+				04162D2417DFC90A0086EFB0 /* NSData+Additions.h */,
+				04162D2517DFC90A0086EFB0 /* NSData+Additions.m */,
 				04B68CF917A5BE74006760D0 /* Unirest */,
 				04B68CB417A56E25006760D0 /* PXSourceList */,
 				0469CC0116CBF19F006863B7 /* itvdb */,
@@ -446,6 +451,7 @@
 		043942A517D0006C009C160F /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				0403609017DFAEA90014D6D6 /* it-icon.png */,
 				04B5BE7717D53644001F0705 /* error.png */,
 				0441839417D0DA5200F9FCA2 /* trakttv.png */,
 				0441839617D0DA9D00F9FCA2 /* trakttv_pressed.png */,
@@ -559,7 +565,7 @@
 			name = views;
 			sourceTree = "<group>";
 		};
-		04AB5F1C17C569CF00A2B1AC /* Window */ = {
+		04AB5F1C17C569CF00A2B1AC /* Main Window */ = {
 			isa = PBXGroup;
 			children = (
 				04B68CA617A5600D006760D0 /* MainWindowController.h */,
@@ -584,7 +590,17 @@
 				04B5BE7A17D5401B001F0705 /* ITToolbar.m */,
 				043942C317D07D74009C160F /* MainWindowController.xib */,
 			);
-			name = Window;
+			name = "Main Window";
+			sourceTree = "<group>";
+		};
+		04AC34A217DF893B0027A5E2 /* Progress/Login Window */ = {
+			isa = PBXGroup;
+			children = (
+				047D985517D67ED7002E97B8 /* ProgressWindowController.h */,
+				047D985617D67ED7002E97B8 /* ProgressWindowController.m */,
+				047D985717D67ED7002E97B8 /* ProgressWindowController.xib */,
+			);
+			name = "Progress/Login Window";
 			sourceTree = "<group>";
 		};
 		04B68CB417A56E25006760D0 /* PXSourceList */ = {
@@ -748,6 +764,7 @@
 				0441839717D0DA9D00F9FCA2 /* trakttv_pressed.png in Resources */,
 				04B5BE7817D53644001F0705 /* error.png in Resources */,
 				047D985917D67ED7002E97B8 /* ProgressWindowController.xib in Resources */,
+				0403609117DFAEA90014D6D6 /* it-icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -776,6 +793,7 @@
 				0481386A16CA8C6000E682A0 /* PrefIndexViewController.m in Sources */,
 				0469CC0016CBE010006863B7 /* IMDB.m in Sources */,
 				0469CC1616CBF19F006863B7 /* NSString+Helper.m in Sources */,
+				04162D2617DFC90A0086EFB0 /* NSData+Additions.m in Sources */,
 				0469CC1A16CBF19F006863B7 /* TVDbClient.m in Sources */,
 				0469CC1B16CBF19F006863B7 /* TVDbEpisode.m in Sources */,
 				0469CC1C16CBF19F006863B7 /* TVDbImage.m in Sources */,

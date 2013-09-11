@@ -26,7 +26,6 @@
 {
     self = [super initWithWindow:window];
     if (self) {
-        
     }
     
     return self;
@@ -66,7 +65,6 @@
     [self.toolbar setHidden:YES];
     [self.tableViewBottomConstraint setConstant:0];
 }
-
 
 #pragma mark -
 #pragma mark Source List Data Source Methods

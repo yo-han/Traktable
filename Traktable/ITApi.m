@@ -15,6 +15,7 @@
 #import "ITNotification.h"
 #import "Unirest.h"
 #import "ITConstants.h"
+#import "NSData+Additions.h"
 
 #define kApiUrl @"http://api.trakt.tv"
 
@@ -370,7 +371,7 @@
     
     NSString *url = [NSString stringWithFormat:@"%@/user/library/%@/watched.json/%@/%@/%@", kApiUrl, type, [self apiKey], self.username, ext];
     
-    NSDictionary* headers = [NSDictionary dictionaryWithObjectsAndKeys:@"application/json", @"accept", nil];
+    NSDictionary* headers = [self basicAuthHeaders];
     
     HttpJsonResponse* response = [[Unirest get:^(SimpleRequest* request) {
         [request setUrl:url];
@@ -393,7 +394,7 @@
         
     NSString *url = [NSString stringWithFormat:@"%@/activity/user.json/%@/%@/movie,show,episode/scrobble,seen/%ld?min=1", kApiUrl, [self apiKey], self.username, (long)lastSync];
 
-    NSDictionary* headers = [NSDictionary dictionaryWithObjectsAndKeys:@"application/json", @"accept", nil];
+    NSDictionary* headers = [self basicAuthHeaders];
     
     HttpJsonResponse* response = [[Unirest get:^(SimpleRequest* request) {
         [request setUrl:url];
@@ -482,6 +483,17 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:kITMovieNeedsUpdateNotification object:nil userInfo:argsDict];
         
     } 
+}
+
+- (NSDictionary *)basicAuthHeaders {
+    
+    NSString *authStr = [NSString stringWithFormat:@"%@:%@", [self username], [self password]];
+    NSData *authData = [authStr dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *authValue = [NSString stringWithFormat:@"Basic %@", [authData base64Encoding]];
+    
+    NSDictionary* headers = [NSDictionary dictionaryWithObjectsAndKeys:@"application/json", @"accept", authValue, @"Authorization", nil];
+    
+    return headers;
 }
 
 - (void)traktError:(NSDictionary *)response {

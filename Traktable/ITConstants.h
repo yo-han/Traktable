@@ -15,6 +15,7 @@
 #define kITTVShowEpisodeNeedsUpdateNotification @"ITSyncUpdateEpisode"
 #define kITUpdateProgressWindowNotification @"ITUpdateProgressWindow"
 #define kITHideProgressWindowNotification @"ITHideProgressWindow"
+#define kITMigrateProgressWindowNotification @"ITMigrateWindowUpdate"
 
 @interface ITConstants : NSObject
 

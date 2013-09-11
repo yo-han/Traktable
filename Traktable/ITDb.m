@@ -10,6 +10,7 @@
 #import "ITConstants.h"
 #import "FMDatabase.h"
 #import "FMDatabaseQueue.h"
+#import "ITSync.h"
 
 static NSString *dbFile = @"iTraktor.db";
 static int dbVersion = 1;
@@ -203,9 +204,14 @@ static int dbVersion = 1;
     
     NSLog(@"Migrating database schema from version %d to version %d", version, dbVersion);
     
+    [[NSNotificationCenter defaultCenter] postNotificationName:kITMigrateProgressWindowNotification object:nil];
+    
+    /*[self backupDatabaseFile];
+    
     [self.dbQueue inDatabase:^(FMDatabase *db) {
         
         if (version < 1) {
+            
             [db executeUpdate:@"CREATE TABLE \"movies\" (\"movieId\" INTEGER PRIMARY KEY AUTOINCREMENT,\"tmdb_id\" INTEGER,\"imdb_id\" INTEGER,\"extended\" INTEGER, \"year\" INTEGER,\"traktPlays\" INTEGER,\"released\" INTEGER,\"runtime\" INTEGER,\"poster\" TEXT,\"title\" TEXT,\"tagline\" TEXT,\"overview\" TEXT,\"trailer\" TEXT,\"traktUrl\" TEXT,\"genres\" BLOB);"];
             
             [db executeUpdate:@"CREATE UNIQUE INDEX \"uid_movie\" ON \"movies\" (\"tmdb_id\");"];            
@@ -221,13 +227,26 @@ static int dbVersion = 1;
             [db executeUpdate:@"CREATE TABLE \"history\" (\"uid\" TEXT PRIMARY KEY,\"tvdb_id\" INTEGER,\"tmdb_id\" INTEGER,\"imdb_id\" TEXT,\"type\" TEXT,\"action\" TEXT,\"timestamp\" DATETIME,\"season\" INTEGER,\"episode\" INTEGER);"];
             
             [db executeUpdate:@"CREATE TABLE \"errors\" (\"errorId\" INTEGER PRIMARY KEY AUTOINCREMENT,\"description\" TEXT,\"timestamp\" DATETIME);"];
-            
         }
     }];
     
     [self setDatabaseSchemaVersion:dbVersion];
+    */
+    ITSync *sync = [[ITSync alloc] init];
+    [sync syncTraktExtended];
     
     NSLog(@"Database schema version after migration is %d", [self databaseSchemaVersion]);
+}
+
+- (void)backupDatabaseFile {
+    
+    int version = [self databaseSchemaVersion];
+    
+    NSString *source = [self getDbFilePath];
+    NSString *destination = [NSString stringWithFormat:@"%@.v%d", source, version];
+
+    if ([[NSFileManager defaultManager] isReadableFileAtPath:source])
+        [[NSFileManager defaultManager] copyItemAtURL:[NSURL fileURLWithPath:source] toURL:[NSURL fileURLWithPath:destination] error:nil];
 }
 
 @end

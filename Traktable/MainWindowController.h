@@ -18,6 +18,8 @@
 @property (nonatomic, strong) IBOutlet PXSourceList *sourceList;
 @property (nonatomic, strong) IBOutlet ITToolbar *toolbar;
 
+@property (nonatomic, strong) IBOutlet NSProgressIndicator *activityIndicator;
+
 @property (nonatomic) IBOutlet NSLayoutConstraint *tableViewBottomConstraint;
 
 @end

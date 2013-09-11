@@ -69,7 +69,7 @@
     
     NSArray *items = [api watchedSync:type extended:[NSString stringWithFormat:@"%d",extended]];
     int n = 0;
-    
+
     for(NSDictionary *item in items) {
         
         NSDictionary *argsDict;
