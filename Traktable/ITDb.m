@@ -206,7 +206,7 @@ static int dbVersion = 1;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kITMigrateProgressWindowNotification object:nil];
     
-    /*[self backupDatabaseFile];
+    [self backupDatabaseFile];
     
     [self.dbQueue inDatabase:^(FMDatabase *db) {
         
@@ -231,9 +231,8 @@ static int dbVersion = 1;
     }];
     
     [self setDatabaseSchemaVersion:dbVersion];
-    */
-    ITSync *sync = [[ITSync alloc] init];
-    [sync syncTraktExtended];
+
+    [ITSync syncTraktExtendedInBackgroundThread];
     
     NSLog(@"Database schema version after migration is %d", [self databaseSchemaVersion]);
 }

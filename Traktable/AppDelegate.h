@@ -12,8 +12,6 @@
 #import <netinet/in.h>
 #import <Sparkle/Sparkle.h>
 
-@class ITApi, ITVideo, ITLibrary, MainWindowController;
-
 @interface AppDelegate : NSObject <NSApplicationDelegate, NSMenuDelegate, NSUserNotificationCenterDelegate>
 
 @property (strong) NSWindowController *preferencesWindow;

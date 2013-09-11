@@ -29,7 +29,8 @@
 @interface AppDelegate()
 
 @property(assign) BOOL showProgressWindow;
-@property(assign) double lastProgressValue;
+@property(assign) BOOL isSyncing;
+@property(assign) BOOL showLogin;
 
 @property(strong) MainWindowController *mainWindow;
 @property(strong, nonatomic) ProgressWindowController *progressWindow;
@@ -58,6 +59,11 @@
     // Make sure all logging with NSLog is ported to the log file in the compiled version of the app
     [self redirectConsoleLogToDocumentFolder];
     
+    _api = [ITApi new];
+    _video = [[ITVideo alloc] init];
+    _library = [[ITLibrary alloc] init];
+    _sync = [[ITSync alloc] init];
+    
     // Register this class as the NotificationCenter delegate
     [[NSUserNotificationCenter defaultUserNotificationCenter] setDelegate:self];
     
@@ -65,21 +71,24 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideProgressWindow) name:kITHideProgressWindowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(migrateProgressWindow) name:kITMigrateProgressWindowNotification object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self.sync selector:@selector(updateMovieData:) name:kITMovieNeedsUpdateNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self.sync selector:@selector(updateTVShowData:) name:kITTVShowNeedsUpdateNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self.sync selector:@selector(updateEpisodeData:) name:kITTVShowEpisodeNeedsUpdateNotification object:nil];
+    
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"NSConstraintBasedLayoutVisualizeMutuallyExclusiveConstraints"];
     
     // Setup progressWindow
     if(!self.progressWindow)
         _progressWindow = [[ProgressWindowController alloc] initWithWindowNibName:@"ProgressWindowController"];
     
-    _api = [ITApi new];
-    _video = [[ITVideo alloc] init];
-    _library = [[ITLibrary alloc] init];
-    _sync = [[ITSync alloc] init];
-    
     if(![self.api username] || ![self.api testAccount]) {
 
         _showProgressWindow = YES;
+        _showLogin = YES;
+        
         [self showProgressWindow:nil];
+        
+        [NSApp requestUserAttention:NSInformationalRequest];
         
         return;
         
@@ -87,8 +96,6 @@
         
         NSLog(@"Startup normal, loggedin.");
 
-        _showProgressWindow = NO;
-            
         [self showWindow:self];
     }
     
@@ -113,56 +120,71 @@
     
     [self.mainWindow.window makeKeyAndOrderFront:self];
     
-    [NSApp activateIgnoringOtherApps:YES];
+    [self.progressWindow.window orderOut:nil];
 }
 
 - (void)migrateProgressWindow {
     
     _showProgressWindow = YES;
-    _lastProgressValue = 0;
+    _isSyncing = YES;
     
     [self.progressWindow showWindow:self];
+    
+    [NSApp requestUserAttention:NSInformationalRequest];
 }
 
 - (void)showProgressWindow:(NSNotification *)notification {
-    
+
     if(self.showProgressWindow == NO)
         return;
-    
-    [self.progressWindow.window makeKeyAndOrderFront:self];
 
+    [self.progressWindow.window makeKeyAndOrderFront:self];
+    
     if(notification == nil) {
+        
         [self.progressWindow.progress setIndeterminate:YES];
+        [self.progressWindow.loginView setHidden:NO];
+        [self.progressWindow.loginView displayIfNeeded];
+        
     } else {
         
         double progress = [[notification.userInfo objectForKey:@"progress"] doubleValue];
         
-        if(self.lastProgressValue > progress) {
-            _lastProgressValue = progress;
-            [self.progressWindow.progress setIndeterminate:YES];
-        }
-        
         [self.progressWindow.loginView setHidden:YES];
         [self.progressWindow.progress setIndeterminate:NO];
         [self.progressWindow.progress setDoubleValue:progress];
+        [self.progressWindow.progress setHidden:NO];
+        [self.progressWindow.description setHidden:NO];
+        
+        [self.progressWindow.progress displayIfNeeded];
+        [self.progressWindow.description displayIfNeeded];
+        [self.progressWindow.bgImage displayIfNeeded];
+        [self.progressWindow.loginView displayIfNeeded];
+        
+        _isSyncing = YES;
         
         if([[notification.userInfo objectForKey:@"type"] isEqualToString:@"movies"]) {
             [self.progressWindow.description setStringValue:@"Syncing movies with Trakt.tv"];
         } else if([[notification.userInfo objectForKey:@"type"] isEqualToString:@"tvshows"]) {
             [self.progressWindow.description setStringValue:@"Syncing TV Shows with Trakt.tv"];
         } else if([[notification.userInfo objectForKey:@"type"] isEqualToString:@"history"]) {
+
+            _showLogin = NO;
             [self.progressWindow.description setStringValue:@"Syncing history with Trakt.tv"];
         }
     }
-    
-    [NSApp requestUserAttention:NSInformationalRequest];
-    [NSApp activateIgnoringOtherApps:YES];
 }
 
 - (void)hideProgressWindow {
-   
+
+    if(self.showLogin == YES)
+        return;
+    
     [self.progressWindow.window orderOut:nil];
     [self showWindow:self];
+    
+    _showProgressWindow = NO;
+    _isSyncing = NO;
 }
 
 - (IBAction)feedback:(id)sender {

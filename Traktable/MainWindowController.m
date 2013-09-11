@@ -205,7 +205,6 @@
 	}
 }
 
-
 - (void)sourceListDeleteKeyPressedOnRows:(NSNotification *)notification
 {
 	NSIndexSet *rows = [[notification userInfo] objectForKey:@"rows"];
@@ -213,6 +212,11 @@
 	NSLog(@"Delete key pressed on rows %@", rows);
 	
 	//Do something here
+}
+
+- (BOOL)sourceList:(PXSourceList*)aSourceList shouldEditItem:(id)item {
+    
+    return NO;
 }
 
 @end

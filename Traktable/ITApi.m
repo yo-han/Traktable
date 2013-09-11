@@ -417,8 +417,10 @@
             
             int progress = (100 / [[responseObject objectForKey:@"activity"] count]) * n;
             
-            // Update progress
-            [[NSNotificationCenter defaultCenter] postNotificationName:kITUpdateProgressWindowNotification object:self userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:progress],@"progress",@"history",@"type", nil]];
+            dispatch_sync(dispatch_get_main_queue(),^{
+                // Update progress
+                [[NSNotificationCenter defaultCenter] postNotificationName:kITUpdateProgressWindowNotification object:self userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:progress],@"progress",@"history",@"type", nil]];
+            });
             
             [self updateHistory:activity parameters:nil];
         }
@@ -432,10 +434,11 @@
     ITDb *db = [ITDb new];
     NSString *uid = [self sha1Hash:[update description]];
     
+    NSDictionary *argsDict = [NSDictionary dictionary];
+    
     if([update objectForKey:@"type"] != nil && [[update objectForKey:@"type"] isEqualToString:@"episode"]) {
         
         NSDate *timestamp = [NSDate dateWithTimeIntervalSince1970:[[update objectForKey:@"timestamp"] doubleValue]];
-        NSDictionary *argsDict = [NSDictionary dictionary];
         
         if([update objectForKey:@"episode"] != nil) {
 
@@ -446,9 +449,11 @@
             [db executeUpdateUsingQueue:qry arguments:argsDict];
             
             //NSLog(@"%@",[db lastErrorMessage]);
-
-            [[NSNotificationCenter defaultCenter] postNotificationName:kITTVShowNeedsUpdateNotification object:nil userInfo:argsDict];
-            [[NSNotificationCenter defaultCenter] postNotificationName:kITTVShowEpisodeNeedsUpdateNotification object:nil userInfo:argsDict];
+            
+            dispatch_sync(dispatch_get_main_queue(),^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:kITTVShowNeedsUpdateNotification object:nil userInfo:argsDict];
+                [[NSNotificationCenter defaultCenter] postNotificationName:kITTVShowEpisodeNeedsUpdateNotification object:nil userInfo:argsDict];
+            });
         
         } else if([update objectForKey:@"episodes"] != nil) {
             
@@ -471,17 +476,17 @@
     } else if([update objectForKey:@"movie"] != nil) {
         
         NSDate *timestamp = [NSDate dateWithTimeIntervalSince1970:[[update objectForKey:@"timestamp"] doubleValue]];
+
+        argsDict = [NSDictionary dictionaryWithObjectsAndKeys:uid, @"uid",[[update objectForKey:@"movie"] objectForKey:@"tmdb_id" ], @"tmdb_id", [[update objectForKey:@"movie"] objectForKey:@"imdb_id" ], @"imdb_id", @"movie", @"type", [update objectForKey:@"action"], @"action", [timestamp descriptionWithCalendarFormat:@"%Y-%m-%d %H:%M" timeZone:nil locale:nil], @"timestamp", nil];
         
-        NSDictionary *argsDict = [NSDictionary dictionaryWithObjectsAndKeys:uid, @"uid",[[update objectForKey:@"movie"] objectForKey:@"tmdb_id" ], @"tmdb_id", [[update objectForKey:@"movie"] objectForKey:@"imdb_id" ], @"imdb_id", @"movie", @"type", [update objectForKey:@"action"], @"action", [timestamp descriptionWithCalendarFormat:@"%Y-%m-%d %H:%M" timeZone:nil locale:nil], @"timestamp", nil];
-        
+        NSDictionary *dict = [argsDict copy];
         NSString *qry = [db getInsertQueryFromDictionary:argsDict queryType:@"REPLACE" forTable:@"history"];
         
         [db executeUpdateUsingQueue:qry arguments:argsDict];
         
         //NSLog(@"%@",[db lastErrorMessage]);
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:kITMovieNeedsUpdateNotification object:nil userInfo:argsDict];
-        
+
+        [[NSNotificationCenter defaultCenter] postNotificationName:kITMovieNeedsUpdateNotification object:nil userInfo:dict];
     } 
 }
 

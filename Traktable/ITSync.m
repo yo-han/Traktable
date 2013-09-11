@@ -29,11 +29,6 @@
         
         _queue = dispatch_queue_create("traktable.sync.queue", NULL);
         _extended = NO;
-        
-        // Register an observer for history updates
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateMovieData:) name:kITMovieNeedsUpdateNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateTVShowData:) name:kITTVShowNeedsUpdateNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateEpisodeData:) name:kITTVShowEpisodeNeedsUpdateNotification object:nil];        
     }
     
     return self;
@@ -68,7 +63,7 @@
     ITDb *db = [ITDb new];
     
     NSArray *items = [api watchedSync:type extended:[NSString stringWithFormat:@"%d",extended]];
-    int n = 0;
+    __block int n = 0;
 
     for(NSDictionary *item in items) {
         
@@ -97,13 +92,16 @@
         //NSLog(@"%@",[db lastErrorMessage]);
         
         NSNumber *lastId = [db lastInsertRowId];
-        
-        n++;
-        
-        int progress = (100 / [items count]) * n;
-        
-        // Update progress
-        [[NSNotificationCenter defaultCenter] postNotificationName:kITUpdateProgressWindowNotification object:self userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:progress],@"progress",table,@"type", nil]];
+      
+        dispatch_sync(dispatch_get_main_queue(),^{
+            
+            n++;
+            
+            int progress = (100 / [items count]) * n;
+              
+            // Update progress
+            [[NSNotificationCenter defaultCenter] postNotificationName:kITUpdateProgressWindowNotification object:self userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:progress],@"progress",table,@"type", nil]];
+        });
         
         if([lastId intValue] == 0)
             continue;
