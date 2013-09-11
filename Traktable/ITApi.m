@@ -390,8 +390,11 @@
 
 - (void)historySync {
    
-    NSInteger lastSync = [[NSUserDefaults standardUserDefaults] boolForKey:@"traktable.ITHistorySyncLast"];
-        
+    NSInteger lastSync = [[NSUserDefaults standardUserDefaults] integerForKey:@"traktable.ITHistorySyncLast"];
+    
+    if(lastSync < 1262325600)
+        lastSync = 1262325600;
+    
     NSString *url = [NSString stringWithFormat:@"%@/activity/user.json/%@/%@/movie,show,episode/scrobble,seen/%ld?min=1", kApiUrl, [self apiKey], self.username, (long)lastSync];
 
     NSDictionary* headers = [self basicAuthHeaders];
