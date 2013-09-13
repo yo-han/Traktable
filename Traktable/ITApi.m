@@ -396,7 +396,7 @@
         lastSync = 1262325600;
     
     NSString *url = [NSString stringWithFormat:@"%@/activity/user.json/%@/%@/movie,show,episode/scrobble,seen/%ld?min=1", kApiUrl, [self apiKey], self.username, (long)lastSync];
-
+    NSLog(@"%@",url);
     NSDictionary* headers = [self basicAuthHeaders];
     
     HttpJsonResponse* response = [[Unirest get:^(SimpleRequest* request) {
@@ -420,7 +420,7 @@
             
             int progress = (100 / [[responseObject objectForKey:@"activity"] count]) * n;
             
-            dispatch_sync(dispatch_get_main_queue(),^{
+            dispatch_async(dispatch_get_main_queue(),^{
                 // Update progress
                 [[NSNotificationCenter defaultCenter] postNotificationName:kITUpdateProgressWindowNotification object:self userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:progress],@"progress",@"history",@"type", nil]];
             });
@@ -453,7 +453,7 @@
             
             //NSLog(@"%@",[db lastErrorMessage]);
             
-            dispatch_sync(dispatch_get_main_queue(),^{
+            dispatch_async(dispatch_get_main_queue(),^{
                 [[NSNotificationCenter defaultCenter] postNotificationName:kITTVShowNeedsUpdateNotification object:nil userInfo:argsDict];
                 [[NSNotificationCenter defaultCenter] postNotificationName:kITTVShowEpisodeNeedsUpdateNotification object:nil userInfo:argsDict];
             });
