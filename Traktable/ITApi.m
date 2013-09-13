@@ -396,7 +396,7 @@
         lastSync = 1262325600;
     
     NSString *url = [NSString stringWithFormat:@"%@/activity/user.json/%@/%@/movie,show,episode/scrobble,seen/%ld?min=1", kApiUrl, [self apiKey], self.username, (long)lastSync];
-    NSLog(@"%@",url);
+
     NSDictionary* headers = [self basicAuthHeaders];
     
     HttpJsonResponse* response = [[Unirest get:^(SimpleRequest* request) {
