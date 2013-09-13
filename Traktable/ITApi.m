@@ -420,7 +420,7 @@
             
             int progress = (100 / [[responseObject objectForKey:@"activity"] count]) * n;
             
-            dispatch_sync(dispatch_get_main_queue(),^{
+            dispatch_async(dispatch_get_main_queue(),^{
                 // Update progress
                 [[NSNotificationCenter defaultCenter] postNotificationName:kITUpdateProgressWindowNotification object:self userInfo:[NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInt:progress],@"progress",@"history",@"type", nil]];
             });
@@ -453,7 +453,7 @@
             
             //NSLog(@"%@",[db lastErrorMessage]);
             
-            dispatch_sync(dispatch_get_main_queue(),^{
+            dispatch_async(dispatch_get_main_queue(),^{
                 [[NSNotificationCenter defaultCenter] postNotificationName:kITTVShowNeedsUpdateNotification object:nil userInfo:argsDict];
                 [[NSNotificationCenter defaultCenter] postNotificationName:kITTVShowEpisodeNeedsUpdateNotification object:nil userInfo:argsDict];
             });
