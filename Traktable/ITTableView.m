@@ -132,6 +132,9 @@ typedef NS_ENUM(NSUInteger, ITTableViewCellType) {
         
         [cellView.timestamp setStringValue:time];
         
+        NSLog(@"%ld", row);
+        NSLog(@"%@",_entry.traktUrl);
+        
         if(_entry.traktUrl)
             [cellView.traktUrl setTag:row];
         else
@@ -229,7 +232,7 @@ typedef NS_ENUM(NSUInteger, ITTableViewCellType) {
     
     if (row >= [self.items count])
         return nil;
-        
+    
     id entry = [ITHistory historyEntityWithHistoryObject:[self.items objectAtIndex:row]];
 
     return entry;
@@ -238,8 +241,8 @@ typedef NS_ENUM(NSUInteger, ITTableViewCellType) {
 - (IBAction)openTraktUrl:(id)sender {
     
     NSButton *btn = (NSButton *) sender;
+    NSLog(@"%d",btn.tag);
     ITHistory *entry = [self _entryForRow:btn.tag];
-    
     NSString *url = entry.traktUrl;
 
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:url]];
