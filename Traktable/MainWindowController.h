@@ -16,10 +16,12 @@
 
 @property (nonatomic, strong) IBOutlet ITTableView *tableView;
 @property (nonatomic, strong) IBOutlet PXSourceList *sourceList;
-@property (nonatomic, strong) IBOutlet ITToolbar *toolbar;
+@property (nonatomic, strong) IBOutlet ITToolbar *errorToolbar;
+@property (nonatomic, strong) IBOutlet ITToolbar *historyToolbar;
 
 @property (nonatomic, strong) IBOutlet NSProgressIndicator *activityIndicator;
 
+@property (nonatomic) IBOutlet NSLayoutConstraint *tableViewTopConstraint;
 @property (nonatomic) IBOutlet NSLayoutConstraint *tableViewBottomConstraint;
 
 @end

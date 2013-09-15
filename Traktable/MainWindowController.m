@@ -20,8 +20,6 @@
 
 @implementation MainWindowController
 
-@synthesize toolbar=_toolbar;
-
 - (id)initWithWindow:(NSWindow *)window
 {
     self = [super initWithWindow:window];
@@ -40,21 +38,21 @@
 {	
 	_sourceListItems = [[NSMutableArray alloc] init];
 	
+    SourceListItem *traktable = [SourceListItem itemWithTitle:NSLocalizedString(@"Traktable", nil) identifier:@"traktable"];
+	[traktable setIcon:[NSImage imageNamed:@"movies.png"]];
+    
 	SourceListItem *historyItem = [SourceListItem itemWithTitle:NSLocalizedString(@"History", nil) identifier:@"history"];
-	[historyItem setIcon:[NSImage imageNamed:@"menuicon.png"]];
-	SourceListItem *moviesItem = [SourceListItem itemWithTitle:NSLocalizedString(@"Movies", nil) identifier:@"movies"];
-	[moviesItem setIcon:[NSImage imageNamed:@"movies.png"]];
-    SourceListItem *tvShowsItem = [SourceListItem itemWithTitle:NSLocalizedString(@"TVShows", nil) identifier:@"tvshows"];
-	[tvShowsItem setIcon:[NSImage imageNamed:@"movies.png"]];
+	[historyItem setIcon:[NSImage imageNamed:@"movies.png"]];
+	
     SourceListItem *logItem = [SourceListItem itemWithTitle:NSLocalizedString(@"Log", nil) identifier:@"log"];
     [logItem setIcon:[NSImage imageNamed:NSImageNameIconViewTemplate]];
     SourceListItem *errorItem = [SourceListItem itemWithTitle:NSLocalizedString(@"Errors", nil) identifier:@"errors"];
     [errorItem setIcon:[NSImage imageNamed:NSImageNameIconViewTemplate]];
 	
-    [historyItem setChildren:[NSArray arrayWithObjects:moviesItem, tvShowsItem, nil]];
+    [traktable setChildren:[NSArray arrayWithObjects:historyItem, nil]];
     [logItem setChildren:[NSArray arrayWithObjects:errorItem, nil]];
 	
-	[self.sourceListItems addObject:historyItem];
+	[self.sourceListItems addObject:traktable];
     [self.sourceListItems addObject:logItem];
 	
 	[self.sourceList reloadData];
@@ -62,7 +60,7 @@
     [self.tableView setup];
     [self.tableView refreshTableData:ITHistoryMovies];
     
-    [self.toolbar setHidden:YES];
+    [self.errorToolbar setHidden:YES];
     [self.tableViewBottomConstraint setConstant:0];
 }
 
@@ -153,7 +151,7 @@
 
 - (BOOL)sourceList:(PXSourceList*)aSourceList isGroupAlwaysExpanded:(id)group
 {
-	if([[group identifier] isEqualToString:@"history"] || [[group identifier] isEqualToString:@"log"])
+	if([[group identifier] isEqualToString:@"log"] || [[group identifier] isEqualToString:@"traktable"])
 		return YES;
 	
 	return NO;
@@ -173,8 +171,7 @@
 		NSString *identifier = [[self.sourceList itemAtRow:[selectedIndexes firstIndex]] identifier];
 		
 		NSDictionary *identifiers = [NSDictionary dictionaryWithObjectsAndKeys:
-                                        [NSNumber numberWithInteger:ITHistoryMovies],@"movies",
-                                        [NSNumber numberWithInteger:ITHistoryTVShows],@"tvshows",
+                                        [NSNumber numberWithInteger:ITHistoryMovies],@"history",
                                         [NSNumber numberWithInteger:ITErrorList],@"errors",
                                         nil];
         
@@ -182,21 +179,22 @@
             case ITHistoryMovies: 
                 [self.tableView refreshTableData:ITHistoryMovies];
                 [self.tableViewBottomConstraint setConstant:0];
-                [self.toolbar setHidden:YES];
-                break;
-            case ITHistoryTVShows:
-                [self.tableView refreshTableData:ITHistoryTVShows];
-                [self.tableViewBottomConstraint setConstant:0];
-                [self.toolbar setHidden:YES];
+                [self.tableViewTopConstraint setConstant:28.0];
+                [self.errorToolbar setHidden:YES];
+                [self.historyToolbar setHidden:NO];
                 break;
             case ITErrorList:
                 [self.tableView refreshTableData:ITErrorList];
                 [self.tableViewBottomConstraint setConstant:41.0];
-                [self.toolbar setHidden:NO];
+                [self.tableViewTopConstraint setConstant:0];
+                [self.errorToolbar setHidden:NO];
+                [self.historyToolbar setHidden:YES];
                 break;
             default:
                 [self.tableViewBottomConstraint setConstant:0];
-                [self.toolbar setHidden:YES];
+                [self.tableViewTopConstraint setConstant:28.0];
+                [self.errorToolbar setHidden:YES];
+                [self.historyToolbar setHidden:NO];
         }
         
         

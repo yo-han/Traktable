@@ -98,6 +98,22 @@ typedef NS_ENUM(NSUInteger, ITTableViewCellType) {
     [self reloadTableData];
 }
 
+- (IBAction)historyMovies:(id)sender {
+    
+    [self.historyMoviesButton setState:1];
+    [self.historyShowsButton setState:0];
+    
+    [self refreshTableData:ITHistoryMovies];
+}
+
+- (IBAction)historyShows:(id)sender {
+    
+    [self.historyMoviesButton setState:0];
+    [self.historyShowsButton setState:1];
+    
+    [self refreshTableData:ITHistoryTVShows];
+}
+
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
     return [self.items count];
 }

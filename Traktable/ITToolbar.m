@@ -27,8 +27,9 @@
 }
 
 - (void)drawRect:(NSRect)rect {
+    
     if (endingColor == nil || [startingColor isEqual:endingColor]) {
-        // Fill view with a standard background color
+        
         [startingColor set];
         NSRectFill(rect);
     }
@@ -40,12 +41,26 @@
                                  endingColor:endingColor];
         [aGradient drawInRect:[self bounds] angle:angle];
     }
+
+    if([self bounds].size.height < 30) {
+        
+        NSGradient* aBorderGradient = [[NSGradient alloc]
+                                 initWithStartingColor:[NSColor colorWithCalibratedWhite:0.8 alpha:1.0]
+                                 endingColor:[NSColor colorWithCalibratedWhite:0.3 alpha:1.0]];
+        
+        NSRect bounds = [self bounds];
+        NSRect borderBounds = NSMakeRect(bounds.origin.x, bounds.origin.y, bounds.size.width, 1.5);
+        
+        NSBezierPath *bottomBorder = [NSBezierPath bezierPathWithRoundedRect:borderBounds xRadius:0 yRadius:0];
+        [bottomBorder setLineWidth:5];
+        [aBorderGradient drawInBezierPath:bottomBorder angle:angle];
+    }
 }
 
 - (void)awakeFromNib {
     
-    [self setStartingColor:[NSColor colorWithCalibratedWhite:0.85 alpha:1.0]];
-    [self setEndingColor:[NSColor colorWithCalibratedWhite:0.7 alpha:1.0]];
+    [self setStartingColor:[NSColor colorWithCalibratedWhite:0.9 alpha:1.0]];
+    [self setEndingColor:[NSColor colorWithCalibratedWhite:0.99 alpha:1.0]];
     [self setAngle:270];
 }
 
