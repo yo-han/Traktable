@@ -180,16 +180,24 @@ typedef NS_ENUM(NSUInteger, ITTableViewCellType) {
     
     } else if(self.tableType == ITTableViewErrorCell) {
         
+        NSDictionary *entry = [self.items objectAtIndex:row];
+        
+        if([entry isKindOfClass:[ITErrorGroupHeader class]]) {
+            
+            ITHistoryTableGroupCellView *cellView = [tableView makeViewWithIdentifier:@"historyGroupCell" owner:self];
+            
+            ITErrorGroupHeader *_entry = (ITErrorGroupHeader *) entry;
+            
+            [cellView.timestamp setStringValue:_entry.date];
+            
+            return cellView;
+        }
+        
         ITErrorTableCellView *cellView = [tableView makeViewWithIdentifier:cellType owner:self];
         
         if(row >= [self.items count])
             return nil;
         
-        NSDictionary *entry = [self.items objectAtIndex:row];
-        
-        NSString *date = [ITUtil localeDateString:[entry objectForKey:@"timestamp"]];
-        
-        [cellView.timestamp setStringValue:date];
         [cellView.textField setStringValue:[entry objectForKey:@"description"]];
         
         return cellView;
@@ -200,13 +208,16 @@ typedef NS_ENUM(NSUInteger, ITTableViewCellType) {
 
 - (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row {
     
+    id entry = [self _entryForRow:row];
+    
     if(self.tableViewCellType == ITTableViewErrorCell) {
+        
+        if([entry isKindOfClass:[ITErrorGroupHeader class]])
+            return 28.0;
         
         return 50.0;
         
     } else {
-        
-        id entry = [self _entryForRow:row];
         
         if([entry isKindOfClass:[ITHistoryGroupHeader class]])
             return 28.0;
@@ -219,7 +230,7 @@ typedef NS_ENUM(NSUInteger, ITTableViewCellType) {
     
     id entry = [self _entryForRow:row];
     
-    if([entry isKindOfClass:[ITHistoryGroupHeader class]]) {
+    if([entry isKindOfClass:[ITHistoryGroupHeader class]] || [entry isKindOfClass:[ITErrorGroupHeader class]]) {
         return YES;
     }
 
@@ -233,7 +244,7 @@ typedef NS_ENUM(NSUInteger, ITTableViewCellType) {
     
     id entry = [self _entryForRow:row];
     
-    if([entry isKindOfClass:[ITHistoryGroupHeader class]])
+    if([entry isKindOfClass:[ITHistoryGroupHeader class]] || [entry isKindOfClass:[ITErrorGroupHeader class]])
         return [[ITTableRowGroupView alloc] init];
     
     ITTableRowView *result = [[ITTableRowView alloc] init];

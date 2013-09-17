@@ -7,6 +7,7 @@
 //
 
 #import "ITHistory.h"
+#import "ITErrors.h"
 #import "ITMovie.h"
 #import "ITMoviePoster.h"
 #import "ITTVShow.h"
@@ -41,7 +42,7 @@
 
     ITHistory *history = [ITHistory new];
     
-    if([object isKindOfClass:[ITHistoryGroupHeader class]]) {
+    if([object isKindOfClass:[ITHistoryGroupHeader class]] || [object isKindOfClass:[ITErrorGroupHeader class]]) {
         
         return object;
     }

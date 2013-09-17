@@ -8,6 +8,19 @@
 
 #import "ITErrors.h"
 #import "ITDb.h"
+#import "ITUtil.h"
+
+@implementation ITErrorGroupHeader
+
+- (id)initWithDateString:(NSString *)date {
+    
+    self = [super init];
+    if (self) {
+        _date = date;
+    }
+    return self;
+}
+@end
 
 @implementation ITErrors
 
@@ -16,11 +29,22 @@
     NSMutableArray *errors = [NSMutableArray array];
     ITDb *db = [ITDb new];
     
+    NSString *lastGroup = nil;
+    
     NSArray *results = [db executeAndGetResults:@"select * from errors ORDER BY timestamp DESC" arguments:nil];
     
     for (NSDictionary *result in results) {
-
+        
+        NSString *date = [ITUtil localeDateString:[result objectForKey:@"timestamp"]];
+        
+        if(![lastGroup isEqualToString:date]) {
+            ITErrorGroupHeader *header = [[ITErrorGroupHeader alloc] initWithDateString:date];
+            [errors addObject:header];
+        }
+        
         [errors addObject:result];
+        
+        lastGroup = date;        
     }
     
     return errors;

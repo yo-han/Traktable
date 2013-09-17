@@ -14,3 +14,11 @@
 - (void)clearErrors;
 
 @end
+
+@interface ITErrorGroupHeader : NSObject
+
+@property (nonatomic, strong) NSString *date;
+
+- (id)initWithDateString:(NSString *)date;
+
+@end
