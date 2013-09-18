@@ -208,11 +208,16 @@
         
     }] asJsonAsync:^(HttpJsonResponse* response) {
         
-        NSError *error;
-        id responseObject = [NSJSONSerialization JSONObjectWithData:[response rawBody] options:0 error:&error];
+        id responseObject = nil;
+        
+        if([response rawBody] != nil) {
+        
+            NSError *error;
+            responseObject = [NSJSONSerialization JSONObjectWithData:[response rawBody] options:0 error:&error];
 
-        if(error)
-            NSLog(@"API Call JSON error: %@",error);
+            if(error)
+                NSLog(@"API Call JSON error: %@",error);
+        }
         
         completionBlock(responseObject, nil);
     }];
