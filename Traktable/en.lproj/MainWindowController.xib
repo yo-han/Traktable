@@ -532,12 +532,10 @@
 				<string key="NSFrameAutosaveName">mainWindow</string>
 				<bool key="NSWindowIsRestorable">YES</bool>
 			</object>
-			<object class="NSCustomView" id="662841581">
+			<object class="NSView" id="725386980">
 				<nil key="NSNextResponder"/>
-				<int key="NSvFlags">1292</int>
-				<object class="NSPSMatrix" key="NSFrameMatrix"/>
-				<string key="NSFrameSize">{163, 96}</string>
-				<string key="NSClassName">NSView</string>
+				<int key="NSvFlags">256</int>
+				<string key="NSFrameSize">{100, 100}</string>
 			</object>
 		</array>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
@@ -1970,11 +1968,6 @@
 						<reference key="parent" ref="799210822"/>
 					</object>
 					<object class="IBObjectRecord">
-						<string key="id">1570</string>
-						<reference key="object" ref="662841581"/>
-						<reference key="parent" ref="0"/>
-					</object>
-					<object class="IBObjectRecord">
 						<string key="id">64</string>
 						<reference key="object" ref="222329535"/>
 						<array class="NSMutableArray" key="children">
@@ -2059,7 +2052,7 @@
 						<string key="id">1340</string>
 						<reference key="object" ref="344835429"/>
 						<array class="NSMutableArray" key="children">
-							<object class="IBNSLayoutConstraint" id="51937021">
+							<object class="IBNSLayoutConstraint" id="666279533">
 								<reference key="firstItem" ref="344835429"/>
 								<int key="firstAttribute">4</int>
 								<int key="relation">0</int>
@@ -2075,7 +2068,7 @@
 								<float key="scoringTypeFloat">29</float>
 								<int key="contentType">3</int>
 							</object>
-							<object class="IBNSLayoutConstraint" id="340798426">
+							<object class="IBNSLayoutConstraint" id="604391437">
 								<reference key="firstItem" ref="349228495"/>
 								<int key="firstAttribute">5</int>
 								<int key="relation">0</int>
@@ -2107,7 +2100,7 @@
 								<float key="scoringTypeFloat">22</float>
 								<int key="contentType">2</int>
 							</object>
-							<object class="IBNSLayoutConstraint" id="947609065">
+							<object class="IBNSLayoutConstraint" id="53834421">
 								<reference key="firstItem" ref="876672631"/>
 								<int key="firstAttribute">5</int>
 								<int key="relation">0</int>
@@ -3815,7 +3808,7 @@
 						<string key="id">1349</string>
 						<reference key="object" ref="349228495"/>
 						<array class="NSMutableArray" key="children">
-							<object class="IBNSLayoutConstraint" id="361502955">
+							<object class="IBNSLayoutConstraint" id="601244779">
 								<reference key="firstItem" ref="349228495"/>
 								<int key="firstAttribute">7</int>
 								<int key="relation">0</int>
@@ -3831,7 +3824,7 @@
 								<float key="scoringTypeFloat">9</float>
 								<int key="contentType">1</int>
 							</object>
-							<object class="IBNSLayoutConstraint" id="1016032944">
+							<object class="IBNSLayoutConstraint" id="827020915">
 								<reference key="firstItem" ref="349228495"/>
 								<int key="firstAttribute">8</int>
 								<int key="relation">0</int>
@@ -4210,28 +4203,33 @@
 					</object>
 					<object class="IBObjectRecord">
 						<string key="id">m6Z-qS-V8v</string>
-						<reference key="object" ref="340798426"/>
+						<reference key="object" ref="604391437"/>
 						<reference key="parent" ref="344835429"/>
 					</object>
 					<object class="IBObjectRecord">
 						<string key="id">I0T-Oq-228</string>
-						<reference key="object" ref="947609065"/>
+						<reference key="object" ref="53834421"/>
 						<reference key="parent" ref="344835429"/>
 					</object>
 					<object class="IBObjectRecord">
 						<string key="id">ras-hu-On9</string>
-						<reference key="object" ref="361502955"/>
+						<reference key="object" ref="601244779"/>
 						<reference key="parent" ref="349228495"/>
 					</object>
 					<object class="IBObjectRecord">
 						<string key="id">iC0-qj-Br7</string>
-						<reference key="object" ref="1016032944"/>
+						<reference key="object" ref="827020915"/>
 						<reference key="parent" ref="349228495"/>
 					</object>
 					<object class="IBObjectRecord">
 						<string key="id">thG-49-dDB</string>
-						<reference key="object" ref="51937021"/>
+						<reference key="object" ref="666279533"/>
 						<reference key="parent" ref="344835429"/>
+					</object>
+					<object class="IBObjectRecord">
+						<string key="id">j1H-fi-0Ho</string>
+						<reference key="object" ref="725386980"/>
+						<reference key="parent" ref="0"/>
 					</object>
 				</array>
 			</object>
@@ -4420,18 +4418,18 @@
 				<boolean value="NO" key="1339.showNotes"/>
 				<string key="1340.CustomClassName">ITErrorTableCellView</string>
 				<array class="NSMutableArray" key="1340.IBNSViewMetadataConstraints">
-					<reference ref="947609065"/>
+					<reference ref="53834421"/>
 					<reference ref="164423465"/>
-					<reference ref="340798426"/>
-					<reference ref="51937021"/>
+					<reference ref="604391437"/>
+					<reference ref="666279533"/>
 				</array>
 				<string key="1340.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<reference key="1340.IBUserGuides" ref="0"/>
 				<boolean value="NO" key="1340.showNotes"/>
 				<string key="1340.userInterfaceItemIdentifier">ErrorCell</string>
 				<array class="NSMutableArray" key="1349.IBNSViewMetadataConstraints">
-					<reference ref="1016032944"/>
-					<reference ref="361502955"/>
+					<reference ref="827020915"/>
+					<reference ref="601244779"/>
 				</array>
 				<boolean value="NO" key="1349.IBNSViewMetadataTranslatesAutoresizingMaskIntoConstraints"/>
 				<string key="1349.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -4457,9 +4455,6 @@
 				<boolean value="NO" key="1413.showNotes"/>
 				<string key="143.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="NO" key="143.showNotes"/>
-				<string key="1570.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<reference key="1570.IBUserGuides" ref="0"/>
-				<boolean value="NO" key="1570.showNotes"/>
 				<array key="1576.IBNSViewMetadataConstraints">
 					<reference ref="855283594"/>
 					<reference ref="900298011"/>
@@ -4835,6 +4830,7 @@
 				<string key="cfz-i4-OSg.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="ec6-JR-1YA.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="iC0-qj-Br7.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="j1H-fi-0Ho.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="jQP-N0-fq3.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<array class="NSMutableArray" key="kcx-oH-OKj.IBNSViewMetadataConstraints">
 					<reference ref="769347753"/>
@@ -4953,7 +4949,6 @@
 						<string key="clearErrors:">id</string>
 						<string key="historyMovies:">id</string>
 						<string key="historyShows:">id</string>
-						<string key="openTraktUrl:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="clearErrors:">
@@ -4966,10 +4961,6 @@
 						</object>
 						<object class="IBActionInfo" key="historyShows:">
 							<string key="name">historyShows:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="openTraktUrl:">
-							<string key="name">openTraktUrl:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 					</dictionary>

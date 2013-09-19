@@ -100,6 +100,7 @@
 		04B68CF617A5BE65006760D0 /* HttpStringResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B68CE617A5BE65006760D0 /* HttpStringResponse.m */; };
 		04B68CF717A5BE65006760D0 /* JsonNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B68CE817A5BE65006760D0 /* JsonNode.m */; };
 		04B68CF817A5BE65006760D0 /* Unirest.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B68CEB17A5BE65006760D0 /* Unirest.m */; };
+		04BAA45417E8F88300D26CF4 /* ITCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BAA45317E8F88300D26CF4 /* ITCollectionView.m */; };
 		04BCC5E417B03DBB00D8DE7A /* ITHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BCC5E317B03DBB00D8DE7A /* ITHistory.m */; };
 		04BCC5EF17B1879300D8DE7A /* ITDb.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BCC5EE17B1879300D8DE7A /* ITDb.m */; };
 		04BCC5F217B1885A00D8DE7A /* ITConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BCC5F117B1885A00D8DE7A /* ITConstants.m */; };
@@ -284,6 +285,8 @@
 		04B68CE917A5BE65006760D0 /* Unirest-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Unirest-Prefix.pch"; sourceTree = "<group>"; };
 		04B68CEA17A5BE65006760D0 /* Unirest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Unirest.h; sourceTree = "<group>"; };
 		04B68CEB17A5BE65006760D0 /* Unirest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Unirest.m; sourceTree = "<group>"; };
+		04BAA45217E8F88300D26CF4 /* ITCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITCollectionView.h; sourceTree = "<group>"; };
+		04BAA45317E8F88300D26CF4 /* ITCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITCollectionView.m; sourceTree = "<group>"; };
 		04BCC5E217B03DBB00D8DE7A /* ITHistory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITHistory.h; sourceTree = "<group>"; };
 		04BCC5E317B03DBB00D8DE7A /* ITHistory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITHistory.m; sourceTree = "<group>"; };
 		04BCC5ED17B1879300D8DE7A /* ITDb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITDb.h; sourceTree = "<group>"; };
@@ -586,6 +589,8 @@
 				04B5BE7917D5401B001F0705 /* ITToolbar.h */,
 				04B5BE7A17D5401B001F0705 /* ITToolbar.m */,
 				043942C317D07D74009C160F /* MainWindowController.xib */,
+				04BAA45217E8F88300D26CF4 /* ITCollectionView.h */,
+				04BAA45317E8F88300D26CF4 /* ITCollectionView.m */,
 			);
 			name = "Main Window";
 			sourceTree = "<group>";
@@ -833,6 +838,7 @@
 				04B5BE7B17D5401B001F0705 /* ITToolbar.m in Sources */,
 				047D985417D67285002E97B8 /* ITTableRowGroupView.m in Sources */,
 				047D985817D67ED7002E97B8 /* ProgressWindowController.m in Sources */,
+				04BAA45417E8F88300D26CF4 /* ITCollectionView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
