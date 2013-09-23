@@ -25,6 +25,13 @@ typedef enum ITSourceListIdentifier : NSUInteger {
     ITErrorList
 } ITSourceListIdentifier;
 
+typedef NS_ENUM(NSUInteger, ITTableViewCellType) {
+    ITTableViewMovieHistoryCell = 0,
+    ITTableViewTVShowHistoryCell = 1,
+    ITTableViewErrorCell = 2,
+    ITTableViewUnknownCell = NSUIntegerMax
+};
+
 + (NSString *)applicationSupportFolder;
 
 + (BOOL)firstBoot;

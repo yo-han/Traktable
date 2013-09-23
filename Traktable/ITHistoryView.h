@@ -9,7 +9,9 @@
 #import <Cocoa/Cocoa.h>
 #import "ITConstants.h"
 
-@interface ITTableView : NSTableView <NSTableViewDataSource, NSTableViewDelegate>
+@class ITToolbar;
+
+@interface ITHistoryView : NSViewController <NSTableViewDataSource, NSTableViewDelegate>
 
 @property (nonatomic, assign, readonly) ITSourceListIdentifier tableType;
 
@@ -21,7 +23,6 @@
 - (void)reloadTableData;
 - (void)refreshTableData:(ITSourceListIdentifier)tableType;
 
-- (IBAction)clearErrors:(id)sender;
 - (IBAction)historyMovies:(id)sender;
 - (IBAction)historyShows:(id)sender;
 

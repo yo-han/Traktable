@@ -8,17 +8,25 @@
 
 #import "MainWindowController.h"
 #import "SourceListItem.h"
-#import "ITTableView.h"
 #import "ITConstants.h"
 #import "ITToolbar.h"
+#import "ITHistoryView.h"
+#import "ITErrorView.h"
+
+static float const kSidebarWidth = 220.0f;
 
 @interface MainWindowController ()
 
 @property (nonatomic, strong) NSMutableArray *sourceListItems;
+@property (nonatomic, strong) NSViewController *currentViewController;
+@property (nonatomic, strong) NSViewController *historyViewController;
+@property (nonatomic, strong) NSViewController *errorViewController;
 
 @end
 
 @implementation MainWindowController
+
+@synthesize placeholderView=_placeholderView;
 
 - (id)initWithWindow:(NSWindow *)window
 {
@@ -32,6 +40,11 @@
 - (void)windowDidLoad
 {
     [super windowDidLoad];
+    
+    _historyViewController = [[ITHistoryView alloc] init];
+    _errorViewController = [[ITErrorView alloc] init];
+    
+    [self switchView:@"history"];
 }
 
 - (void)awakeFromNib
@@ -57,11 +70,95 @@
 	
 	[self.sourceList reloadData];
     
-    [self.tableView setup];
-    [self.tableView refreshTableData:ITHistoryMovies];
+    [self.splitView setPosition:kSidebarWidth ofDividerAtIndex:0];
+}
+
+- (void)switchView:(NSString *)identifier {
     
-    [self.errorToolbar setHidden:YES];
-    [self.tableViewBottomConstraint setConstant:0];
+    NSDictionary *identifiers = [NSDictionary dictionaryWithObjectsAndKeys:
+                                 [NSNumber numberWithInteger:ITHistoryMovies],@"history",
+                                 [NSNumber numberWithInteger:ITErrorList],@"errors",
+                                 nil];
+    
+    NSView *view = [self.historyViewController view];
+    
+    [self.placeholderView addSubview:view];
+    
+    NSRect newBounds;
+    newBounds.origin.x = 0;
+    newBounds.origin.y = 0;
+    newBounds.size.width = [[view superview] frame].size.width;
+    newBounds.size.height = [[view superview] frame].size.height - 1;
+    [view setFrame:[[view superview] frame]];
+    
+    // make sure our added subview is placed and resizes correctly
+    [view setFrameOrigin:NSMakePoint(0,0)];
+    [view setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
+    
+     switch ([[identifiers objectForKey:identifier] intValue]) {
+     case ITHistoryMovies:
+             _currentViewController = self.historyViewController;
+             [self.historyViewController refreshTableData:ITHistoryMovies];
+     break;
+     case ITErrorList:
+     [self.tableView refreshTableData:ITErrorList];
+     [self.tableViewBottomConstraint setConstant:41.0];
+     [self.tableViewTopConstraint setConstant:0];
+     [self.errorToolbar setHidden:NO];
+     [self.historyToolbar setHidden:YES];
+     break;
+     default:
+     [self.tableViewBottomConstraint setConstant:0];
+     [self.tableViewTopConstraint setConstant:28.0];
+     [self.errorToolbar setHidden:YES];
+     [self.historyToolbar setHidden:NO];
+     }*/
+}
+
+#pragma mark -
+#pragma mark Splitview Delegate Methods
+
+- (CGFloat)splitView:(NSSplitView *)splitView constrainMinCoordinate:(CGFloat)proposedCoordinate ofSubviewAt:(NSInteger)index
+{
+    CGFloat constrainedCoordinate = proposedCoordinate;
+    if (index == 0)
+    {
+		constrainedCoordinate = kSidebarWidth;
+    }
+    return constrainedCoordinate;
+}
+
+- (CGFloat)splitView:(NSSplitView *)splitView constrainMaxCoordinate:(CGFloat)proposedCoordinate ofSubviewAt:(NSInteger)index
+{
+    CGFloat constrainedCoordinate = proposedCoordinate;
+    if (index == 0)
+	{
+		constrainedCoordinate = kSidebarWidth;
+    }
+	
+    return constrainedCoordinate;
+}
+
+- (CGFloat)splitView:(NSSplitView *)splitView constrainSplitPosition:(CGFloat)proposedPosition ofSubviewAt:(NSInteger)dividerIndex {
+    
+    return kSidebarWidth;
+}
+
+-(void)splitView:(NSSplitView *)sender resizeSubviewsWithOldSize:(NSSize)oldSize
+{
+    CGFloat dividerThickness = [sender dividerThickness];
+    NSRect leftRect  = [[[sender subviews] objectAtIndex:0] frame];
+    NSRect rightRect = [[[sender subviews] objectAtIndex:1] frame];
+    NSRect newFrame  = [sender frame];
+    
+    leftRect.size.height = newFrame.size.height;
+    leftRect.origin = NSMakePoint(0, 0);
+    rightRect.size.width = newFrame.size.width - leftRect.size.width - dividerThickness;
+    rightRect.size.height = newFrame.size.height;
+    rightRect.origin.x = leftRect.size.width + dividerThickness;
+    
+    [[[sender subviews] objectAtIndex:0] setFrame:leftRect];
+    [[[sender subviews] objectAtIndex:1] setFrame:rightRect];
 }
 
 #pragma mark -
@@ -170,33 +267,7 @@
 
 		NSString *identifier = [[self.sourceList itemAtRow:[selectedIndexes firstIndex]] identifier];
 		
-		NSDictionary *identifiers = [NSDictionary dictionaryWithObjectsAndKeys:
-                                        [NSNumber numberWithInteger:ITHistoryMovies],@"history",
-                                        [NSNumber numberWithInteger:ITErrorList],@"errors",
-                                        nil];
-        
-        switch ([[identifiers objectForKey:identifier] intValue]) {
-            case ITHistoryMovies: 
-                [self.tableView refreshTableData:ITHistoryMovies];
-                [self.tableViewBottomConstraint setConstant:0];
-                [self.tableViewTopConstraint setConstant:28.0];
-                [self.errorToolbar setHidden:YES];
-                [self.historyToolbar setHidden:NO];
-                break;
-            case ITErrorList:
-                [self.tableView refreshTableData:ITErrorList];
-                [self.tableViewBottomConstraint setConstant:41.0];
-                [self.tableViewTopConstraint setConstant:0];
-                [self.errorToolbar setHidden:NO];
-                [self.historyToolbar setHidden:YES];
-                break;
-            default:
-                [self.tableViewBottomConstraint setConstant:0];
-                [self.tableViewTopConstraint setConstant:28.0];
-                [self.errorToolbar setHidden:YES];
-                [self.historyToolbar setHidden:NO];
-        }
-        
+		[self switchView:identifier];
         
     } else {
 		// none

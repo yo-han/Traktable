@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		0403609117DFAEA90014D6D6 /* it-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0403609017DFAEA90014D6D6 /* it-icon.png */; };
+		040CA4E717EB8F36007B9076 /* HistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040CA4E617EB8F36007B9076 /* HistoryViewController.xib */; };
+		040CA4E917EDCDA0007B9076 /* ErrorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040CA4E817EDCDA0007B9076 /* ErrorViewController.xib */; };
+		040CA4F217EDED67007B9076 /* ITErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 040CA4F117EDED67007B9076 /* ITErrorView.m */; };
 		04162D2617DFC90A0086EFB0 /* NSData+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 04162D2517DFC90A0086EFB0 /* NSData+Additions.m */; };
 		042F07E316BC19DB00A0CE9E /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 042F07E216BC19DB00A0CE9E /* Cocoa.framework */; };
 		042F07ED16BC19DB00A0CE9E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 042F07EB16BC19DB00A0CE9E /* InfoPlist.strings */; };
@@ -77,7 +80,7 @@
 		04A9FE5317B43E0C006CD129 /* NSImage+MGCropExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A9FE5217B43E0C006CD129 /* NSImage+MGCropExtensions.m */; };
 		04A9FE5617B448C7006CD129 /* ITUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A9FE5517B448C7006CD129 /* ITUtil.m */; };
 		04AB5F1F17C56A3200A2B1AC /* ITHistoryTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AB5F1E17C56A3200A2B1AC /* ITHistoryTableCellView.m */; };
-		04AB88D317A70F270086D5CD /* ITTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AB88D217A70F270086D5CD /* ITTableView.m */; };
+		04AB88D317A70F270086D5CD /* ITHistoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AB88D217A70F270086D5CD /* ITHistoryView.m */; };
 		04B5BE7317D5266F001F0705 /* ITErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B5BE7217D5266F001F0705 /* ITErrors.m */; };
 		04B5BE7617D53081001F0705 /* ITErrorTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B5BE7517D53081001F0705 /* ITErrorTableCellView.m */; };
 		04B5BE7817D53644001F0705 /* error.png in Resources */ = {isa = PBXBuildFile; fileRef = 04B5BE7717D53644001F0705 /* error.png */; };
@@ -100,7 +103,6 @@
 		04B68CF617A5BE65006760D0 /* HttpStringResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B68CE617A5BE65006760D0 /* HttpStringResponse.m */; };
 		04B68CF717A5BE65006760D0 /* JsonNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B68CE817A5BE65006760D0 /* JsonNode.m */; };
 		04B68CF817A5BE65006760D0 /* Unirest.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B68CEB17A5BE65006760D0 /* Unirest.m */; };
-		04BAA45417E8F88300D26CF4 /* ITCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BAA45317E8F88300D26CF4 /* ITCollectionView.m */; };
 		04BCC5E417B03DBB00D8DE7A /* ITHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BCC5E317B03DBB00D8DE7A /* ITHistory.m */; };
 		04BCC5EF17B1879300D8DE7A /* ITDb.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BCC5EE17B1879300D8DE7A /* ITDb.m */; };
 		04BCC5F217B1885A00D8DE7A /* ITConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BCC5F117B1885A00D8DE7A /* ITConstants.m */; };
@@ -128,6 +130,10 @@
 
 /* Begin PBXFileReference section */
 		0403609017DFAEA90014D6D6 /* it-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "it-icon.png"; sourceTree = "<group>"; };
+		040CA4E617EB8F36007B9076 /* HistoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HistoryViewController.xib; sourceTree = "<group>"; };
+		040CA4E817EDCDA0007B9076 /* ErrorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ErrorViewController.xib; sourceTree = "<group>"; };
+		040CA4F017EDED67007B9076 /* ITErrorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITErrorView.h; sourceTree = "<group>"; };
+		040CA4F117EDED67007B9076 /* ITErrorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITErrorView.m; sourceTree = "<group>"; };
 		04162D2417DFC90A0086EFB0 /* NSData+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Additions.h"; sourceTree = "<group>"; };
 		04162D2517DFC90A0086EFB0 /* NSData+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Additions.m"; sourceTree = "<group>"; };
 		042F07DE16BC19DB00A0CE9E /* Traktable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Traktable.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -239,8 +245,8 @@
 		04A9FE5517B448C7006CD129 /* ITUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITUtil.m; sourceTree = "<group>"; };
 		04AB5F1D17C56A3200A2B1AC /* ITHistoryTableCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITHistoryTableCellView.h; sourceTree = "<group>"; };
 		04AB5F1E17C56A3200A2B1AC /* ITHistoryTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITHistoryTableCellView.m; sourceTree = "<group>"; };
-		04AB88D117A70F270086D5CD /* ITTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITTableView.h; sourceTree = "<group>"; };
-		04AB88D217A70F270086D5CD /* ITTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITTableView.m; sourceTree = "<group>"; };
+		04AB88D117A70F270086D5CD /* ITHistoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITHistoryView.h; sourceTree = "<group>"; };
+		04AB88D217A70F270086D5CD /* ITHistoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITHistoryView.m; sourceTree = "<group>"; };
 		04B5BE7117D5266F001F0705 /* ITErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITErrors.h; sourceTree = "<group>"; };
 		04B5BE7217D5266F001F0705 /* ITErrors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITErrors.m; sourceTree = "<group>"; };
 		04B5BE7417D53081001F0705 /* ITErrorTableCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITErrorTableCellView.h; sourceTree = "<group>"; };
@@ -285,8 +291,6 @@
 		04B68CE917A5BE65006760D0 /* Unirest-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Unirest-Prefix.pch"; sourceTree = "<group>"; };
 		04B68CEA17A5BE65006760D0 /* Unirest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Unirest.h; sourceTree = "<group>"; };
 		04B68CEB17A5BE65006760D0 /* Unirest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Unirest.m; sourceTree = "<group>"; };
-		04BAA45217E8F88300D26CF4 /* ITCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITCollectionView.h; sourceTree = "<group>"; };
-		04BAA45317E8F88300D26CF4 /* ITCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITCollectionView.m; sourceTree = "<group>"; };
 		04BCC5E217B03DBB00D8DE7A /* ITHistory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITHistory.h; sourceTree = "<group>"; };
 		04BCC5E317B03DBB00D8DE7A /* ITHistory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITHistory.m; sourceTree = "<group>"; };
 		04BCC5ED17B1879300D8DE7A /* ITDb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITDb.h; sourceTree = "<group>"; };
@@ -576,8 +580,10 @@
 				04BCC5E317B03DBB00D8DE7A /* ITHistory.m */,
 				04B5BE7117D5266F001F0705 /* ITErrors.h */,
 				04B5BE7217D5266F001F0705 /* ITErrors.m */,
-				04AB88D117A70F270086D5CD /* ITTableView.h */,
-				04AB88D217A70F270086D5CD /* ITTableView.m */,
+				04AB88D117A70F270086D5CD /* ITHistoryView.h */,
+				04AB88D217A70F270086D5CD /* ITHistoryView.m */,
+				040CA4F017EDED67007B9076 /* ITErrorView.h */,
+				040CA4F117EDED67007B9076 /* ITErrorView.m */,
 				04AB5F1D17C56A3200A2B1AC /* ITHistoryTableCellView.h */,
 				04AB5F1E17C56A3200A2B1AC /* ITHistoryTableCellView.m */,
 				04B5BE7417D53081001F0705 /* ITErrorTableCellView.h */,
@@ -589,8 +595,8 @@
 				04B5BE7917D5401B001F0705 /* ITToolbar.h */,
 				04B5BE7A17D5401B001F0705 /* ITToolbar.m */,
 				043942C317D07D74009C160F /* MainWindowController.xib */,
-				04BAA45217E8F88300D26CF4 /* ITCollectionView.h */,
-				04BAA45317E8F88300D26CF4 /* ITCollectionView.m */,
+				040CA4E617EB8F36007B9076 /* HistoryViewController.xib */,
+				040CA4E817EDCDA0007B9076 /* ErrorViewController.xib */,
 			);
 			name = "Main Window";
 			sourceTree = "<group>";
@@ -766,6 +772,8 @@
 				04B5BE7817D53644001F0705 /* error.png in Resources */,
 				047D985917D67ED7002E97B8 /* ProgressWindowController.xib in Resources */,
 				0403609117DFAEA90014D6D6 /* it-icon.png in Resources */,
+				040CA4E717EB8F36007B9076 /* HistoryViewController.xib in Resources */,
+				040CA4E917EDCDA0007B9076 /* ErrorViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -821,7 +829,7 @@
 				04B68CF617A5BE65006760D0 /* HttpStringResponse.m in Sources */,
 				04B68CF717A5BE65006760D0 /* JsonNode.m in Sources */,
 				04B68CF817A5BE65006760D0 /* Unirest.m in Sources */,
-				04AB88D317A70F270086D5CD /* ITTableView.m in Sources */,
+				04AB88D317A70F270086D5CD /* ITHistoryView.m in Sources */,
 				04BCC5E417B03DBB00D8DE7A /* ITHistory.m in Sources */,
 				04BCC5EF17B1879300D8DE7A /* ITDb.m in Sources */,
 				04BCC5F217B1885A00D8DE7A /* ITConstants.m in Sources */,
@@ -838,7 +846,7 @@
 				04B5BE7B17D5401B001F0705 /* ITToolbar.m in Sources */,
 				047D985417D67285002E97B8 /* ITTableRowGroupView.m in Sources */,
 				047D985817D67ED7002E97B8 /* ProgressWindowController.m in Sources */,
-				04BAA45417E8F88300D26CF4 /* ITCollectionView.m in Sources */,
+				040CA4F217EDED67007B9076 /* ITErrorView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,19 +9,12 @@
 #import <Cocoa/Cocoa.h>
 #import "PXSourceList.h"
 
-@class ITTableView;
-@class ITToolbar;
+@interface MainWindowController : NSWindowController <PXSourceListDataSource, PXSourceListDelegate, NSSplitViewDelegate>
 
-@interface MainWindowController : NSWindowController <PXSourceListDataSource, PXSourceListDelegate, NSTableViewDataSource, NSTableViewDelegate>
-
-@property (nonatomic, strong) IBOutlet ITTableView *tableView;
 @property (nonatomic, strong) IBOutlet PXSourceList *sourceList;
-@property (nonatomic, strong) IBOutlet ITToolbar *errorToolbar;
-@property (nonatomic, strong) IBOutlet ITToolbar *historyToolbar;
 
 @property (nonatomic, strong) IBOutlet NSProgressIndicator *activityIndicator;
-
-@property (nonatomic) IBOutlet NSLayoutConstraint *tableViewTopConstraint;
-@property (nonatomic) IBOutlet NSLayoutConstraint *tableViewBottomConstraint;
+@property (nonatomic, strong) IBOutlet NSSplitView *splitView;
+@property (nonatomic, strong) IBOutlet NSView *placeholderView;
 
 @end

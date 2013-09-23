@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Mustacherious. All rights reserved.
 //
 
-#import "ITTableView.h"
+#import "ITHistoryView.h"
 #import "ITHistory.h"
 #import "ITHistoryTableCellView.h"
 #import "ITErrorTableCellView.h"
@@ -14,9 +14,8 @@
 #import "ITTableRowGroupView.h"
 #import "ITTVShowPoster.h"
 #import "ITUtil.h"
-#import "ITErrors.h"
 
-@interface ITTableView()
+@interface ITHistoryView()
 
 typedef NS_ENUM(NSUInteger, ITTableViewCellType) {
     ITTableViewMovieHistoryCell = 0,
@@ -33,9 +32,18 @@ typedef NS_ENUM(NSUInteger, ITTableViewCellType) {
 
 @end
 
-@implementation ITTableView
+@implementation ITHistoryView
 
 @synthesize tableView=_tableView;
+
+- (id)init
+{
+    self = [super initWithNibName:@"HistoryViewController" bundle:nil];
+    if (self != nil)
+    {
+    }
+    return self;
+}
 
 - (void)setup {
     
@@ -89,13 +97,6 @@ typedef NS_ENUM(NSUInteger, ITTableViewCellType) {
 - (void)reloadTableView {
    
     [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
-}
-
-- (IBAction)clearErrors:(id)sender {
-    
-    [[ITErrors new] clearErrors];
-    
-    [self reloadTableData];
 }
 
 - (IBAction)historyMovies:(id)sender {
