@@ -59,5 +59,12 @@
     return ok;
 }
 
++ (NSDictionary *)tableViewCellTypes
+{
+    return @{@(ITTableViewMovieHistoryCell) : @"MovieHistoryCell",
+             @(ITTableViewTVShowHistoryCell) : @"TVShowHistoryCell",
+             @(ITTableViewErrorCell) : @"ErrorCell",
+             @(ITTableViewUnknownCell) : @"DefaultCell"};
+}
 
 @end

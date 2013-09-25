@@ -10,15 +10,9 @@
 
 @interface ITErrors : NSObject
 
++ (ITErrors *)errorEntityWithErrorObject:(id)object;
+
 - (NSArray *)fetchErrors;
 - (void)clearErrors;
-
-@end
-
-@interface ITErrorGroupHeader : NSObject
-
-@property (nonatomic, strong) NSString *date;
-
-- (id)initWithDateString:(NSString *)date;
 
 @end

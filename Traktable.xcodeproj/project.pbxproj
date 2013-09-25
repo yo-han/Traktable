@@ -35,6 +35,7 @@
 		0441839717D0DA9D00F9FCA2 /* trakttv_pressed.png in Resources */ = {isa = PBXBuildFile; fileRef = 0441839617D0DA9D00F9FCA2 /* trakttv_pressed.png */; };
 		0441839D17D0EDB800F9FCA2 /* ITEpisodeScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 0441839C17D0EDB800F9FCA2 /* ITEpisodeScreen.m */; };
 		0446E06D17385349008BC1EB /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04714E7F16D2DEC000A308F7 /* Sparkle.framework */; };
+		044AC42817F0DAF30045D281 /* ITTableGroupDateCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 044AC42717F0DAF30045D281 /* ITTableGroupDateCellView.m */; };
 		045235A416CA9069005D25E4 /* MASPreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0481386416CA8BF400E682A0 /* MASPreferencesWindow.xib */; };
 		0469CC0016CBE010006863B7 /* IMDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 0469CBFF16CBE010006863B7 /* IMDB.m */; };
 		0469CC1616CBF19F006863B7 /* NSString+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0469CC0416CBF19F006863B7 /* NSString+Helper.m */; };
@@ -171,6 +172,8 @@
 		0441839617D0DA9D00F9FCA2 /* trakttv_pressed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = trakttv_pressed.png; sourceTree = "<group>"; };
 		0441839B17D0EDB800F9FCA2 /* ITEpisodeScreen.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITEpisodeScreen.h; sourceTree = "<group>"; };
 		0441839C17D0EDB800F9FCA2 /* ITEpisodeScreen.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITEpisodeScreen.m; sourceTree = "<group>"; };
+		044AC42617F0DAF30045D281 /* ITTableGroupDateCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITTableGroupDateCellView.h; sourceTree = "<group>"; };
+		044AC42717F0DAF30045D281 /* ITTableGroupDateCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITTableGroupDateCellView.m; sourceTree = "<group>"; };
 		0469CBFE16CBE010006863B7 /* IMDB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IMDB.h; sourceTree = "<group>"; };
 		0469CBFF16CBE010006863B7 /* IMDB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IMDB.m; sourceTree = "<group>"; };
 		0469CC0316CBF19F006863B7 /* NSString+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Helper.h"; sourceTree = "<group>"; };
@@ -592,6 +595,8 @@
 				04D74BB517C7AC5700B135BF /* ITTableRowView.m */,
 				047D985217D67284002E97B8 /* ITTableRowGroupView.h */,
 				047D985317D67285002E97B8 /* ITTableRowGroupView.m */,
+				044AC42617F0DAF30045D281 /* ITTableGroupDateCellView.h */,
+				044AC42717F0DAF30045D281 /* ITTableGroupDateCellView.m */,
 				04B5BE7917D5401B001F0705 /* ITToolbar.h */,
 				04B5BE7A17D5401B001F0705 /* ITToolbar.m */,
 				043942C317D07D74009C160F /* MainWindowController.xib */,
@@ -847,6 +852,7 @@
 				047D985417D67285002E97B8 /* ITTableRowGroupView.m in Sources */,
 				047D985817D67ED7002E97B8 /* ProgressWindowController.m in Sources */,
 				040CA4F217EDED67007B9076 /* ITErrorView.m in Sources */,
+				044AC42817F0DAF30045D281 /* ITTableGroupDateCellView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

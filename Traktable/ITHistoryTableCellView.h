@@ -20,9 +20,3 @@
 @property (nonatomic, strong) IBOutlet NSButton *traktUrl;
 
 @end
-
-@interface ITHistoryTableGroupCellView : NSTableCellView
-
-@property (nonatomic, strong) IBOutlet NSTextField *timestamp;
-
-@end

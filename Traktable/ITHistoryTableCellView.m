@@ -17,7 +17,3 @@
 @implementation ITHistoryTableCellView
 
 @end
-
-@implementation ITHistoryTableGroupCellView
-
-@end

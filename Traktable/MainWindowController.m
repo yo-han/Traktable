@@ -19,8 +19,8 @@ static float const kSidebarWidth = 220.0f;
 
 @property (nonatomic, strong) NSMutableArray *sourceListItems;
 @property (nonatomic, strong) NSViewController *currentViewController;
-@property (nonatomic, strong) NSViewController *historyViewController;
-@property (nonatomic, strong) NSViewController *errorViewController;
+@property (nonatomic, strong) ITHistoryView *historyViewController;
+@property (nonatomic, strong) ITErrorView *errorViewController;
 
 @end
 
@@ -80,7 +80,25 @@ static float const kSidebarWidth = 220.0f;
                                  [NSNumber numberWithInteger:ITErrorList],@"errors",
                                  nil];
     
-    NSView *view = [self.historyViewController view];
+    switch ([[identifiers objectForKey:identifier] intValue]) {
+        case ITHistoryMovies:
+            _currentViewController = self.historyViewController;
+            [self.historyViewController refreshTableData:ITHistoryMovies];
+            break;
+        case ITErrorList:
+            _currentViewController = self.errorViewController;
+            [self.errorViewController refreshTableData:ITErrorList];
+            break;
+        default:
+            _currentViewController = self.historyViewController;
+            [self.historyViewController refreshTableData:ITHistoryMovies];
+    }
+    
+    NSView *view = [self.currentViewController view];
+    
+    for(NSView *subview in [self.placeholderView subviews]) {
+        [subview removeFromSuperview];
+    }
     
     [self.placeholderView addSubview:view];
     
@@ -94,25 +112,6 @@ static float const kSidebarWidth = 220.0f;
     // make sure our added subview is placed and resizes correctly
     [view setFrameOrigin:NSMakePoint(0,0)];
     [view setAutoresizingMask:NSViewWidthSizable | NSViewHeightSizable];
-    
-     switch ([[identifiers objectForKey:identifier] intValue]) {
-     case ITHistoryMovies:
-             _currentViewController = self.historyViewController;
-             [self.historyViewController refreshTableData:ITHistoryMovies];
-     break;
-     case ITErrorList:
-     [self.tableView refreshTableData:ITErrorList];
-     [self.tableViewBottomConstraint setConstant:41.0];
-     [self.tableViewTopConstraint setConstant:0];
-     [self.errorToolbar setHidden:NO];
-     [self.historyToolbar setHidden:YES];
-     break;
-     default:
-     [self.tableViewBottomConstraint setConstant:0];
-     [self.tableViewTopConstraint setConstant:28.0];
-     [self.errorToolbar setHidden:YES];
-     [self.historyToolbar setHidden:NO];
-     }*/
 }
 
 #pragma mark -

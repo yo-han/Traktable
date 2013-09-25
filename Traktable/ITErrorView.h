@@ -17,6 +17,9 @@
 
 @property (nonatomic, strong) IBOutlet NSTableView *tableView;
 
+- (void)refreshTableData:(ITSourceListIdentifier)aTableType;
+- (void)reloadTableView;
+
 - (IBAction)clearErrors:(id)sender;
 
 @end

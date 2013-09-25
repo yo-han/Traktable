@@ -33,6 +33,7 @@ typedef NS_ENUM(NSUInteger, ITTableViewCellType) {
 };
 
 + (NSString *)applicationSupportFolder;
++ (NSDictionary *)tableViewCellTypes;
 
 + (BOOL)firstBoot;
 + (BOOL)traktReachable;

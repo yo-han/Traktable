@@ -11,19 +11,18 @@
 
 @class ITToolbar;
 
-@interface ITHistoryView : NSViewController <NSTableViewDataSource, NSTableViewDelegate>
-
-@property (nonatomic, assign, readonly) ITSourceListIdentifier tableType;
+@interface ITHistoryView : NSViewController <NSTableViewDelegate, NSTableViewDataSource>
 
 @property (nonatomic, strong) IBOutlet NSTableView *tableView;
 @property (nonatomic, strong) IBOutlet NSButton *historyMoviesButton;
 @property (nonatomic, strong) IBOutlet NSButton *historyShowsButton;
 
 - (void)setup;
-- (void)reloadTableData;
-- (void)refreshTableData:(ITSourceListIdentifier)tableType;
 
 - (IBAction)historyMovies:(id)sender;
 - (IBAction)historyShows:(id)sender;
+
+- (void)refreshTableData:(ITSourceListIdentifier)aTableType;
+- (void)reloadTableView;
 
 @end

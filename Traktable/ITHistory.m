@@ -12,21 +12,10 @@
 #import "ITMoviePoster.h"
 #import "ITTVShow.h"
 #import "ITEpisodeScreen.h"
+#import "ITTableGroupDateCellView.h"
 #import "ITDb.h"
 #import "ITUtil.h"
 #import "ITConstants.h"
-
-@implementation ITHistoryGroupHeader
-
-- (id)initWithDateString:(NSString *)date {
-    
-    self = [super init];
-    if (self) {
-        _date = date;
-    }
-    return self;
-}
-@end
 
 @interface ITHistory()
 
@@ -42,7 +31,7 @@
 
     ITHistory *history = [ITHistory new];
     
-    if([object isKindOfClass:[ITHistoryGroupHeader class]] || [object isKindOfClass:[ITErrorGroupHeader class]]) {
+    if([object isKindOfClass:[ITDateGroupHeader class]]) {
         
         return object;
     }
@@ -113,7 +102,7 @@
         NSString *date = [ITUtil localeDateString:[result objectForKey:@"timestamp"]];
         
         if(![lastGroup isEqualToString:date]) {
-            ITHistoryGroupHeader *header = [[ITHistoryGroupHeader alloc] initWithDateString:date];
+            ITDateGroupHeader *header = [[ITDateGroupHeader alloc] initWithDateString:date];
             [movies addObject:header];
         }
         
@@ -139,7 +128,7 @@
         NSString *date = [ITUtil localeDateString:[result objectForKey:@"timestamp"]];
         
         if(![lastGroup isEqualToString:date]) {
-            ITHistoryGroupHeader *header = [[ITHistoryGroupHeader alloc] initWithDateString:date];
+            ITDateGroupHeader *header = [[ITDateGroupHeader alloc] initWithDateString:date];
             [shows addObject:header];
         }
         
