@@ -20,9 +20,10 @@
 @interface ITConstants : NSObject
 
 typedef enum ITSourceListIdentifier : NSUInteger {
-    ITHistoryMovies,
-    ITHistoryTVShows,
-    ITErrorList
+    ITMovies = 0,
+    ITHistoryMovies = 1,
+    ITHistoryTVShows = 2,
+    ITErrorList = 3
 } ITSourceListIdentifier;
 
 typedef NS_ENUM(NSUInteger, ITTableViewCellType) {

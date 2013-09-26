@@ -12,6 +12,7 @@
 #import "ITToolbar.h"
 #import "ITHistoryView.h"
 #import "ITErrorView.h"
+#import "ITMovieView.h"
 
 static float const kSidebarWidth = 220.0f;
 
@@ -21,6 +22,7 @@ static float const kSidebarWidth = 220.0f;
 @property (nonatomic, strong) NSViewController *currentViewController;
 @property (nonatomic, strong) ITHistoryView *historyViewController;
 @property (nonatomic, strong) ITErrorView *errorViewController;
+@property (nonatomic, strong) ITMovieView *movieViewController;
 
 @end
 
@@ -43,6 +45,7 @@ static float const kSidebarWidth = 220.0f;
     
     _historyViewController = [[ITHistoryView alloc] init];
     _errorViewController = [[ITErrorView alloc] init];
+    _movieViewController = [[ITMovieView alloc] init];
     
     [self switchView:@"history"];
 }
@@ -54,6 +57,9 @@ static float const kSidebarWidth = 220.0f;
     SourceListItem *traktable = [SourceListItem itemWithTitle:NSLocalizedString(@"Traktable", nil) identifier:@"traktable"];
 	[traktable setIcon:[NSImage imageNamed:@"movies.png"]];
     
+    SourceListItem *moviesItem = [SourceListItem itemWithTitle:NSLocalizedString(@"Movies", nil) identifier:@"movies"];
+	[moviesItem setIcon:[NSImage imageNamed:@"movies.png"]];
+    
 	SourceListItem *historyItem = [SourceListItem itemWithTitle:NSLocalizedString(@"History", nil) identifier:@"history"];
 	[historyItem setIcon:[NSImage imageNamed:@"movies.png"]];
 	
@@ -62,7 +68,7 @@ static float const kSidebarWidth = 220.0f;
     SourceListItem *errorItem = [SourceListItem itemWithTitle:NSLocalizedString(@"Errors", nil) identifier:@"errors"];
     [errorItem setIcon:[NSImage imageNamed:NSImageNameIconViewTemplate]];
 	
-    [traktable setChildren:[NSArray arrayWithObjects:historyItem, nil]];
+    [traktable setChildren:[NSArray arrayWithObjects:moviesItem, historyItem, nil]];
     [logItem setChildren:[NSArray arrayWithObjects:errorItem, nil]];
 	
 	[self.sourceListItems addObject:traktable];
@@ -76,10 +82,11 @@ static float const kSidebarWidth = 220.0f;
 - (void)switchView:(NSString *)identifier {
     
     NSDictionary *identifiers = [NSDictionary dictionaryWithObjectsAndKeys:
+                                 [NSNumber numberWithInteger:ITMovies],@"movies",
                                  [NSNumber numberWithInteger:ITHistoryMovies],@"history",
                                  [NSNumber numberWithInteger:ITErrorList],@"errors",
                                  nil];
-    
+
     switch ([[identifiers objectForKey:identifier] intValue]) {
         case ITHistoryMovies:
             _currentViewController = self.historyViewController;
@@ -89,9 +96,12 @@ static float const kSidebarWidth = 220.0f;
             _currentViewController = self.errorViewController;
             [self.errorViewController refreshTableData:ITErrorList];
             break;
+        case ITMovies:
+            _currentViewController = self.movieViewController;
+            [self.movieViewController reload];
+            break;
         default:
-            _currentViewController = self.historyViewController;
-            [self.historyViewController refreshTableData:ITHistoryMovies];
+            _currentViewController = self.movieViewController;
     }
     
     NSView *view = [self.currentViewController view];
@@ -265,7 +275,7 @@ static float const kSidebarWidth = 220.0f;
 	} else if([selectedIndexes count]==1) {
 
 		NSString *identifier = [[self.sourceList itemAtRow:[selectedIndexes firstIndex]] identifier];
-		
+
 		[self switchView:identifier];
         
     } else {

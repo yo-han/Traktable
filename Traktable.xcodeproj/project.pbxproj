@@ -82,6 +82,8 @@
 		04A9FE5617B448C7006CD129 /* ITUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A9FE5517B448C7006CD129 /* ITUtil.m */; };
 		04AB5F1F17C56A3200A2B1AC /* ITHistoryTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AB5F1E17C56A3200A2B1AC /* ITHistoryTableCellView.m */; };
 		04AB88D317A70F270086D5CD /* ITHistoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04AB88D217A70F270086D5CD /* ITHistoryView.m */; };
+		04ACB10F17F382AF00305321 /* ITMovieView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04ACB10D17F382AF00305321 /* ITMovieView.m */; };
+		04ACB11017F382AF00305321 /* MovieViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04ACB10E17F382AF00305321 /* MovieViewController.xib */; };
 		04B5BE7317D5266F001F0705 /* ITErrors.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B5BE7217D5266F001F0705 /* ITErrors.m */; };
 		04B5BE7617D53081001F0705 /* ITErrorTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B5BE7517D53081001F0705 /* ITErrorTableCellView.m */; };
 		04B5BE7817D53644001F0705 /* error.png in Resources */ = {isa = PBXBuildFile; fileRef = 04B5BE7717D53644001F0705 /* error.png */; };
@@ -250,6 +252,9 @@
 		04AB5F1E17C56A3200A2B1AC /* ITHistoryTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITHistoryTableCellView.m; sourceTree = "<group>"; };
 		04AB88D117A70F270086D5CD /* ITHistoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITHistoryView.h; sourceTree = "<group>"; };
 		04AB88D217A70F270086D5CD /* ITHistoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITHistoryView.m; sourceTree = "<group>"; };
+		04ACB10C17F382AF00305321 /* ITMovieView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITMovieView.h; sourceTree = "<group>"; };
+		04ACB10D17F382AF00305321 /* ITMovieView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITMovieView.m; sourceTree = "<group>"; };
+		04ACB10E17F382AF00305321 /* MovieViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MovieViewController.xib; sourceTree = "<group>"; };
 		04B5BE7117D5266F001F0705 /* ITErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITErrors.h; sourceTree = "<group>"; };
 		04B5BE7217D5266F001F0705 /* ITErrors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITErrors.m; sourceTree = "<group>"; };
 		04B5BE7417D53081001F0705 /* ITErrorTableCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITErrorTableCellView.h; sourceTree = "<group>"; };
@@ -583,6 +588,8 @@
 				04BCC5E317B03DBB00D8DE7A /* ITHistory.m */,
 				04B5BE7117D5266F001F0705 /* ITErrors.h */,
 				04B5BE7217D5266F001F0705 /* ITErrors.m */,
+				04ACB10C17F382AF00305321 /* ITMovieView.h */,
+				04ACB10D17F382AF00305321 /* ITMovieView.m */,
 				04AB88D117A70F270086D5CD /* ITHistoryView.h */,
 				04AB88D217A70F270086D5CD /* ITHistoryView.m */,
 				040CA4F017EDED67007B9076 /* ITErrorView.h */,
@@ -602,6 +609,7 @@
 				043942C317D07D74009C160F /* MainWindowController.xib */,
 				040CA4E617EB8F36007B9076 /* HistoryViewController.xib */,
 				040CA4E817EDCDA0007B9076 /* ErrorViewController.xib */,
+				04ACB10E17F382AF00305321 /* MovieViewController.xib */,
 			);
 			name = "Main Window";
 			sourceTree = "<group>";
@@ -772,6 +780,7 @@
 				043942B417D076F2009C160F /* Localizable.strings in Resources */,
 				043942BF17D07B92009C160F /* Localizable.strings in Resources */,
 				043942C517D07D74009C160F /* MainWindowController.xib in Resources */,
+				04ACB11017F382AF00305321 /* MovieViewController.xib in Resources */,
 				0441839517D0DA5200F9FCA2 /* trakttv.png in Resources */,
 				0441839717D0DA9D00F9FCA2 /* trakttv_pressed.png in Resources */,
 				04B5BE7817D53644001F0705 /* error.png in Resources */,
@@ -813,6 +822,7 @@
 				0469CC1C16CBF19F006863B7 /* TVDbImage.m in Sources */,
 				0469CC1D16CBF19F006863B7 /* TVDbShow.m in Sources */,
 				0469CC1E16CBF19F006863B7 /* TVDbUpdater.m in Sources */,
+				04ACB10F17F382AF00305321 /* ITMovieView.m in Sources */,
 				0469CC1F16CBF19F006863B7 /* XMLReader.m in Sources */,
 				0469CC2216CD8CEA006863B7 /* ITTVdb.m in Sources */,
 				04714E2816D2C59900A308F7 /* ITConfig.m in Sources */,
