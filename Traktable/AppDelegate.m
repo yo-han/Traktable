@@ -56,6 +56,8 @@
     } else {
         
         NSLog(@"Startup normal, loggedin.");
+        
+        [NSTimer scheduledTimerWithTimeInterval:900 target:self selector:@selector(iTunesSourceSaved:) userInfo:nil repeats:YES];
     }
     
     [[NSDistributedNotificationCenter defaultCenter] addObserver:self selector:@selector(iTunesChangedState:) name:@"com.apple.iTunes.playerInfo" object:@"com.apple.iTunes.player" suspensionBehavior:NSNotificationSuspensionBehaviorCoalesce];
