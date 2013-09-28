@@ -9,7 +9,7 @@
 #import "ITMovieView.h"
 
 static const NSSize buttonSize = { 80, 20 };
-static const NSSize itemSize = { 100, 40 };
+static const NSSize itemSize = { 200, 300 };
 static const NSPoint buttonOrigin = { 10, 10 };
 
 @interface BVView : NSView
@@ -81,6 +81,7 @@ static const NSPoint buttonOrigin = { 10, 10 };
                              | NSViewHeightSizable
                              | NSViewMaxYMargin)];
     [[self view] addSubview:cv];
+    [self.view needsLayout];
 }
 
 @end

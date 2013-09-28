@@ -7,7 +7,7 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="ITMovieView">
             <connections>
-                <outlet property="view" destination="97U-FT-xdJ" id="fvD-vw-gX0"/>
+                <outlet property="view" destination="97U-FT-xdJ" id="9Vv-Ts-BVV"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
@@ -16,23 +16,29 @@
             <rect key="frame" x="0.0" y="0.0" width="419" height="341"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <button translatesAutoresizingMaskIntoConstraints="NO" id="Rxn-il-MxI">
-                    <rect key="frame" x="337" y="8" width="64" height="64"/>
+                <scrollView fixedFrame="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dl3-uI-jlW">
+                    <rect key="frame" x="0.0" y="0.0" width="419" height="341"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="59" id="3Ff-Xe-xWL"/>
-                        <constraint firstAttribute="width" constant="60" id="9Ro-pG-KwQ"/>
-                    </constraints>
-                    <buttonCell key="cell" type="bevel" bezelStyle="regularSquare" imagePosition="only" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="gyu-tX-KDb">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" size="10" name="LucidaGrande"/>
-                    </buttonCell>
-                </button>
+                    <clipView key="contentView" ambiguous="YES" misplaced="YES" id="xlc-dS-egY">
+                        <rect key="frame" x="1" y="1" width="402" height="324"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J9N-JA-VRu">
+                                <rect key="frame" x="0.0" y="0.0" width="402" height="324"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </view>
+                        </subviews>
+                    </clipView>
+                    <scroller key="horizontalScroller" verticalHuggingPriority="750" id="z5g-eg-Qjz">
+                        <rect key="frame" x="1" y="325" width="402" height="15"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </scroller>
+                    <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="1" id="FaL-DA-Pb4">
+                        <rect key="frame" x="403" y="1" width="15" height="324"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </scroller>
+                </scrollView>
             </subviews>
-            <constraints>
-                <constraint firstAttribute="bottom" secondItem="Rxn-il-MxI" secondAttribute="bottom" constant="11" id="suh-tl-N0h"/>
-                <constraint firstAttribute="trailing" secondItem="Rxn-il-MxI" secondAttribute="trailing" constant="20" symbolic="YES" id="vsD-2M-kRY"/>
-            </constraints>
         </customView>
     </objects>
 </document>
