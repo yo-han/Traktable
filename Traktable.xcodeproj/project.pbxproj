@@ -114,6 +114,7 @@
 		04D74BC417CAB18B00B135BF /* movies.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D74BC317CAB18B00B135BF /* movies.png */; };
 		04D74BC717CB49FE00B135BF /* ITTVShowPoster.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D74BC617CB49FE00B135BF /* ITTVShowPoster.m */; };
 		04D74BCA17CBA18C00B135BF /* ITSync.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D74BC917CBA18B00B135BF /* ITSync.m */; };
+		04E3EFF417F877FF002840C5 /* MovieCollectionViewItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04E3EFF317F877FF002840C5 /* MovieCollectionViewItem.xib */; };
 		04FE3AE517D8BBF200497DAD /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FE3AE417D8BBF200497DAD /* SystemConfiguration.framework */; };
 /* End PBXBuildFile section */
 
@@ -314,6 +315,7 @@
 		04D74BC617CB49FE00B135BF /* ITTVShowPoster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITTVShowPoster.m; sourceTree = "<group>"; };
 		04D74BC817CBA18A00B135BF /* ITSync.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITSync.h; sourceTree = "<group>"; };
 		04D74BC917CBA18B00B135BF /* ITSync.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITSync.m; sourceTree = "<group>"; };
+		04E3EFF317F877FF002840C5 /* MovieCollectionViewItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MovieCollectionViewItem.xib; sourceTree = "<group>"; };
 		04FE3AE417D8BBF200497DAD /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -610,6 +612,7 @@
 				040CA4E617EB8F36007B9076 /* HistoryViewController.xib */,
 				040CA4E817EDCDA0007B9076 /* ErrorViewController.xib */,
 				04ACB10E17F382AF00305321 /* MovieViewController.xib */,
+				04E3EFF317F877FF002840C5 /* MovieCollectionViewItem.xib */,
 			);
 			name = "Main Window";
 			sourceTree = "<group>";
@@ -729,7 +732,7 @@
 		042F07D516BC19DB00A0CE9E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0450;
+				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = Mustacherious;
 			};
 			buildConfigurationList = 042F07D816BC19DB00A0CE9E /* Build configuration list for PBXProject "Traktable" */;
@@ -767,6 +770,7 @@
 				0469CC1916CBF19F006863B7 /* README.md in Resources */,
 				0437203316CEF3ED003B8AB6 /* icon.icns in Resources */,
 				0437204316CEF823003B8AB6 /* menuicon.png in Resources */,
+				04E3EFF417F877FF002840C5 /* MovieCollectionViewItem.xib in Resources */,
 				048DF1F816DEC3ED004B064A /* PrefSyncViewController.xib in Resources */,
 				048DF1FA16DECC6B004B064A /* PrefUpdateViewController.h in Resources */,
 				048DF1FE16DECD14004B064A /* PrefUpdateViewController.xib in Resources */,
@@ -924,7 +928,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -955,7 +958,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -978,7 +980,6 @@
 		042F07FD16BC19DB00A0CE9E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1002,7 +1003,6 @@
 		042F07FE16BC19DB00A0CE9E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

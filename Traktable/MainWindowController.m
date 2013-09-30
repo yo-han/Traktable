@@ -98,7 +98,6 @@ static float const kSidebarWidth = 220.0f;
             break;
         case ITMovies:
             _currentViewController = self.movieViewController;
-            [self.movieViewController reload];
             break;
         default:
             _currentViewController = self.movieViewController;

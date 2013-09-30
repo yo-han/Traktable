@@ -45,8 +45,146 @@
                                         </textFieldCell>
                                         <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                         <prototypeCellViews>
-                                            <tableCellView identifier="MovieHistoryCell" focusRingType="exterior" id="26" customClass="ITHistoryTableCellView">
+                                            <tableCellView identifier="TVShowHistoryCell" focusRingType="exterior" id="27" customClass="ITHistoryTableCellView">
                                                 <rect key="frame" x="0.0" y="0.0" width="660" height="150"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <subviews>
+                                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="48">
+                                                        <rect key="frame" x="0.0" y="1" width="195" height="150"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="150" id="99"/>
+                                                            <constraint firstAttribute="width" constant="195" id="100"/>
+                                                        </constraints>
+                                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" drawsBackground="YES" usesSingleLineMode="YES" id="98">
+                                                            <font key="font" size="13" name="Futura-Medium"/>
+                                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </textFieldCell>
+                                                    </textField>
+                                                    <textField verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="49">
+                                                        <rect key="frame" x="210" y="69" width="347" height="61"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                        <textFieldCell key="cell" selectable="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" alignment="left" placeholderString="title" id="95">
+                                                            <font key="font" size="16" name="HelveticaNeue-Medium"/>
+                                                            <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                        </textFieldCell>
+                                                    </textField>
+                                                    <imageView translatesAutoresizingMaskIntoConstraints="NO" id="50">
+                                                        <rect key="frame" x="-1" y="26" width="196" height="104"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="104" id="94"/>
+                                                        </constraints>
+                                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" image="movies" id="93"/>
+                                                    </imageView>
+                                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="51">
+                                                        <rect key="frame" x="515" y="80" width="129" height="50"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="50" id="91"/>
+                                                            <constraint firstAttribute="width" constant="123" id="92"/>
+                                                        </constraints>
+                                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" placeholderString="S00E00" id="90">
+                                                            <font key="font" size="20" name="Futura-Medium"/>
+                                                            <color key="textColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                        </textFieldCell>
+                                                    </textField>
+                                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="52">
+                                                        <rect key="frame" x="236" y="6" width="97" height="21"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="91" id="88"/>
+                                                            <constraint firstAttribute="height" constant="21" id="89"/>
+                                                        </constraints>
+                                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" placeholderString="action" id="87">
+                                                            <font key="font" size="12" name="HelveticaNeue"/>
+                                                            <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                        </textFieldCell>
+                                                    </textField>
+                                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="53">
+                                                        <rect key="frame" x="355" y="6" width="168" height="21"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="162" id="86"/>
+                                                        </constraints>
+                                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" placeholderString="timestamp" id="85">
+                                                            <font key="font" size="12" name="HelveticaNeue"/>
+                                                            <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                                        </textFieldCell>
+                                                    </textField>
+                                                    <imageView translatesAutoresizingMaskIntoConstraints="NO" id="54">
+                                                        <rect key="frame" x="213" y="11" width="18" height="12"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="12" id="83"/>
+                                                            <constraint firstAttribute="width" constant="18" id="84"/>
+                                                        </constraints>
+                                                        <imageCell key="cell" controlSize="small" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="eye_32x24" id="82"/>
+                                                    </imageView>
+                                                    <imageView translatesAutoresizingMaskIntoConstraints="NO" id="55">
+                                                        <rect key="frame" x="338" y="11" width="12" height="12"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="12" id="81"/>
+                                                        </constraints>
+                                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="clock_32x32" id="80"/>
+                                                    </imageView>
+                                                    <button toolTip="View on trakt.tv" focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="56">
+                                                        <rect key="frame" x="615" y="7" width="36" height="19"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="36" id="79"/>
+                                                        </constraints>
+                                                        <buttonCell key="cell" type="roundRect" bezelStyle="roundedRect" image="trakttv" imagePosition="only" alignment="center" alternateImage="trakttv_pressed" state="on" focusRingType="none" inset="2" id="78">
+                                                            <behavior key="behavior" lightByContents="YES"/>
+                                                            <font key="font" metaFont="cellTitle"/>
+                                                        </buttonCell>
+                                                        <accessibility description="View this movie on trakt.tv"/>
+                                                        <connections>
+                                                            <action selector="openTraktUrl:" target="-2" id="vSJ-J5-ECy"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="56" secondAttribute="trailing" constant="9" id="57"/>
+                                                    <constraint firstItem="56" firstAttribute="centerY" secondItem="53" secondAttribute="centerY" id="58"/>
+                                                    <constraint firstItem="56" firstAttribute="top" secondItem="27" secondAttribute="top" constant="124" id="59"/>
+                                                    <constraint firstItem="56" firstAttribute="centerY" secondItem="55" secondAttribute="centerY" id="60"/>
+                                                    <constraint firstAttribute="trailing" secondItem="51" secondAttribute="trailing" constant="19" id="61"/>
+                                                    <constraint firstItem="51" firstAttribute="top" secondItem="49" secondAttribute="top" id="62"/>
+                                                    <constraint firstItem="53" firstAttribute="leading" secondItem="55" secondAttribute="trailing" constant="8" symbolic="YES" id="63"/>
+                                                    <constraint firstItem="53" firstAttribute="baseline" secondItem="52" secondAttribute="baseline" id="64"/>
+                                                    <constraint firstItem="55" firstAttribute="bottom" secondItem="54" secondAttribute="bottom" id="65"/>
+                                                    <constraint firstItem="55" firstAttribute="top" secondItem="54" secondAttribute="top" id="66"/>
+                                                    <constraint firstItem="55" firstAttribute="leading" secondItem="52" secondAttribute="trailing" constant="8" symbolic="YES" id="67"/>
+                                                    <constraint firstItem="52" firstAttribute="top" secondItem="53" secondAttribute="top" id="68"/>
+                                                    <constraint firstItem="52" firstAttribute="leading" secondItem="54" secondAttribute="trailing" constant="8" symbolic="YES" id="69"/>
+                                                    <constraint firstItem="54" firstAttribute="leading" secondItem="49" secondAttribute="leading" id="70"/>
+                                                    <constraint firstItem="49" firstAttribute="top" secondItem="50" secondAttribute="top" id="72"/>
+                                                    <constraint firstItem="50" firstAttribute="trailing" secondItem="48" secondAttribute="trailing" id="73"/>
+                                                    <constraint firstItem="50" firstAttribute="leading" secondItem="27" secondAttribute="leading" constant="-1" id="74"/>
+                                                    <constraint firstItem="50" firstAttribute="top" secondItem="27" secondAttribute="top" constant="20" id="75"/>
+                                                    <constraint firstItem="48" firstAttribute="top" secondItem="27" secondAttribute="top" constant="-1" id="76"/>
+                                                    <constraint firstItem="48" firstAttribute="centerX" secondItem="50" secondAttribute="centerX" id="77"/>
+                                                    <constraint firstItem="49" firstAttribute="leading" secondItem="50" secondAttribute="trailing" constant="18" id="nBc-OR-p9b"/>
+                                                    <constraint firstAttribute="trailing" secondItem="49" secondAttribute="trailing" constant="20" symbolic="YES" id="tIC-8h-qEQ"/>
+                                                </constraints>
+                                                <connections>
+                                                    <outlet property="episodeSeasonNumber" destination="51" id="9Ra-yY-103"/>
+                                                    <outlet property="imageView" destination="50" id="dm3-4H-1Y3"/>
+                                                    <outlet property="scrobble" destination="52" id="ddq-KK-gbr"/>
+                                                    <outlet property="timestamp" destination="53" id="jJA-qD-UTj"/>
+                                                    <outlet property="title" destination="49" id="aJL-At-nGZ"/>
+                                                    <outlet property="traktUrl" destination="56" id="1es-Sd-I2s"/>
+                                                </connections>
+                                            </tableCellView>
+                                            <tableCellView identifier="MovieHistoryCell" focusRingType="exterior" id="26" customClass="ITHistoryTableCellView">
+                                                <rect key="frame" x="0.0" y="150" width="660" height="150"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <subviews>
                                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="101">
@@ -137,6 +275,9 @@
                                                             <font key="font" metaFont="cellTitle"/>
                                                         </buttonCell>
                                                         <accessibility description="View this movie on trakt.tv"/>
+                                                        <connections>
+                                                            <action selector="openTraktUrl:" target="-2" id="vt4-7l-cdL"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <constraints>
@@ -164,147 +305,8 @@
                                                     <outlet property="scrobble" destination="103" id="176"/>
                                                     <outlet property="timestamp" destination="104" id="177"/>
                                                     <outlet property="title" destination="101" id="178"/>
-                                                    <outlet property="traktUrl" destination="108" id="179"/>
+                                                    <outlet property="traktUrl" destination="108" id="atL-2J-DYU"/>
                                                     <outlet property="year" destination="105" id="180"/>
-                                                </connections>
-                                            </tableCellView>
-                                            <tableCellView identifier="TVShowHistoryCell" focusRingType="exterior" id="27" customClass="ITHistoryTableCellView">
-                                                <rect key="frame" x="0.0" y="150" width="660" height="150"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                <subviews>
-                                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="48">
-                                                        <rect key="frame" x="0.0" y="1" width="195" height="150"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="150" id="99"/>
-                                                            <constraint firstAttribute="width" constant="195" id="100"/>
-                                                        </constraints>
-                                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" drawsBackground="YES" usesSingleLineMode="YES" id="98">
-                                                            <font key="font" size="13" name="Futura-Medium"/>
-                                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                                            <color key="backgroundColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
-                                                        </textFieldCell>
-                                                    </textField>
-                                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="49">
-                                                        <rect key="frame" x="210" y="98" width="319" height="32"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="32" id="96"/>
-                                                            <constraint firstAttribute="width" constant="313" id="97"/>
-                                                        </constraints>
-                                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="title" id="95">
-                                                            <font key="font" size="16" name="HelveticaNeue-Medium"/>
-                                                            <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                                        </textFieldCell>
-                                                    </textField>
-                                                    <imageView translatesAutoresizingMaskIntoConstraints="NO" id="50">
-                                                        <rect key="frame" x="-1" y="26" width="196" height="104"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="104" id="94"/>
-                                                        </constraints>
-                                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" image="movies" id="93"/>
-                                                    </imageView>
-                                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="51">
-                                                        <rect key="frame" x="515" y="80" width="129" height="50"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="50" id="91"/>
-                                                            <constraint firstAttribute="width" constant="123" id="92"/>
-                                                        </constraints>
-                                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="S00E00" id="90">
-                                                            <font key="font" size="20" name="Futura-Medium"/>
-                                                            <color key="textColor" red="0.40000000600000002" green="0.40000000600000002" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                                        </textFieldCell>
-                                                    </textField>
-                                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="52">
-                                                        <rect key="frame" x="236" y="6" width="97" height="21"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="91" id="88"/>
-                                                            <constraint firstAttribute="height" constant="21" id="89"/>
-                                                        </constraints>
-                                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" placeholderString="action" id="87">
-                                                            <font key="font" size="12" name="HelveticaNeue"/>
-                                                            <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                                        </textFieldCell>
-                                                    </textField>
-                                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="53">
-                                                        <rect key="frame" x="355" y="6" width="168" height="21"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="162" id="86"/>
-                                                        </constraints>
-                                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="timestamp" id="85">
-                                                            <font key="font" size="12" name="HelveticaNeue"/>
-                                                            <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                                        </textFieldCell>
-                                                    </textField>
-                                                    <imageView translatesAutoresizingMaskIntoConstraints="NO" id="54">
-                                                        <rect key="frame" x="213" y="11" width="18" height="12"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="12" id="83"/>
-                                                            <constraint firstAttribute="width" constant="18" id="84"/>
-                                                        </constraints>
-                                                        <imageCell key="cell" controlSize="small" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="eye_32x24" id="82"/>
-                                                    </imageView>
-                                                    <imageView translatesAutoresizingMaskIntoConstraints="NO" id="55">
-                                                        <rect key="frame" x="338" y="11" width="12" height="12"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="12" id="81"/>
-                                                        </constraints>
-                                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" image="clock_32x32" id="80"/>
-                                                    </imageView>
-                                                    <button toolTip="View on trakt.tv" focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="56">
-                                                        <rect key="frame" x="615" y="7" width="36" height="19"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="36" id="79"/>
-                                                        </constraints>
-                                                        <buttonCell key="cell" type="roundRect" bezelStyle="roundedRect" image="trakttv" imagePosition="only" alignment="center" alternateImage="trakttv_pressed" state="on" focusRingType="none" inset="2" id="78">
-                                                            <behavior key="behavior" lightByContents="YES"/>
-                                                            <font key="font" metaFont="cellTitle"/>
-                                                        </buttonCell>
-                                                        <accessibility description="View this movie on trakt.tv"/>
-                                                    </button>
-                                                </subviews>
-                                                <constraints>
-                                                    <constraint firstAttribute="trailing" secondItem="56" secondAttribute="trailing" constant="9" id="57"/>
-                                                    <constraint firstItem="56" firstAttribute="centerY" secondItem="53" secondAttribute="centerY" id="58"/>
-                                                    <constraint firstItem="56" firstAttribute="top" secondItem="27" secondAttribute="top" constant="124" id="59"/>
-                                                    <constraint firstItem="56" firstAttribute="centerY" secondItem="55" secondAttribute="centerY" id="60"/>
-                                                    <constraint firstAttribute="trailing" secondItem="51" secondAttribute="trailing" constant="19" id="61"/>
-                                                    <constraint firstItem="51" firstAttribute="top" secondItem="49" secondAttribute="top" id="62"/>
-                                                    <constraint firstItem="53" firstAttribute="leading" secondItem="55" secondAttribute="trailing" constant="8" symbolic="YES" id="63"/>
-                                                    <constraint firstItem="53" firstAttribute="baseline" secondItem="52" secondAttribute="baseline" id="64"/>
-                                                    <constraint firstItem="55" firstAttribute="bottom" secondItem="54" secondAttribute="bottom" id="65"/>
-                                                    <constraint firstItem="55" firstAttribute="top" secondItem="54" secondAttribute="top" id="66"/>
-                                                    <constraint firstItem="55" firstAttribute="leading" secondItem="52" secondAttribute="trailing" constant="8" symbolic="YES" id="67"/>
-                                                    <constraint firstItem="52" firstAttribute="top" secondItem="53" secondAttribute="top" id="68"/>
-                                                    <constraint firstItem="52" firstAttribute="leading" secondItem="54" secondAttribute="trailing" constant="8" symbolic="YES" id="69"/>
-                                                    <constraint firstItem="54" firstAttribute="leading" secondItem="49" secondAttribute="leading" id="70"/>
-                                                    <constraint firstItem="49" firstAttribute="leading" secondItem="27" secondAttribute="leading" constant="213" id="71"/>
-                                                    <constraint firstItem="49" firstAttribute="top" secondItem="50" secondAttribute="top" id="72"/>
-                                                    <constraint firstItem="50" firstAttribute="trailing" secondItem="48" secondAttribute="trailing" id="73"/>
-                                                    <constraint firstItem="50" firstAttribute="leading" secondItem="27" secondAttribute="leading" constant="-1" id="74"/>
-                                                    <constraint firstItem="50" firstAttribute="top" secondItem="27" secondAttribute="top" constant="20" id="75"/>
-                                                    <constraint firstItem="48" firstAttribute="top" secondItem="27" secondAttribute="top" constant="-1" id="76"/>
-                                                    <constraint firstItem="48" firstAttribute="centerX" secondItem="50" secondAttribute="centerX" id="77"/>
-                                                </constraints>
-                                                <connections>
-                                                    <outlet property="episodeSeasonNumber" destination="51" id="189"/>
-                                                    <outlet property="imageView" destination="50" id="190"/>
-                                                    <outlet property="scrobble" destination="52" id="191"/>
-                                                    <outlet property="seasonLabel" destination="48" id="192"/>
-                                                    <outlet property="timestamp" destination="53" id="193"/>
-                                                    <outlet property="title" destination="49" id="194"/>
-                                                    <outlet property="traktUrl" destination="56" id="195"/>
                                                 </connections>
                                             </tableCellView>
                                             <tableCellView identifier="dateGroupCell" id="29" customClass="ITTableGroupDateCellView">

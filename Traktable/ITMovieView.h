@@ -8,10 +8,31 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface ITMovieView : NSViewController
+@interface ITMovieViewBox : NSBox
+@end
 
-@property(nonatomic, strong) IBOutlet NSCollectionView *collectionView;
+@interface ITMovieScrollView : NSScrollView
+@end
 
-- (void)reload;
+@interface ITMovieCollectionViewItem : NSCollectionViewItem
+
+@property (nonatomic, retain) IBOutlet NSString *movieTitle;
+@property (nonatomic, retain) IBOutlet NSImage *moviePoster;
+
+- (id)copyWithZone:(NSZone *)zone;
+- (void)setRepresentedObject:(id)object;
+- (void)setSelected:(BOOL)flag;
+- (void)awakeFromNib;
+
+@end
+
+@interface ITMovieView : NSViewController <NSCollectionViewDelegate> {
+    
+    IBOutlet NSCollectionView *collectionView;
+    IBOutlet NSArrayController *arrayController;
+    NSMutableArray *movies;
+}
+
+@property (retain) NSMutableArray *movies;
 
 @end

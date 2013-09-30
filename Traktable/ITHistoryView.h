@@ -21,6 +21,7 @@
 
 - (IBAction)historyMovies:(id)sender;
 - (IBAction)historyShows:(id)sender;
+- (IBAction)openTraktUrl:(id)sender;
 
 - (void)refreshTableData:(ITSourceListIdentifier)aTableType;
 - (void)reloadTableView;

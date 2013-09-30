@@ -141,7 +141,7 @@
         NSString *time = [ITUtil stringToTime:_entry.timestamp];
         
         [cellView.timestamp setStringValue:time];
-        
+
         if(_entry.traktUrl)
             [cellView.traktUrl setTag:row];
         else
@@ -158,8 +158,8 @@
             [cellView.year setStringValue:_entry.year];
             [cellView.scrobble setStringValue: NSLocalizedString(_entry.action, nil)];
             
-        } else if (self.tableType == ITTableViewTVShowHistoryCell) {
-            
+        } else if (self.tableViewCellType == ITTableViewTVShowHistoryCell) {
+
             [cellView.title setStringValue:[NSString stringWithFormat:@"%@ - %@",_entry.title,_entry.episodeTitle]];
             [cellView.seasonLabel setBackgroundColor:[NSColor blackColor]];
             [cellView.seasonLabel setDrawsBackground:YES];
@@ -180,10 +180,15 @@
 - (IBAction)openTraktUrl:(id)sender {
     
     NSButton *btn = (NSButton *) sender;
+    
     ITHistory *entry = [self entryForRow:btn.tag];
-    NSString *url = entry.traktUrl;
 
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:url]];
+    if(![entry isKindOfClass:[ITDateGroupHeader class]]) {
+        
+        NSString *url = entry.traktUrl;
+
+        [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:url]];
+    }
 }
 
 #pragma mark -
