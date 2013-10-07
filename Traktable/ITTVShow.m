@@ -44,6 +44,7 @@
     show.seasonNumber = [[record objectForKey:@"season"] intValue];
     show.episodeNumber = [[record objectForKey:@"episode"] intValue];
     show.url = [record objectForKey:@"traktUrl"];
+    show.year = [[record objectForKey:@"year"] intValue];
     
     if([record objectForKey:@"timestamp"] != nil) {
         

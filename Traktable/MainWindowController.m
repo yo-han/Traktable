@@ -13,6 +13,7 @@
 #import "ITHistoryView.h"
 #import "ITErrorView.h"
 #import "ITMovieView.h"
+#import "ITTVShowView.h"
 
 static float const kSidebarWidth = 220.0f;
 
@@ -23,6 +24,7 @@ static float const kSidebarWidth = 220.0f;
 @property (nonatomic, strong) ITHistoryView *historyViewController;
 @property (nonatomic, strong) ITErrorView *errorViewController;
 @property (nonatomic, strong) ITMovieView *movieViewController;
+@property (nonatomic, strong) ITTVShowView *tvShowViewController;
 
 @end
 
@@ -46,6 +48,7 @@ static float const kSidebarWidth = 220.0f;
     _historyViewController = [[ITHistoryView alloc] init];
     _errorViewController = [[ITErrorView alloc] init];
     _movieViewController = [[ITMovieView alloc] init];
+    _tvShowViewController = [[ITTVShowView alloc] init];
     
     [self switchView:@"history"];
 }
@@ -60,6 +63,9 @@ static float const kSidebarWidth = 220.0f;
     SourceListItem *moviesItem = [SourceListItem itemWithTitle:NSLocalizedString(@"Movies", nil) identifier:@"movies"];
 	[moviesItem setIcon:[NSImage imageNamed:@"movies.png"]];
     
+    SourceListItem *tvshowItem = [SourceListItem itemWithTitle:NSLocalizedString(@"TV Shows", nil) identifier:@"tvshows"];
+	[tvshowItem setIcon:[NSImage imageNamed:@"movies.png"]];
+    
 	SourceListItem *historyItem = [SourceListItem itemWithTitle:NSLocalizedString(@"History", nil) identifier:@"history"];
 	[historyItem setIcon:[NSImage imageNamed:@"movies.png"]];
 	
@@ -68,7 +74,7 @@ static float const kSidebarWidth = 220.0f;
     SourceListItem *errorItem = [SourceListItem itemWithTitle:NSLocalizedString(@"Errors", nil) identifier:@"errors"];
     [errorItem setIcon:[NSImage imageNamed:NSImageNameIconViewTemplate]];
 	
-    [traktable setChildren:[NSArray arrayWithObjects:moviesItem, historyItem, nil]];
+    [traktable setChildren:[NSArray arrayWithObjects:moviesItem, tvshowItem, historyItem, nil]];
     [logItem setChildren:[NSArray arrayWithObjects:errorItem, nil]];
 	
 	[self.sourceListItems addObject:traktable];
@@ -83,6 +89,7 @@ static float const kSidebarWidth = 220.0f;
     
     NSDictionary *identifiers = [NSDictionary dictionaryWithObjectsAndKeys:
                                  [NSNumber numberWithInteger:ITMovies],@"movies",
+                                 [NSNumber numberWithInteger:ITTVShows],@"tvshows",
                                  [NSNumber numberWithInteger:ITHistoryMovies],@"history",
                                  [NSNumber numberWithInteger:ITErrorList],@"errors",
                                  nil];
@@ -99,6 +106,9 @@ static float const kSidebarWidth = 220.0f;
             break;
         case ITMovies:
             _currentViewController = self.movieViewController;
+            break;
+        case ITTVShows:
+            _currentViewController = self.tvShowViewController;
             break;
         default:
             _currentViewController = self.movieViewController;

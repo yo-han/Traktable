@@ -1,18 +1,18 @@
 //
-//  ITMovieView.m
+//  ITTVShowView.m
 //  Traktable
 //
-//  Created by Johan Kuijt on 25-09-13.
+//  Created by Johan Kuijt on 07-10-13.
 //  Copyright (c) 2013 Mustacherious. All rights reserved.
 //
 
-#import "ITMovieView.h"
-#import "ITMovie.h"
-#import "ITMoviePoster.h"
+#import "ITTVShowView.h"
+#import "ITTVShow.h"
+#import "ITTVShowPoster.h"
 #import "ITDb.h"
 #import "ITConstants.h"
 
-@interface movieObject : NSObject
+@interface showObject : NSObject
 {
     NSString *path;
     NSString *title;
@@ -20,7 +20,7 @@
 }
 @end
 
-@implementation movieObject
+@implementation showObject
 
 - (void)setPath:(NSString *)inPath
 {
@@ -68,14 +68,14 @@
 
 @end
 
-@implementation ITMovieView
+@implementation ITTVShowView
 
 - (id)init
 {
-    self = [super initWithNibName:@"MovieViewController" bundle:nil];
+    self = [super initWithNibName:@"TVShowViewController" bundle:nil];
     if (self != nil)
     {
-    
+        
     }
     return self;
 }
@@ -87,6 +87,7 @@
     images = [NSMutableArray array];
     importedImages = [NSMutableArray array];
     
+    // Allow reordering, animations and set the dragging destination delegate.
     [imageBrowser setAnimates:YES];
 	
 	// customize the appearance
@@ -121,7 +122,7 @@
 	
 	//set initial zoom value
 	[imageBrowser setZoomValue:0.5];
-
+    
     [self fetchMovies];
 }
 
@@ -220,7 +221,7 @@
 	if (addObject && [self isImageFile:path])
 	{
 		// Add a path to the temporary images array.
-		movieObject* p = [[movieObject alloc] init];
+		showObject* p = [[showObject alloc] init];
 		[p setPath:path];
         [p setTitle:title];
         [p setYear:year];
@@ -245,28 +246,28 @@
 }
 
 - (NSMutableArray *)fetchMovies {
-
-    NSMutableArray *moviesTemp = [NSMutableArray array];
+    
+    NSMutableArray *showsTemp = [NSMutableArray array];
     
     ITDb *db = [ITDb new];
     
-    NSArray *results = [db executeAndGetResults:@"SELECT * FROM movies ORDER BY title ASC" arguments:nil];
+    NSArray *results = [db executeAndGetResults:@"SELECT * FROM tvshows ORDER BY title ASC" arguments:nil];
     
     for (NSDictionary *result in results) {
         
-        ITMovie *movie = [ITMovie movieWithDatabaseRecord:result];
+        ITTVShow *show = [ITTVShow showWithDatabaseRecord:result];
         
-        [moviesTemp addObject:movie];
+        [showsTemp addObject:show];
         
-        NSString *imagePath = [[ITConstants applicationSupportFolder] stringByAppendingPathComponent:[NSString stringWithFormat:@"images/movies/%@/medium.jpg", movie.movieId]];
+        NSString *imagePath = [[ITConstants applicationSupportFolder] stringByAppendingPathComponent:[NSString stringWithFormat:@"images/tvshows/%@/medium.jpg", show.showId]];
         
-        [self addAnImageWithPath:imagePath title:movie.name year:[NSString stringWithFormat:@"%ld",movie.year]];
+        [self addAnImageWithPath:imagePath title:show.title year:[NSString stringWithFormat:@"%ld",show.year]];
     }
     
     [self updateDatasource];
     [self.view layoutSubtreeIfNeeded];
     
-    return moviesTemp;
+    return showsTemp;
 }
 
 @end

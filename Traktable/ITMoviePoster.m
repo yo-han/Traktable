@@ -61,7 +61,7 @@ struct ITPosterSize ITMoviePosterSizeMediumSize = {500.0, 750.0};
     NSImage *imageScaled;
     
     if(size != ITMoviePosterSizeOriginal)
-        imageScaled = [image imageScaledToFitSize:NSMakeSize(self.sizeValues.width, self.sizeValues.height)];
+        imageScaled = [image imageCroppedToFitSize:NSMakeSize(self.sizeValues.width, self.sizeValues.height)];
     else
         imageScaled = image;
     

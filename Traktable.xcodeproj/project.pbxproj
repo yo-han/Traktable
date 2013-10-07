@@ -81,6 +81,8 @@
 		04982DE817FBFE0600A50555 /* Quartz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04982DE717FBFE0600A50555 /* Quartz.framework */; };
 		049ACB0916C2AD43007F103C /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 049ACB0816C2AD43007F103C /* CFNetwork.framework */; };
 		049C48BE16C0223B00CC9A0E /* ITMovie.m in Sources */ = {isa = PBXBuildFile; fileRef = 049C48BD16C0223B00CC9A0E /* ITMovie.m */; };
+		049FC1A718035B1900008D56 /* ITTVShowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 049FC1A618035B1900008D56 /* ITTVShowView.m */; };
+		049FC1A918035BBB00008D56 /* TVShowViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 049FC1A818035BBB00008D56 /* TVShowViewController.xib */; };
 		04A9FE5017B43A69006CD129 /* ITMoviePoster.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A9FE4F17B43A69006CD129 /* ITMoviePoster.m */; };
 		04A9FE5317B43E0C006CD129 /* NSImage+MGCropExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A9FE5217B43E0C006CD129 /* NSImage+MGCropExtensions.m */; };
 		04A9FE5617B448C7006CD129 /* ITUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A9FE5517B448C7006CD129 /* ITUtil.m */; };
@@ -252,6 +254,9 @@
 		049ACB0816C2AD43007F103C /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		049C48BC16C0223B00CC9A0E /* ITMovie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITMovie.h; sourceTree = "<group>"; };
 		049C48BD16C0223B00CC9A0E /* ITMovie.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITMovie.m; sourceTree = "<group>"; };
+		049FC1A518035B1900008D56 /* ITTVShowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITTVShowView.h; sourceTree = "<group>"; };
+		049FC1A618035B1900008D56 /* ITTVShowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITTVShowView.m; sourceTree = "<group>"; };
+		049FC1A818035BBB00008D56 /* TVShowViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TVShowViewController.xib; sourceTree = "<group>"; };
 		04A9FE4E17B43A69006CD129 /* ITMoviePoster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITMoviePoster.h; sourceTree = "<group>"; };
 		04A9FE4F17B43A69006CD129 /* ITMoviePoster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITMoviePoster.m; sourceTree = "<group>"; };
 		04A9FE5117B43E0C006CD129 /* NSImage+MGCropExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSImage+MGCropExtensions.h"; sourceTree = "<group>"; };
@@ -602,6 +607,8 @@
 				04B5BE7217D5266F001F0705 /* ITErrors.m */,
 				04ACB10C17F382AF00305321 /* ITMovieView.h */,
 				04ACB10D17F382AF00305321 /* ITMovieView.m */,
+				049FC1A518035B1900008D56 /* ITTVShowView.h */,
+				049FC1A618035B1900008D56 /* ITTVShowView.m */,
 				04AB88D117A70F270086D5CD /* ITHistoryView.h */,
 				04AB88D217A70F270086D5CD /* ITHistoryView.m */,
 				040CA4F017EDED67007B9076 /* ITErrorView.h */,
@@ -627,6 +634,7 @@
 				040CA4E617EB8F36007B9076 /* HistoryViewController.xib */,
 				040CA4E817EDCDA0007B9076 /* ErrorViewController.xib */,
 				04ACB10E17F382AF00305321 /* MovieViewController.xib */,
+				049FC1A818035BBB00008D56 /* TVShowViewController.xib */,
 			);
 			name = "Main Window";
 			sourceTree = "<group>";
@@ -786,6 +794,7 @@
 				0437204316CEF823003B8AB6 /* menuicon.png in Resources */,
 				048DF1F816DEC3ED004B064A /* PrefSyncViewController.xib in Resources */,
 				048DF1FA16DECC6B004B064A /* PrefUpdateViewController.h in Resources */,
+				049FC1A918035BBB00008D56 /* TVShowViewController.xib in Resources */,
 				048DF1FE16DECD14004B064A /* PrefUpdateViewController.xib in Resources */,
 				048DF20616DFF6DD004B064A /* Growl Registration Ticket.growlRegDict in Resources */,
 				048DF20A16DFFF17004B064A /* sync.png in Resources */,
@@ -872,6 +881,7 @@
 				04A9FE5317B43E0C006CD129 /* NSImage+MGCropExtensions.m in Sources */,
 				04A9FE5617B448C7006CD129 /* ITUtil.m in Sources */,
 				04AB5F1F17C56A3200A2B1AC /* ITHistoryTableCellView.m in Sources */,
+				049FC1A718035B1900008D56 /* ITTVShowView.m in Sources */,
 				04D74BB617C7AC5700B135BF /* ITTableRowView.m in Sources */,
 				04D74BC717CB49FE00B135BF /* ITTVShowPoster.m in Sources */,
 				04D74BCA17CBA18C00B135BF /* ITSync.m in Sources */,

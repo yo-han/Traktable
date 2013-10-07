@@ -21,9 +21,10 @@
 
 typedef enum ITSourceListIdentifier : NSUInteger {
     ITMovies = 0,
-    ITHistoryMovies = 1,
-    ITHistoryTVShows = 2,
-    ITErrorList = 3
+    ITTVShows = 1,
+    ITHistoryMovies = 2,
+    ITHistoryTVShows = 3,
+    ITErrorList = 4
 } ITSourceListIdentifier;
 
 typedef NS_ENUM(NSUInteger, ITTableViewCellType) {

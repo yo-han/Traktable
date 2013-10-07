@@ -1,11 +1,6 @@
 
 #import "ImageBrowserCell.h"
 
-//---------------------------------------------------------------------------------
-// setBundleImageOnLayer
-//
-// utilty function that creates, and sets the image (from the bundle) on the layer
-//---------------------------------------------------------------------------------
 static void setBundleImageOnLayer(CALayer *layer, CFStringRef imageName)
 {
     CGImageRef image = NULL;
@@ -34,11 +29,6 @@ static void setBundleImageOnLayer(CALayer *layer, CFStringRef imageName)
 
 @implementation ImageBrowserCell
 
-//---------------------------------------------------------------------------------
-// layerForType:
-//
-// provides the layers for the given types
-//---------------------------------------------------------------------------------
 - (CALayer *) layerForType:(NSString*) type
 {
 	CGColorRef color;
@@ -183,11 +173,7 @@ static void setBundleImageOnLayer(CALayer *layer, CFStringRef imageName)
 	return nil;
 }
 
-//---------------------------------------------------------------------------------
-// imageFrame
-//
-// define where the image should be drawn
-//---------------------------------------------------------------------------------
+
 - (NSRect) imageFrame
 {
 	//get default imageFrame and aspect ratio
@@ -227,11 +213,6 @@ static void setBundleImageOnLayer(CALayer *layer, CFStringRef imageName)
 	return imageFrame;
 }
 
-//---------------------------------------------------------------------------------
-// imageContainerFrame
-//
-// override the default image container frame
-//---------------------------------------------------------------------------------
 - (NSRect) imageContainerFrame
 {
 	NSRect container = [super frame];
@@ -243,11 +224,7 @@ static void setBundleImageOnLayer(CALayer *layer, CFStringRef imageName)
 	return container;
 }
 
-//---------------------------------------------------------------------------------
-// titleFrame
-//
-// override the default frame for the title
-//---------------------------------------------------------------------------------
+
 - (NSRect) titleFrame
 {
 	//get the default frame for the title
@@ -265,11 +242,6 @@ static void setBundleImageOnLayer(CALayer *layer, CFStringRef imageName)
 	return titleFrame;
 }
 
-//---------------------------------------------------------------------------------
-// subtitleFrame
-//
-// override the default frame for the subtitle
-//---------------------------------------------------------------------------------
 - (NSRect) subtitleFrame
 {
 	//get the default frame for the title
@@ -287,11 +259,7 @@ static void setBundleImageOnLayer(CALayer *layer, CFStringRef imageName)
 	return subtitleFrame;
 }
 
-//---------------------------------------------------------------------------------
-// selectionFrame
-//
-// make the selection frame a little bit larger than the default one
-//---------------------------------------------------------------------------------
+
 - (NSRect) selectionFrame
 {
 	return NSInsetRect([self frame], -5, -5);
