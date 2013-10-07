@@ -7,50 +7,35 @@
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="ITMovieView">
             <connections>
-                <outlet property="arrayController" destination="Bei-hp-6dL" id="gf8-4L-hdh"/>
-                <outlet property="collectionView" destination="xQu-u5-DYS" id="Pip-1b-Anm"/>
-                <outlet property="view" destination="8cx-y5-7Fv" id="7Lr-MP-f3b"/>
+                <outlet property="imageBrowser" destination="ao5-a0-sS0" id="GAD-Yc-qPt"/>
+                <outlet property="view" destination="ypc-y3-PZ5" id="ISM-Bk-JAI"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application"/>
-        <arrayController automaticallyRearrangesObjects="YES" id="Bei-hp-6dL" userLabel="Array Controller">
-            <declaredKeys>
-                <string>icon</string>
-                <string>name</string>
-            </declaredKeys>
-            <connections>
-                <binding destination="-2" name="contentArray" keyPath="movies" id="V2V-8u-n7v"/>
-            </connections>
-        </arrayController>
-        <collectionViewItem nibName="IconViewPrototype" id="o9f-4u-YC2" userLabel="Collection View Item" customClass="ITMovieCollectionViewItem"/>
-        <scrollView focusRingType="none" borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" id="8cx-y5-7Fv" userLabel="Scroll View" customClass="ITMovieScrollView">
-            <rect key="frame" x="0.0" y="0.0" width="318" height="216"/>
-            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES"/>
-            <clipView key="contentView" focusRingType="none" drawsBackground="NO" copiesOnScroll="NO" id="RBF-DJ-R11">
-                <rect key="frame" x="0.0" y="0.0" width="303" height="216"/>
+        <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="0.0" horizontalPageScroll="0.0" verticalLineScroll="0.0" verticalPageScroll="0.0" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" id="ypc-y3-PZ5">
+            <rect key="frame" x="0.0" y="0.0" width="741" height="603"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <clipView key="contentView" autoresizesSubviews="NO" focusRingType="none" id="YTO-XL-s1i">
+                <rect key="frame" x="0.0" y="0.0" width="741" height="603"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <collectionView focusRingType="none" selectable="YES" allowsMultipleSelection="YES" id="xQu-u5-DYS">
-                        <rect key="frame" x="0.0" y="0.0" width="301" height="199"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                        <color key="primaryBackgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
+                    <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ao5-a0-sS0" customClass="ImageBrowserView">
+                        <rect key="frame" x="0.0" y="0.0" width="741" height="601"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <connections>
-                            <binding destination="Bei-hp-6dL" name="content" keyPath="arrangedObjects" id="MY9-Ru-cR0"/>
-                            <binding destination="Bei-hp-6dL" name="selectionIndexes" keyPath="selectionIndexes" previousBinding="MY9-Ru-cR0" id="Vxh-Eg-gEa"/>
-                            <outlet property="delegate" destination="-2" id="tz1-4y-jOP"/>
-                            <outlet property="itemPrototype" destination="o9f-4u-YC2" id="dWg-Ye-pNu"/>
+                            <outlet property="_dataSource" destination="-2" id="0Kh-He-WmX"/>
+                            <outlet property="_delegate" destination="-2" id="kXa-2T-ZOR"/>
                         </connections>
-                    </collectionView>
+                    </customView>
                 </subviews>
-                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
             </clipView>
-            <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" id="hft-yR-j7N">
-                <rect key="frame" x="-100" y="-100" width="303" height="15"/>
+            <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" id="eP9-d6-hIZ">
+                <rect key="frame" x="-100" y="-100" width="719" height="15"/>
                 <autoresizingMask key="autoresizingMask"/>
             </scroller>
-            <scroller key="verticalScroller" verticalHuggingPriority="750" id="84U-nq-Rp5">
-                <rect key="frame" x="303" y="0.0" width="15" height="216"/>
+            <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" id="kse-F8-q6O">
+                <rect key="frame" x="-30" y="1" width="15" height="601"/>
                 <autoresizingMask key="autoresizingMask"/>
             </scroller>
         </scrollView>

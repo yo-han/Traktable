@@ -89,6 +89,7 @@ static float const kSidebarWidth = 220.0f;
 
     switch ([[identifiers objectForKey:identifier] intValue]) {
         case ITHistoryMovies:
+        case ITHistoryTVShows:
             _currentViewController = self.historyViewController;
             [self.historyViewController refreshTableData:ITHistoryMovies];
             break;
