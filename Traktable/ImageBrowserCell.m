@@ -50,6 +50,7 @@ static void setBundleImageOnLayer(CALayer *layer, CFStringRef imageName)
 
 	/* place holder layer */
 	if(type == IKImageBrowserCellPlaceHolderLayer){
+        
 		//create a place holder layer
 		CALayer *layer = [CALayer layer];
 		layer.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
@@ -93,6 +94,7 @@ static void setBundleImageOnLayer(CALayer *layer, CFStringRef imageName)
 		NSRect imageContainerFrame = [self imageContainerFrame];
 		NSRect relativeImageContainerFrame = NSMakeRect(imageContainerFrame.origin.x - frame.origin.x, imageContainerFrame.origin.y - frame.origin.y, imageContainerFrame.size.width, imageContainerFrame.size.height);
 		
+        /*
 		//add a glossy overlay
 		CALayer *glossyLayer = [CALayer layer];
 		glossyLayer.frame = *(CGRect*) &relativeImageContainerFrame;
@@ -104,13 +106,13 @@ static void setBundleImageOnLayer(CALayer *layer, CFStringRef imageName)
         setBundleImageOnLayer(pinLayer, CFSTR("pin.tiff"));
 		pinLayer.frame = CGRectMake((frame.size.width/2)-5, frame.size.height - 17, 24, 30);
 		[layer addSublayer:pinLayer];
-		
+		*/
 		return layer;
 	}
 
 	/* selection layer */
 	if(type == IKImageBrowserCellSelectionLayer){
-
+        /*
 		//create a selection layer
 		CALayer *selectionLayer = [CALayer layer];
 		selectionLayer.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
@@ -134,6 +136,7 @@ static void setBundleImageOnLayer(CALayer *layer, CFStringRef imageName)
 		[selectionLayer setCornerRadius:5];
 		
 		return selectionLayer;
+         */
 	}
 	
 	/* background layer */
@@ -292,6 +295,10 @@ static void setBundleImageOnLayer(CALayer *layer, CFStringRef imageName)
 - (NSRect) selectionFrame
 {
 	return NSInsetRect([self frame], -5, -5);
+}
+
+- (BOOL) isSelectable {
+    return NO;
 }
 
 @end

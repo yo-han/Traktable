@@ -12,46 +12,40 @@
 #import "ITDb.h"
 #import "ITConstants.h"
 
-//==============================================================================
-// This is the data source object.
-@interface myImageObject : NSObject
+@interface movieObject : NSObject
 {
-    NSString* path;
+    NSString *path;
+    NSString *title;
+    NSString *year;
 }
 @end
 
-@implementation myImageObject
+@implementation movieObject
 
-// -------------------------------------------------------------------------
-//	setPath:path
-//
-//	The data source object is just a file path representation
-// -------------------------------------------------------------------------
-- (void)setPath:(NSString*)inPath
+- (void)setPath:(NSString *)inPath
 {
     if (path != inPath)
         path = inPath;
 }
 
-// The required methods of the IKImageBrowserItem protocol.
+- (void)setTitle:(NSString *)aTitle {
+    
+    title = aTitle;
+}
+
+- (void)setYear:(NSString *)aYear {
+    
+    year = aYear;
+}
+
 #pragma mark -
 #pragma mark item data source protocol
 
-// -------------------------------------------------------------------------
-//	imageRepresentationType:
-//
-//	Set up the image browser to use a path representation.
-// -------------------------------------------------------------------------
 - (NSString*)imageRepresentationType
 {
 	return IKImageBrowserPathRepresentationType;
 }
 
-// -------------------------------------------------------------------------
-//	imageRepresentation:
-//
-//	Give the path representation to the image browser.
-// -------------------------------------------------------------------------
 - (id)imageRepresentation
 {
 	return path;
@@ -74,7 +68,7 @@
 // -------------------------------------------------------------------------
 - (NSString*)imageTitle
 {
-    return @"huttum";
+    return title;
 }
 
 // -------------------------------------------------------------------------
@@ -84,7 +78,7 @@
 // -------------------------------------------------------------------------
 - (NSString*)imageSubtitle
 {
-    return @"dittum";
+    return year;
 }
 
 @end
@@ -144,9 +138,6 @@
     
 	//change intercell spacing
 	[imageBrowser setIntercellSpacing:NSMakeSize(10, 10)];
-	
-	//change selection color
-	[imageBrowser setValue:[NSColor colorWithCalibratedRed:1 green:0 blue:0.5 alpha:1.0] forKey:IKImageBrowserSelectionColorKey];
 	
 	//set initial zoom value
 	[imageBrowser setZoomValue:0.5];
@@ -231,7 +222,7 @@
 	return isImageFile;
 }
 
-- (void)addAnImageWithPath:(NSString*)path
+- (void)addAnImageWithPath:(NSString*)path title:(NSString *)title year:(NSString *)year
 {
 	BOOL addObject = NO;
 	
@@ -253,8 +244,10 @@
 	if (addObject && [self isImageFile:path])
 	{
 		// Add a path to the temporary images array.
-		myImageObject* p = [[myImageObject alloc] init];
+		movieObject* p = [[movieObject alloc] init];
 		[p setPath:path];
+        [p setTitle:title];
+        [p setYear:year];
 		[importedImages addObject:p];
 	}
 }
@@ -291,7 +284,7 @@
         
         NSString *imagePath = [[ITConstants applicationSupportFolder] stringByAppendingPathComponent:[NSString stringWithFormat:@"images/movies/%@/medium.jpg", movie.movieId]];
         
-        [self addAnImageWithPath:imagePath];
+        [self addAnImageWithPath:imagePath title:movie.name year:[NSString stringWithFormat:@"%d",movie.year]];
     }
     
     [self updateDatasource];
