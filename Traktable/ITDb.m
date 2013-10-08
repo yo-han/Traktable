@@ -13,7 +13,7 @@
 #import "ITSync.h"
 
 static NSString *dbFile = @"iTraktor.db";
-static int dbVersion = 1;
+static int dbVersion = 2;
 
 @interface ITDb()
 
@@ -227,6 +227,10 @@ static int dbVersion = 1;
             [db executeUpdate:@"CREATE TABLE \"history\" (\"uid\" TEXT PRIMARY KEY,\"tvdb_id\" INTEGER,\"tmdb_id\" INTEGER,\"imdb_id\" TEXT,\"type\" TEXT,\"action\" TEXT,\"timestamp\" DATETIME,\"season\" INTEGER,\"episode\" INTEGER);"];
             
             [db executeUpdate:@"CREATE TABLE \"errors\" (\"errorId\" INTEGER PRIMARY KEY AUTOINCREMENT,\"description\" TEXT,\"timestamp\" DATETIME);"];
+            
+        } else if(version < 2) {
+            
+            [db executeUpdate:@"CREATE TABLE \"traktQueue\" (\"url\" TEXT,\"params\" TEXT);"];
         }
     }];
     

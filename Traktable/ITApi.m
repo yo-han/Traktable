@@ -224,7 +224,7 @@
 }
 
 - (void)callAPI:(NSString*)apiCall WithParameters:(NSDictionary *)params notification:(NSDictionary *)notification {
-
+    
     [self callURL:apiCall withParameters:params completionHandler:^(id response, NSError *err) {
 
         if(![response isKindOfClass:[NSDictionary class]]) {
@@ -236,7 +236,9 @@
         if ([[response objectForKey:@"status"] isEqualToString:@"success"] && [response objectForKey:@"error"] == nil){
             
             NSLog(@"Succes: %@",[response objectForKey:@"message"]);
-    
+            
+            [self removeTraktQueueEntry:params url:apiCall];
+            
             if([[notification objectForKey:@"state"] isEqual: @"scrobble"])
                 [ITNotification showNotification:[NSString stringWithFormat:@"Scrobbled: %@", [notification objectForKey:@"video"]]];
             
@@ -283,8 +285,12 @@
     }
     
     NSDictionary *notification = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:aState, aVideo, nil] forKeys:[NSArray arrayWithObjects:@"state", @"video", nil]];
-
+    
     NSString *url = [NSString stringWithFormat:@"%@/%@/%@/%@", kApiUrl, type, aState, [self apiKey]];
+    
+    if([aState isEqualToString:@"scrobble"])
+        [self newTraktQueueEntry:params url:url];
+    
     [self callAPI:url WithParameters:params notification:notification];
 }
 
@@ -305,7 +311,8 @@
     }
 
     NSString *url = [NSString stringWithFormat:@"%@/%@/seen/%@", kApiUrl, type, [self apiKey]];
-
+    
+    [self newTraktQueueEntry:params url:url];
     [self callAPI:url WithParameters:params notification:nil];
 }
 
@@ -520,4 +527,36 @@
     //NSLog(@"%@",[db lastErrorMessage]);
 }
 
+- (void)newTraktQueueEntry:(NSDictionary *)params url:(NSString *)url {
+    
+    ITDb *db = [ITDb new];
+    
+    NSMutableDictionary *mParams = [NSMutableDictionary dictionaryWithDictionary:params];
+    
+    [mParams setObject:@"" forKey:@"password"];
+    
+    NSString *paramsString = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:mParams options:0 error:nil] encoding:NSUTF8StringEncoding];
+
+    NSDictionary *argsDict = [NSDictionary dictionaryWithObjectsAndKeys:url, @"url", paramsString, @"params", nil];
+    
+    NSString *qry = [db getInsertQueryFromDictionary:argsDict queryType:@"INSERT" forTable:@"traktQueue"];
+    
+    [db executeUpdateUsingQueue:qry arguments:argsDict];
+    
+}
+
+- (void)removeTraktQueueEntry:(NSDictionary *)params url:(NSString *)url {
+ 
+    ITDb *db = [ITDb new];
+    
+    NSMutableDictionary *mParams = [NSMutableDictionary dictionaryWithDictionary:params];
+    
+    [mParams setObject:@"" forKey:@"password"];
+    
+    NSString *paramsString = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:mParams options:0 error:nil] encoding:NSUTF8StringEncoding];
+    
+    [db executeAndGetResults:@"delete from traktQueue where url=? AND params = ? " arguments:[NSArray arrayWithObjects:url,paramsString, nil]];
+    
+    NSLog(@"%@",[db lastErrorMessage]);
+}
 @end

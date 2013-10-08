@@ -50,7 +50,7 @@ static float const kSidebarWidth = 220.0f;
     _movieViewController = [[ITMovieView alloc] init];
     _tvShowViewController = [[ITTVShowView alloc] init];
     
-    [self switchView:@"history"];
+    [self switchView:@"movies"];
 }
 
 - (void)awakeFromNib
