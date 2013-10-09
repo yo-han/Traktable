@@ -12,6 +12,7 @@
 #import "ITToolbar.h"
 #import "ITHistoryView.h"
 #import "ITErrorView.h"
+#import "ITQueueView.h"
 #import "ITMovieView.h"
 #import "ITTVShowView.h"
 
@@ -23,6 +24,7 @@ static float const kSidebarWidth = 220.0f;
 @property (nonatomic, strong) NSViewController *currentViewController;
 @property (nonatomic, strong) ITHistoryView *historyViewController;
 @property (nonatomic, strong) ITErrorView *errorViewController;
+@property (nonatomic, strong) ITQueueView *queueViewController;
 @property (nonatomic, strong) ITMovieView *movieViewController;
 @property (nonatomic, strong) ITTVShowView *tvShowViewController;
 
@@ -47,6 +49,7 @@ static float const kSidebarWidth = 220.0f;
     
     _historyViewController = [[ITHistoryView alloc] init];
     _errorViewController = [[ITErrorView alloc] init];
+    _queueViewController = [[ITQueueView alloc] init];
     _movieViewController = [[ITMovieView alloc] init];
     _tvShowViewController = [[ITTVShowView alloc] init];
     
@@ -73,9 +76,11 @@ static float const kSidebarWidth = 220.0f;
     [logItem setIcon:[NSImage imageNamed:NSImageNameIconViewTemplate]];
     SourceListItem *errorItem = [SourceListItem itemWithTitle:NSLocalizedString(@"Errors", nil) identifier:@"errors"];
     [errorItem setIcon:[NSImage imageNamed:NSImageNameIconViewTemplate]];
+    SourceListItem *queueItem = [SourceListItem itemWithTitle:NSLocalizedString(@"Scrobble queue", nil) identifier:@"queue"];
+    [queueItem setIcon:[NSImage imageNamed:NSImageNameIconViewTemplate]];
 	
     [traktable setChildren:[NSArray arrayWithObjects:moviesItem, tvshowItem, historyItem, nil]];
-    [logItem setChildren:[NSArray arrayWithObjects:errorItem, nil]];
+    [logItem setChildren:[NSArray arrayWithObjects:errorItem, queueItem, nil]];
 	
 	[self.sourceListItems addObject:traktable];
     [self.sourceListItems addObject:logItem];
@@ -92,6 +97,7 @@ static float const kSidebarWidth = 220.0f;
                                  [NSNumber numberWithInteger:ITTVShows],@"tvshows",
                                  [NSNumber numberWithInteger:ITHistoryMovies],@"history",
                                  [NSNumber numberWithInteger:ITErrorList],@"errors",
+                                 [NSNumber numberWithInteger:ITQueueList],@"queue",
                                  nil];
 
     switch ([[identifiers objectForKey:identifier] intValue]) {
@@ -103,6 +109,10 @@ static float const kSidebarWidth = 220.0f;
         case ITErrorList:
             _currentViewController = self.errorViewController;
             [self.errorViewController refreshTableData:ITErrorList];
+            break;
+        case ITQueueList:
+            _currentViewController = self.queueViewController;
+            [self.queueViewController refreshTableData:ITQueueList];
             break;
         case ITMovies:
             _currentViewController = self.movieViewController;

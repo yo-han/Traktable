@@ -57,6 +57,9 @@
 		046C9BD916C168880003AD64 /* FMDatabaseQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 046C9BC816C166AE0003AD64 /* FMDatabaseQueue.m */; };
 		046C9BDB16C168880003AD64 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 046C9BCB16C166AE0003AD64 /* FMResultSet.m */; };
 		046C9BDC16C16F490003AD64 /* iTraktor.db in Resources */ = {isa = PBXBuildFile; fileRef = 046C9BCF16C167B80003AD64 /* iTraktor.db */; };
+		046EFB131805FE2B005EEB4C /* ITQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 046EFB111805FE2B005EEB4C /* ITQueue.m */; };
+		046EFB141805FE2B005EEB4C /* QueueViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 046EFB121805FE2B005EEB4C /* QueueViewController.xib */; };
+		046EFB171805FF40005EEB4C /* ITQueueView.m in Sources */ = {isa = PBXBuildFile; fileRef = 046EFB161805FF40005EEB4C /* ITQueueView.m */; };
 		04714E2816D2C59900A308F7 /* ITConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 04714E2716D2C59900A308F7 /* ITConfig.m */; };
 		04714E8116D2DEC500A308F7 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 04714E7F16D2DEC000A308F7 /* Sparkle.framework */; };
 		047D985417D67285002E97B8 /* ITTableRowGroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 047D985317D67285002E97B8 /* ITTableRowGroupView.m */; };
@@ -219,6 +222,11 @@
 		046C9BCB16C166AE0003AD64 /* FMResultSet.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
 		046C9BCF16C167B80003AD64 /* iTraktor.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTraktor.db; sourceTree = "<group>"; };
 		046C9BD016C1685B0003AD64 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		046EFB101805FE2B005EEB4C /* ITQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITQueue.h; sourceTree = "<group>"; };
+		046EFB111805FE2B005EEB4C /* ITQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITQueue.m; sourceTree = "<group>"; };
+		046EFB121805FE2B005EEB4C /* QueueViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QueueViewController.xib; sourceTree = "<group>"; };
+		046EFB151805FF40005EEB4C /* ITQueueView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITQueueView.h; sourceTree = "<group>"; };
+		046EFB161805FF40005EEB4C /* ITQueueView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITQueueView.m; sourceTree = "<group>"; };
 		04714E2616D2C59900A308F7 /* ITConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITConfig.h; sourceTree = "<group>"; };
 		04714E2716D2C59900A308F7 /* ITConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITConfig.m; sourceTree = "<group>"; };
 		04714E7F16D2DEC000A308F7 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
@@ -605,6 +613,8 @@
 				04BCC5E317B03DBB00D8DE7A /* ITHistory.m */,
 				04B5BE7117D5266F001F0705 /* ITErrors.h */,
 				04B5BE7217D5266F001F0705 /* ITErrors.m */,
+				046EFB101805FE2B005EEB4C /* ITQueue.h */,
+				046EFB111805FE2B005EEB4C /* ITQueue.m */,
 				04ACB10C17F382AF00305321 /* ITMovieView.h */,
 				04ACB10D17F382AF00305321 /* ITMovieView.m */,
 				049FC1A518035B1900008D56 /* ITTVShowView.h */,
@@ -613,6 +623,8 @@
 				04AB88D217A70F270086D5CD /* ITHistoryView.m */,
 				040CA4F017EDED67007B9076 /* ITErrorView.h */,
 				040CA4F117EDED67007B9076 /* ITErrorView.m */,
+				046EFB151805FF40005EEB4C /* ITQueueView.h */,
+				046EFB161805FF40005EEB4C /* ITQueueView.m */,
 				04AB5F1D17C56A3200A2B1AC /* ITHistoryTableCellView.h */,
 				04AB5F1E17C56A3200A2B1AC /* ITHistoryTableCellView.m */,
 				04B5BE7417D53081001F0705 /* ITErrorTableCellView.h */,
@@ -633,6 +645,7 @@
 				043942C317D07D74009C160F /* MainWindowController.xib */,
 				040CA4E617EB8F36007B9076 /* HistoryViewController.xib */,
 				040CA4E817EDCDA0007B9076 /* ErrorViewController.xib */,
+				046EFB121805FE2B005EEB4C /* QueueViewController.xib */,
 				04ACB10E17F382AF00305321 /* MovieViewController.xib */,
 				049FC1A818035BBB00008D56 /* TVShowViewController.xib */,
 			);
@@ -781,6 +794,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				046EFB141805FE2B005EEB4C /* QueueViewController.xib in Resources */,
 				045235A416CA9069005D25E4 /* MASPreferencesWindow.xib in Resources */,
 				046C9BDC16C16F490003AD64 /* iTraktor.db in Resources */,
 				042F07ED16BC19DB00A0CE9E /* InfoPlist.strings in Resources */,
@@ -835,6 +849,7 @@
 				042F081216BD649800A0CE9E /* EMKeychainItem.m in Sources */,
 				042F080F16BD646000A0CE9E /* ITApi.m in Sources */,
 				042F081016BD646000A0CE9E /* ITVideo.m in Sources */,
+				046EFB131805FE2B005EEB4C /* ITQueue.m in Sources */,
 				042F081116BD646000A0CE9E /* ITTVShow.m in Sources */,
 				042F07EF16BC19DB00A0CE9E /* main.m in Sources */,
 				042F07F616BC19DB00A0CE9E /* AppDelegate.m in Sources */,
@@ -861,6 +876,7 @@
 				04B68CEC17A5BE65006760D0 /* HttpClientHelper.m in Sources */,
 				04982DE417FBFC2A00A50555 /* ImageBrowserCell.m in Sources */,
 				04B68CED17A5BE65006760D0 /* BaseRequest.m in Sources */,
+				046EFB171805FF40005EEB4C /* ITQueueView.m in Sources */,
 				04B68CEE17A5BE65006760D0 /* BodyRequest.m in Sources */,
 				04B68CEF17A5BE65006760D0 /* MultipartRequest.m in Sources */,
 				04B68CF017A5BE65006760D0 /* SimpleRequest.m in Sources */,

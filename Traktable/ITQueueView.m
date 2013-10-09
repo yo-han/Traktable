@@ -1,19 +1,19 @@
 //
-//  ITErrorView.m
+//  ITQueueView.m
 //  Traktable
 //
-//  Created by Johan Kuijt on 21-09-13.
+//  Created by Johan Kuijt on 09-10-13.
 //  Copyright (c) 2013 Mustacherious. All rights reserved.
 //
 
-#import "ITErrorView.h"
-#import "ITErrors.h"
+#import "ITQueueView.h"
+#import "ITQueue.h"
 #import "ITConstants.h"
 #import "ITTableGroupDateCellView.h"
 #import "ITTableRowView.h"
 #import "ITTableRowGroupView.h"
 
-@interface ITErrorView ()
+@interface ITQueueView ()
 
 @property (nonatomic, assign) ITTableViewCellType tableViewCellType;
 @property (nonatomic, assign, readwrite) ITSourceListIdentifier tableType;
@@ -21,13 +21,14 @@
 
 @end
 
-@implementation ITErrorView
+@implementation ITQueueView
 
 @synthesize tableView=_tableView;
+@synthesize noItemsMention;
 
 - (id)init
 {
-    self = [super initWithNibName:@"ErrorViewController" bundle:nil];
+    self = [super initWithNibName:@"QueueViewController" bundle:nil];
     if (self != nil)
     {
         [self setup];
@@ -57,7 +58,12 @@
     [_items removeAllObjects];
     
     _tableViewCellType = ITTableViewErrorCell;
-    _items = (NSMutableArray *) [[ITErrors new] fetchErrors];
+    _items = (NSMutableArray *) [[ITQueue new] fetchQueue];
+
+    if([self.items count] > 0)
+       [self.noItemsMention setHidden:NO];
+    else
+       [self.noItemsMention setHidden:YES];
     
     [self reloadTableView];
 }
@@ -67,9 +73,9 @@
     [self.tableView performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
 }
 
-- (IBAction)clearErrors:(id)sender {
+- (IBAction)clearQueue:(id)sender {
     
-    [[ITErrors new] clearErrors];
+    [[ITQueue new] clearQueue];
     
     [self reloadTableData];
 }
@@ -79,7 +85,7 @@
     if (row >= [self.items count])
         return nil;
     
-    id entry = [ITErrors errorEntityWithErrorObject:[self.items objectAtIndex:row]];
+    id entry = [ITQueue queueEntityWithErrorObject:[self.items objectAtIndex:row]];
     
     return entry;
 }
@@ -90,23 +96,12 @@
     
     NSDictionary *entry = [self.items objectAtIndex:row];
     
-    if([entry isKindOfClass:[ITDateGroupHeader class]]) {
-        
-        ITTableGroupDateCellView *cellView = [tableView makeViewWithIdentifier:@"dateGroupCell" owner:self];
-        
-        ITDateGroupHeader *_entry = (ITDateGroupHeader *) entry;
-        
-        [cellView.timestamp setStringValue:_entry.date];
-        
-        return cellView;
-    }
-    
     ITTableGroupDateCellView *cellView = [tableView makeViewWithIdentifier:cellType owner:self];
     
     if(row >= [self.items count])
         return nil;
     
-    [cellView.textField setStringValue:[entry objectForKey:@"description"]];
+    //[cellView.textField setStringValue:[entry objectForKey:@"description"]];
     
     return cellView;
 }
@@ -115,17 +110,17 @@
 #pragma mark NSTableViewDelegate & Datasource methods
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
-
+    
     return [self.items count];
 }
 
 - (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row {
     
     id entry = [self entryForRow:row];
-
+    
     if([entry isKindOfClass:[ITDateGroupHeader class]])
         return 28.0;
-        
+    
     return 50.0;
 }
 
@@ -154,6 +149,5 @@
     result.objectValue = [self.items objectAtIndex:row];
     return result;
 }
-
 
 @end

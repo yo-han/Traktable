@@ -184,14 +184,23 @@
 - (id)callURLSync:(NSString *)requestUrl withParameters:(NSDictionary *)params {
     
     NSDictionary* headers = [NSDictionary dictionaryWithObjectsAndKeys:@"application/json", @"accept", nil];
-
-    HttpJsonResponse* response = [[Unirest postEntity:^(BodyRequest* request) {
-        [request setUrl:requestUrl];
-        [request setHeaders:headers];
-        [request setBody:[NSJSONSerialization dataWithJSONObject:params options:0 error:nil]];
-    }] asJson];
+    HttpJsonResponse* response = nil;
     
-    id responseObject = [NSJSONSerialization JSONObjectWithData:[response rawBody] options:0 error:nil];
+    if([ITConstants traktReachable]) {
+        
+        response = [[Unirest postEntity:^(BodyRequest* request) {
+            [request setUrl:requestUrl];
+            [request setHeaders:headers];
+            [request setBody:[NSJSONSerialization dataWithJSONObject:params options:0 error:nil]];
+        }] asJson];
+    }
+    
+    id responseObject = nil;
+    
+    if([response rawBody] != nil) {
+
+        responseObject = [NSJSONSerialization JSONObjectWithData:[response rawBody] options:0 error:nil];
+    }
     
     return responseObject;
 }
@@ -199,7 +208,7 @@
 - (void)callURL:(NSString *)requestUrl withParameters:(NSDictionary *)params completionHandler:(void (^)(id , NSError *))completionBlock
 {
     NSDictionary* headers = [NSDictionary dictionaryWithObjectsAndKeys:@"application/json", @"accept", nil];
- 
+
     [[Unirest postEntity:^(BodyRequest* request) {
         
         [request setUrl:requestUrl];
@@ -229,7 +238,7 @@
 
         if(![response isKindOfClass:[NSDictionary class]]) {
 
-            NSLog(@"Repsonse is not an NSDictionary");
+            NSLog(@"Response is not an NSDictionary");
             return;
         }
                 
@@ -534,6 +543,7 @@
     NSMutableDictionary *mParams = [NSMutableDictionary dictionaryWithDictionary:params];
     
     [mParams setObject:@"" forKey:@"password"];
+    mParams = [self sortParamsDict:mParams];
     
     NSString *paramsString = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:mParams options:0 error:nil] encoding:NSUTF8StringEncoding];
 
@@ -552,11 +562,40 @@
     NSMutableDictionary *mParams = [NSMutableDictionary dictionaryWithDictionary:params];
     
     [mParams setObject:@"" forKey:@"password"];
+    mParams = [self sortParamsDict:mParams];
     
     NSString *paramsString = [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:mParams options:0 error:nil] encoding:NSUTF8StringEncoding];
-    
+ 
     [db executeAndGetResults:@"delete from traktQueue where url=? AND params = ? " arguments:[NSArray arrayWithObjects:url,paramsString, nil]];
     
     NSLog(@"%@",[db lastErrorMessage]);
+}
+
+- (void)retryTraktQueue {
+    
+    ITDb *db = [ITDb new];
+
+    NSArray *results = [db executeAndGetResults:@"select * from traktQueue " arguments:nil];
+    
+    for(NSDictionary *result in results) {
+       
+        NSDictionary *p = [NSJSONSerialization JSONObjectWithData:[[result objectForKey:@"params"] dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
+        
+        NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:p];
+        
+        [params setObject:[self password] forKey:@"password"];
+        
+        [self callAPI:[result objectForKey:@"url"] WithParameters:params notification:nil];
+    }
+}
+
+- (NSMutableDictionary *)sortParamsDict:(NSDictionary *)params {
+    
+    NSArray *sortedKeys = [[params allKeys] sortedArrayUsingSelector: @selector(compare:)];
+    NSMutableDictionary *sortedValues = [NSMutableDictionary dictionary];
+    for (NSString *key in sortedKeys)
+        [sortedValues setObject:[params objectForKey: key] forKey:key];
+    
+    return sortedValues;
 }
 @end

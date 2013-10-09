@@ -106,6 +106,8 @@
     [[NSDistributedNotificationCenter defaultCenter] addObserver:self selector:@selector(VLCPlayerStateDidChange) name:@"VLCPlayerStateDidChange" object:nil suspensionBehavior:NSNotificationSuspensionBehaviorCoalesce];
 
     [NSTimer timerWithTimeInterval:86400 target:self.sync selector:@selector(syncTraktExtendedInBackgroundThread) userInfo:nil repeats:YES];
+    
+    [self.api retryTraktQueue];
 }
 
 - (IBAction)showLog:(id)sender {
