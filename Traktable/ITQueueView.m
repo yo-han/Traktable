@@ -9,7 +9,7 @@
 #import "ITQueueView.h"
 #import "ITQueue.h"
 #import "ITConstants.h"
-#import "ITTableGroupDateCellView.h"
+#import "ITQueueTableCellView.h"
 #import "ITTableRowView.h"
 #import "ITTableRowGroupView.h"
 
@@ -59,11 +59,6 @@
     
     _tableViewCellType = ITTableViewErrorCell;
     _items = (NSMutableArray *) [[ITQueue new] fetchQueue];
-
-    if([self.items count] > 0)
-       [self.noItemsMention setHidden:NO];
-    else
-       [self.noItemsMention setHidden:YES];
     
     [self reloadTableView];
 }
@@ -96,12 +91,26 @@
     
     NSDictionary *entry = [self.items objectAtIndex:row];
     
-    ITTableGroupDateCellView *cellView = [tableView makeViewWithIdentifier:cellType owner:self];
+    ITQueueTableCellView *cellView = [tableView makeViewWithIdentifier:cellType owner:self];
     
     if(row >= [self.items count])
         return nil;
     
-    //[cellView.textField setStringValue:[entry objectForKey:@"description"]];
+    NSDictionary *p = [NSJSONSerialization JSONObjectWithData:[[entry objectForKey:@"params"] dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionaryWithDictionary:p];
+    
+    NSString *title;
+    
+    if([params objectForKey:@"season"] != nil) {
+        title = [NSString stringWithFormat:@"%@ %@", [params objectForKey:@"title"], [NSString stringWithFormat:@"S%02dE%02d", [[params objectForKey:@"season"] intValue], [[params objectForKey:@"episode"] intValue]]];
+    } else {
+        title = [NSString stringWithFormat:@"%@ (%@)", [params objectForKey:@"title"], [params objectForKey:@"year"]];
+    }
+    
+    [cellView.textField setStringValue:title];
+    [cellView.timestamp setStringValue:[params objectForKey:@"media_center_date"]];
+    [cellView.imageView setImage:[NSImage imageNamed:@"movies"]];
     
     return cellView;
 }
@@ -111,26 +120,20 @@
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView {
     
+    if([self.items count] > 0)
+        [self.noItemsMention setHidden:YES];
+    else
+        [self.noItemsMention setHidden:NO];
+    
     return [self.items count];
 }
 
 - (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row {
     
-    id entry = [self entryForRow:row];
-    
-    if([entry isKindOfClass:[ITDateGroupHeader class]])
-        return 28.0;
-    
     return 50.0;
 }
 
 - (BOOL)tableView:(NSTableView *)tableView isGroupRow:(NSInteger)row {
-    
-    id entry = [self entryForRow:row];
-    
-    if([entry isKindOfClass:[ITDateGroupHeader class]]) {
-        return YES;
-    }
     
     return NO;
 }
@@ -139,11 +142,6 @@
     
     if (row >= [self.items count])
         return nil;
-    
-    id entry = [self entryForRow:row];
-    
-    if([entry isKindOfClass:[ITDateGroupHeader class]])
-        return [[ITTableRowGroupView alloc] init];
     
     ITTableRowView *result = [[ITTableRowView alloc] init];
     result.objectValue = [self.items objectAtIndex:row];

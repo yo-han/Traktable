@@ -107,7 +107,7 @@
 
     [NSTimer timerWithTimeInterval:86400 target:self.sync selector:@selector(syncTraktExtendedInBackgroundThread) userInfo:nil repeats:YES];
     
-    [self.api retryTraktQueue];
+    [NSTimer timerWithTimeInterval:3600 target:self.api selector:@selector(retryTraktQueue) userInfo:nil repeats:YES];
 }
 
 - (IBAction)showLog:(id)sender {

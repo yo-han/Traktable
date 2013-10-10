@@ -117,7 +117,7 @@
                   @"50", @"progress",
                   appVersion, @"plugin_version",
                   @"1.0", @"media_center_version",
-                  @"31.12.2011", @"media_center_date",
+                  [[NSDate date] descriptionWithCalendarFormat:@"%Y-%m-%d %H:%M" timeZone:nil locale:nil], @"media_center_date",
                   nil];
 
     } else if(aTVShow != nil && aBatch != nil){
@@ -159,7 +159,7 @@
                   @"50", @"progress",
                   appVersion, @"plugin_version",
                   @"1.0", @"media_center_version",
-                  @"31.12.2011", @"media_center_date",
+                  [[NSDate date] descriptionWithCalendarFormat:@"%Y-%m-%d %H:%M" timeZone:nil locale:nil], @"media_center_date",
                   nil];
         
     } else if(aMovie == nil && aBatch != nil){

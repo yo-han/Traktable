@@ -60,6 +60,7 @@
 		046EFB131805FE2B005EEB4C /* ITQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 046EFB111805FE2B005EEB4C /* ITQueue.m */; };
 		046EFB141805FE2B005EEB4C /* QueueViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 046EFB121805FE2B005EEB4C /* QueueViewController.xib */; };
 		046EFB171805FF40005EEB4C /* ITQueueView.m in Sources */ = {isa = PBXBuildFile; fileRef = 046EFB161805FF40005EEB4C /* ITQueueView.m */; };
+		046EFB1A18073BF9005EEB4C /* ITQueueTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 046EFB1918073BF9005EEB4C /* ITQueueTableCellView.m */; };
 		04714E2816D2C59900A308F7 /* ITConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 04714E2716D2C59900A308F7 /* ITConfig.m */; };
 		04714E8116D2DEC500A308F7 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 04714E7F16D2DEC000A308F7 /* Sparkle.framework */; };
 		047D985417D67285002E97B8 /* ITTableRowGroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 047D985317D67285002E97B8 /* ITTableRowGroupView.m */; };
@@ -227,6 +228,8 @@
 		046EFB121805FE2B005EEB4C /* QueueViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QueueViewController.xib; sourceTree = "<group>"; };
 		046EFB151805FF40005EEB4C /* ITQueueView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITQueueView.h; sourceTree = "<group>"; };
 		046EFB161805FF40005EEB4C /* ITQueueView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITQueueView.m; sourceTree = "<group>"; };
+		046EFB1818073BF9005EEB4C /* ITQueueTableCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITQueueTableCellView.h; sourceTree = "<group>"; };
+		046EFB1918073BF9005EEB4C /* ITQueueTableCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITQueueTableCellView.m; sourceTree = "<group>"; };
 		04714E2616D2C59900A308F7 /* ITConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITConfig.h; sourceTree = "<group>"; };
 		04714E2716D2C59900A308F7 /* ITConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITConfig.m; sourceTree = "<group>"; };
 		04714E7F16D2DEC000A308F7 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
@@ -629,6 +632,8 @@
 				04AB5F1E17C56A3200A2B1AC /* ITHistoryTableCellView.m */,
 				04B5BE7417D53081001F0705 /* ITErrorTableCellView.h */,
 				04B5BE7517D53081001F0705 /* ITErrorTableCellView.m */,
+				046EFB1818073BF9005EEB4C /* ITQueueTableCellView.h */,
+				046EFB1918073BF9005EEB4C /* ITQueueTableCellView.m */,
 				04D74BB417C7AC5700B135BF /* ITTableRowView.h */,
 				04D74BB517C7AC5700B135BF /* ITTableRowView.m */,
 				047D985217D67284002E97B8 /* ITTableRowGroupView.h */,
@@ -880,6 +885,7 @@
 				04B68CEE17A5BE65006760D0 /* BodyRequest.m in Sources */,
 				04B68CEF17A5BE65006760D0 /* MultipartRequest.m in Sources */,
 				04B68CF017A5BE65006760D0 /* SimpleRequest.m in Sources */,
+				046EFB1A18073BF9005EEB4C /* ITQueueTableCellView.m in Sources */,
 				04B68CF117A5BE65006760D0 /* HttpRequest.m in Sources */,
 				04B68CF217A5BE65006760D0 /* HttpRequestWithBody.m in Sources */,
 				04982DE517FBFC2A00A50555 /* ImageBrowserView.m in Sources */,
