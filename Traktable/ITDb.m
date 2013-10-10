@@ -228,7 +228,9 @@ static int dbVersion = 2;
             
             [db executeUpdate:@"CREATE TABLE \"errors\" (\"errorId\" INTEGER PRIMARY KEY AUTOINCREMENT,\"description\" TEXT,\"timestamp\" DATETIME);"];
             
-        } else if(version < 2) {
+        }
+        
+        if(version < 2) {
             
             [db executeUpdate:@"CREATE TABLE \"traktQueue\" (\"url\" TEXT,\"params\" TEXT);"];
         }
