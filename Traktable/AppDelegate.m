@@ -97,6 +97,12 @@
         NSLog(@"Startup normal, loggedin.");
 
         [self showWindow:self];
+        
+        [NSTimer scheduledTimerWithTimeInterval:900 target:self selector:@selector(iTunesSourceSaved:) userInfo:nil repeats:YES];
+        
+        [NSTimer timerWithTimeInterval:86400 target:self.sync selector:@selector(syncTraktExtendedInBackgroundThread) userInfo:nil repeats:YES];
+        
+        [NSTimer timerWithTimeInterval:3600 target:self.api selector:@selector(retryTraktQueue) userInfo:nil repeats:YES];
     }
     
     [[NSDistributedNotificationCenter defaultCenter] addObserver:self selector:@selector(iTunesChangedState:) name:@"com.apple.iTunes.playerInfo" object:@"com.apple.iTunes.player" suspensionBehavior:NSNotificationSuspensionBehaviorCoalesce];
@@ -104,10 +110,8 @@
     [[NSDistributedNotificationCenter defaultCenter] addObserver:self selector:@selector(iTunesSourceSaved:) name:@"com.apple.iTunes.sourceInfo" object:@"com.apple.iTunes.sources" suspensionBehavior:NSNotificationSuspensionBehaviorCoalesce];
     
     [[NSDistributedNotificationCenter defaultCenter] addObserver:self selector:@selector(VLCPlayerStateDidChange) name:@"VLCPlayerStateDidChange" object:nil suspensionBehavior:NSNotificationSuspensionBehaviorCoalesce];
-
-    [NSTimer timerWithTimeInterval:86400 target:self.sync selector:@selector(syncTraktExtendedInBackgroundThread) userInfo:nil repeats:YES];
     
-    [NSTimer timerWithTimeInterval:3600 target:self.api selector:@selector(retryTraktQueue) userInfo:nil repeats:YES];
+    [[NSDistributedNotificationCenter defaultCenter] addObserver:self selector:@selector(iTunesSourceSaved:) name:@"com.apple.iTunes.sourceSaved" object:@"com.apple.iTunes.sources" suspensionBehavior:NSNotificationSuspensionBehaviorCoalesce];
 }
 
 - (IBAction)showLog:(id)sender {
