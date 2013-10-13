@@ -575,7 +575,7 @@
     
     ITDb *db = [ITDb new];
 
-    NSArray *results = [db executeAndGetResults:@"select * from traktQueue " arguments:nil];
+    NSArray *results = [db executeAndGetResults:@"select * from traktQueue" arguments:nil];
     
     for(NSDictionary *result in results) {
        

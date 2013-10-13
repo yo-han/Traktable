@@ -54,7 +54,7 @@
 + (NSString * )getImdbIdByTitle:(NSString *)title year:(NSString *)aYear {
 
     NSString *cachedID = [self checkCache:title];
-    NSLog(@"Looking for movie %@ imdbId", title);
+    NSLog(@"Looking for movie %@ (%@) imdbId", title, aYear);
     
     if(cachedID == (id)[NSNull null])
         cachedID = @"";
