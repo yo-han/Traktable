@@ -25,7 +25,7 @@
 {
     self = [super initWithWindow:window];
     if (self) {
-       
+    
     }
     
     return self;
@@ -36,6 +36,12 @@
     [super windowDidLoad];
     
     [self.bgImage setAlphaValue:0.3];
+    
+    [self.username setTarget:self];
+    [self.username setAction:@selector(login:)];
+    
+    [self.password setTarget:self];
+    [self.password setAction:@selector(login:)];
 }
 
 - (void)controlTextDidChange:(NSNotification *)notification {

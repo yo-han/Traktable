@@ -85,7 +85,7 @@ static float const kSidebarWidth = 220.0f;
 	[self.sourceListItems addObject:traktable];
     [self.sourceListItems addObject:logItem];
 	
-	[self.sourceList reloadData];
+	[self.sourceList performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
     
     [self.splitView setPosition:kSidebarWidth ofDividerAtIndex:0];
 }

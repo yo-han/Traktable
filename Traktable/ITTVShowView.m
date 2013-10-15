@@ -136,7 +136,7 @@
     [importedImages removeAllObjects];
     
     // Reload the image browser, which triggers setNeedsDisplay.
-    [imageBrowser reloadData];
+    [imageBrowser performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
 }
 
 

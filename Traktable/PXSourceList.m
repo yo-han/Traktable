@@ -138,7 +138,7 @@ NSString * const PXSLDeleteKeyPressedOnRowsNotification = @"PXSourceListDeleteKe
 {
 	_secondaryDataSource = aDataSource;
 	
-	[self reloadData];
+	[self performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
 }
 
 - (void)setIconSize:(NSSize)newIconSize
