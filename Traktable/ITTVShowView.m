@@ -123,7 +123,7 @@
 	//set initial zoom value
 	[imageBrowser setZoomValue:0.5];
     
-    [self fetchMovies];
+    [self fetchShows];
 }
 
 
@@ -245,7 +245,7 @@
     return [images objectAtIndex:index];
 }
 
-- (NSMutableArray *)fetchMovies {
+- (NSMutableArray *)fetchShows {
     
     NSMutableArray *showsTemp = [NSMutableArray array];
     

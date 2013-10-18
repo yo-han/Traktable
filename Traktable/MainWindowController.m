@@ -122,6 +122,7 @@ static float const kSidebarWidth = 220.0f;
             break;
         default:
             _currentViewController = self.movieViewController;
+            
     }
     
     NSView *view = [self.currentViewController view];

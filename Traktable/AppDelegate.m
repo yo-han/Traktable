@@ -189,7 +189,7 @@
         return;
     
     [self.progressWindow.window orderOut:nil];
-    [self showWindow:self];
+    [self performSelectorOnMainThread:@selector(showWindow:) withObject:self waitUntilDone:YES];
     
     _showProgressWindow = NO;
     _isSyncing = NO;
