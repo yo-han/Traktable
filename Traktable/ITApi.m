@@ -188,11 +188,16 @@
     
     if([ITConstants traktReachable]) {
         
-        response = [[Unirest postEntity:^(BodyRequest* request) {
-            [request setUrl:requestUrl];
-            [request setHeaders:headers];
-            [request setBody:[NSJSONSerialization dataWithJSONObject:params options:0 error:nil]];
-        }] asJson];
+        @try {
+            response = [[Unirest postEntity:^(BodyRequest* request) {
+                [request setUrl:requestUrl];
+                [request setHeaders:headers];
+                [request setBody:[NSJSONSerialization dataWithJSONObject:params options:0 error:nil]];
+            }] asJson];
+            
+        } @catch (NSException *e ) {
+            NSLog(@"callURLSync:withParameters: response error");
+        }
     }
     
     id responseObject = nil;
