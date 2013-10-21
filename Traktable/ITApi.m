@@ -421,7 +421,7 @@
     if(lastSync < 1262325600)
         lastSync = 1262325600;
     
-    NSString *url = [NSString stringWithFormat:@"%@/activity/user.json/%@/%@/movie,show,episode/scrobble,seen/%ld?min=1", kApiUrl, [self apiKey], self.username, (long)lastSync];
+    NSString *url = [NSString stringWithFormat:@"%@/activity/user.json/%@/%@/movie,show,episode/scrobble,seen,checkin/%ld?min=1", kApiUrl, [self apiKey], self.username, (long)lastSync];
 
     NSDictionary* headers = [self basicAuthHeaders];
     
