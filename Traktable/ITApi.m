@@ -579,7 +579,9 @@
 - (void)retryTraktQueue {
     
     ITDb *db = [ITDb new];
-
+    
+    NSLog(@"Rety Trakt queue");
+    
     NSArray *results = [db executeAndGetResults:@"select * from traktQueue" arguments:nil];
     
     for(NSDictionary *result in results) {

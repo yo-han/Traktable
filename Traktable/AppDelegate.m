@@ -53,9 +53,7 @@
 @synthesize currentlyPlaying, statusItem, statusMenu, showLog, timer;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
-{
-    NSLog(@"Offline modus inbouwen - check internet en sla offline scrobbles op");
-    
+{   
     // Make sure all logging with NSLog is ported to the log file in the compiled version of the app
     [self redirectConsoleLogToDocumentFolder];
     

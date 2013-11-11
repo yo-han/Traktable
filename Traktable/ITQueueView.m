@@ -108,8 +108,12 @@
         title = [NSString stringWithFormat:@"%@ (%@)", [params objectForKey:@"title"], [params objectForKey:@"year"]];
     }
     
-    [cellView.textField setStringValue:title];
-    [cellView.timestamp setStringValue:[params objectForKey:@"media_center_date"]];
+    if(title != nil)
+        [cellView.textField setStringValue:title];
+    
+    if([params objectForKey:@"media_center_date"] != nil)
+        [cellView.timestamp setStringValue:[params objectForKey:@"media_center_date"]];
+    
     [cellView.imageView setImage:[NSImage imageNamed:@"movies"]];
     
     return cellView;
