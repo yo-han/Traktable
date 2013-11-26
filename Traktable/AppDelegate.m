@@ -209,6 +209,12 @@
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:url]];
 }
 
+- (IBAction)donate:(id)sender {
+    
+    NSString *url = @"http://derefer.me/?https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=johankuijt%40gmail%2ecom&lc=NL&item_name=Traktable&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted";
+    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:url]];
+}
+
 - (void) redirectConsoleLogToDocumentFolder
 {
     NSString *currentPath = [[NSBundle mainBundle] bundlePath];
