@@ -13,8 +13,12 @@
 
 @property (nonatomic, strong) IBOutlet PXSourceList *sourceList;
 
-@property (nonatomic, strong) IBOutlet NSProgressIndicator *activityIndicator;
-@property (nonatomic, strong) IBOutlet NSSplitView *splitView;
-@property (nonatomic, strong) IBOutlet NSView *placeholderView;
+@property (nonatomic, weak) IBOutlet NSProgressIndicator *activityIndicator;
+@property (nonatomic, weak) IBOutlet NSSplitView *splitView;
+@property (nonatomic, weak) IBOutlet NSView *placeholderView;
+@property (nonatomic, weak) IBOutlet NSButton *bottomBarButton;
+
+- (IBAction)clearErrors:(id)sender;
+- (IBAction)clearQueue:(id)sender;
 
 @end

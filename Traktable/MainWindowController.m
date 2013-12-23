@@ -23,10 +23,10 @@ static float const kSidebarWidth = 220.0f;
 @property (nonatomic, strong) NSMutableArray *sourceListItems;
 @property (nonatomic, strong) NSViewController *currentViewController;
 @property (nonatomic, strong) ITHistoryView *historyViewController;
-@property (nonatomic, strong) ITErrorView *errorViewController;
-@property (nonatomic, strong) ITQueueView *queueViewController;
 @property (nonatomic, strong) ITMovieView *movieViewController;
 @property (nonatomic, strong) ITTVShowView *tvShowViewController;
+@property (nonatomic, strong) ITErrorView *errorViewController;
+@property (nonatomic, strong) ITQueueView *queueViewController;
 
 @end
 
@@ -105,23 +105,42 @@ static float const kSidebarWidth = 220.0f;
         case ITHistoryTVShows:
             _currentViewController = self.historyViewController;
             [self.historyViewController refreshTableData:ITHistoryMovies];
+
+            [self.bottomBarButton setHidden:YES];
             break;
         case ITErrorList:
             _currentViewController = self.errorViewController;
             [self.errorViewController refreshTableData:ITErrorList];
+            
+            [self.bottomBarButton setTitle:@"Clear errors"];
+            [self.bottomBarButton setHidden:NO];
+            [self.bottomBarButton setAction:@selector(clearErrors:)];
+            
             break;
         case ITQueueList:
             _currentViewController = self.queueViewController;
             [self.queueViewController refreshTableData:ITQueueList];
+            
+            [self.bottomBarButton setTitle:@"Clear queue"];
+            [self.bottomBarButton setHidden:NO];
+            [self.bottomBarButton setAction:@selector(clearQueue:)];
+            
             break;
         case ITMovies:
             _currentViewController = self.movieViewController;
+            
+            [self.bottomBarButton setHidden:YES];
             break;
         case ITTVShows:
             _currentViewController = self.tvShowViewController;
+            
+            [self.bottomBarButton setHidden:YES];
+            
             break;
         default:
             _currentViewController = self.movieViewController;
+            
+            [self.bottomBarButton setHidden:YES];
             
     }
     
@@ -316,6 +335,16 @@ static float const kSidebarWidth = 220.0f;
 - (BOOL)sourceList:(PXSourceList*)aSourceList shouldEditItem:(id)item {
     
     return NO;
+}
+
+- (IBAction)clearErrors:(id)sender {
+    
+    [self.errorViewController clearErrors:self];
+}
+
+- (IBAction)clearQueue:(id)sender {
+    
+    [self.queueViewController clearQueue:self];
 }
 
 @end

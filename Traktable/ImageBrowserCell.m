@@ -81,8 +81,8 @@ static void setBundleImageOnLayer(CALayer *layer, CFStringRef imageName)
 		CALayer *layer = [CALayer layer];
 		layer.frame = CGRectMake(0, 0, frame.size.width, frame.size.height);
 
-		NSRect imageContainerFrame = [self imageContainerFrame];
-		NSRect relativeImageContainerFrame = NSMakeRect(imageContainerFrame.origin.x - frame.origin.x, imageContainerFrame.origin.y - frame.origin.y, imageContainerFrame.size.width, imageContainerFrame.size.height);
+		//NSRect imageContainerFrame = [self imageContainerFrame];
+		//NSRect relativeImageContainerFrame = NSMakeRect(imageContainerFrame.origin.x - frame.origin.x, imageContainerFrame.origin.y - frame.origin.y, imageContainerFrame.size.width, imageContainerFrame.size.height);
 		
         /*
 		//add a glossy overlay

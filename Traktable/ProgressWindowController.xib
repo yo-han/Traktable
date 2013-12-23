@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1070</int>
-		<string key="IBDocument.SystemVersion">12F45</string>
-		<string key="IBDocument.InterfaceBuilderVersion">4510</string>
-		<string key="IBDocument.AppKitVersion">1187.40</string>
-		<string key="IBDocument.HIToolboxVersion">626.00</string>
+		<string key="IBDocument.SystemVersion">13B3116</string>
+		<string key="IBDocument.InterfaceBuilderVersion">4514</string>
+		<string key="IBDocument.AppKitVersion">1265</string>
+		<string key="IBDocument.HIToolboxVersion">696.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">4510</string>
+			<string key="NS.object.0">4514</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBNSLayoutConstraint</string>
@@ -101,7 +101,7 @@
 							<reference key="NSNextResponder" ref="665405073"/>
 							<int key="NSvFlags">-2147482356</int>
 							<object class="NSPSMatrix" key="NSFrameMatrix"/>
-							<string key="NSFrame">{{105, 134}, {317, 17}}</string>
+							<string key="NSFrame">{{106, 134}, {315, 17}}</string>
 							<reference key="NSSuperview" ref="665405073"/>
 							<reference key="NSNextKeyView" ref="104707376"/>
 							<bool key="NSEnabled">YES</bool>
@@ -110,7 +110,7 @@
 								<int key="NSCellFlags2">138413056</int>
 								<string key="NSContents">Syncing with Trakt.tv</string>
 								<object class="NSFont" key="NSSupport">
-									<string key="NSName">LucidaGrande-Bold</string>
+									<string key="NSName">.LucidaGrandeUI-Bold</string>
 									<double key="NSSize">13</double>
 									<int key="NSfFlags">2072</int>
 								</object>
@@ -135,6 +135,7 @@
 								</object>
 							</object>
 							<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+							<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 						</object>
 						<object class="NSCustomView" id="923392915">
 							<reference key="NSNextResponder" ref="665405073"/>
@@ -144,7 +145,7 @@
 									<reference key="NSNextResponder" ref="923392915"/>
 									<int key="NSvFlags">1292</int>
 									<object class="NSPSMatrix" key="NSFrameMatrix"/>
-									<string key="NSFrame">{{111, 33}, {160, 17}}</string>
+									<string key="NSFrame">{{112, 33}, {158, 17}}</string>
 									<reference key="NSSuperview" ref="923392915"/>
 									<reference key="NSNextKeyView" ref="717609815"/>
 									<bool key="NSEnabled">YES</bool>
@@ -165,6 +166,7 @@
 										</object>
 									</object>
 									<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+									<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 								</object>
 								<object class="NSProgressIndicator" id="717609815">
 									<reference key="NSNextResponder" ref="923392915"/>
@@ -191,7 +193,7 @@
 										<int key="NSCellFlags2">134217728</int>
 										<string key="NSContents">Login</string>
 										<object class="NSFont" key="NSSupport" id="921730712">
-											<string key="NSName">LucidaGrande</string>
+											<string key="NSName">.LucidaGrandeUI</string>
 											<double key="NSSize">13</double>
 											<int key="NSfFlags">1044</int>
 										</object>
@@ -247,6 +249,7 @@
 										</array>
 									</object>
 									<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+									<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 								</object>
 								<object class="NSTextField" id="476370655">
 									<reference key="NSNextResponder" ref="923392915"/>
@@ -268,12 +271,13 @@
 										<reference key="NSTextColor" ref="240429158"/>
 									</object>
 									<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+									<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 								</object>
 								<object class="NSTextField" id="602834466">
 									<reference key="NSNextResponder" ref="923392915"/>
 									<int key="NSvFlags">1292</int>
 									<object class="NSPSMatrix" key="NSFrameMatrix"/>
-									<string key="NSFrame">{{111, 63}, {69, 20}}</string>
+									<string key="NSFrame">{{112, 63}, {67, 20}}</string>
 									<reference key="NSSuperview" ref="923392915"/>
 									<reference key="NSNextKeyView" ref="898358549"/>
 									<bool key="NSEnabled">YES</bool>
@@ -291,12 +295,13 @@
 										<reference key="NSTextColor" ref="21829567"/>
 									</object>
 									<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+									<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 								</object>
 								<object class="NSTextField" id="579671570">
 									<reference key="NSNextResponder" ref="923392915"/>
 									<int key="NSvFlags">1292</int>
 									<object class="NSPSMatrix" key="NSFrameMatrix"/>
-									<string key="NSFrame">{{111, 98}, {70, 19}}</string>
+									<string key="NSFrame">{{112, 98}, {68, 19}}</string>
 									<reference key="NSSuperview" ref="923392915"/>
 									<reference key="NSNextKeyView" ref="476370655"/>
 									<bool key="NSEnabled">YES</bool>
@@ -310,12 +315,13 @@
 										<reference key="NSTextColor" ref="21829567"/>
 									</object>
 									<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+									<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 								</object>
 								<object class="NSTextField" id="113731489">
 									<reference key="NSNextResponder" ref="923392915"/>
 									<int key="NSvFlags">1292</int>
 									<object class="NSPSMatrix" key="NSFrameMatrix"/>
-									<string key="NSFrame">{{99, 137}, {321, 27}}</string>
+									<string key="NSFrame">{{100, 137}, {319, 27}}</string>
 									<reference key="NSSuperview" ref="923392915"/>
 									<reference key="NSNextKeyView" ref="579671570"/>
 									<bool key="NSEnabled">YES</bool>
@@ -333,6 +339,7 @@
 										<reference key="NSTextColor" ref="21829567"/>
 									</object>
 									<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+									<int key="NSTextFieldAlignmentRectInsetsVersion">1</int>
 								</object>
 							</array>
 							<object class="NSPSMatrix" key="NSFrameMatrix"/>
@@ -346,7 +353,7 @@
 					<string key="NSFrameSize">{480, 186}</string>
 					<reference key="NSNextKeyView" ref="837826560"/>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
+				<string key="NSScreenRect">{{0, 0}, {2560, 1418}}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
 				<bool key="NSWindowIsRestorable">YES</bool>
 			</object>
@@ -1169,34 +1176,12 @@
 						<reference key="object" ref="579671570"/>
 						<array class="NSMutableArray" key="children">
 							<reference ref="198510349"/>
-							<object class="IBNSLayoutConstraint" id="25145141">
-								<reference key="firstItem" ref="579671570"/>
-								<int key="firstAttribute">7</int>
-								<int key="relation">0</int>
-								<nil key="secondItem"/>
-								<int key="secondAttribute">0</int>
-								<float key="multiplier">1</float>
-								<object class="IBLayoutConstant" key="constant">
-									<double key="value">64</double>
-								</object>
-								<float key="priority">1000</float>
-								<reference key="containingView" ref="579671570"/>
-								<int key="scoringType">0</int>
-								<float key="scoringTypeFloat">23.5</float>
-								<int key="contentType">1</int>
-								<bool key="placeholder">NO</bool>
-							</object>
 						</array>
 						<reference key="parent" ref="923392915"/>
 					</object>
 					<object class="IBObjectRecord">
 						<string key="id">79</string>
 						<reference key="object" ref="198510349"/>
-						<reference key="parent" ref="579671570"/>
-					</object>
-					<object class="IBObjectRecord">
-						<string key="id">91</string>
-						<reference key="object" ref="25145141"/>
 						<reference key="parent" ref="579671570"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -1683,9 +1668,6 @@
 				<boolean value="NO" key="6.showNotes"/>
 				<string key="67.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="NO" key="67.showNotes"/>
-				<array key="72.IBNSViewMetadataConstraints">
-					<reference ref="25145141"/>
-				</array>
 				<boolean value="NO" key="72.IBNSViewMetadataTranslatesAutoresizingMaskIntoConstraints"/>
 				<string key="72.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<reference key="72.IBUserGuides" ref="0"/>
@@ -1717,8 +1699,6 @@
 				<boolean value="NO" key="78.showNotes"/>
 				<string key="79.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="NO" key="79.showNotes"/>
-				<string key="91.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<boolean value="NO" key="91.showNotes"/>
 				<boolean value="NO" key="99.IBNSViewMetadataTranslatesAutoresizingMaskIntoConstraints"/>
 				<string key="99.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<reference key="99.IBUserGuides" ref="0"/>

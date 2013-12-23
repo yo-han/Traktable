@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13B3116" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment version="1070" defaultVersion="1070" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4514"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="MainWindowController">
             <connections>
+                <outlet property="bottomBarButton" destination="bFv-HW-L0f" id="9a1-TG-frH"/>
                 <outlet property="placeholderView" destination="P85-db-2bd" id="Vy8-ZA-wkY"/>
                 <outlet property="sourceList" destination="64" id="209"/>
                 <outlet property="splitView" destination="dPr-to-57G" id="mqg-lh-1ef"/>
@@ -18,26 +19,26 @@
         <window title="Traktable" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" wantsToBeColor="NO" frameAutosaveName="mainWindow" animationBehavior="default" id="1">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" unifiedTitleAndToolbar="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="1631" y="401" width="880" height="571"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="878"/>
+            <rect key="contentRect" x="913" y="436" width="880" height="571"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1418"/>
             <value key="minSize" type="size" width="850" height="300"/>
             <view key="contentView" id="2">
                 <rect key="frame" x="0.0" y="0.0" width="880" height="571"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <splitView dividerStyle="thin" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dPr-to-57G">
-                        <rect key="frame" x="0.0" y="0.0" width="880" height="571"/>
+                        <rect key="frame" x="0.0" y="32" width="880" height="539"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <subviews>
                             <scrollView fixedFrame="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="24" horizontalPageScroll="10" verticalLineScroll="24" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="63">
-                                <rect key="frame" x="0.0" y="0.0" width="295" height="571"/>
+                                <rect key="frame" x="0.0" y="0.0" width="295" height="539"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <clipView key="contentView" id="vyc-aI-Prl">
-                                    <rect key="frame" x="0.0" y="0.0" width="295" height="571"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="295" height="539"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" autosaveColumns="NO" rowHeight="24" indentationPerLevel="16" autosaveExpandedItems="YES" outlineTableColumn="68" id="64" customClass="PXSourceList">
-                                            <rect key="frame" x="0.0" y="0.0" width="295" height="571"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="295" height="539"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="0.0"/>
                                             <color key="backgroundColor" name="_sourceListBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -65,17 +66,17 @@
                                     </subviews>
                                     <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </clipView>
-                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" id="65">
+                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="65">
                                     <rect key="frame" x="1" y="555" width="174" height="15"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
-                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" id="67">
+                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="67">
                                     <rect key="frame" x="224" y="17" width="15" height="102"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
                             <customView fixedFrame="YES" id="P85-db-2bd">
-                                <rect key="frame" x="296" y="0.0" width="584" height="571"/>
+                                <rect key="frame" x="296" y="0.0" width="584" height="539"/>
                                 <autoresizingMask key="autoresizingMask"/>
                             </customView>
                         </subviews>
@@ -87,14 +88,28 @@
                             <outlet property="delegate" destination="-2" id="NxW-gM-8pb"/>
                         </connections>
                     </splitView>
+                    <button hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bFv-HW-L0f">
+                        <rect key="frame" x="773" y="3" width="97" height="25"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="97" id="5U6-fH-0Q2"/>
+                        </constraints>
+                        <buttonCell key="cell" type="roundTextured" title="Clear" bezelStyle="texturedRounded" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Keb-5N-ouq">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="dPr-to-57G" firstAttribute="leading" secondItem="2" secondAttribute="leading" id="3yO-x7-3QG"/>
-                    <constraint firstItem="dPr-to-57G" firstAttribute="bottom" secondItem="2" secondAttribute="bottom" id="PYy-Io-9Yt"/>
+                    <constraint firstItem="dPr-to-57G" firstAttribute="bottom" secondItem="2" secondAttribute="bottom" constant="-32" id="PYy-Io-9Yt"/>
+                    <constraint firstAttribute="trailing" secondItem="bFv-HW-L0f" secondAttribute="trailing" constant="10" id="Sck-mj-Uug"/>
                     <constraint firstItem="dPr-to-57G" firstAttribute="trailing" secondItem="2" secondAttribute="trailing" id="WOZ-OS-DG0"/>
                     <constraint firstItem="dPr-to-57G" firstAttribute="top" secondItem="2" secondAttribute="top" id="XQT-rY-fjG"/>
+                    <constraint firstAttribute="bottom" secondItem="bFv-HW-L0f" secondAttribute="bottom" constant="5" id="m9T-rh-Prw"/>
                 </constraints>
             </view>
+            <contentBorderThickness minY="32"/>
             <connections>
                 <outlet property="delegate" destination="-2" id="4"/>
             </connections>
