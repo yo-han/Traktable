@@ -126,8 +126,10 @@
     
     if([self.items count] > 0)
         [self.noItemsMention setHidden:YES];
-    else
+    else {
         [self.noItemsMention setHidden:NO];
+        [self.noItemsMention setStringValue:NSLocalizedString(@"Nothing in the queue. Everything is scrobbled.", nil)];
+    }
     
     return [self.items count];
 }

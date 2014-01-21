@@ -9,8 +9,19 @@
 /* Menu */
 "History" = "Geschiedenis";
 "Movies" = "Films";
-"TVShows" = "TV Series";
+"TV Shows" = "TV Series";
+"Errors" = "Problemen";
+"Scrobble queue" = "Scrobble wachtrij";
 
 /* TableRowView History */
 "scrobble" = "gescrobbled";
 "seen" = "sync";
+"movies" = "films";
+"tv shows" = "tv series";
+
+/* Buttons */
+"Clear errors" = "Verwijder meldingen";
+"Clear queue" = "Wachtrij legen";
+
+/* Queue */
+"Nothing in the queue. Everything is scrobbled." = "De wachtrij is leeg. Alles is gescrobbled.";

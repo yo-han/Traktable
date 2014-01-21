@@ -89,10 +89,10 @@
                         </connections>
                     </splitView>
                     <button hidden="YES" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bFv-HW-L0f">
-                        <rect key="frame" x="773" y="3" width="97" height="25"/>
+                        <rect key="frame" x="710" y="3" width="160" height="25"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="97" id="5U6-fH-0Q2"/>
+                            <constraint firstAttribute="width" constant="160" id="5U6-fH-0Q2"/>
                         </constraints>
                         <buttonCell key="cell" type="roundTextured" title="Clear" bezelStyle="texturedRounded" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Keb-5N-ouq">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>

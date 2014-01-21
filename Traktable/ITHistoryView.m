@@ -39,7 +39,7 @@
 }
 
 - (void)setup {
-    
+ 
     self.tableViewCellType = ITTableViewMovieHistoryCell;
     
     if(self.items == nil)
@@ -48,6 +48,12 @@
     // Register an observer for history updates
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableData) name:kITHistoryNeedsUpdateNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableView) name:kITHistoryTableReloadNotification object:nil];    
+}
+
+- (void)awakeFromNib {
+
+    [self.historyMoviesButton setTitle:NSLocalizedString(@"movies", nil)];
+    [self.historyShowsButton setTitle:NSLocalizedString(@"tv shows", nil)];
 }
 
 - (ITHistory *)getHistory {
@@ -65,7 +71,12 @@
 
 - (void)refreshTableData:(ITSourceListIdentifier)aTableType {
     
-    self.tableType = aTableType;
+    if(!aTableType) {
+        if(!self.tableType)
+            self.tableType = ITHistoryMovies;
+    } else {
+        self.tableType = aTableType;
+    }
     
     [self.items removeAllObjects];
     
@@ -78,6 +89,13 @@
         default:
             self.tableViewCellType = ITTableViewMovieHistoryCell;
             self.items = (NSMutableArray *) [[self getHistory] fetchMovieHistory];
+            
+            if([self.historyShowsButton state] == 1) {
+                
+                [self.historyMoviesButton setState:1];
+                [self.historyShowsButton setState:0];
+            }
+                
     }
    
     [self reloadTableView];

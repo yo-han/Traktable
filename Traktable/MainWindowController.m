@@ -104,7 +104,7 @@ static float const kSidebarWidth = 220.0f;
         case ITHistoryMovies:
         case ITHistoryTVShows:
             _currentViewController = self.historyViewController;
-            [self.historyViewController refreshTableData:ITHistoryMovies];
+            [self.historyViewController refreshTableData:nil];
 
             [self.bottomBarButton setHidden:YES];
             break;
@@ -112,7 +112,7 @@ static float const kSidebarWidth = 220.0f;
             _currentViewController = self.errorViewController;
             [self.errorViewController refreshTableData:ITErrorList];
             
-            [self.bottomBarButton setTitle:@"Clear errors"];
+            [self.bottomBarButton setTitle:NSLocalizedString(@"Clear errors", nil)];
             [self.bottomBarButton setHidden:NO];
             [self.bottomBarButton setAction:@selector(clearErrors:)];
             
@@ -121,7 +121,7 @@ static float const kSidebarWidth = 220.0f;
             _currentViewController = self.queueViewController;
             [self.queueViewController refreshTableData:ITQueueList];
             
-            [self.bottomBarButton setTitle:@"Clear queue"];
+            [self.bottomBarButton setTitle:NSLocalizedString(@"Clear queue", nil)];
             [self.bottomBarButton setHidden:NO];
             [self.bottomBarButton setAction:@selector(clearQueue:)];
             
