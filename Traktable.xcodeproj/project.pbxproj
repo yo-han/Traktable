@@ -774,6 +774,11 @@
 			attributes = {
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = Mustacherious;
+				TargetAttributes = {
+					042F07DD16BC19DB00A0CE9E = {
+						DevelopmentTeam = 68SVRCR7Q9;
+					};
+				};
 			};
 			buildConfigurationList = 042F07D816BC19DB00A0CE9E /* Build configuration list for PBXProject "Traktable" */;
 			compatibilityVersion = "Xcode 3.2";

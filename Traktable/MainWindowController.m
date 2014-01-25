@@ -54,6 +54,24 @@ static float const kSidebarWidth = 220.0f;
     _tvShowViewController = [[ITTVShowView alloc] init];
     
     [self switchView:@"movies"];
+    
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+
+    if([ud integerForKey:@"TraktableStartUpNum"] > 2 && ![ud boolForKey:@"TraktableDonateAlertShown"])
+    {
+        [ud setBool:YES forKey:@"TraktableDonateAlertShown"];
+        
+        NSAlert *alert = [[NSAlert alloc] init];
+        [alert addButtonWithTitle:@"Donate"];
+        [alert addButtonWithTitle:@"No thanks"];
+        [alert setMessageText:@"Please donate"];
+        [alert setInformativeText:@"The software is free but you like it and find it useful, please consider donating..."];
+        
+        if ([alert runModal] == NSAlertFirstButtonReturn) {
+
+            [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://yo-han.github.io/Traktable/donate.html"]];
+        }
+    }
 }
 
 - (void)awakeFromNib
@@ -88,6 +106,15 @@ static float const kSidebarWidth = 220.0f;
 	[self.sourceList performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:YES];
     
     [self.splitView setPosition:kSidebarWidth ofDividerAtIndex:0];
+    
+    NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+    NSUInteger startupTime = 0;
+    
+    if([ud integerForKey:@"TraktableStartUpNum"]) {
+        startupTime = [ud integerForKey:@"TraktableStartUpNum"];
+    }
+    
+    [ud setInteger:(startupTime + 1) forKey:@"TraktableStartUpNum"];
 }
 
 - (void)switchView:(NSString *)identifier {
