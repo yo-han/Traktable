@@ -19,6 +19,10 @@
 
 - (id)init;
 - (void)checkTracks:(NSArray *)tracks;
+<<<<<<< HEAD
+=======
+- (void)createDir:(NSString *)dir;
+>>>>>>> 36d3320923f18ac9a8d3e894293a6ad9602a8cdb
 
 @property dispatch_queue_t queue;
 @property dispatch_group_t dispatchGroup;
@@ -28,6 +32,10 @@
 @implementation ITLibrary
 
 @synthesize iTunesBridge;
+<<<<<<< HEAD
+=======
+@synthesize dbQueue=_dbQueue;
+>>>>>>> 36d3320923f18ac9a8d3e894293a6ad9602a8cdb
 @synthesize dbFilePath;
 @synthesize firstImport;
 
@@ -36,7 +44,19 @@
     self = [super init];
 	if (self) {
         
+<<<<<<< HEAD
         iTunesBridge = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
+=======
+        [self resetDb];
+    }
+    
+    _dbQueue = [FMDatabaseQueue databaseQueueWithPath:dbFilePath];
+    _queue = dispatch_queue_create("traktable.sync.queue", NULL);
+    _dispatchGroup = dispatch_group_create();
+    
+    [self.dbQueue inDatabase:^(FMDatabase *db) {
+        FMResultSet *s = [db executeQuery:@"SELECT playedCount FROM library"];
+>>>>>>> 36d3320923f18ac9a8d3e894293a6ad9602a8cdb
         
         NSString *appSupportPath = [ITConstants applicationSupportFolder];
         [ITUtil createDir:appSupportPath];
@@ -151,6 +171,7 @@
     NSArray *shows = [self getVideos:iTunesESpKTVShows noCheck:NO];
     
     firstImport = NO;
+
     [self checkTracks:movies];
     [self checkTracks:shows];
     
@@ -160,6 +181,7 @@
 - (void)checkTracks:(NSArray *)tracks {
 
     __block NSMutableArray *seenVideos = [NSMutableArray array];
+
     ITVideo *video = [ITVideo new];
     ITApi *api = [ITApi new];
        
@@ -246,9 +268,8 @@
     
     }
     
-    
     dispatch_group_notify(self.dispatchGroup, self.queue, ^{
-        
+
         if([seenVideos count] > 0)
             [api seen:seenVideos type:iTunesEVdKMovie video:nil];
     });

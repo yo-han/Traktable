@@ -9,10 +9,6 @@ Trakt Scrobbler for iTunes/AppleTV. Download a binary version [here](http://w3f.
 
 Any feedback or bug reports are welcome. Please use the [`issues`](https://github.com/yo-han/Traktable/issues) page or the feedback option in the app to report your feedback.
 
-## Install
-
-Rename config-example.plist to config.plist and enter a tvdb and trakt api key.
-
 ## Changelog
 
 See what's new in the [changelog](https://github.com/yo-han/Traktable/wiki/Changelog)
