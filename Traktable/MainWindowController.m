@@ -65,7 +65,7 @@ static float const kSidebarWidth = 220.0f;
         [alert addButtonWithTitle:@"Donate"];
         [alert addButtonWithTitle:@"No thanks"];
         [alert setMessageText:@"Please donate"];
-        [alert setInformativeText:@"The software is free but you like it and find it useful, please consider donating..."];
+        [alert setInformativeText:@"The software is free but if you like it and find it useful, please consider donating..."];
         
         if ([alert runModal] == NSAlertFirstButtonReturn) {
 
