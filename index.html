@@ -35,6 +35,35 @@
 	      font-size: 11px;
 	      text-align: center;
       }
+      .divider {
+	      border-bottom: 1px solid #ddd;
+	      margin: 24px 0 24px 0;
+      }
+      
+      @media all and (max-width: 1000px) {
+      	.preview {
+		  	width:300px;
+		  	float: none;
+		}
+	  }
+	  
+      @media all and (max-width: 767px) {
+
+      	.span {
+		  	float: none;
+		}
+		.explainer {
+			margin-top: 24px;
+		}
+		.banner {
+			background-size:300px 300px;
+			background-position: 120px 150px;
+			border-bottom: 12px solid black;
+		}
+		.container {
+			margin: 0 0 0 20px;
+		}
+	  }
       </style>
   </head>
   <body>
@@ -63,21 +92,20 @@
         		<p>
         			The app scrobbles all your played movies and tv episodes from iTunes or Apple TV to Trakt.tv. New since version 0.5 is the scrobble queue where failed scrobbles are saved for a retry.
         		</p>
-        	</div>
-        	<div class='span six dark'>
-        		<p>
-	        		<img src="img/preview.png" class="pull-right">
-        		</p>
-        	</div>
-        </div>
-        <div class='row'>
-        	<div class='span ten'>
+        		<div class='divider'></div>
         		<h4 class='explainer'>Download</h4>
 	        	<p>The current stable version is 0.5. Older releases can be found <a href="https://github.com/yo-han/Traktable/releases" target="_blank">here</a>.
 	        	<br><br>
 	        	<button class='button primary small' onclick="javascript:window.open('http://bit.ly/1en3tga');">Download v0.5</button></p>
+
         	</div>
-	    </div>
+        	<div class='span six'>
+        		<p>
+	        		<img src="img/preview.png" class="pull-right preview">
+        		</p>
+        	</div>
+        </div>
+        <div class='divider'></div>
         <div class='row' style="margin-top:12px;">
         	<div class='span five'>
         		<h4 class='explainer'>Contribute and feedback</h4>
