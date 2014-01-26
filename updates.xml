@@ -11,7 +11,7 @@
                http://yo-han.github.io/Traktable/changelog/0.5.html
            </sparkle:releaseNotesLink>
            <pubDate>Sat, 25 Jan 2014 17:00:00 +0100</pubDate>
-           <enclosure url="http://bit.ly/1en3tga" sparkle:version="0.5" length="1623481" type="application/octet-stream" sparkle:dsaSignature="MCwCFCFPz8e1eM7zdlzjXvrtw82WqcgIAhQCsdbcY1sPerlXoJVcP2zjQDYD5A==" />
+           <enclosure url="http://bit.ly/1en3tga" sparkle:version="0.5" length="1623481" type="application/octet-stream" sparkle:dsaSignature="MC0CFAkHU+0J7eLE2/MJWyt2JwhN/ZlpAhUAgnfXWCkPozb6ZGBiSlMwsXt3hsc=" />
        </item>
        <item>
            <title>Version 0.4.4</title>
