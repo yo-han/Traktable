@@ -98,7 +98,7 @@
         
         [NSTimer scheduledTimerWithTimeInterval:3600 target:self.api selector:@selector(retryTraktQueue) userInfo:nil repeats:YES];
         
-        [NSTimer scheduledTimerWithTimeInterval:86400 target:self.sync selector:@selector(syncTraktExtendedInBackgroundThread) userInfo:nil repeats:YES];
+        [NSTimer scheduledTimerWithTimeInterval:86400 target:[ITSync class] selector:@selector(syncTraktExtendedInBackgroundThread) userInfo:nil repeats:YES];
         
         [self showWindow:self];
     }
