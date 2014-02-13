@@ -43,10 +43,23 @@
         } else {
             
             TVDbShow *show = [shows objectAtIndex:0];
-            [self setCache:show.imdbId title:title];
             
-            NSLog(@"Show %@ imdbId found and cached: %@", title, show.imdbId);
-            return show.imdbId;
+            // It's possible that thetvdb has a show but doesn't have the imdbId for it, in that
+            // case if we try to cache it, the sql execution will cause an unhandled exception
+            
+            if (show.imdbId.length > 0) {
+                
+                [self setCache:show.imdbId title:title];
+                
+                NSLog(@"Show %@ imdbId found and cached: %@", title, show.imdbId);
+                return show.imdbId;
+                
+            } else {
+                
+                NSLog(@"Show %@ imdbId not found", title);
+                return @"";
+                
+            }
         }
         
         return @"";
