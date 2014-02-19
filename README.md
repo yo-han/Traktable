@@ -3,7 +3,7 @@ Traktable
 
 Trakt Scrobbler for iTunes/AppleTV. Download a binary version [here](http://w3f.nl/traktable/).
 
-<script data-gittip-username="yo-han" src="//gttp.co/v1.js"></script>
+[![Support via Gittip](https://rawgithub.com/twolfson/gittip-badge/0.2.0/dist/gittip.png)](https://www.gittip.com/yo-han/)
       
 ## Status and bugs
 
