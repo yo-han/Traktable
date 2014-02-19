@@ -6,6 +6,14 @@
       <description>Some updates to the Traktable scrobbler.</description>
       <language>en</language>
       <item>
+           <title>Version 0.5.1</title>
+           <sparkle:releaseNotesLink>
+               http://yo-han.github.io/Traktable/changelog/0.5.1.html
+           </sparkle:releaseNotesLink>
+           <pubDate>Sat, 25 Jan 2014 17:00:00 +0100</pubDate>
+           <enclosure url="http://bit.ly/traktable051u" sparkle:version="0.5.1" length="1623481" type="application/octet-stream" sparkle:dsaSignature="MCwCFFkNS5UWw73dQEcGxg0hMMHzbRRLAhRWtxKKDomXY/OjzRJ7AG2x209xOg==" />
+       </item>
+      <item>
            <title>Version 0.5</title>
            <sparkle:releaseNotesLink>
                http://yo-han.github.io/Traktable/changelog/0.5.html
