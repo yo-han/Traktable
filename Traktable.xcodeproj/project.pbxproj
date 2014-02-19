@@ -119,6 +119,8 @@
 		04BCC5E417B03DBB00D8DE7A /* ITHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BCC5E317B03DBB00D8DE7A /* ITHistory.m */; };
 		04BCC5EF17B1879300D8DE7A /* ITDb.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BCC5EE17B1879300D8DE7A /* ITDb.m */; };
 		04BCC5F217B1885A00D8DE7A /* ITConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BCC5F117B1885A00D8DE7A /* ITConstants.m */; };
+		04D27E8E18B404BD007AD8CD /* FeedbackReporter.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 04D27E8D18B404BD007AD8CD /* FeedbackReporter.framework */; };
+		04D27E8F18B404C4007AD8CD /* FeedbackReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04D27E8D18B404BD007AD8CD /* FeedbackReporter.framework */; };
 		04D74BB617C7AC5700B135BF /* ITTableRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D74BB517C7AC5700B135BF /* ITTableRowView.m */; };
 		04D74BC217CA9FB800B135BF /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04D74BC117CA9FB800B135BF /* CoreServices.framework */; };
 		04D74BC417CAB18B00B135BF /* movies.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D74BC317CAB18B00B135BF /* movies.png */; };
@@ -134,6 +136,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				04D27E8E18B404BD007AD8CD /* FeedbackReporter.framework in CopyFiles */,
 				04714E8116D2DEC500A308F7 /* Sparkle.framework in CopyFiles */,
 				048DF20416DFF676004B064A /* Growl.framework in CopyFiles */,
 			);
@@ -331,6 +334,7 @@
 		04BCC5EE17B1879300D8DE7A /* ITDb.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITDb.m; sourceTree = "<group>"; };
 		04BCC5F017B1885A00D8DE7A /* ITConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITConstants.h; sourceTree = "<group>"; };
 		04BCC5F117B1885A00D8DE7A /* ITConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITConstants.m; sourceTree = "<group>"; };
+		04D27E8D18B404BD007AD8CD /* FeedbackReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FeedbackReporter.framework; sourceTree = "<group>"; };
 		04D74BB417C7AC5700B135BF /* ITTableRowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITTableRowView.h; sourceTree = "<group>"; };
 		04D74BB517C7AC5700B135BF /* ITTableRowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITTableRowView.m; sourceTree = "<group>"; };
 		04D74BBC17CA88A200B135BF /* VLC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VLC.h; sourceTree = "<group>"; };
@@ -348,6 +352,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04D27E8F18B404C4007AD8CD /* FeedbackReporter.framework in Frameworks */,
 				04982DE817FBFE0600A50555 /* Quartz.framework in Frameworks */,
 				04FE3AE517D8BBF200497DAD /* SystemConfiguration.framework in Frameworks */,
 				04D74BC217CA9FB800B135BF /* CoreServices.framework in Frameworks */,
@@ -385,6 +390,7 @@
 		042F07E116BC19DB00A0CE9E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				04D27E8D18B404BD007AD8CD /* FeedbackReporter.framework */,
 				04982DE717FBFE0600A50555 /* Quartz.framework */,
 				04FE3AE417D8BBF200497DAD /* SystemConfiguration.framework */,
 				04D74BC117CA9FB800B135BF /* CoreServices.framework */,
@@ -776,7 +782,7 @@
 				ORGANIZATIONNAME = Mustacherious;
 				TargetAttributes = {
 					042F07DD16BC19DB00A0CE9E = {
-						DevelopmentTeam = 68SVRCR7Q9;
+						DevelopmentTeam = DWL2AQ47K8;
 					};
 				};
 			};
@@ -1033,21 +1039,25 @@
 		042F07FD16BC19DB00A0CE9E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/..\"",
-					"\"$(SRCROOT)/Traktable\"",
+					"$(SRCROOT)",
+					"\\\"$(SRCROOT)/..\\\"",
+					"\\\"$(SRCROOT)/Traktable\\\"",
+					/Users/johan/Documents/Traktable,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Traktable/Traktable-Prefix.pch";
 				INFOPLIST_FILE = "Traktable/Traktable-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Traktable\"",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				OTHER_CODE_SIGN_FLAGS = "--deep";
 				PRODUCT_NAME = Traktable;
 				WRAPPER_EXTENSION = app;
 			};
@@ -1056,21 +1066,25 @@
 		042F07FE16BC19DB00A0CE9E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Developer ID Application";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)\"",
-					"\"$(SRCROOT)/..\"",
-					"\"$(SRCROOT)/Traktable\"",
+					"$(SRCROOT)",
+					"\\\"$(SRCROOT)/..\\\"",
+					"\\\"$(SRCROOT)/Traktable\\\"",
+					/Users/johan/Documents/Traktable,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Traktable/Traktable-Prefix.pch";
 				INFOPLIST_FILE = "Traktable/Traktable-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/Traktable\"",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				OTHER_CODE_SIGN_FLAGS = "--deep";
 				PRODUCT_NAME = Traktable;
 				WRAPPER_EXTENSION = app;
 			};

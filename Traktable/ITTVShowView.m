@@ -124,6 +124,8 @@
 	[imageBrowser setZoomValue:0.5];
     
     [self fetchShows];
+    
+    abort();
 }
 
 

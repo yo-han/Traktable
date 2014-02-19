@@ -21,6 +21,7 @@
 #import "ITDb.h"
 #import "ITSync.h"
 #import "ITConstants.h"
+#import <FeedbackReporter/FRFeedbackReporter.h>
 
 // Scripting Bridge
 #import "iTunes.h"
@@ -56,6 +57,8 @@
 {   
     // Make sure all logging with NSLog is ported to the log file in the compiled version of the app
     [self redirectConsoleLogToDocumentFolder];
+
+    [[FRFeedbackReporter sharedReporter] reportIfCrash];
     
     _api = [ITApi new];
     _video = [[ITVideo alloc] init];
@@ -197,12 +200,7 @@
 
 - (IBAction)feedback:(id)sender {
     
-    NSString *encodedSubject = [NSString stringWithFormat:@"SUBJECT=%@", [@"Traktable feedback" stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
-    NSString *encodedBody = [NSString stringWithFormat:@"BODY=%@", [@"Your feedback here..." stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding]];
-    NSString *encodedTo = [@"traktable@w3f.nl" stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
-    NSString *encodedURLString = [NSString stringWithFormat:@"mailto:%@?%@&%@", encodedTo, encodedSubject, encodedBody];
-    NSURL *mailtoURL = [NSURL URLWithString:encodedURLString];
-    [[NSWorkspace sharedWorkspace] openURL:mailtoURL];
+    [[FRFeedbackReporter sharedReporter] reportFeedback];
 }
 
 - (IBAction)openTraktProfile:(id)sender {
@@ -366,4 +364,5 @@
 - (BOOL)userNotificationCenter:(NSUserNotificationCenter *)center shouldPresentNotification:(NSUserNotification *)notification{
     return YES;
 }
+
 @end
