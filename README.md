@@ -1,7 +1,7 @@
 Traktable
 ========
 
-Trakt Scrobbler for iTunes/AppleTV. A version working on Lion, Mountain Lion and Mavericks can be found [here](http://w3f.nl/traktable/). Yosemity is not yet supported.
+Trakt Scrobbler for iTunes/AppleTV. A version working on Lion, Mountain Lion and Mavericks can be found [here](http://w3f.nl/traktable/). Yosemite is not yet supported.
       
 ## Status and bugs
 
