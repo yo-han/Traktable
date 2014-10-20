@@ -1,9 +1,7 @@
 Traktable
 ========
 
-Trakt Scrobbler for iTunes/AppleTV. Download a binary version [here](http://w3f.nl/traktable/).
-
-[![Support via Gittip](https://rawgithub.com/twolfson/gittip-badge/0.2.0/dist/gittip.png)](https://www.gittip.com/yo-han/)
+Trakt Scrobbler for iTunes/AppleTV. A version working on Lion, Mountain Lion and Mavericks can be found [here](http://w3f.nl/traktable/). Yosemity is not yet supported.
       
 ## Status and bugs
 
