@@ -15,7 +15,9 @@
 #import "ITNotification.h"
 #import "Unirest.h"
 #import "ITConstants.h"
+#import "WebViewController.h"
 #import "NSData+Additions.h"
+#import <OAuth2Client/NXOAuth2.h>
 
 #define kApiUrl @"http://api.trakt.tv"
 
@@ -30,6 +32,8 @@
 - (void)callAPI:(NSString*)apiCall WithParameters:(NSDictionary *)params notification:(NSDictionary *)notification;
 - (id)callURLSync:(NSString *)requestUrl withParameters:(NSDictionary *)params;
 - (void)callURL:(NSString *)requestUrl withParameters:(NSDictionary *)params completionHandler:(void (^)(id, NSError *))completionBlock;
+
+@property(strong) WebViewController *oAuthWindow;
 
 @end
 
@@ -270,6 +274,19 @@
 }
 
 - (BOOL)testAccount {
+     /*
+    WebViewController *webViewController = [[WebViewController alloc] initWithWindowNibName:@"WebViewController"];
+    [webViewController showWindow:nil];
+    [webViewController.window makeKeyAndOrderFront:self];
+     return NO;
+    [[NXOAuth2AccountStore sharedStore] requestAccessToAccountWithType:@"Trakt.tv"
+                                   withPreparedAuthorizationURLHandler:^(NSURL *preparedURL){
+                                       
+                                       [[webViewController.myWebView mainFrame] loadRequest:[NSURLRequest requestWithURL:preparedURL]];
+                                   }];
+   
+      */NSLog(@"alwys no");
+    return NO;
     
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
     [params setValue:[self username] forKey:@"username"];

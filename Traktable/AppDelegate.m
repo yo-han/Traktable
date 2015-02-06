@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "MainWindowController.h"
 #import "ProgressWindowController.h"
+#import "WebViewController.h"
 #import "MASPreferencesWindowController.h"
 #import "PrefIndexViewController.h"
 #import "PrefSyncViewController.h"
@@ -22,6 +23,8 @@
 #import "ITSync.h"
 #import "ITConstants.h"
 #import <FeedbackReporter/FRFeedbackReporter.h>
+#import <OAuth2Client/NXOAuth2.h>
+#import <WebKit/WebKit.h>
 
 // Scripting Bridge
 #import "iTunes.h"
@@ -35,6 +38,7 @@
 
 @property(strong) MainWindowController *mainWindow;
 @property(strong, nonatomic) ProgressWindowController *progressWindow;
+@property(strong, nonatomic) WebViewController *webview;
 
 @property(nonatomic, retain) ITApi *api;
 @property(nonatomic, retain) ITVideo *video;
@@ -53,6 +57,26 @@
 
 @synthesize currentlyPlaying, statusItem, statusMenu, showLog, timer;
 
++ (void)initialize;
+{
+    [[NXOAuth2AccountStore sharedStore] setClientID:@"61d9e93b4b964209c1152f38a0c829da6a34b01b9cfce39c31d8c2b1f6c9c4ec"
+                                             secret:@"1b0461e4e0e93630c0f59141960af9abc044744bf78345842916cb35e4a4e0b8"
+                                   authorizationURL:[NSURL URLWithString:@"https://trakt.tv/oauth/authorize"]
+                                           tokenURL:[NSURL URLWithString:@"https://api.trakt.tv/oauth/token"]
+                                        redirectURL:[NSURL URLWithString:@"traktable://oauth"]
+                                     forAccountType:@"Trakt.tv"];
+    
+    
+}
+
+- (void)getUrl:(NSAppleEventDescriptor *)event withReplyEvent:(NSAppleEventDescriptor *)replyEvent {
+    
+    NSString *url = [[event paramDescriptorForKeyword:keyDirectObject] stringValue];
+    
+    NSArray *pairComponents = [url componentsSeparatedByString:@"="];
+    NSString *code = [pairComponents lastObject];
+}
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {   
     // Make sure all logging with NSLog is ported to the log file in the compiled version of the app
@@ -65,12 +89,13 @@
     _library = [[ITLibrary alloc] init];
     _sync = [[ITSync alloc] init];
     
+    [[NSAppleEventManager sharedAppleEventManager] setEventHandler:self
+                                                       andSelector:@selector(getUrl:withReplyEvent:)
+                                                     forEventClass:kInternetEventClass
+                                                        andEventID:kAEGetURL];
+    
     // Register this class as the NotificationCenter delegate
     [[NSUserNotificationCenter defaultUserNotificationCenter] setDelegate:self];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showProgressWindow:) name:kITUpdateProgressWindowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(hideProgressWindow) name:kITHideProgressWindowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(migrateProgressWindow) name:kITMigrateProgressWindowNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self.sync selector:@selector(updateMovieData:) name:kITMovieNeedsUpdateNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self.sync selector:@selector(updateTVShowData:) name:kITTVShowNeedsUpdateNotification object:nil];
@@ -82,12 +107,18 @@
     if(!self.progressWindow)
         _progressWindow = [[ProgressWindowController alloc] initWithWindowNibName:@"ProgressWindowController"];
     
+    if(!self.webview)
+        _webview = [[WebViewController alloc] initWithWindowNibName:@"WebViewController"];
+    
     if(![self.api username] || ![self.api testAccount]) {
 
-        _showProgressWindow = YES;
-        _showLogin = YES;
-        
-        [self showProgressWindow:nil];
+        [self.webview.window makeKeyAndOrderFront:self];
+
+        [[NXOAuth2AccountStore sharedStore] requestAccessToAccountWithType:@"Trakt.tv"
+                                       withPreparedAuthorizationURLHandler:^(NSURL *preparedURL){
+                                           
+                                           [[self.webview.myWebView mainFrame] loadRequest:[NSURLRequest requestWithURL:preparedURL]];
+                                       }];
         
         [NSApp requestUserAttention:NSInformationalRequest];
         
@@ -149,7 +180,7 @@
     if(self.showProgressWindow == NO)
         return;
 
-    [self.progressWindow.window makeKeyAndOrderFront:self];
+    //[self.progressWindow.window makeKeyAndOrderFront:self];
     
     if(notification == nil) {
         

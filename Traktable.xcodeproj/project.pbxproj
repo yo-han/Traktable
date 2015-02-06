@@ -24,6 +24,9 @@
 		042F081216BD649800A0CE9E /* EMKeychainItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 042F080716BC1A5200A0CE9E /* EMKeychainItem.m */; };
 		042F081416BD64C400A0CE9E /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 042F081316BD64C400A0CE9E /* ScriptingBridge.framework */; };
 		042F081616BD64ED00A0CE9E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 042F081516BD64ED00A0CE9E /* Security.framework */; };
+		0430CB441A73DF2400427390 /* OAuth2Client.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0430CB3F1A73DE9900427390 /* OAuth2Client.framework */; };
+		0430CB4C1A8295AE00427390 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0430CB4A1A8295AE00427390 /* WebViewController.m */; };
+		0430CB4D1A8295AE00427390 /* WebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0430CB4B1A8295AE00427390 /* WebViewController.xib */; };
 		0437203316CEF3ED003B8AB6 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 0437203216CEF3ED003B8AB6 /* icon.icns */; };
 		0437204316CEF823003B8AB6 /* menuicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0437204216CEF823003B8AB6 /* menuicon.png */; };
 		043942A817D00499009C160F /* clock_32x32.png in Resources */ = {isa = PBXBuildFile; fileRef = 043942A617D00499009C160F /* clock_32x32.png */; };
@@ -62,7 +65,7 @@
 		046EFB171805FF40005EEB4C /* ITQueueView.m in Sources */ = {isa = PBXBuildFile; fileRef = 046EFB161805FF40005EEB4C /* ITQueueView.m */; };
 		046EFB1A18073BF9005EEB4C /* ITQueueTableCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 046EFB1918073BF9005EEB4C /* ITQueueTableCellView.m */; };
 		04714E2816D2C59900A308F7 /* ITConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 04714E2716D2C59900A308F7 /* ITConfig.m */; };
-		04714E8116D2DEC500A308F7 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 04714E7F16D2DEC000A308F7 /* Sparkle.framework */; };
+		04714E8116D2DEC500A308F7 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 04714E7F16D2DEC000A308F7 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		047D985417D67285002E97B8 /* ITTableRowGroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 047D985317D67285002E97B8 /* ITTableRowGroupView.m */; };
 		047D985817D67ED7002E97B8 /* ProgressWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047D985617D67ED7002E97B8 /* ProgressWindowController.m */; };
 		047D985917D67ED7002E97B8 /* ProgressWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 047D985717D67ED7002E97B8 /* ProgressWindowController.xib */; };
@@ -76,7 +79,7 @@
 		048DF1FE16DECD14004B064A /* PrefUpdateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048DF1FD16DECD14004B064A /* PrefUpdateViewController.xib */; };
 		048DF20116DFEE69004B064A /* ITNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 048DF20016DFEE69004B064A /* ITNotification.m */; };
 		048DF20316DFF64A004B064A /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 048DF20216DFF64A004B064A /* Growl.framework */; };
-		048DF20416DFF676004B064A /* Growl.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 048DF20216DFF64A004B064A /* Growl.framework */; };
+		048DF20416DFF676004B064A /* Growl.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 048DF20216DFF64A004B064A /* Growl.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		048DF20616DFF6DD004B064A /* Growl Registration Ticket.growlRegDict in Resources */ = {isa = PBXBuildFile; fileRef = 048DF20516DFF6DD004B064A /* Growl Registration Ticket.growlRegDict */; };
 		048DF20A16DFFF17004B064A /* sync.png in Resources */ = {isa = PBXBuildFile; fileRef = 048DF20916DFFF17004B064A /* sync.png */; };
 		04982DE417FBFC2A00A50555 /* ImageBrowserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04982DE017FBFC2900A50555 /* ImageBrowserCell.m */; };
@@ -119,7 +122,7 @@
 		04BCC5E417B03DBB00D8DE7A /* ITHistory.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BCC5E317B03DBB00D8DE7A /* ITHistory.m */; };
 		04BCC5EF17B1879300D8DE7A /* ITDb.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BCC5EE17B1879300D8DE7A /* ITDb.m */; };
 		04BCC5F217B1885A00D8DE7A /* ITConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 04BCC5F117B1885A00D8DE7A /* ITConstants.m */; };
-		04D27E8E18B404BD007AD8CD /* FeedbackReporter.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 04D27E8D18B404BD007AD8CD /* FeedbackReporter.framework */; };
+		04D27E8E18B404BD007AD8CD /* FeedbackReporter.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 04D27E8D18B404BD007AD8CD /* FeedbackReporter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		04D27E8F18B404C4007AD8CD /* FeedbackReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04D27E8D18B404BD007AD8CD /* FeedbackReporter.framework */; };
 		04D74BB617C7AC5700B135BF /* ITTableRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D74BB517C7AC5700B135BF /* ITTableRowView.m */; };
 		04D74BC217CA9FB800B135BF /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04D74BC117CA9FB800B135BF /* CoreServices.framework */; };
@@ -128,6 +131,30 @@
 		04D74BCA17CBA18C00B135BF /* ITSync.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D74BC917CBA18B00B135BF /* ITSync.m */; };
 		04FE3AE517D8BBF200497DAD /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FE3AE417D8BBF200497DAD /* SystemConfiguration.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		0430CB3E1A73DE9900427390 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0430CB381A73DE9900427390 /* OAuth2Client.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 942FFCD612315E0A00E6C65E;
+			remoteInfo = OAuth2Client.framework;
+		};
+		0430CB401A73DE9900427390 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0430CB381A73DE9900427390 /* OAuth2Client.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC07E0554694100DB518D;
+			remoteInfo = OAuth2Client;
+		};
+		0430CB421A73DE9900427390 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0430CB381A73DE9900427390 /* OAuth2Client.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 94B6CE6619C1D0A200AA859B;
+			remoteInfo = OAuth2ClientTests;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		04714E5F16D2D3D600A308F7 /* CopyFiles */ = {
@@ -176,6 +203,10 @@
 		042F080E16BC1E4C00A0CE9E /* ITTVShow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ITTVShow.m; sourceTree = "<group>"; };
 		042F081316BD64C400A0CE9E /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = System/Library/Frameworks/ScriptingBridge.framework; sourceTree = SDKROOT; };
 		042F081516BD64ED00A0CE9E /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		0430CB381A73DE9900427390 /* OAuth2Client.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OAuth2Client.xcodeproj; path = ../OAuth2Client/OAuth2Client.xcodeproj; sourceTree = "<group>"; };
+		0430CB491A8295AE00427390 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		0430CB4A1A8295AE00427390 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
+		0430CB4B1A8295AE00427390 /* WebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebViewController.xib; sourceTree = "<group>"; };
 		0437203216CEF3ED003B8AB6 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = "<group>"; };
 		0437204216CEF823003B8AB6 /* menuicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menuicon.png; sourceTree = "<group>"; };
 		043942A617D00499009C160F /* clock_32x32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clock_32x32.png; sourceTree = "<group>"; };
@@ -352,6 +383,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0430CB441A73DF2400427390 /* OAuth2Client.framework in Frameworks */,
 				04D27E8F18B404C4007AD8CD /* FeedbackReporter.framework in Frameworks */,
 				04982DE817FBFE0600A50555 /* Quartz.framework in Frameworks */,
 				04FE3AE517D8BBF200497DAD /* SystemConfiguration.framework in Frameworks */,
@@ -372,6 +404,7 @@
 		042F07D316BC19DB00A0CE9E = {
 			isa = PBXGroup;
 			children = (
+				0430CB381A73DE9900427390 /* OAuth2Client.xcodeproj */,
 				0437203216CEF3ED003B8AB6 /* icon.icns */,
 				042F07E816BC19DB00A0CE9E /* Traktable */,
 				042F07E116BC19DB00A0CE9E /* Frameworks */,
@@ -492,6 +525,16 @@
 				042F080716BC1A5200A0CE9E /* EMKeychainItem.m */,
 			);
 			name = EMKeychain;
+			sourceTree = "<group>";
+		};
+		0430CB391A73DE9900427390 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0430CB3F1A73DE9900427390 /* OAuth2Client.framework */,
+				0430CB411A73DE9900427390 /* libOAuth2Client.a */,
+				0430CB431A73DE9900427390 /* OAuth2ClientTests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		043942A517D0006C009C160F /* Images */ = {
@@ -669,6 +712,9 @@
 				047D985517D67ED7002E97B8 /* ProgressWindowController.h */,
 				047D985617D67ED7002E97B8 /* ProgressWindowController.m */,
 				047D985717D67ED7002E97B8 /* ProgressWindowController.xib */,
+				0430CB491A8295AE00427390 /* WebViewController.h */,
+				0430CB4A1A8295AE00427390 /* WebViewController.m */,
+				0430CB4B1A8295AE00427390 /* WebViewController.xib */,
 			);
 			name = "Progress/Login Window";
 			sourceTree = "<group>";
@@ -778,7 +824,7 @@
 		042F07D516BC19DB00A0CE9E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = Mustacherious;
 				TargetAttributes = {
 					042F07DD16BC19DB00A0CE9E = {
@@ -798,12 +844,42 @@
 			mainGroup = 042F07D316BC19DB00A0CE9E;
 			productRefGroup = 042F07DF16BC19DB00A0CE9E /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 0430CB391A73DE9900427390 /* Products */;
+					ProjectRef = 0430CB381A73DE9900427390 /* OAuth2Client.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				042F07DD16BC19DB00A0CE9E /* Traktable */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		0430CB3F1A73DE9900427390 /* OAuth2Client.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = OAuth2Client.framework;
+			remoteRef = 0430CB3E1A73DE9900427390 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0430CB411A73DE9900427390 /* libOAuth2Client.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libOAuth2Client.a;
+			remoteRef = 0430CB401A73DE9900427390 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0430CB431A73DE9900427390 /* OAuth2ClientTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = OAuth2ClientTests.xctest;
+			remoteRef = 0430CB421A73DE9900427390 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		042F07DC16BC19DB00A0CE9E /* Resources */ = {
@@ -828,6 +904,7 @@
 				048DF1FE16DECD14004B064A /* PrefUpdateViewController.xib in Resources */,
 				048DF20616DFF6DD004B064A /* Growl Registration Ticket.growlRegDict in Resources */,
 				048DF20A16DFFF17004B064A /* sync.png in Resources */,
+				0430CB4D1A8295AE00427390 /* WebViewController.xib in Resources */,
 				04982DE617FBFC2A00A50555 /* Main.xib in Resources */,
 				04B68C9F17A55E63006760D0 /* config.plist in Resources */,
 				04B68CA017A55E63006760D0 /* dsa_pub.pem in Resources */,
@@ -922,6 +999,7 @@
 				04B5BE7317D5266F001F0705 /* ITErrors.m in Sources */,
 				04B5BE7617D53081001F0705 /* ITErrorTableCellView.m in Sources */,
 				04B5BE7B17D5401B001F0705 /* ITToolbar.m in Sources */,
+				0430CB4C1A8295AE00427390 /* WebViewController.m in Sources */,
 				047D985417D67285002E97B8 /* ITTableRowGroupView.m in Sources */,
 				047D985817D67ED7002E97B8 /* ProgressWindowController.m in Sources */,
 				040CA4F217EDED67007B9076 /* ITErrorView.m in Sources */,
@@ -1039,7 +1117,8 @@
 		042F07FD16BC19DB00A0CE9E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1047,6 +1126,7 @@
 					"\\\"$(SRCROOT)/..\\\"",
 					"\\\"$(SRCROOT)/Traktable\\\"",
 					/Users/johan/Documents/Traktable,
+					"$(CONFIGURATION_BUILD_DIR)/$(CONTENTS_FOLDER_PATH)/Frameworks",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Traktable/Traktable-Prefix.pch";
@@ -1059,6 +1139,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_CODE_SIGN_FLAGS = "--deep";
 				PRODUCT_NAME = Traktable;
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -1066,7 +1147,8 @@
 		042F07FE16BC19DB00A0CE9E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Developer ID Application";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1074,6 +1156,7 @@
 					"\\\"$(SRCROOT)/..\\\"",
 					"\\\"$(SRCROOT)/Traktable\\\"",
 					/Users/johan/Documents/Traktable,
+					"$(CONFIGURATION_BUILD_DIR)/$(CONTENTS_FOLDER_PATH)/Frameworks",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Traktable/Traktable-Prefix.pch";
@@ -1086,6 +1169,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_CODE_SIGN_FLAGS = "--deep";
 				PRODUCT_NAME = Traktable;
+				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
