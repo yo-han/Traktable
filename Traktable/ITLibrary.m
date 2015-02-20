@@ -142,7 +142,10 @@
 }
 
 - (void)syncLibrary {
-
+    
+    NSLog(@"NO SYNC");
+    return;
+    
     if(![self dbExists]) {
         [self resetDb];
     }

@@ -18,8 +18,8 @@
 - (void)setPassword:(NSString *)password;
 - (BOOL)testAccount;
 
-- (NSString*)username;
-- (NSString *)password;
+- (NSString *)apiKey;
+- (NSString *)apiSecret;
 - (BOOL)collection;
 
 - (void)updateState:(id)aVideo state:(NSString *)aState;

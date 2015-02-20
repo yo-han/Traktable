@@ -19,7 +19,7 @@
 #import "NSData+Additions.h"
 #import <OAuth2Client/NXOAuth2.h>
 
-#define kApiUrl @"http://api.trakt.tv"
+#define kApiUrl @"https://api-v2launch.trakt.tv"
 
 @interface ITApi()
 
@@ -65,6 +65,13 @@
     NSDictionary *config = [ITConfig getConfigFile];
     
     return [config objectForKey:@"traktApiKey"];
+}
+
+- (NSString *)apiSecret {
+    
+    NSDictionary *config = [ITConfig getConfigFile];
+    
+    return [config objectForKey:@"traktApiSecret"];
 }
 
 - (NSString *)username {
@@ -187,7 +194,8 @@
 
 - (id)callURLSync:(NSString *)requestUrl withParameters:(NSDictionary *)params {
     
-    NSDictionary* headers = [NSDictionary dictionaryWithObjectsAndKeys:@"application/json", @"accept", nil];
+    NSString *code = [[NSUserDefaults standardUserDefaults] stringForKey:@"TraktOAuthCode"];
+    NSDictionary* headers = [NSDictionary dictionaryWithObjectsAndKeys:@"application/json", @"accept", @"trakt-api-version", @"2", @"trakt-api-key", [self apiKey], @"Authorization", code, nil];
     HttpJsonResponse* response = nil;
     
     if([ITConstants traktReachable]) {
@@ -216,7 +224,8 @@
 
 - (void)callURL:(NSString *)requestUrl withParameters:(NSDictionary *)params completionHandler:(void (^)(id , NSError *))completionBlock
 {
-    NSDictionary* headers = [NSDictionary dictionaryWithObjectsAndKeys:@"application/json", @"accept", nil];
+    NSString *code = [[NSUserDefaults standardUserDefaults] stringForKey:@"TraktOAuthCode"];
+    NSDictionary* headers = [NSDictionary dictionaryWithObjectsAndKeys:@"application/json", @"accept", @"trakt-api-version", @"2", @"trakt-api-key", [self apiKey], @"Authorization", code, nil];
 
     [[Unirest postEntity:^(BodyRequest* request) {
         
@@ -227,14 +236,14 @@
     }] asJsonAsync:^(HttpJsonResponse* response) {
         
         id responseObject = nil;
-        
+       
         if([response rawBody] != nil) {
-        
+      
             NSError *error;
             responseObject = [NSJSONSerialization JSONObjectWithData:[response rawBody] options:0 error:&error];
 
             if(error)
-                NSLog(@"API Call JSON error: %@",error);
+                NSLog(@"API Call JSON error: %@. Raw response body looked like: %@", error, [response rawBody]);
         }
         
         completionBlock(responseObject, nil);
@@ -274,31 +283,13 @@
 }
 
 - (BOOL)testAccount {
-     /*
-    WebViewController *webViewController = [[WebViewController alloc] initWithWindowNibName:@"WebViewController"];
-    [webViewController showWindow:nil];
-    [webViewController.window makeKeyAndOrderFront:self];
-     return NO;
-    [[NXOAuth2AccountStore sharedStore] requestAccessToAccountWithType:@"Trakt.tv"
-                                   withPreparedAuthorizationURLHandler:^(NSURL *preparedURL){
-                                       
-                                       [[webViewController.myWebView mainFrame] loadRequest:[NSURLRequest requestWithURL:preparedURL]];
-                                   }];
-   
-      */NSLog(@"alwys no");
-    return NO;
     
-    NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
-    [params setValue:[self username] forKey:@"username"];
-    [params setValue:[self password] forKey:@"password"];
+    NSString *code = [[NSUserDefaults standardUserDefaults] stringForKey:@"TraktOAuthCode"];
     
-    NSString *url = [NSString stringWithFormat:@"%@/account/test/%@", kApiUrl, [self apiKey]];
-    NSDictionary *data = [self callURLSync:url withParameters:params];
+    if(code == nil)
+        return NO;    
 
-    if([[data objectForKey:@"status"] isEqualToString:@"failure"])
-        return NO;
-    else
-        return YES;
+    return YES;
 }
 
 - (void)updateState:(id)aVideo state:(NSString *)aState {
@@ -401,6 +392,9 @@
 
 - (NSArray *)watchedSync:(iTunesEVdK)videoType extended:(NSString *)ext {
     
+    NSLog(@"SYNC IS OFF");
+    return nil;
+    
     NSString *type;
         
     if(videoType == iTunesEVdKTVShow) {
@@ -433,6 +427,9 @@
 
 - (void)historySync {
    
+    NSLog(@"SYNC IS OFF");
+    return;
+    
     NSInteger lastSync = [[NSUserDefaults standardUserDefaults] integerForKey:@"traktable.ITHistorySyncLast"];
     
     if(lastSync < 1262325600)
@@ -476,7 +473,10 @@
 }
 
 - (void)updateHistory:(NSDictionary *)update parameters:(NSDictionary *)params {
-      
+    
+    NSLog(@"SYNC IS OFF");
+    return;
+    
     ITDb *db = [ITDb new];
     NSString *uid = [self sha1Hash:[update description]];
     
@@ -536,6 +536,7 @@
 
 - (NSDictionary *)basicAuthHeaders {
     
+    /*
     NSString *authStr = [NSString stringWithFormat:@"%@:%@", [self username], [self password]];
     NSData *authData = [authStr dataUsingEncoding:NSUTF8StringEncoding];
     NSString *authValue = [NSString stringWithFormat:@"Basic %@", [authData base64Encoding]];
@@ -543,6 +544,8 @@
     NSDictionary* headers = [NSDictionary dictionaryWithObjectsAndKeys:@"application/json", @"accept", authValue, @"Authorization", nil];
     
     return headers;
+     */
+    return nil;
 }
 
 - (void)traktError:(NSDictionary *)response {

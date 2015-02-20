@@ -82,6 +82,7 @@
 
 - (IBAction)import:(id)sender {
     
+    /*
     [ITNotification showNotification:[NSString stringWithFormat:@"Start iTunes library import"]];
     
     NSButton *btn = (NSButton *) sender;
@@ -117,6 +118,7 @@
     }
     
     [btn setEnabled:YES];
+     */
 }
 
 - (IBAction)reset:(id)sender {

@@ -59,8 +59,10 @@
 
 + (void)initialize;
 {
-    [[NXOAuth2AccountStore sharedStore] setClientID:@"61d9e93b4b964209c1152f38a0c829da6a34b01b9cfce39c31d8c2b1f6c9c4ec"
-                                             secret:@"1b0461e4e0e93630c0f59141960af9abc044744bf78345842916cb35e4a4e0b8"
+    ITApi *api = [ITApi new];
+    
+    [[NXOAuth2AccountStore sharedStore] setClientID:[api apiKey]
+                                             secret:[api apiSecret]
                                    authorizationURL:[NSURL URLWithString:@"https://trakt.tv/oauth/authorize"]
                                            tokenURL:[NSURL URLWithString:@"https://api.trakt.tv/oauth/token"]
                                         redirectURL:[NSURL URLWithString:@"traktable://oauth"]
@@ -75,6 +77,10 @@
     
     NSArray *pairComponents = [url componentsSeparatedByString:@"="];
     NSString *code = [pairComponents lastObject];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:code forKey:@"TraktOAuthCode"];
+    
+    [self showWindow:self];
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
@@ -102,10 +108,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self.sync selector:@selector(updateEpisodeData:) name:kITTVShowEpisodeNeedsUpdateNotification object:nil];
     
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"NSConstraintBasedLayoutVisualizeMutuallyExclusiveConstraints"];
-    
-    // Setup progressWindow
-    if(!self.progressWindow)
-        _progressWindow = [[ProgressWindowController alloc] initWithWindowNibName:@"ProgressWindowController"];
     
     if(!self.webview)
         _webview = [[WebViewController alloc] initWithWindowNibName:@"WebViewController"];
@@ -160,11 +162,12 @@
     
     [self.mainWindow.window makeKeyAndOrderFront:self];
     
-    [self.progressWindow.window orderOut:nil];
+    [self.webview.window orderOut:nil];
     
     [NSApp activateIgnoringOtherApps:YES];
 }
 
+/*
 - (void)migrateProgressWindow {
     
     _showProgressWindow = YES;
@@ -228,6 +231,7 @@
     _showProgressWindow = NO;
     _isSyncing = NO;
 }
+*/
 
 - (IBAction)feedback:(id)sender {
     

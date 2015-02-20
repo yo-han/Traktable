@@ -62,7 +62,7 @@
         ITTVShow *show = (ITTVShow *) object;
    
         history.title = show.title;
-        history.poster = [screen getScreen:show.showId season:[NSNumber numberWithInt:show.seasonNumber] episode:[NSNumber numberWithInt:show.episodeNumber] withSize:ITEpisodeScreenSizeMedium];
+        history.poster = [screen getScreen:show.showId season:[NSNumber numberWithLong:show.seasonNumber] episode:[NSNumber numberWithLong:show.episodeNumber] withSize:ITEpisodeScreenSizeMedium];
         history.timestamp = show.timestamp;
         history.episodeTitle = show.episodeName;
         history.episode = show.episodeNumber;
