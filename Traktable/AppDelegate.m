@@ -55,7 +55,7 @@
 
 @implementation AppDelegate
 
-@synthesize currentlyPlaying, statusItem, statusMenu, showLog, timer;
+@synthesize currentlyPlaying, statusItem, statusMenu, showLog;
 
 + (void)initialize;
 {
@@ -87,7 +87,10 @@
 {   
     // Make sure all logging with NSLog is ported to the log file in the compiled version of the app
     [self redirectConsoleLogToDocumentFolder];
-
+    
+    //NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
+    //[[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+    
     [[FRFeedbackReporter sharedReporter] reportIfCrash];
     
     _api = [ITApi new];
@@ -112,7 +115,7 @@
     if(!self.webview)
         _webview = [[WebViewController alloc] initWithWindowNibName:@"WebViewController"];
     
-    if(![self.api username] || ![self.api testAccount]) {
+    if(![self.api testAccount]) {
 
         [self.webview.window makeKeyAndOrderFront:self];
 
@@ -240,8 +243,9 @@
 
 - (IBAction)openTraktProfile:(id)sender {
     
-    NSString *url = [NSString stringWithFormat:@"http://trakt.tv/user/%@", [_api username]];
-    [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:url]];
+    NSLog(@"Need to fix this");
+    //NSString *url = [NSString stringWithFormat:@"http://trakt.tv/user/%@", [_api username]];
+    //[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:url]];
 }
 
 - (IBAction)donate:(id)sender {
@@ -294,35 +298,26 @@
         
     NSDictionary *newPlayerInfo = [notification userInfo];
     NSString *playerState = [newPlayerInfo objectForKey:@"Player State"];
-    
+
     if ([playerState isEqualToString:@"Playing"]) {
         
         NSLog(@"iTunes started playing");
-                
-        if (![self.video isVideoPlaying:ITPlayerITunes]) {
-         
-            [self checkProgress];
-            return;
-        }
         
+        [self checkProgress:ITPlayerStart];
+       
         currentlyPlaying = [self.video getCurrentlyPlaying:ITPlayerITunes];
-        
-        [self watching];
-        
-        timer = [NSTimer scheduledTimerWithTimeInterval:600 target:self selector:@selector(watching) userInfo:nil repeats:YES];
         
     } else if ([playerState isEqualToString:@"Stopped"]) {
         
         NSLog(@"iTunes stopped playing");
         
-        [timer invalidate];
-        if (currentlyPlaying) [self checkProgress];
+        if (currentlyPlaying) [self checkProgress:ITPlayerStopped];
         
     } else if ([playerState isEqualToString:@"Paused"]) {
+        
         NSLog(@"iTunes paused playing");
         
-        [timer invalidate];
-        if (currentlyPlaying) [self checkProgress];
+        if (currentlyPlaying) [self checkProgress:ITPlayerPaused];
     }
 }
 
@@ -336,14 +331,7 @@
     }
 }
 
--(void)watching {
-    
-    [self.api updateState:currentlyPlaying state:@"watching"];
-    
-    [ITNotification showNotification:[NSString stringWithFormat:@"Watching: %@", currentlyPlaying]];
-}
-
--(void)checkProgress {
+-(void)checkProgress:(ITVideoPlayerState)playerState {
     
     if(currentlyPlaying == nil)
         return;
@@ -361,18 +349,11 @@
 
     [currentlyPlaying playCount];
     
-    if ([currentlyPlaying playCount] < [[self.library getTrack:[currentlyPlaying persistentID] type:playlist] playedCount]) {
-        
-        [self.api updateState:currentlyPlaying state:@"scrobble"];
+    [self.api updateState:currentlyPlaying state:playerState];
+    
+    if (playerState == ITPlayerStopped && [currentlyPlaying playCount] < [[self.library getTrack:[currentlyPlaying persistentID] type:playlist] playedCount])
         [self.library updateTrackCount:[self.library getTrack:[currentlyPlaying persistentID] type:playlist] scrobbled:YES];
        
-    } else {
-        
-        [self.api updateState:currentlyPlaying state:@"cancelwatching"];
-        
-        [ITNotification showNotification:[NSString stringWithFormat:@"Canceled watching: %@", currentlyPlaying]];
-    }
-
     currentlyPlaying = nil;
 }
 

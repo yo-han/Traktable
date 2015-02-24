@@ -52,6 +52,35 @@
     return movie;
 }
 
++ (NSDictionary *)traktEntity:(ITMovie *)aMovie batch:(NSArray *)aBatch {
+  
+    NSDictionary *params;
+    
+    if (aMovie && aBatch == nil) {
+        
+        params = [NSDictionary dictionaryWithObjectsAndKeys:
+                  aMovie.name, @"title",
+                  [NSString stringWithFormat:@"%ld", aMovie.year], @"year",
+                  [NSDictionary dictionaryWithObjectsAndKeys:
+                    aMovie.imdbId, @"imdb_id",
+                   nil], @"ids",
+                  nil];
+        
+    } else if(aMovie == nil && aBatch != nil){
+        
+        params = [NSDictionary dictionaryWithObjectsAndKeys:
+                  aBatch, @"movies",
+                  nil];
+    } else {
+        
+        params = [NSDictionary dictionaryWithObjectsAndKeys:
+                  nil];
+        
+    }
+    
+    return params;
+}
+
 + (NSInteger)playCount {
     return self.playCount;
 }

@@ -38,4 +38,6 @@
 +(ITMovie *)movieWithCurrentTunesTrack:(iTunesTrack *)iTunesTrack;
 +(ITMovie *)movieWithDatabaseRecord:(NSDictionary *)record;
 
++(NSDictionary *)traktEntity:(ITMovie *)aMovie batch:(NSArray *)aBatch;
+
 @end

@@ -232,7 +232,7 @@
                         if(firstImport)
                             [api seen:[NSArray arrayWithObject:videoDict] type:iTunesEVdKTVShow video:scrobbleVideo];
                         else
-                            [api updateState:scrobbleVideo state:@"scrobble"];
+                            [api updateState:scrobbleVideo state:ITPlayerStopped];
                     }                        
                 }
                            
@@ -242,7 +242,7 @@
             } else if([playedCount integerValue] < [track playedCount]) {
                                    
                 id scrobbleVideo = [video getITunesVideoByType:track type:type];
-                [api updateState:scrobbleVideo state:@"scrobble"];
+                [api updateState:scrobbleVideo state:ITPlayerStopped];
                 
                 [self updateTrackCount:track scrobbled:YES];
             }

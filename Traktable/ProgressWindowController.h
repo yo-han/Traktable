@@ -18,8 +18,6 @@
 @property (nonatomic, assign) IBOutlet NSView *loginView;
 
 @property (nonatomic, assign) IBOutlet NSProgressIndicator *progress;
-@property (nonatomic, assign) IBOutlet NSTextField *description;
-
 @property (nonatomic, assign) IBOutlet NSImageView *bgImage;
 
 @end

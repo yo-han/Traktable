@@ -76,7 +76,6 @@
             
             [self.loginView setHidden:YES];
             [self.progress setHidden:NO];
-            [self.description setHidden:NO];
             
         } else {
             [self.loginStatus setStringValue:@"Failed. Wrong password?"];

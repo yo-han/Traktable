@@ -10,6 +10,7 @@
 #import <CommonCrypto/CommonDigest.h>
 
 #import "iTunes.h"
+#import "ITVideo.h"
 
 @class ITTVShow;
 
@@ -22,7 +23,7 @@
 - (NSString *)apiSecret;
 - (BOOL)collection;
 
-- (void)updateState:(id)aVideo state:(NSString *)aState;
+- (void)updateState:(id)aVideo state:(ITVideoPlayerState *)aState;
 - (void)seen:(NSArray *)videos type:(iTunesEVdK)videoType video:(id)aVideo;
 - (void)library:(NSArray *)videos type:(iTunesEVdK)videoType video:(id)aVideo;
 - (void)updateHistory:(NSDictionary *)update parameters:(NSDictionary *)params;

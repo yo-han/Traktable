@@ -23,6 +23,25 @@
 
 @implementation ITVideo
 
++ (NSString *)playerStateString:(ITVideoPlayerState)state {
+    
+    NSString *stateString;
+    
+    switch (state) {
+        case 0:
+            stateString = @"start";
+            break;
+        case 1:
+            stateString = @"pause";
+            break;
+        case 2:
+            stateString = @"stop";
+            break;
+    }
+    
+    return stateString;
+}
+
 - (id)init {
    
     _iTunesBridge = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];

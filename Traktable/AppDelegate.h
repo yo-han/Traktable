@@ -20,6 +20,5 @@
 @property (strong) NSStatusItem * statusItem;
 
 @property(nonatomic, retain) id currentlyPlaying;
-@property(nonatomic, retain) NSTimer *timer;
 
 @end

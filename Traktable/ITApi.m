@@ -11,6 +11,7 @@
 #import "ITMovie.h"
 #import "ITConfig.h"
 #import "ITDb.h"
+#import "ITUtil.h"
 #import "EMKeychainItem.h"
 #import "ITNotification.h"
 #import "Unirest.h"
@@ -115,27 +116,29 @@
     NSDictionary *params;
     NSString *appVersion = [NSString stringWithFormat:@"Version %@",[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]];
     
+    NSString *compileDate = [NSString stringWithUTF8String:__DATE__];
+    NSDateFormatter *df = [[NSDateFormatter alloc] init];
+    [df setDateFormat:@"MMM d yyyy"];
+    NSLocale *usLocale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+    [df setLocale:usLocale];
+    NSDate *aDate = [df dateFromString:compileDate];
+    NSLog(@"%@", aTVShow);
     if (aTVShow && aBatch == nil) {
-
+        
         params = [[NSDictionary alloc] initWithObjectsAndKeys:
-                  self.username, @"username",
-                  self.password, @"password",
                   aTVShow.show, @"title",
                   [NSString stringWithFormat:@"%ld", aTVShow.seasonNumber], @"season",
                   [NSString stringWithFormat:@"%ld", aTVShow.episodeNumber], @"episode",
                   [NSString stringWithFormat:@"%ld", aTVShow.year], @"year",
                   [NSString stringWithFormat:@"%ld", aTVShow.duration], @"duration",
-                  @"50", @"progress",
-                  appVersion, @"plugin_version",
-                  @"1.0", @"media_center_version",
-                  [[NSDate date] descriptionWithCalendarFormat:@"%Y-%m-%d %H:%M" timeZone:nil locale:nil], @"media_center_date",
+                  @"99", @"progress",
+                  appVersion, @"app_version",
+                  [aDate descriptionWithCalendarFormat:@"%Y-%m-%d" timeZone:nil locale:nil], @"app_date",
                   nil];
 
-    } else if(aTVShow != nil && aBatch != nil){
+    } else if(aTVShow != nil && aBatch != nil) {
         
         params = [[NSDictionary alloc] initWithObjectsAndKeys:
-                  self.username, @"username",
-                  self.password, @"password",
                   aTVShow.show, @"title",
                   [NSString stringWithFormat:@"%ld", aTVShow.year], @"year",
                   aBatch, @"episodes",
@@ -143,8 +146,6 @@
     } else {
         
         params = [[NSDictionary alloc] initWithObjectsAndKeys:
-                  self.username, @"username",
-                  self.password, @"password",
                   nil];
         
     }
@@ -157,12 +158,10 @@
     
     NSDictionary *params;
     NSString *appVersion = [NSString stringWithFormat:@"Version %@",[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]];
-    
+    NSLog(@"%@", aMovie);
     if (aMovie && aBatch == nil) {
         
         params = [NSDictionary dictionaryWithObjectsAndKeys:
-                  self.username, @"username",
-                  self.password, @"password",
                   aMovie.name, @"title",
                   aMovie.imdbId, @"imdb_id",
                   [NSString stringWithFormat:@"%ld", aMovie.year], @"year",
@@ -224,9 +223,44 @@
 
 - (void)callURL:(NSString *)requestUrl withParameters:(NSDictionary *)params completionHandler:(void (^)(id , NSError *))completionBlock
 {
-    NSString *code = [[NSUserDefaults standardUserDefaults] stringForKey:@"TraktOAuthCode"];
-    NSDictionary* headers = [NSDictionary dictionaryWithObjectsAndKeys:@"application/json", @"accept", @"trakt-api-version", @"2", @"trakt-api-key", [self apiKey], @"Authorization", code, nil];
-
+    
+    NSURL *URL = [NSURL URLWithString:requestUrl];
+    NSString *code = [NSString stringWithFormat:@"Bearer %@", [[NSUserDefaults standardUserDefaults] stringForKey:@"TraktOAuthCode"]];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
+    [request setHTTPMethod:@"POST"];
+    
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:code forHTTPHeaderField:@"Authorization"];
+    [request setValue:@"2" forHTTPHeaderField:@"trakt-api-version"];
+    [request setValue:[self apiKey] forHTTPHeaderField:@"trakt-api-key"];
+    
+    [request setHTTPBody:[@"{\"movie\": {\"title\": \"Guardians of the Galaxy\",\"year\": 2014,\"ids\": {\"trakt\": 28,\"slug\": \"guardians-of-the-galaxy-2014\",\"imdb\": \"tt2015381\",\"tmdb\": 118340}},\"progress\": 1.25, \"app_version\": \"1.0\",\"app_date\": \"2014-09-22\" }" dataUsingEncoding:NSUTF8StringEncoding]];
+                          
+                          NSURLSession *session = [NSURLSession sharedSession];
+                          NSURLSessionDataTask *task = [session dataTaskWithRequest:request
+                                                                  completionHandler:
+                                                        ^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                            
+                                                            if (error) {
+                                                                NSLog(@"Error %@", error);
+                                                                return;
+                                                            }
+                                                            
+                                                            if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
+                                                                NSLog(@"Response HTTP Status code: %ld\n", (long)[(NSHTTPURLResponse *)response statusCode]);
+                                                                NSLog(@"Response HTTP Headers:\n%@\n", [(NSHTTPURLResponse *)response allHeaderFields]);
+                                                            }
+                                                            
+                                                            NSString* body = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                                                            NSLog(@"Response Body:\n%@\n", body);
+                                                        }];
+                          [task resume];
+                          
+                          /*
+    NSString *code = [NSString stringWithFormat:@"Bearer %@", [[NSUserDefaults standardUserDefaults] stringForKey:@"TraktOAuthCode"]];
+    NSDictionary* headers = [NSDictionary dictionaryWithObjectsAndKeys:@"application/json", @"Content-type", @"trakt-api-version", @"2", @"trakt-api-key", [self apiKey], @"Authorization", code, nil];
+    NSLog(@"%@", headers);
     [[Unirest postEntity:^(BodyRequest* request) {
         
         [request setUrl:requestUrl];
@@ -236,7 +270,7 @@
     }] asJsonAsync:^(HttpJsonResponse* response) {
         
         id responseObject = nil;
-       
+        
         if([response rawBody] != nil) {
       
             NSError *error;
@@ -247,7 +281,7 @@
         }
         
         completionBlock(responseObject, nil);
-    }];
+    }];*/
 }
 
 - (void)callAPI:(NSString*)apiCall WithParameters:(NSDictionary *)params notification:(NSDictionary *)notification {
@@ -256,7 +290,7 @@
 
         if(![response isKindOfClass:[NSDictionary class]]) {
 
-            NSLog(@"Response is not an NSDictionary");
+            NSLog(@"Response is not an NSDictionary: %@", err);
             return;
         }
                 
@@ -266,7 +300,7 @@
             
             [self removeTraktQueueEntry:params url:apiCall];
             
-            if([[notification objectForKey:@"state"] isEqual: @"scrobble"])
+            if([[notification objectForKey:@"state"] isEqual: @"stop"])
                 [ITNotification showNotification:[NSString stringWithFormat:@"Scrobbled: %@", [notification objectForKey:@"video"]]];
             
             [self historySync];
@@ -285,32 +319,47 @@
 - (BOOL)testAccount {
     
     NSString *code = [[NSUserDefaults standardUserDefaults] stringForKey:@"TraktOAuthCode"];
-    
+
     if(code == nil)
         return NO;    
 
     return YES;
 }
 
-- (void)updateState:(id)aVideo state:(NSString *)aState {
+- (void)updateState:(id)aVideo state:(ITVideoPlayerState *)aState {
     
-    NSLog(@"%@ --> %@", [aState stringByReplacingCharactersInRange:NSMakeRange(0,1) withString:[[aState substringToIndex:1] uppercaseString]], aVideo);
     NSDictionary *params;
+    NSDictionary *traktObject;
     NSString *type;
     
     if([aVideo isKindOfClass:[ITTVShow class]]) {
-        params = [self TVShow:(ITTVShow *)aVideo batch:nil];
+        
+        traktObject = [self TVShow:(ITTVShow *)aVideo batch:nil];
         type = @"show";
+        
     } else if ([aVideo isKindOfClass:[ITMovie class]]) {
-        params = [self Movie:(ITMovie *)aVideo batch:nil];
+        
+        traktObject = [ITMovie traktEntity:aVideo batch:nil];
         type = @"movie";
+        
     }
     
-    NSDictionary *notification = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:aState, aVideo, nil] forKeys:[NSArray arrayWithObjects:@"state", @"video", nil]];
+    NSString *playerStateString = [ITVideo playerStateString:aState];
+    NSDictionary *notification = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:playerStateString, aVideo, nil] forKeys:[NSArray arrayWithObjects:@"state", @"video", nil]];
     
-    NSString *url = [NSString stringWithFormat:@"%@/%@/%@/%@", kApiUrl, type, aState, [self apiKey]];
+    NSString *url = [NSString stringWithFormat:@"%@/scrobble/%@", kApiUrl, playerStateString];
     
-    if([aState isEqualToString:@"scrobble"])
+    NSString *appVersion = [NSString stringWithFormat:@"Version %@",[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]];
+    NSDate *appBuildDate = [ITUtil appBuildDate];
+    
+    params = [[NSDictionary alloc] initWithObjectsAndKeys:
+              traktObject, @"item",
+              @"99", @"progress",
+              appVersion, @"app_version",
+              [appBuildDate descriptionWithCalendarFormat:@"%Y-%m-%d" timeZone:nil locale:nil], @"app_date",
+              nil];
+
+    if([playerStateString isEqualToString:@"stop"])
         [self newTraktQueueEntry:params url:url];
     
     [self callAPI:url WithParameters:params notification:notification];

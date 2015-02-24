@@ -29,21 +29,6 @@
     return self;
 }
 
-- (void) viewWillAppear {
-    
-    NSString *username = [self.api username];
-    NSString *pwd = [self.api password];
-    
-    [name setDelegate:self];
-    [password setDelegate:self];
-    
-    if(username != nil)
-        [name setStringValue:username];
-    
-    if(pwd != nil)
-        [password setStringValue:pwd];
-}
-
 -(NSString *)identifier{
     return @"Account";
 }

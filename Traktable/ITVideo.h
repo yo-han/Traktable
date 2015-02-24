@@ -17,10 +17,18 @@ typedef NS_ENUM(NSUInteger, ITVideoPlayer) {
     ITPlayerUnknown = NSIntegerMax
 };
 
+typedef NS_ENUM(NSUInteger, ITVideoPlayerState) {
+    ITPlayerStart = 0,
+    ITPlayerPaused = 1,
+    ITPlayerStopped = 2
+};
+
 @interface ITVideo : NSObject
 
 - (id)getCurrentlyPlaying:(ITVideoPlayer)player;
 - (BOOL)isVideoPlaying:(ITVideoPlayer)player;
 - (id)getITunesVideoByType:(iTunesTrack *)track type:(iTunesEVdK)aType;
+
++ (NSString *)playerStateString:(ITVideoPlayerState)state;
 
 @end
