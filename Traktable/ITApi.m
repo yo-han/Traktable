@@ -222,8 +222,7 @@
 }
 
 - (void)callURL:(NSString *)requestUrl withParameters:(NSDictionary *)params completionHandler:(void (^)(id , NSError *))completionBlock
-{
-    
+{    
     NSURL *URL = [NSURL URLWithString:requestUrl];
     NSString *code = [NSString stringWithFormat:@"Bearer %@", [[NSUserDefaults standardUserDefaults] stringForKey:@"TraktOAuthCode"]];
     
@@ -281,7 +280,7 @@
         }
         
         completionBlock(responseObject, nil);
-    }];*/
+    }];
 }
 
 - (void)callAPI:(NSString*)apiCall WithParameters:(NSDictionary *)params notification:(NSDictionary *)notification {
@@ -319,10 +318,17 @@
 - (BOOL)testAccount {
     
     NSString *code = [[NSUserDefaults standardUserDefaults] stringForKey:@"TraktOAuthCode"];
-
+    double expires = [[NSUserDefaults standardUserDefaults] doubleForKey:@"TraktCodeExpiresIn"];
+    
     if(code == nil)
-        return NO;    
+        return NO;
+    
+    if(expires && expires < [[NSDate date] timeIntervalSince1970])
+        code = [[NSUserDefaults standardUserDefaults] stringForKey:@"TraktRefreshCode"];
 
+    if(!expires || expires < [[NSDate date] timeIntervalSince1970])
+        [self refreshOAuthToken:code];
+    
     return YES;
 }
 
@@ -532,7 +538,7 @@
     NSDictionary *argsDict = [NSDictionary dictionary];
     
     if([update objectForKey:@"type"] != nil && [[update objectForKey:@"type"] isEqualToString:@"episode"]) {
-        
+
         NSDate *timestamp = [NSDate dateWithTimeIntervalSince1970:[[update objectForKey:@"timestamp"] doubleValue]];
         
         if([update objectForKey:@"episode"] != nil) {
@@ -672,4 +678,47 @@
     
     return sortedValues;
 }
+
+- (void)refreshOAuthToken:(NSString *)code {
+    
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/oauth/token", kApiUrl]];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
+    [request setHTTPMethod:@"POST"];
+    
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    
+    NSString *httpBody = @"{\"code\": \"%@\", \"client_id\": \"%@\", \"client_secret\": \"%@\", \"redirect_uri\": \"traktable://oauth\", \"grant_type\": \"authorization_code\"}";
+    
+    httpBody = [NSString stringWithFormat:httpBody, code, [self apiKey], [self apiSecret]];
+    
+    [request setHTTPBody:[httpBody dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request
+                                            completionHandler:
+                                  ^(NSData *data, NSURLResponse *response, NSError *error) {
+                                      
+                                      if (error) {
+                                          NSLog(@"ERROR ---> %@", error);
+                                          return;
+                                      }
+                                      
+                                      if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
+                                          NSLog(@"Response HTTP Status code: %ld\n", (long)[(NSHTTPURLResponse *)response statusCode]);
+                                          NSLog(@"Response HTTP Headers:\n%@\n", [(NSHTTPURLResponse *)response allHeaderFields]);
+                                      }
+                                      
+                                      //NSString* body = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                                      //NSLog(@"Response Body:\n%@\n", body);
+                                      
+                                      id json = [NSJSONSerialization JSONObjectWithData:data options:nil error:nil];
+                                      
+                                      [[NSUserDefaults standardUserDefaults] setObject:[json objectForKey:@"access_token"] forKey:@"TraktOAuthCode"];
+                                      [[NSUserDefaults standardUserDefaults] setObject:[json objectForKey:@"refresh_token"] forKey:@"TraktRefreshCode"];
+                                      [[NSUserDefaults standardUserDefaults] setDouble:([[NSDate date] timeIntervalSince1970] + [[json objectForKey:@"expires_in"] doubleValue]) - 3600 forKey:@"TraktCodeExpiresIn"];
+                                  }];
+    [task resume];
+}
+
 @end

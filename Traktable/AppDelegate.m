@@ -80,6 +80,7 @@
     
     [[NSUserDefaults standardUserDefaults] setObject:code forKey:@"TraktOAuthCode"];
     
+    [self.api testAccount];
     [self showWindow:self];
 }
 
@@ -90,6 +91,7 @@
     
     //NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
     //[[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+    //return;
     
     [[FRFeedbackReporter sharedReporter] reportIfCrash];
     
@@ -128,7 +130,7 @@
         [NSApp requestUserAttention:NSInformationalRequest];
         
         return;
-        
+    
     } else {
         
         NSLog(@"Startup normal, loggedin.");
