@@ -134,7 +134,7 @@
     } else {
         
         NSLog(@"Startup normal, loggedin.");
-       
+        [self iTunesSourceSaved:nil];
         [NSTimer scheduledTimerWithTimeInterval:900 target:self selector:@selector(iTunesSourceSaved:) userInfo:nil repeats:YES];
         
         [NSTimer scheduledTimerWithTimeInterval:3600 target:self.api selector:@selector(retryTraktQueue) userInfo:nil repeats:YES];

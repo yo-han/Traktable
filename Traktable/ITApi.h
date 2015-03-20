@@ -24,7 +24,7 @@
 - (BOOL)collection;
 
 - (void)updateState:(id)aVideo state:(ITVideoPlayerState *)aState;
-- (void)seen:(NSArray *)videos type:(iTunesEVdK)videoType video:(id)aVideo;
+- (void)batch:(NSDictionary *)videos;
 - (void)library:(NSArray *)videos type:(iTunesEVdK)videoType video:(id)aVideo;
 - (void)updateHistory:(NSDictionary *)update parameters:(NSDictionary *)params;
 

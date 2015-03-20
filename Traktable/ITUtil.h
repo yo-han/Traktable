@@ -15,6 +15,7 @@
 + (NSDate *)stringToDateTime:(NSString *)dateStr;
 + (NSString *)localeDateString:(NSString *)dateStr;
 + (NSString *)stringToTime:(NSString *)dateStr;
++ (NSString *)watchedDate:(NSDate *)date;
 + (NSDate *)appBuildDate;
 
 @end

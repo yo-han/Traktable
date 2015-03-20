@@ -8,6 +8,7 @@
 
 #import "ITMovie.h"
 #import "IMDB.h"
+#import "ITUtil.h"
 
 @implementation ITMovie
 
@@ -54,31 +55,22 @@
 
 + (NSDictionary *)traktEntity:(ITMovie *)aMovie batch:(NSArray *)aBatch {
   
-    NSDictionary *params;
+    NSDictionary *httpObject;
+    NSString *appVersion = [NSString stringWithFormat:@"Version %@",[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]];
+    NSDate *appBuildDate = [ITUtil appBuildDate];
     
     if (aMovie && aBatch == nil) {
         
-        params = [NSDictionary dictionaryWithObjectsAndKeys:
-                  aMovie.name, @"title",
-                  [NSString stringWithFormat:@"%ld", aMovie.year], @"year",
-                  [NSDictionary dictionaryWithObjectsAndKeys:
-                    aMovie.imdbId, @"imdb_id",
-                   nil], @"ids",
-                  nil];
-        
+        NSDictionary *movie = [NSDictionary dictionaryWithObjectsAndKeys:aMovie.name, @"title", [NSNumber numberWithLong:aMovie.year], @"year", nil];
+        httpObject = [NSDictionary dictionaryWithObjectsAndKeys:movie, @"movie", [NSNumber numberWithInt:99], @"progress", appVersion, @"app_version",[appBuildDate descriptionWithCalendarFormat:@"%Y-%m-%d" timeZone:nil locale:nil], @"app_date", nil];
+
     } else if(aMovie == nil && aBatch != nil){
         
-        params = [NSDictionary dictionaryWithObjectsAndKeys:
-                  aBatch, @"movies",
-                  nil];
     } else {
-        
-        params = [NSDictionary dictionaryWithObjectsAndKeys:
-                  nil];
         
     }
     
-    return params;
+    return httpObject;
 }
 
 + (NSInteger)playCount {

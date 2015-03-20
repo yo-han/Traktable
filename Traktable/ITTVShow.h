@@ -35,5 +35,6 @@
 
 +(ITTVShow *)showWithCurrentITunesTrack:(iTunesTrack *)iTunesTrack;
 +(ITTVShow *)showWithDatabaseRecord:(NSDictionary *)record;
++(NSDictionary *)traktEntity:(ITTVShow *)aShow batch:(NSArray *)aBatch;
 
 @end

@@ -43,6 +43,16 @@
     return weekDay;
 }
 
++ (NSString *)watchedDate:(NSDate *)date {
+    
+    NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
+
+    [dateFormatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss'Z'"];
+    NSString *dateString = [dateFormatter stringFromDate:date];
+    
+    return dateString;
+}
+
 + (NSString *)stringToTime:(NSString *)dateStr {
     
     NSDateFormatter* timeFormatter = [[NSDateFormatter alloc] init];

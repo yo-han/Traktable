@@ -113,7 +113,7 @@ static int dbVersion = 2;
             [db executeUpdate:sql withParameterDictionary:args];
         
         self.errorMessage = [db lastErrorMessage];
-        self.lastInsertId = [db lastInsertRowId];
+        self.lastInsertId = (int) [db lastInsertRowId];
     }];
 }
 

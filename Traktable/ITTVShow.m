@@ -8,6 +8,7 @@
 
 #import "ITTVShow.h"
 #import "ITTVdb.h"
+#import "ITUtil.h"
 
 @implementation ITTVShow
 
@@ -54,6 +55,28 @@
     }
     
     return show;
+}
+
++ (NSDictionary *)traktEntity:(ITTVShow *)aShow batch:(NSArray *)aBatch {
+    
+    NSDictionary *httpObject;
+    
+    NSString *appVersion = [NSString stringWithFormat:@"Version %@",[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]];
+    NSDate *appBuildDate = [ITUtil appBuildDate];
+
+    if (aShow && aBatch == nil) {
+        
+        NSDictionary *show = [NSDictionary dictionaryWithObjectsAndKeys:aShow.show, @"title", nil];
+        NSDictionary *episode = [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithLong:aShow.seasonNumber], @"season", [NSNumber numberWithLong:aShow.episodeNumber], @"number", nil];
+        httpObject = [NSDictionary dictionaryWithObjectsAndKeys:show, @"show", episode, @"episode", [NSNumber numberWithInt:99], @"progress", appVersion, @"app_version",[appBuildDate descriptionWithCalendarFormat:@"%Y-%m-%d" timeZone:nil locale:nil], @"app_date", nil];
+        
+    } else if(aShow == nil && aBatch != nil){
+        
+    } else {
+        
+    }
+    
+    return httpObject;
 }
 
 + (NSInteger)playCount {

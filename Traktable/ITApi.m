@@ -233,54 +233,38 @@
     [request setValue:code forHTTPHeaderField:@"Authorization"];
     [request setValue:@"2" forHTTPHeaderField:@"trakt-api-version"];
     [request setValue:[self apiKey] forHTTPHeaderField:@"trakt-api-key"];
-    
-    [request setHTTPBody:[@"{\"movie\": {\"title\": \"Guardians of the Galaxy\",\"year\": 2014,\"ids\": {\"trakt\": 28,\"slug\": \"guardians-of-the-galaxy-2014\",\"imdb\": \"tt2015381\",\"tmdb\": 118340}},\"progress\": 1.25, \"app_version\": \"1.0\",\"app_date\": \"2014-09-22\" }" dataUsingEncoding:NSUTF8StringEncoding]];
-                          
-                          NSURLSession *session = [NSURLSession sharedSession];
-                          NSURLSessionDataTask *task = [session dataTaskWithRequest:request
-                                                                  completionHandler:
-                                                        ^(NSData *data, NSURLResponse *response, NSError *error) {
-                                                            
-                                                            if (error) {
-                                                                NSLog(@"Error %@", error);
-                                                                return;
-                                                            }
-                                                            
-                                                            if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
-                                                                NSLog(@"Response HTTP Status code: %ld\n", (long)[(NSHTTPURLResponse *)response statusCode]);
-                                                                NSLog(@"Response HTTP Headers:\n%@\n", [(NSHTTPURLResponse *)response allHeaderFields]);
-                                                            }
-                                                            
-                                                            NSString* body = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                                                            NSLog(@"Response Body:\n%@\n", body);
-                                                        }];
-                          [task resume];
-                          
-                          /*
-    NSString *code = [NSString stringWithFormat:@"Bearer %@", [[NSUserDefaults standardUserDefaults] stringForKey:@"TraktOAuthCode"]];
-    NSDictionary* headers = [NSDictionary dictionaryWithObjectsAndKeys:@"application/json", @"Content-type", @"trakt-api-version", @"2", @"trakt-api-key", [self apiKey], @"Authorization", code, nil];
-    NSLog(@"%@", headers);
-    [[Unirest postEntity:^(BodyRequest* request) {
-        
-        [request setUrl:requestUrl];
-        [request setHeaders:headers];
-        [request setBody:[NSJSONSerialization dataWithJSONObject:params options:0 error:nil]];
-        
-    }] asJsonAsync:^(HttpJsonResponse* response) {
-        
-        id responseObject = nil;
-        
-        if([response rawBody] != nil) {
-      
-            NSError *error;
-            responseObject = [NSJSONSerialization JSONObjectWithData:[response rawBody] options:0 error:&error];
 
-            if(error)
-                NSLog(@"API Call JSON error: %@. Raw response body looked like: %@", error, [response rawBody]);
-        }
-        
-        completionBlock(responseObject, nil);
-    }];
+    [request setHTTPBody:[NSJSONSerialization dataWithJSONObject:params options:nil error:nil]];
+                          
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request
+                                              completionHandler:
+                                    ^(NSData *data, NSURLResponse *response, NSError *error) {
+                                        
+                                        NSString* body = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                                        
+                                        if (error) {
+                                            
+                                            NSLog(@"API Call JSON error: %@. Response body looked like: %@", error, body);
+                                            return;
+                                        }
+                                        
+                                        if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
+                                            
+                                            if((long)[(NSHTTPURLResponse *)response statusCode] > 204) {
+                                                
+                                                NSLog(@"ERROR! Response HTTP Status code: %ld\n", (long)[(NSHTTPURLResponse *)response statusCode]);
+                                                NSLog(@"ERROR! Url: %@", requestUrl);
+                                                NSLog(@"ERROR! Response body: %@", body);
+                                                return;
+                                            }
+                                        }
+                                        
+                                        id jsonObject = [NSJSONSerialization JSONObjectWithData:data options:nil error:nil];
+                                        
+                                        completionBlock(jsonObject, nil);
+                                    }];
+    [task resume];
 }
 
 - (void)callAPI:(NSString*)apiCall WithParameters:(NSDictionary *)params notification:(NSDictionary *)notification {
@@ -293,23 +277,14 @@
             return;
         }
                 
-        if ([[response objectForKey:@"status"] isEqualToString:@"success"] && [response objectForKey:@"error"] == nil){
+        NSLog(@"Succes: %@",[response objectForKey:@"action"]);
             
-            NSLog(@"Succes: %@",[response objectForKey:@"message"]);
+        [self removeTraktQueueEntry:params url:apiCall];
             
-            [self removeTraktQueueEntry:params url:apiCall];
-            
-            if([[notification objectForKey:@"state"] isEqual: @"stop"])
-                [ITNotification showNotification:[NSString stringWithFormat:@"Scrobbled: %@", [notification objectForKey:@"video"]]];
-            
-            [self historySync];
-            
-        } else {
-            
-            [self traktError:response];
-            
-            NSLog(@"%@ got error: %@", apiCall, response);
-        }
+        if([[notification objectForKey:@"state"] isEqual: @"stop"])
+            [ITNotification showNotification:[NSString stringWithFormat:@"Scrobbled: %@", [notification objectForKey:@"video"]]];
+        
+        [self historySync];
         
         if (err) NSLog(@"Error: %@",[err description]);
     }];
@@ -334,13 +309,12 @@
 
 - (void)updateState:(id)aVideo state:(ITVideoPlayerState *)aState {
     
-    NSDictionary *params;
     NSDictionary *traktObject;
     NSString *type;
     
     if([aVideo isKindOfClass:[ITTVShow class]]) {
         
-        traktObject = [self TVShow:(ITTVShow *)aVideo batch:nil];
+        traktObject = [ITTVShow traktEntity:aVideo batch:nil];
         type = @"show";
         
     } else if ([aVideo isKindOfClass:[ITMovie class]]) {
@@ -355,42 +329,18 @@
     
     NSString *url = [NSString stringWithFormat:@"%@/scrobble/%@", kApiUrl, playerStateString];
     
-    NSString *appVersion = [NSString stringWithFormat:@"Version %@",[[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]];
-    NSDate *appBuildDate = [ITUtil appBuildDate];
-    
-    params = [[NSDictionary alloc] initWithObjectsAndKeys:
-              traktObject, @"item",
-              @"99", @"progress",
-              appVersion, @"app_version",
-              [appBuildDate descriptionWithCalendarFormat:@"%Y-%m-%d" timeZone:nil locale:nil], @"app_date",
-              nil];
-
     if([playerStateString isEqualToString:@"stop"])
-        [self newTraktQueueEntry:params url:url];
+        [self newTraktQueueEntry:traktObject url:url];
     
-    [self callAPI:url WithParameters:params notification:notification];
+    [self callAPI:url WithParameters:traktObject notification:notification];
 }
 
-- (void)seen:(NSArray *)videos type:(iTunesEVdK)videoType video:(id)aVideo {
+- (void)batch:(NSDictionary *)videos {
     
-    NSDictionary *params;
-    NSString *type;
+    NSString *url = [NSString stringWithFormat:@"%@/sync/history", kApiUrl];
     
-    if(videoType == iTunesEVdKTVShow) {
-        
-        params = [self TVShow:aVideo batch:videos];
-        type = @"show/episode";
-        
-    } else if(videoType == iTunesEVdKMovie) {
-
-        params = [self Movie:nil batch:videos];
-        type = @"movie";
-    }
-
-    NSString *url = [NSString stringWithFormat:@"%@/%@/seen/%@", kApiUrl, type, [self apiKey]];
-    
-    [self newTraktQueueEntry:params url:url];
-    [self callAPI:url WithParameters:params notification:nil];
+    [self newTraktQueueEntry:videos url:url];
+    [self callAPI:url WithParameters:videos notification:nil];
 }
 
 - (void)library:(NSArray *)videos type:(iTunesEVdK)videoType video:(id)aVideo {
@@ -704,13 +654,17 @@
                                           return;
                                       }
                                       
-                                      if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
-                                          NSLog(@"Response HTTP Status code: %ld\n", (long)[(NSHTTPURLResponse *)response statusCode]);
-                                          NSLog(@"Response HTTP Headers:\n%@\n", [(NSHTTPURLResponse *)response allHeaderFields]);
-                                      }
+                                      NSString* body = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
                                       
-                                      //NSString* body = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                                      //NSLog(@"Response Body:\n%@\n", body);
+                                      if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
+                                          
+                                          if((long)[(NSHTTPURLResponse *)response statusCode] > 204) {
+                                              
+                                              NSLog(@"ERROR! Response HTTP Status code: %ld\n", (long)[(NSHTTPURLResponse *)response statusCode]);
+                                              NSLog(@"ERROR! Response body: %@", body);
+                                              return;
+                                          }
+                                      }
                                       
                                       id json = [NSJSONSerialization JSONObjectWithData:data options:nil error:nil];
                                       
