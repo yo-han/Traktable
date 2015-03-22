@@ -129,6 +129,8 @@
 		04D74BC417CAB18B00B135BF /* movies.png in Resources */ = {isa = PBXBuildFile; fileRef = 04D74BC317CAB18B00B135BF /* movies.png */; };
 		04D74BC717CB49FE00B135BF /* ITTVShowPoster.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D74BC617CB49FE00B135BF /* ITTVShowPoster.m */; };
 		04D74BCA17CBA18C00B135BF /* ITSync.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D74BC917CBA18B00B135BF /* ITSync.m */; };
+		04DA0FE81ABCCD7700B07154 /* OAuth2Client.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0430CB3F1A73DE9900427390 /* OAuth2Client.framework */; };
+		04DA0FE91ABCCD7700B07154 /* OAuth2Client.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0430CB3F1A73DE9900427390 /* OAuth2Client.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		04FE3AE517D8BBF200497DAD /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FE3AE417D8BBF200497DAD /* SystemConfiguration.framework */; };
 /* End PBXBuildFile section */
 
@@ -154,6 +156,13 @@
 			remoteGlobalIDString = 94B6CE6619C1D0A200AA859B;
 			remoteInfo = OAuth2ClientTests;
 		};
+		04DA0FEA1ABCCD7700B07154 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0430CB381A73DE9900427390 /* OAuth2Client.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 942FFCD512315E0A00E6C65E;
+			remoteInfo = OAuth2Client.framework;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -163,6 +172,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				04DA0FE91ABCCD7700B07154 /* OAuth2Client.framework in CopyFiles */,
 				04D27E8E18B404BD007AD8CD /* FeedbackReporter.framework in CopyFiles */,
 				04714E8116D2DEC500A308F7 /* Sparkle.framework in CopyFiles */,
 				048DF20416DFF676004B064A /* Growl.framework in CopyFiles */,
@@ -385,6 +395,7 @@
 			files = (
 				0430CB441A73DF2400427390 /* OAuth2Client.framework in Frameworks */,
 				04D27E8F18B404C4007AD8CD /* FeedbackReporter.framework in Frameworks */,
+				04DA0FE81ABCCD7700B07154 /* OAuth2Client.framework in Frameworks */,
 				04982DE817FBFE0600A50555 /* Quartz.framework in Frameworks */,
 				04FE3AE517D8BBF200497DAD /* SystemConfiguration.framework in Frameworks */,
 				04D74BC217CA9FB800B135BF /* CoreServices.framework in Frameworks */,
@@ -812,6 +823,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				04DA0FEB1ABCCD7700B07154 /* PBXTargetDependency */,
 			);
 			name = Traktable;
 			productName = Traktable;
@@ -1009,6 +1021,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		04DA0FEB1ABCCD7700B07154 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = OAuth2Client.framework;
+			targetProxy = 04DA0FEA1ABCCD7700B07154 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		042F07EB16BC19DB00A0CE9E /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
@@ -1128,7 +1148,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Traktable/Traktable-Prefix.pch";
 				INFOPLIST_FILE = "Traktable/Traktable-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "";
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_CODE_SIGN_FLAGS = "--deep";
@@ -1152,7 +1172,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Traktable/Traktable-Prefix.pch";
 				INFOPLIST_FILE = "Traktable/Traktable-Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "";
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				OTHER_CODE_SIGN_FLAGS = "--deep";
