@@ -295,8 +295,12 @@
     NSString *code = [[NSUserDefaults standardUserDefaults] stringForKey:@"TraktOAuthCode"];
     double expires = [[NSUserDefaults standardUserDefaults] doubleForKey:@"TraktCodeExpiresIn"];
     
-    if(code == nil)
+    if(code == nil) {
+        NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
+        [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+        
         return NO;
+    }
     
     if(expires && expires < [[NSDate date] timeIntervalSince1970])
         code = [[NSUserDefaults standardUserDefaults] stringForKey:@"TraktRefreshCode"];
@@ -659,7 +663,7 @@
                                       if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
                                           
                                           if((long)[(NSHTTPURLResponse *)response statusCode] > 204) {
-                                              
+                        
                                               NSLog(@"ERROR! Response HTTP Status code: %ld\n", (long)[(NSHTTPURLResponse *)response statusCode]);
                                               NSLog(@"ERROR! Response body: %@", body);
                                               return;
