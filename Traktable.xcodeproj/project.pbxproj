@@ -130,7 +130,7 @@
 		04D74BC717CB49FE00B135BF /* ITTVShowPoster.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D74BC617CB49FE00B135BF /* ITTVShowPoster.m */; };
 		04D74BCA17CBA18C00B135BF /* ITSync.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D74BC917CBA18B00B135BF /* ITSync.m */; };
 		04DA0FE81ABCCD7700B07154 /* OAuth2Client.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0430CB3F1A73DE9900427390 /* OAuth2Client.framework */; };
-		04DA0FE91ABCCD7700B07154 /* OAuth2Client.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0430CB3F1A73DE9900427390 /* OAuth2Client.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		04DA0FED1ABF0FEA00B07154 /* OAuth2Client.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 0430CB3F1A73DE9900427390 /* OAuth2Client.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		04FE3AE517D8BBF200497DAD /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04FE3AE417D8BBF200497DAD /* SystemConfiguration.framework */; };
 /* End PBXBuildFile section */
 
@@ -172,7 +172,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				04DA0FE91ABCCD7700B07154 /* OAuth2Client.framework in CopyFiles */,
+				04DA0FED1ABF0FEA00B07154 /* OAuth2Client.framework in CopyFiles */,
 				04D27E8E18B404BD007AD8CD /* FeedbackReporter.framework in CopyFiles */,
 				04714E8116D2DEC500A308F7 /* Sparkle.framework in CopyFiles */,
 				048DF20416DFF676004B064A /* Growl.framework in CopyFiles */,
