@@ -21,7 +21,6 @@ See what's new in the [changelog](https://github.com/yo-han/Traktable/wiki/Chang
 
 ## Credits
 
-* Traktable is inspired by and used some snippets of: https://github.com/m4p/iTrakt/
 * [iTVDB](https://github.com/kevintuhumury/itvdb)
 * [MASPreferences](https://github.com/shpakovski/MASPreferences)
 * [FMDB](https://github.com/ccgus/fmdb)
