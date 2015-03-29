@@ -231,11 +231,9 @@
     } else {
         
         NSDictionary *episode = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%@",[ITUtil watchedDate:[track playedDate]]], @"watched_at", [NSString stringWithFormat:@"%ld",(long)[track episodeNumber]],@"number", nil];
-        NSDictionary *season = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%ld",(long)[track episodeNumber]],@"number", [NSMutableArray array], @"episodes", nil];
-        [[season objectForKey:@"episodes"] addObject:episode];
+        NSDictionary *season = [NSDictionary dictionaryWithObjectsAndKeys:[NSString stringWithFormat:@"%ld",(long)[track seasonNumber]],@"number", [NSMutableArray arrayWithObjects:episode, nil], @"episodes", nil];
         
-        NSDictionary *show = [NSDictionary dictionaryWithObjectsAndKeys:[track show], @"title", [NSString stringWithFormat:@"%ld",(long)[track year]], @"year", [NSMutableArray array], @"seasons" , nil];
-        [[show objectForKey:@"seasons"] addObject:season];
+        NSDictionary *show = [NSDictionary dictionaryWithObjectsAndKeys:[track show], @"title", [NSMutableArray arrayWithObjects:season, nil], @"seasons" , nil];
         
         [[videoDict objectForKey:@"shows"] addObject:show];
     }

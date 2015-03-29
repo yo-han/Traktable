@@ -21,12 +21,9 @@
 		042F080F16BD646000A0CE9E /* ITApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 042F080A16BC1E4C00A0CE9E /* ITApi.m */; };
 		042F081016BD646000A0CE9E /* ITVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 042F080C16BC1E4C00A0CE9E /* ITVideo.m */; };
 		042F081116BD646000A0CE9E /* ITTVShow.m in Sources */ = {isa = PBXBuildFile; fileRef = 042F080E16BC1E4C00A0CE9E /* ITTVShow.m */; };
-		042F081216BD649800A0CE9E /* EMKeychainItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 042F080716BC1A5200A0CE9E /* EMKeychainItem.m */; };
 		042F081416BD64C400A0CE9E /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 042F081316BD64C400A0CE9E /* ScriptingBridge.framework */; };
 		042F081616BD64ED00A0CE9E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 042F081516BD64ED00A0CE9E /* Security.framework */; };
 		0430CB441A73DF2400427390 /* OAuth2Client.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0430CB3F1A73DE9900427390 /* OAuth2Client.framework */; };
-		0430CB4C1A8295AE00427390 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0430CB4A1A8295AE00427390 /* WebViewController.m */; };
-		0430CB4D1A8295AE00427390 /* WebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0430CB4B1A8295AE00427390 /* WebViewController.xib */; };
 		0437203316CEF3ED003B8AB6 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 0437203216CEF3ED003B8AB6 /* icon.icns */; };
 		0437204316CEF823003B8AB6 /* menuicon.png in Resources */ = {isa = PBXBuildFile; fileRef = 0437204216CEF823003B8AB6 /* menuicon.png */; };
 		043942A817D00499009C160F /* clock_32x32.png in Resources */ = {isa = PBXBuildFile; fileRef = 043942A617D00499009C160F /* clock_32x32.png */; };
@@ -39,7 +36,6 @@
 		0441839D17D0EDB800F9FCA2 /* ITEpisodeScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 0441839C17D0EDB800F9FCA2 /* ITEpisodeScreen.m */; };
 		0446E06D17385349008BC1EB /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04714E7F16D2DEC000A308F7 /* Sparkle.framework */; };
 		044AC42817F0DAF30045D281 /* ITTableGroupDateCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = 044AC42717F0DAF30045D281 /* ITTableGroupDateCellView.m */; };
-		045235A416CA9069005D25E4 /* MASPreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0481386416CA8BF400E682A0 /* MASPreferencesWindow.xib */; };
 		0469CC0016CBE010006863B7 /* IMDB.m in Sources */ = {isa = PBXBuildFile; fileRef = 0469CBFF16CBE010006863B7 /* IMDB.m */; };
 		0469CC1616CBF19F006863B7 /* NSString+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 0469CC0416CBF19F006863B7 /* NSString+Helper.m */; };
 		0469CC1716CBF19F006863B7 /* iTVDb.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 0469CC0616CBF19F006863B7 /* iTVDb.podspec */; };
@@ -67,16 +63,6 @@
 		04714E2816D2C59900A308F7 /* ITConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 04714E2716D2C59900A308F7 /* ITConfig.m */; };
 		04714E8116D2DEC500A308F7 /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 04714E7F16D2DEC000A308F7 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		047D985417D67285002E97B8 /* ITTableRowGroupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 047D985317D67285002E97B8 /* ITTableRowGroupView.m */; };
-		047D985817D67ED7002E97B8 /* ProgressWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 047D985617D67ED7002E97B8 /* ProgressWindowController.m */; };
-		047D985917D67ED7002E97B8 /* ProgressWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 047D985717D67ED7002E97B8 /* ProgressWindowController.xib */; };
-		0481386A16CA8C6000E682A0 /* PrefIndexViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0481386916CA8C6000E682A0 /* PrefIndexViewController.m */; };
-		0481386B16CA8DA100E682A0 /* MASPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0481386616CA8BF400E682A0 /* MASPreferencesWindowController.m */; };
-		0481386D16CA8DB300E682A0 /* PrefIndexViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0481386C16CA8DB300E682A0 /* PrefIndexViewController.xib */; };
-		048DF1F616DEBF55004B064A /* PrefSyncViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 048DF1F516DEBF54004B064A /* PrefSyncViewController.m */; };
-		048DF1F816DEC3ED004B064A /* PrefSyncViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048DF1F716DEC3ED004B064A /* PrefSyncViewController.xib */; };
-		048DF1FA16DECC6B004B064A /* PrefUpdateViewController.h in Resources */ = {isa = PBXBuildFile; fileRef = 048DF1F916DECC6B004B064A /* PrefUpdateViewController.h */; };
-		048DF1FC16DECC99004B064A /* PrefUpdateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 048DF1FB16DECC99004B064A /* PrefUpdateViewController.m */; };
-		048DF1FE16DECD14004B064A /* PrefUpdateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048DF1FD16DECD14004B064A /* PrefUpdateViewController.xib */; };
 		048DF20116DFEE69004B064A /* ITNotification.m in Sources */ = {isa = PBXBuildFile; fileRef = 048DF20016DFEE69004B064A /* ITNotification.m */; };
 		048DF20316DFF64A004B064A /* Growl.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 048DF20216DFF64A004B064A /* Growl.framework */; };
 		048DF20416DFF676004B064A /* Growl.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 048DF20216DFF64A004B064A /* Growl.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
@@ -90,6 +76,10 @@
 		049C48BE16C0223B00CC9A0E /* ITMovie.m in Sources */ = {isa = PBXBuildFile; fileRef = 049C48BD16C0223B00CC9A0E /* ITMovie.m */; };
 		049FC1A718035B1900008D56 /* ITTVShowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 049FC1A618035B1900008D56 /* ITTVShowView.m */; };
 		049FC1A918035BBB00008D56 /* TVShowViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 049FC1A818035BBB00008D56 /* TVShowViewController.xib */; };
+		04A15DFD1AC82EB100543D52 /* ITTrakt.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A15DFC1AC82EB100543D52 /* ITTrakt.m */; };
+		04A15E001AC82F5D00543D52 /* ITTraktConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A15DFF1AC82F5D00543D52 /* ITTraktConstants.m */; };
+		04A15E041AC8777600543D52 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A15E021AC8777600543D52 /* WebViewController.m */; };
+		04A15E051AC8777600543D52 /* WebViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04A15E031AC8777600543D52 /* WebViewController.xib */; };
 		04A9FE5017B43A69006CD129 /* ITMoviePoster.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A9FE4F17B43A69006CD129 /* ITMoviePoster.m */; };
 		04A9FE5317B43E0C006CD129 /* NSImage+MGCropExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A9FE5217B43E0C006CD129 /* NSImage+MGCropExtensions.m */; };
 		04A9FE5617B448C7006CD129 /* ITUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A9FE5517B448C7006CD129 /* ITUtil.m */; };
@@ -203,8 +193,6 @@
 		042F07F516BC19DB00A0CE9E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		042F07F816BC19DB00A0CE9E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		042F080516BC1A3B00A0CE9E /* iTunes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iTunes.h; sourceTree = "<group>"; };
-		042F080616BC1A5200A0CE9E /* EMKeychainItem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EMKeychainItem.h; sourceTree = "<group>"; };
-		042F080716BC1A5200A0CE9E /* EMKeychainItem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EMKeychainItem.m; sourceTree = "<group>"; };
 		042F080916BC1E4C00A0CE9E /* ITApi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ITApi.h; sourceTree = "<group>"; };
 		042F080A16BC1E4C00A0CE9E /* ITApi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ITApi.m; sourceTree = "<group>"; };
 		042F080B16BC1E4C00A0CE9E /* ITVideo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ITVideo.h; sourceTree = "<group>"; };
@@ -214,9 +202,6 @@
 		042F081316BD64C400A0CE9E /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = System/Library/Frameworks/ScriptingBridge.framework; sourceTree = SDKROOT; };
 		042F081516BD64ED00A0CE9E /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		0430CB381A73DE9900427390 /* OAuth2Client.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = OAuth2Client.xcodeproj; path = ../OAuth2Client/OAuth2Client.xcodeproj; sourceTree = "<group>"; };
-		0430CB491A8295AE00427390 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
-		0430CB4A1A8295AE00427390 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
-		0430CB4B1A8295AE00427390 /* WebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebViewController.xib; sourceTree = "<group>"; };
 		0437203216CEF3ED003B8AB6 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = "<group>"; };
 		0437204216CEF823003B8AB6 /* menuicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menuicon.png; sourceTree = "<group>"; };
 		043942A617D00499009C160F /* clock_32x32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clock_32x32.png; sourceTree = "<group>"; };
@@ -279,22 +264,6 @@
 		04714E7F16D2DEC000A308F7 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Sparkle.framework; sourceTree = "<group>"; };
 		047D985217D67284002E97B8 /* ITTableRowGroupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITTableRowGroupView.h; sourceTree = "<group>"; };
 		047D985317D67285002E97B8 /* ITTableRowGroupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITTableRowGroupView.m; sourceTree = "<group>"; };
-		047D985517D67ED7002E97B8 /* ProgressWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressWindowController.h; sourceTree = "<group>"; };
-		047D985617D67ED7002E97B8 /* ProgressWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressWindowController.m; sourceTree = "<group>"; };
-		047D985717D67ED7002E97B8 /* ProgressWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProgressWindowController.xib; sourceTree = "<group>"; };
-		0481386316CA8BF400E682A0 /* MASPreferencesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MASPreferencesViewController.h; sourceTree = "<group>"; };
-		0481386416CA8BF400E682A0 /* MASPreferencesWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MASPreferencesWindow.xib; sourceTree = "<group>"; };
-		0481386516CA8BF400E682A0 /* MASPreferencesWindowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MASPreferencesWindowController.h; sourceTree = "<group>"; };
-		0481386616CA8BF400E682A0 /* MASPreferencesWindowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MASPreferencesWindowController.m; sourceTree = "<group>"; };
-		0481386816CA8C6000E682A0 /* PrefIndexViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefIndexViewController.h; sourceTree = "<group>"; };
-		0481386916CA8C6000E682A0 /* PrefIndexViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrefIndexViewController.m; sourceTree = "<group>"; };
-		0481386C16CA8DB300E682A0 /* PrefIndexViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrefIndexViewController.xib; sourceTree = "<group>"; };
-		048DF1F416DEBF54004B064A /* PrefSyncViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefSyncViewController.h; sourceTree = "<group>"; };
-		048DF1F516DEBF54004B064A /* PrefSyncViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrefSyncViewController.m; sourceTree = "<group>"; };
-		048DF1F716DEC3ED004B064A /* PrefSyncViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrefSyncViewController.xib; sourceTree = "<group>"; };
-		048DF1F916DECC6B004B064A /* PrefUpdateViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefUpdateViewController.h; sourceTree = "<group>"; };
-		048DF1FB16DECC99004B064A /* PrefUpdateViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrefUpdateViewController.m; sourceTree = "<group>"; };
-		048DF1FD16DECD14004B064A /* PrefUpdateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PrefUpdateViewController.xib; sourceTree = "<group>"; };
 		048DF1FF16DFEE69004B064A /* ITNotification.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITNotification.h; sourceTree = "<group>"; };
 		048DF20016DFEE69004B064A /* ITNotification.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITNotification.m; sourceTree = "<group>"; };
 		048DF20216DFF64A004B064A /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Growl.framework; sourceTree = "<group>"; };
@@ -312,6 +281,13 @@
 		049FC1A518035B1900008D56 /* ITTVShowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITTVShowView.h; sourceTree = "<group>"; };
 		049FC1A618035B1900008D56 /* ITTVShowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITTVShowView.m; sourceTree = "<group>"; };
 		049FC1A818035BBB00008D56 /* TVShowViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TVShowViewController.xib; sourceTree = "<group>"; };
+		04A15DFB1AC82EB100543D52 /* ITTrakt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITTrakt.h; sourceTree = "<group>"; };
+		04A15DFC1AC82EB100543D52 /* ITTrakt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITTrakt.m; sourceTree = "<group>"; };
+		04A15DFE1AC82F5D00543D52 /* ITTraktConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITTraktConstants.h; sourceTree = "<group>"; };
+		04A15DFF1AC82F5D00543D52 /* ITTraktConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITTraktConstants.m; sourceTree = "<group>"; };
+		04A15E011AC8777600543D52 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		04A15E021AC8777600543D52 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
+		04A15E031AC8777600543D52 /* WebViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebViewController.xib; sourceTree = "<group>"; };
 		04A9FE4E17B43A69006CD129 /* ITMoviePoster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITMoviePoster.h; sourceTree = "<group>"; };
 		04A9FE4F17B43A69006CD129 /* ITMoviePoster.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITMoviePoster.m; sourceTree = "<group>"; };
 		04A9FE5117B43E0C006CD129 /* NSImage+MGCropExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSImage+MGCropExtensions.h"; sourceTree = "<group>"; };
@@ -457,7 +433,6 @@
 			children = (
 				042F07F416BC19DB00A0CE9E /* AppDelegate.h */,
 				042F07F516BC19DB00A0CE9E /* AppDelegate.m */,
-				04AC34A217DF893B0027A5E2 /* Progress/Login Window */,
 				04AB5F1C17C569CF00A2B1AC /* Main Window */,
 				04BAD1A217CBA2AE00AA815A /* Models */,
 				042F080916BC1E4C00A0CE9E /* ITApi.h */,
@@ -483,10 +458,13 @@
 				048DF1FF16DFEE69004B064A /* ITNotification.h */,
 				048DF20016DFEE69004B064A /* ITNotification.m */,
 				042F07F716BC19DB00A0CE9E /* MainMenu.xib */,
-				04A9FE5717B62C20006CD129 /* Preferences */,
 				042F080416BC1A3100A0CE9E /* Lib */,
 				043942A517D0006C009C160F /* Images */,
 				042F07E916BC19DB00A0CE9E /* Supporting Files */,
+				04A15DFB1AC82EB100543D52 /* ITTrakt.h */,
+				04A15DFC1AC82EB100543D52 /* ITTrakt.m */,
+				04A15DFE1AC82F5D00543D52 /* ITTraktConstants.h */,
+				04A15DFF1AC82F5D00543D52 /* ITTraktConstants.m */,
 			);
 			path = Traktable;
 			sourceTree = "<group>";
@@ -520,22 +498,11 @@
 				04B68CF917A5BE74006760D0 /* Unirest */,
 				04B68CB417A56E25006760D0 /* PXSourceList */,
 				0469CC0116CBF19F006863B7 /* itvdb */,
-				0481386716CA8C0200E682A0 /* MASPreferences */,
 				046C9BCC16C166B30003AD64 /* FMDB */,
-				042F080816BC1A5500A0CE9E /* EMKeychain */,
 				042F080516BC1A3B00A0CE9E /* iTunes.h */,
 				04D74BBC17CA88A200B135BF /* VLC.h */,
 			);
 			name = Lib;
-			sourceTree = "<group>";
-		};
-		042F080816BC1A5500A0CE9E /* EMKeychain */ = {
-			isa = PBXGroup;
-			children = (
-				042F080616BC1A5200A0CE9E /* EMKeychainItem.h */,
-				042F080716BC1A5200A0CE9E /* EMKeychainItem.m */,
-			);
-			name = EMKeychain;
 			sourceTree = "<group>";
 		};
 		0430CB391A73DE9900427390 /* Products */ = {
@@ -630,41 +597,6 @@
 			name = FMDB;
 			sourceTree = "<group>";
 		};
-		0481386716CA8C0200E682A0 /* MASPreferences */ = {
-			isa = PBXGroup;
-			children = (
-				0481386316CA8BF400E682A0 /* MASPreferencesViewController.h */,
-				0481386416CA8BF400E682A0 /* MASPreferencesWindow.xib */,
-				0481386516CA8BF400E682A0 /* MASPreferencesWindowController.h */,
-				0481386616CA8BF400E682A0 /* MASPreferencesWindowController.m */,
-			);
-			name = MASPreferences;
-			sourceTree = "<group>";
-		};
-		04A9FE5717B62C20006CD129 /* Preferences */ = {
-			isa = PBXGroup;
-			children = (
-				0481386816CA8C6000E682A0 /* PrefIndexViewController.h */,
-				0481386916CA8C6000E682A0 /* PrefIndexViewController.m */,
-				048DF1F416DEBF54004B064A /* PrefSyncViewController.h */,
-				048DF1F516DEBF54004B064A /* PrefSyncViewController.m */,
-				048DF1F916DECC6B004B064A /* PrefUpdateViewController.h */,
-				048DF1FB16DECC99004B064A /* PrefUpdateViewController.m */,
-				04A9FE5817B62C32006CD129 /* views */,
-			);
-			name = Preferences;
-			sourceTree = "<group>";
-		};
-		04A9FE5817B62C32006CD129 /* views */ = {
-			isa = PBXGroup;
-			children = (
-				0481386C16CA8DB300E682A0 /* PrefIndexViewController.xib */,
-				048DF1F716DEC3ED004B064A /* PrefSyncViewController.xib */,
-				048DF1FD16DECD14004B064A /* PrefUpdateViewController.xib */,
-			);
-			name = views;
-			sourceTree = "<group>";
-		};
 		04AB5F1C17C569CF00A2B1AC /* Main Window */ = {
 			isa = PBXGroup;
 			children = (
@@ -706,6 +638,8 @@
 				04982DE017FBFC2900A50555 /* ImageBrowserCell.m */,
 				04982DE117FBFC2900A50555 /* ImageBrowserView.h */,
 				04982DE217FBFC2900A50555 /* ImageBrowserView.m */,
+				04A15E011AC8777600543D52 /* WebViewController.h */,
+				04A15E021AC8777600543D52 /* WebViewController.m */,
 				04982DE317FBFC2900A50555 /* Main.xib */,
 				043942C317D07D74009C160F /* MainWindowController.xib */,
 				040CA4E617EB8F36007B9076 /* HistoryViewController.xib */,
@@ -713,21 +647,9 @@
 				046EFB121805FE2B005EEB4C /* QueueViewController.xib */,
 				04ACB10E17F382AF00305321 /* MovieViewController.xib */,
 				049FC1A818035BBB00008D56 /* TVShowViewController.xib */,
+				04A15E031AC8777600543D52 /* WebViewController.xib */,
 			);
 			name = "Main Window";
-			sourceTree = "<group>";
-		};
-		04AC34A217DF893B0027A5E2 /* Progress/Login Window */ = {
-			isa = PBXGroup;
-			children = (
-				047D985517D67ED7002E97B8 /* ProgressWindowController.h */,
-				047D985617D67ED7002E97B8 /* ProgressWindowController.m */,
-				047D985717D67ED7002E97B8 /* ProgressWindowController.xib */,
-				0430CB491A8295AE00427390 /* WebViewController.h */,
-				0430CB4A1A8295AE00427390 /* WebViewController.m */,
-				0430CB4B1A8295AE00427390 /* WebViewController.xib */,
-			);
-			name = "Progress/Login Window";
 			sourceTree = "<group>";
 		};
 		04B68CB417A56E25006760D0 /* PXSourceList */ = {
@@ -899,24 +821,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				046EFB141805FE2B005EEB4C /* QueueViewController.xib in Resources */,
-				045235A416CA9069005D25E4 /* MASPreferencesWindow.xib in Resources */,
 				046C9BDC16C16F490003AD64 /* iTraktor.db in Resources */,
 				042F07ED16BC19DB00A0CE9E /* InfoPlist.strings in Resources */,
+				04A15E051AC8777600543D52 /* WebViewController.xib in Resources */,
 				042F07F316BC19DB00A0CE9E /* Credits.rtf in Resources */,
 				042F07F916BC19DB00A0CE9E /* MainMenu.xib in Resources */,
-				0481386D16CA8DB300E682A0 /* PrefIndexViewController.xib in Resources */,
 				0469CC1716CBF19F006863B7 /* iTVDb.podspec in Resources */,
 				0469CC1816CBF19F006863B7 /* LICENSE in Resources */,
 				0469CC1916CBF19F006863B7 /* README.md in Resources */,
 				0437203316CEF3ED003B8AB6 /* icon.icns in Resources */,
 				0437204316CEF823003B8AB6 /* menuicon.png in Resources */,
-				048DF1F816DEC3ED004B064A /* PrefSyncViewController.xib in Resources */,
-				048DF1FA16DECC6B004B064A /* PrefUpdateViewController.h in Resources */,
 				049FC1A918035BBB00008D56 /* TVShowViewController.xib in Resources */,
-				048DF1FE16DECD14004B064A /* PrefUpdateViewController.xib in Resources */,
 				048DF20616DFF6DD004B064A /* Growl Registration Ticket.growlRegDict in Resources */,
 				048DF20A16DFFF17004B064A /* sync.png in Resources */,
-				0430CB4D1A8295AE00427390 /* WebViewController.xib in Resources */,
 				04982DE617FBFC2A00A50555 /* Main.xib in Resources */,
 				04B68C9F17A55E63006760D0 /* config.plist in Resources */,
 				04B68CA017A55E63006760D0 /* dsa_pub.pem in Resources */,
@@ -930,7 +847,6 @@
 				0441839517D0DA5200F9FCA2 /* trakttv.png in Resources */,
 				0441839717D0DA9D00F9FCA2 /* trakttv_pressed.png in Resources */,
 				04B5BE7817D53644001F0705 /* error.png in Resources */,
-				047D985917D67ED7002E97B8 /* ProgressWindowController.xib in Resources */,
 				0403609117DFAEA90014D6D6 /* it-icon.png in Resources */,
 				040CA4E717EB8F36007B9076 /* HistoryViewController.xib in Resources */,
 				040CA4E917EDCDA0007B9076 /* ErrorViewController.xib in Resources */,
@@ -945,13 +861,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				04B68CBA17A57351006760D0 /* SourceListItem.m in Sources */,
-				0481386B16CA8DA100E682A0 /* MASPreferencesWindowController.m in Sources */,
 				046C9BD316C168880003AD64 /* FMDatabase.m in Sources */,
 				046C9BD516C168880003AD64 /* FMDatabaseAdditions.m in Sources */,
 				046C9BD716C168880003AD64 /* FMDatabasePool.m in Sources */,
 				046C9BD916C168880003AD64 /* FMDatabaseQueue.m in Sources */,
 				046C9BDB16C168880003AD64 /* FMResultSet.m in Sources */,
-				042F081216BD649800A0CE9E /* EMKeychainItem.m in Sources */,
 				042F080F16BD646000A0CE9E /* ITApi.m in Sources */,
 				042F081016BD646000A0CE9E /* ITVideo.m in Sources */,
 				046EFB131805FE2B005EEB4C /* ITQueue.m in Sources */,
@@ -960,10 +874,11 @@
 				042F07F616BC19DB00A0CE9E /* AppDelegate.m in Sources */,
 				049C48BE16C0223B00CC9A0E /* ITMovie.m in Sources */,
 				046C9BBA16C159BA0003AD64 /* ITLibrary.m in Sources */,
-				0481386A16CA8C6000E682A0 /* PrefIndexViewController.m in Sources */,
 				0469CC0016CBE010006863B7 /* IMDB.m in Sources */,
 				0469CC1616CBF19F006863B7 /* NSString+Helper.m in Sources */,
+				04A15E001AC82F5D00543D52 /* ITTraktConstants.m in Sources */,
 				04162D2617DFC90A0086EFB0 /* NSData+Additions.m in Sources */,
+				04A15E041AC8777600543D52 /* WebViewController.m in Sources */,
 				0469CC1A16CBF19F006863B7 /* TVDbClient.m in Sources */,
 				0469CC1B16CBF19F006863B7 /* TVDbEpisode.m in Sources */,
 				0469CC1C16CBF19F006863B7 /* TVDbImage.m in Sources */,
@@ -973,8 +888,6 @@
 				0469CC1F16CBF19F006863B7 /* XMLReader.m in Sources */,
 				0469CC2216CD8CEA006863B7 /* ITTVdb.m in Sources */,
 				04714E2816D2C59900A308F7 /* ITConfig.m in Sources */,
-				048DF1F616DEBF55004B064A /* PrefSyncViewController.m in Sources */,
-				048DF1FC16DECC99004B064A /* PrefUpdateViewController.m in Sources */,
 				048DF20116DFEE69004B064A /* ITNotification.m in Sources */,
 				04B68CA917A5600D006760D0 /* MainWindowController.m in Sources */,
 				04B68CB317A56E20006760D0 /* PXSourceList.m in Sources */,
@@ -1011,9 +924,8 @@
 				04B5BE7317D5266F001F0705 /* ITErrors.m in Sources */,
 				04B5BE7617D53081001F0705 /* ITErrorTableCellView.m in Sources */,
 				04B5BE7B17D5401B001F0705 /* ITToolbar.m in Sources */,
-				0430CB4C1A8295AE00427390 /* WebViewController.m in Sources */,
+				04A15DFD1AC82EB100543D52 /* ITTrakt.m in Sources */,
 				047D985417D67285002E97B8 /* ITTableRowGroupView.m in Sources */,
-				047D985817D67ED7002E97B8 /* ProgressWindowController.m in Sources */,
 				040CA4F217EDED67007B9076 /* ITErrorView.m in Sources */,
 				044AC42817F0DAF30045D281 /* ITTableGroupDateCellView.m in Sources */,
 			);
@@ -1137,8 +1049,8 @@
 		042F07FD16BC19DB00A0CE9E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Developer ID Application";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1161,8 +1073,8 @@
 		042F07FE16BC19DB00A0CE9E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Developer ID Application";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

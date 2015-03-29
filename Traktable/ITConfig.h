@@ -10,6 +10,19 @@
 
 @interface ITConfig : NSObject
 
-+ (NSDictionary *)getConfigFile;
++ (instancetype)sharedObject;
+
+- (NSString *)apiKey;
+- (NSString *)apiSecret;
+
+- (NSString *)TVDBApiKey;
+
+- (NSString *)OAuthCode;
+- (NSString *)OAuthRefreshCode;
+- (double)OAuthExpiresIn;
+
+- (void)setOAuthCode:(NSString *)code;
+- (void)setOAuthRefreshCode:(NSString *)code;
+- (void)setOAuthExpireTime:(double)time;
 
 @end

@@ -16,13 +16,6 @@
 
 @interface ITApi : NSObject
 
-- (void)setPassword:(NSString *)password;
-- (BOOL)testAccount;
-
-- (NSString *)apiKey;
-- (NSString *)apiSecret;
-- (BOOL)collection;
-
 - (void)updateState:(id)aVideo state:(ITVideoPlayerState *)aState;
 - (void)batch:(NSDictionary *)videos;
 - (void)library:(NSArray *)videos type:(iTunesEVdK)videoType video:(id)aVideo;

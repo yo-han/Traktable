@@ -8,12 +8,7 @@
 
 #import "AppDelegate.h"
 #import "MainWindowController.h"
-#import "ProgressWindowController.h"
 #import "WebViewController.h"
-#import "MASPreferencesWindowController.h"
-#import "PrefIndexViewController.h"
-#import "PrefSyncViewController.h"
-#import "PrefUpdateViewController.h"
 #import "ITApi.h"
 #import "ITVideo.h"
 #import "ITLibrary.h"
@@ -21,6 +16,8 @@
 #import "ITNotification.h"
 #import "ITDb.h"
 #import "ITSync.h"
+#import "ITConfig.h"
+#import "ITTrakt.h"
 #import "ITConstants.h"
 #import <FeedbackReporter/FRFeedbackReporter.h>
 #import <OAuth2Client/NXOAuth2.h>
@@ -32,23 +29,19 @@
 
 @interface AppDelegate()
 
-@property(assign) BOOL showProgressWindow;
-@property(assign) BOOL isSyncing;
-@property(assign) BOOL showLogin;
-
 @property(strong) MainWindowController *mainWindow;
-@property(strong, nonatomic) ProgressWindowController *progressWindow;
 @property(strong, nonatomic) WebViewController *webview;
 
 @property(nonatomic, retain) ITApi *api;
 @property(nonatomic, retain) ITVideo *video;
 @property(nonatomic, retain) ITLibrary *library;
 @property(nonatomic, retain) ITSync *sync;
+@property(nonatomic, retain) ITTrakt *traktClient;
+@property(nonatomic, retain) ITConfig *config;
 
 - (IBAction)showLog:(id)sender;
 - (IBAction)feedback:(id)sender;
 - (IBAction)openTraktProfile:(id)sender;
-- (IBAction)displayPreferences:(id)sender;
 - (IBAction)showWindow:(id)sender;
 
 @end
@@ -59,28 +52,25 @@
 
 + (void)initialize;
 {
-    ITApi *api = [ITApi new];
+    ITConfig *config = [ITConfig sharedObject];
     
-    [[NXOAuth2AccountStore sharedStore] setClientID:[api apiKey]
-                                             secret:[api apiSecret]
+    [[NXOAuth2AccountStore sharedStore] setClientID:[config apiKey]
+                                             secret:[config apiSecret]
                                    authorizationURL:[NSURL URLWithString:@"https://trakt.tv/oauth/authorize"]
                                            tokenURL:[NSURL URLWithString:@"https://api.trakt.tv/oauth/token"]
                                         redirectURL:[NSURL URLWithString:@"traktable://oauth"]
                                      forAccountType:@"Trakt.tv"];
-    
-    
 }
 
 - (void)getUrl:(NSAppleEventDescriptor *)event withReplyEvent:(NSAppleEventDescriptor *)replyEvent {
-    
+
     NSString *url = [[event paramDescriptorForKeyword:keyDirectObject] stringValue];
     
     NSArray *pairComponents = [url componentsSeparatedByString:@"="];
     NSString *code = [pairComponents lastObject];
     
-    [[NSUserDefaults standardUserDefaults] setObject:code forKey:@"TraktOAuthCode"];
-    
-    [self.api testAccount];
+    [self.config setOAuthCode:code];
+    [self.traktClient traktUserAuthenticated];
     [self showWindow:self];
 }
 
@@ -88,17 +78,20 @@
 {   
     // Make sure all logging with NSLog is ported to the log file in the compiled version of the app
     [self redirectConsoleLogToDocumentFolder];
-    
+
     //NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
     //[[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
     //return;
-    
-    [[FRFeedbackReporter sharedReporter] reportIfCrash];
     
     _api = [ITApi new];
     _video = [[ITVideo alloc] init];
     _library = [[ITLibrary alloc] init];
     _sync = [[ITSync alloc] init];
+    
+    _traktClient = [ITTrakt sharedClient];
+    _config = [ITConfig sharedObject];
+    
+    [[FRFeedbackReporter sharedReporter] reportIfCrash];
     
     [[NSAppleEventManager sharedAppleEventManager] setEventHandler:self
                                                        andSelector:@selector(getUrl:withReplyEvent:)
@@ -117,7 +110,7 @@
     if(!self.webview)
         _webview = [[WebViewController alloc] initWithWindowNibName:@"WebViewController"];
     
-    if(![self.api testAccount]) {
+    if(![self.traktClient traktUserAuthenticated]) {
 
         [self.webview.window makeKeyAndOrderFront:self];
 
@@ -172,72 +165,6 @@
     [NSApp activateIgnoringOtherApps:YES];
 }
 
-/*
-- (void)migrateProgressWindow {
-    
-    _showProgressWindow = YES;
-    _isSyncing = YES;
-    
-    [self.progressWindow showWindow:self];
-    
-    [NSApp requestUserAttention:NSInformationalRequest];
-}
-
-- (void)showProgressWindow:(NSNotification *)notification {
-
-    if(self.showProgressWindow == NO)
-        return;
-
-    //[self.progressWindow.window makeKeyAndOrderFront:self];
-    
-    if(notification == nil) {
-        
-        [self.progressWindow.progress setIndeterminate:YES];
-        [self.progressWindow.loginView setHidden:NO];
-        [self.progressWindow.loginView displayIfNeeded];
-        
-    } else {
-        
-        double progress = [[notification.userInfo objectForKey:@"progress"] doubleValue];
-        
-        [self.progressWindow.loginView setHidden:YES];
-        [self.progressWindow.progress setIndeterminate:NO];
-        [self.progressWindow.progress setDoubleValue:progress];
-        [self.progressWindow.progress setHidden:NO];
-        [self.progressWindow.description setHidden:NO];
-        
-        [self.progressWindow.progress displayIfNeeded];
-        [self.progressWindow.description displayIfNeeded];
-        [self.progressWindow.bgImage displayIfNeeded];
-        [self.progressWindow.loginView displayIfNeeded];
-        
-        _isSyncing = YES;
-        
-        if([[notification.userInfo objectForKey:@"type"] isEqualToString:@"movies"]) {
-            [self.progressWindow.description setStringValue:@"Syncing movies with Trakt.tv"];
-        } else if([[notification.userInfo objectForKey:@"type"] isEqualToString:@"tvshows"]) {
-            [self.progressWindow.description setStringValue:@"Syncing TV Shows with Trakt.tv"];
-        } else if([[notification.userInfo objectForKey:@"type"] isEqualToString:@"history"]) {
-
-            _showLogin = NO;
-            [self.progressWindow.description setStringValue:@"Syncing history with Trakt.tv"];
-        }
-    }
-}
-
-- (void)hideProgressWindow {
-
-    if(self.showLogin == YES)
-        return;
-    
-    [self.progressWindow.window orderOut:nil];
-    [self performSelectorOnMainThread:@selector(showWindow:) withObject:self waitUntilDone:YES];
-    
-    _showProgressWindow = NO;
-    _isSyncing = NO;
-}
-*/
-
 - (IBAction)feedback:(id)sender {
     
     [[FRFeedbackReporter sharedReporter] reportFeedback];
@@ -291,7 +218,7 @@
 
 - (void)iTunesChangedState:(NSNotification*)notification {
 
-    if(![self.api testAccount]) {
+    if(![self.traktClient traktUserAuthenticated]) {
         
         //[self noAuthAlert];
         NSLog(@"No auth, no sync");
@@ -325,7 +252,7 @@
 
 -(void)iTunesSourceSaved:(NSNotification*)notification {
     
-    if([self.api testAccount]) {
+    if(![self.traktClient traktUserAuthenticated]) {
         [self.library syncLibrary];
     } else {
 
@@ -357,23 +284,6 @@
         [self.library updateTrackCount:[self.library getTrack:[currentlyPlaying persistentID] type:playlist] scrobbled:YES];
        
     currentlyPlaying = nil;
-}
-
-- (IBAction)displayPreferences:(id)sender {
-    
-    if(_preferencesWindow == nil){
-        NSViewController *prefIndexViewController = [[PrefIndexViewController alloc] initWithNibName:@"PrefIndexViewController" bundle:[NSBundle mainBundle]];
-        NSViewController *prefSyncViewController = [[PrefSyncViewController alloc] initWithNibName:@"PrefSyncViewController" bundle:[NSBundle mainBundle]];
-        NSViewController *prefUpdateViewController = [[PrefUpdateViewController alloc] initWithNibName:@"PrefUpdateViewController" bundle:[NSBundle mainBundle]];
-        NSArray *views = [NSArray arrayWithObjects:prefIndexViewController, prefSyncViewController, prefUpdateViewController, nil];
-        NSString *title = NSLocalizedString(@"Preferences", @"With the letter P of Preferences...");
-        _preferencesWindow = [[MASPreferencesWindowController alloc] initWithViewControllers:views title:title];
-    }
-    [self.preferencesWindow showWindow:self];
-    //[self.preferencesWindow.window setLevel: NSNormalWindowLevel];
-    [self.preferencesWindow.window setLevel: NSStatusWindowLevel];
-    
-    [NSApp activateIgnoringOtherApps:YES];
 }
 
 #pragma mark -- NotificationCenter

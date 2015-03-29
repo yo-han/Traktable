@@ -30,9 +30,9 @@
     
     if([cachedID isEqualToString:@""]) {
         
-        NSDictionary *config = [ITConfig getConfigFile];
+        ITConfig *config = [ITConfig sharedObject];
         
-        [[TVDbClient sharedInstance] setApiKey:[config objectForKey:@"tvdbApiKey"]];
+        [[TVDbClient sharedInstance] setApiKey:[config TVDBApiKey]];
         NSMutableArray *shows = [TVDbShow findByName:title];
         
         if([shows count] == 0) {

@@ -53,7 +53,13 @@
 	<string>NSApplication</string>
 	<key>SUFeedURL</key>
 	<string>http://yo-han.github.io/Traktable/updates.xml</string>
+	<key>SUBundleName</key>
+	<string>Traktable</string>
+	<key>SUScheduledCheckInterval</key>
+	<integer>86400</integer>
 	<key>SUPublicDSAKeyFile</key>
 	<string>dsa_pub.pem</string>
+	<key>SUEnableAutomaticChecks</key>
+	<true/>
 </dict>
 </plist>

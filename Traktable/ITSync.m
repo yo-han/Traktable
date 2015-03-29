@@ -53,7 +53,6 @@
     ITApi *api = [ITApi new];
     [api historySync];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:kITHideProgressWindowNotification object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:kITHistoryTableReloadNotification object:nil];
 }
 
