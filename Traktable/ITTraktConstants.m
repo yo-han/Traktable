@@ -20,3 +20,6 @@ NSString * const kITTraktSyncWatchedMoviesUrl = @"/sync/watched/movies";
 
 NSString * const kITTraktSyncWatchedShowsUrl = @"/sync/watched/shows";
 
+NSString * const kITTraktSyncWatchedMoviesExtendedUrl = @"/movies/%@?extended=full";
+
+NSString * const kITTraktSyncWatchedShowsExtendedUrl = @"/shows/%@?extended=full";

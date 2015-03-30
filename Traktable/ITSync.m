@@ -64,6 +64,22 @@
     dispatch_async(self.queue, ^{ [self syncTVShowHistory]; });
 }
 
+- (void)test {
+    
+    ITDb *db = [ITDb new];
+    NSArray *results = [db executeAndGetResults:@"SELECT episodeId FROM episodes WHERE (showImdb_id = :id OR showImdb_id = :imdb OR trakt_id = :trakt)\
+                            AND episode = :episode AND season = :season" arguments:
+                            [NSArray arrayWithObjects:
+                            
+                             nil
+                             ]];
+    /*
+    ITTrakt *traktClient = [ITTrakt sharedClient];
+    [traktClient GET:[NSString stringWithFormat:kITTraktSyncWatchedShowsExtendedUrl, [show objectForKey:@"traktUrl"]]  withParameters:nil completionHandler:^(id response, NSError *err) {
+        NSLog(@"%@", response);
+    }];*/
+}
+
 - (void)syncTVShowHistory {
     
     ITTrakt *traktClient = [ITTrakt sharedClient];
@@ -105,32 +121,54 @@
             
                     qry = [db getInsertQueryFromDictionary:argsDict queryType:@"REPLACE" forTable:@"history"];
                     [db executeUpdateUsingQueue:qry arguments:argsDict];
-                    
-                    argsDict = [NSDictionary dictionaryWithObjectsAndKeys:
-                                [ids objectForKey:@"tvdb"], @"showTvdb_id",
-                                [ids objectForKey:@"imdb"], @"showImdb_id",
-                                [ids objectForKey:@"trakt"], @"trakt_id",
-                                [episode objectForKey:@"number"], @"episode",
-                                [season objectForKey:@"number"], @"season",
-                                nil];
-                    
-                    qry = [db getInsertQueryFromDictionary:argsDict queryType:@"REPLACE" forTable:@"episodes"];
-                    [db executeUpdateUsingQueue:qry arguments:argsDict];
+
+                    NSDictionary *result = [db executeAndGetOneResult:@"SELECT episodeId FROM episodes WHERE trakt_id = :trakt AND season = :season AND episode = :ep" arguments:
+                                            [NSArray arrayWithObjects:
+                                             [ids objectForKey:@"trakt"],
+                                             [season objectForKey:@"number"],
+                                             [episode objectForKey:@"number"],
+                                             nil
+                                             ]];
+
+                    if(result == nil) {
+                        argsDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                                    [ids objectForKey:@"tvdb"], @"showTvdb_id",
+                                    [ids objectForKey:@"imdb"], @"showImdb_id",
+                                    [ids objectForKey:@"trakt"], @"trakt_id",
+                                    [NSNull null], @"tvdb_Id",
+                                    [episode objectForKey:@"number"], @"episode",
+                                    [season objectForKey:@"number"], @"season",
+                                    nil];
+                        
+                        qry = [db getInsertQueryFromDictionary:argsDict queryType:@"REPLACE" forTable:@"episodes"];
+                        [db executeUpdateUsingQueue:qry arguments:argsDict];
+                    }
                 }
             }
             
-            argsDict = [NSDictionary dictionaryWithObjectsAndKeys:
-                        [ids objectForKey:@"tvdb"], @"tvdb_id",
-                        [ids objectForKey:@"imdb"], @"imdb_id",
-                        [ids objectForKey:@"tvrage"], @"tvrage_id",
-                        [ids objectForKey:@"trakt"], @"trakt_id",
-                        @"0", @"extended",
-                        [show objectForKey:@"year"], @"year",
-                        [show objectForKey:@"title"], @"title",
-                        nil];
+            NSDictionary *result = [db executeAndGetOneResult:@"SELECT showId FROM tvshows WHERE tmdb_id = :id OR imdb_id = :imdb OR trakt_id = :trakt" arguments:
+                                    [NSArray arrayWithObjects:
+                                     [ids objectForKey:@"tmdb"],
+                                     [ids objectForKey:@"imdb"],
+                                     [ids objectForKey:@"trakt"],
+                                     nil
+                                     ]];
             
-            qry = [db getInsertQueryFromDictionary:argsDict queryType:@"REPLACE" forTable:@"tvshows"];
-            [db executeUpdateUsingQueue:qry arguments:argsDict];
+            if(result == nil) {
+                argsDict = [NSDictionary dictionaryWithObjectsAndKeys:
+                            [ids objectForKey:@"tvdb"], @"tvdb_id",
+                            [ids objectForKey:@"imdb"], @"imdb_id",
+                            [ids objectForKey:@"tvrage"], @"tvrage_id",
+                            [ids objectForKey:@"trakt"], @"trakt_id",
+                            [ids objectForKey:@"slug"],   @"traktUrl",
+                            @"0", @"extended",
+                            [show objectForKey:@"year"], @"year",
+                            [show objectForKey:@"title"], @"title",
+                            nil];
+                
+                qry = [db getInsertQueryFromDictionary:argsDict queryType:@"REPLACE" forTable:@"tvshows"];
+                [db executeUpdateUsingQueue:qry arguments:argsDict];
+            }
         }
     }];
 }

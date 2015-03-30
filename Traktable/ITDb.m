@@ -240,6 +240,8 @@ static int dbVersion = 3;
             [db executeUpdate:@"ALTER TABLE movies ADD COLUMN trakt_id INTEGER"];
             [db executeUpdate:@"ALTER TABLE episodes ADD COLUMN trakt_id INTEGER"];
             [db executeUpdate:@"ALTER TABLE tvshows ADD COLUMN trakt_id INTEGER"];
+            
+            [db executeUpdate:@"DROP INDEX uid_episode"];
         }
     }];
     

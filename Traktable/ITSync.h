@@ -11,5 +11,6 @@
 @interface ITSync : NSObject
 
 - (void)syncTraktHistoryInBackgroundThread;
+- (void)test;
 
 @end
