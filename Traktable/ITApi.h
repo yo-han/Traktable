@@ -27,6 +27,7 @@
 
 - (NSArray *)watchedSync:(iTunesEVdK)videoType extended:(NSString *)ext;
 - (void)historySync;
+- (void)syncMovieHistory;
 - (void)retryTraktQueue;
 
 @end

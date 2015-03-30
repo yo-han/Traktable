@@ -15,3 +15,8 @@ NSString * const kITTraktOAuthUrl = @"/oauth/token";
 NSString * const kITTraktScrobbleUrl = @"/scrobble/";
 
 NSString * const kITTraktSyncHistoryUrl = @"/sync/history";
+
+NSString * const kITTraktSyncWatchedMoviesUrl = @"/sync/watched/movies";
+
+NSString * const kITTraktSyncWatchedShowsUrl = @"/sync/watched/shows";
+

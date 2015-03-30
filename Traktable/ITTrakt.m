@@ -97,6 +97,18 @@
     [self dataTaskWithRequest:request completionHandler:completionBlock];
 }
 
+- (void)GET:(NSString *)url withParameters:(NSDictionary *)params completionHandler:(void (^)(id , NSError *))completionBlock {
+    
+    NSMutableURLRequest *request = [self request:url];
+    
+    [request setHTTPMethod:@"GET"];
+    
+    if(params != nil)
+        [request setHTTPBody:[NSJSONSerialization dataWithJSONObject:params options:nil error:nil]];
+    
+    [self dataTaskWithRequest:request completionHandler:completionBlock];
+}
+
 - (void)refreshOAuthToken:(NSString *)code {
     
     NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -124,7 +136,7 @@
     if(code == nil) {
         NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
         [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
-        
+      
         return NO;
     }
     
@@ -133,7 +145,7 @@
     
     if(!expires || expires < [[NSDate date] timeIntervalSince1970])
         [self refreshOAuthToken:code];
-    
+
     return YES;
 }
 

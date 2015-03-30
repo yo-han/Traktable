@@ -43,6 +43,8 @@
 - (IBAction)feedback:(id)sender;
 - (IBAction)openTraktProfile:(id)sender;
 - (IBAction)showWindow:(id)sender;
+- (IBAction)sync:(id)sender;
+- (IBAction)reset:(id)sender;
 
 @end
 
@@ -110,7 +112,7 @@
     if(!self.webview)
         _webview = [[WebViewController alloc] initWithWindowNibName:@"WebViewController"];
     
-    if(![self.traktClient traktUserAuthenticated]) {
+    if([self.traktClient traktUserAuthenticated] == NO) {
 
         [self.webview.window makeKeyAndOrderFront:self];
 
@@ -132,7 +134,7 @@
         
         [NSTimer scheduledTimerWithTimeInterval:3600 target:self.api selector:@selector(retryTraktQueue) userInfo:nil repeats:YES];
         
-        [NSTimer scheduledTimerWithTimeInterval:86400 target:[ITSync class] selector:@selector(syncTraktExtendedInBackgroundThread) userInfo:nil repeats:YES];
+        [NSTimer scheduledTimerWithTimeInterval:86400 target:self.sync selector:@selector(syncTraktHistoryInBackgroundThread) userInfo:nil repeats:YES];
         
         [self showWindow:self];
     }
@@ -183,6 +185,18 @@
     [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:url]];
 }
 
+- (IBAction)sync:(id)sender {
+ 
+    [self iTunesSourceSaved:nil];
+}
+
+- (IBAction)reset:(id)sender {
+    
+    NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
+    [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+    return;
+}
+
 - (void) redirectConsoleLogToDocumentFolder
 {
     NSString *currentPath = [[NSBundle mainBundle] bundlePath];
@@ -217,8 +231,8 @@
 }
 
 - (void)iTunesChangedState:(NSNotification*)notification {
-
-    if(![self.traktClient traktUserAuthenticated]) {
+    
+    if([self.traktClient traktUserAuthenticated] == NO) {
         
         //[self noAuthAlert];
         NSLog(@"No auth, no sync");
@@ -251,9 +265,11 @@
 }
 
 -(void)iTunesSourceSaved:(NSNotification*)notification {
-    
-    if(![self.traktClient traktUserAuthenticated]) {
-        [self.library syncLibrary];
+   
+    if([self.traktClient traktUserAuthenticated] == YES) {
+        
+        [self.library performSelectorInBackground:@selector(syncLibrary) withObject:nil];
+
     } else {
 
         NSLog(@"No auth, no sync");

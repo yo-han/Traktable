@@ -15,7 +15,10 @@
 + (instancetype)sharedClient;
 
 - (void)POST:(NSString *)url withParameters:(NSDictionary *)params completionHandler:(void (^)(id , NSError *))completionBlock;
+- (void)GET:(NSString *)url withParameters:(NSDictionary *)params completionHandler:(void (^)(id , NSError *))completionBlock;
 
 - (BOOL)traktUserAuthenticated;
+
+- (void)refreshOAuthToken:(NSString *)code;
 
 @end

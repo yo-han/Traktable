@@ -16,3 +16,6 @@ extern NSString * const kITTraktScrobbleUrl;
 
 extern NSString * const kITTraktSyncHistoryUrl;
 
+extern NSString * const kITTraktSyncWatchedMoviesUrl;
+
+extern NSString * const kITTraktSyncWatchedShowsUrl;

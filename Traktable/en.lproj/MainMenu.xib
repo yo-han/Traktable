@@ -189,6 +189,23 @@
 									<reference key="NSOnImage" ref="35465992"/>
 									<reference key="NSMixedImage" ref="502551668"/>
 								</object>
+								<object class="NSMenuItem" id="251442425">
+									<reference key="NSMenu" ref="312831232"/>
+									<string key="NSTitle">Sync</string>
+									<string key="NSKeyEquiv">S</string>
+									<int key="NSKeyEquivModMask">1048576</int>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="35465992"/>
+									<reference key="NSMixedImage" ref="502551668"/>
+								</object>
+								<object class="NSMenuItem" id="244839823">
+									<reference key="NSMenu" ref="312831232"/>
+									<string key="NSTitle">Reset User Defaults</string>
+									<string key="NSKeyEquiv"/>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="35465992"/>
+									<reference key="NSMixedImage" ref="502551668"/>
+								</object>
 								<object class="NSMenuItem" id="282255751">
 									<reference key="NSMenu" ref="312831232"/>
 									<bool key="NSIsDisabled">YES</bool>
@@ -593,6 +610,22 @@
 					</object>
 					<string key="id">zmx-4w-4gy</string>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">sync:</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="251442425"/>
+					</object>
+					<string key="id">CDm-wF-SRh</string>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">reset:</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="244839823"/>
+					</object>
+					<string key="id">Grc-2L-gwb</string>
+				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
@@ -699,6 +732,8 @@
 							<reference ref="794561530"/>
 							<reference ref="381031249"/>
 							<reference ref="282255751"/>
+							<reference ref="251442425"/>
+							<reference ref="244839823"/>
 						</array>
 						<reference key="parent" ref="509316413"/>
 					</object>
@@ -894,6 +929,16 @@
 						<reference key="object" ref="563850242"/>
 						<reference key="parent" ref="110575045"/>
 					</object>
+					<object class="IBObjectRecord">
+						<string key="id">FuX-77-5pf</string>
+						<reference key="object" ref="251442425"/>
+						<reference key="parent" ref="312831232"/>
+					</object>
+					<object class="IBObjectRecord">
+						<string key="id">7t7-hC-gKP</string>
+						<reference key="object" ref="244839823"/>
+						<reference key="parent" ref="312831232"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -942,6 +987,8 @@
 				<string key="639.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="640.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="6kw-yw-xcJ.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="7t7-hC-gKP.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="FuX-77-5pf.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
@@ -978,8 +1025,10 @@
 						<string key="donate:">id</string>
 						<string key="feedback:">id</string>
 						<string key="openTraktProfile:">id</string>
+						<string key="reset:">id</string>
 						<string key="showLog:">id</string>
 						<string key="showWindow:">id</string>
+						<string key="sync:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="donate:">
@@ -994,12 +1043,20 @@
 							<string key="name">openTraktProfile:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="reset:">
+							<string key="name">reset:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="showLog:">
 							<string key="name">showLog:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="showWindow:">
 							<string key="name">showWindow:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="sync:">
+							<string key="name">sync:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 					</dictionary>

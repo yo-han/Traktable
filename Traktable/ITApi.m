@@ -188,7 +188,7 @@
 }
 
 - (void)historySync {
-   
+    
     NSLog(@"SYNC IS OFF");
     return;
     
@@ -341,7 +341,17 @@
        
         NSDictionary *params = [NSJSONSerialization JSONObjectWithData:[[result objectForKey:@"params"] dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
         
-        [self callAPI:[result objectForKey:@"url"] WithParameters:params notification:nil];
+        ITTrakt *traktClient = [ITTrakt sharedClient];
+        [traktClient POST:[result objectForKey:@"url"] withParameters:params completionHandler:^(id response, NSError *err) {
+            
+            if(![response isKindOfClass:[NSDictionary class]]) {
+                
+                NSLog(@"Response is not an NSDictionary: %@", err);
+                return;
+            }
+            
+            if (err) NSLog(@"Error: %@",[err description]);
+        }];
     }
 }
 

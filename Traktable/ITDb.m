@@ -13,7 +13,7 @@
 #import "ITSync.h"
 
 static NSString *dbFile = @"iTraktor.db";
-static int dbVersion = 2;
+static int dbVersion = 3;
 
 @interface ITDb()
 
@@ -234,11 +234,16 @@ static int dbVersion = 2;
             
             [db executeUpdate:@"CREATE TABLE \"traktQueue\" (\"url\" TEXT,\"params\" TEXT);"];
         }
+        
+        if(version < 3) {
+            
+            [db executeUpdate:@"ALTER TABLE movies ADD COLUMN trakt_id INTEGER"];
+            [db executeUpdate:@"ALTER TABLE episodes ADD COLUMN trakt_id INTEGER"];
+            [db executeUpdate:@"ALTER TABLE tvshows ADD COLUMN trakt_id INTEGER"];
+        }
     }];
     
     [self setDatabaseSchemaVersion:dbVersion];
-
-    [ITSync syncTraktExtendedInBackgroundThread];
     
     NSLog(@"Database schema version after migration is %d", [self databaseSchemaVersion]);
 }

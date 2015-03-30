@@ -12,6 +12,9 @@
 
 + (void)createDir:(NSString *)dir;
 
++ (NSString *)uuid;
++ (NSString*)md5HexDigest:(NSString*)input;
+
 + (NSDate *)stringToDateTime:(NSString *)dateStr;
 + (NSString *)localeDateString:(NSString *)dateStr;
 + (NSString *)stringToTime:(NSString *)dateStr;
