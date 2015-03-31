@@ -23,3 +23,5 @@ extern NSString * const kITTraktSyncWatchedShowsUrl;
 extern NSString * const kITTraktSyncWatchedMoviesExtendedUrl;
 
 extern NSString * const kITTraktSyncWatchedShowsExtendedUrl;
+
+extern NSString * const kITTraktSyncWatchedShowsEpisodeExtendedUrl;

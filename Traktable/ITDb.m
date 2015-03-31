@@ -237,6 +237,13 @@ static int dbVersion = 3;
         
         if(version < 3) {
             
+            [db executeUpdate:@"DELETE FROM tvshows"];
+            [db executeUpdate:@"DELETE FROM episodes"];
+            [db executeUpdate:@"DELETE FROM errors"];
+            [db executeUpdate:@"DELETE FROM history"];
+            [db executeUpdate:@"DELETE FROM movies"];
+            [db executeUpdate:@"DELETE FROM traktQueue"];
+            
             [db executeUpdate:@"ALTER TABLE movies ADD COLUMN trakt_id INTEGER"];
             [db executeUpdate:@"ALTER TABLE episodes ADD COLUMN trakt_id INTEGER"];
             [db executeUpdate:@"ALTER TABLE tvshows ADD COLUMN trakt_id INTEGER"];

@@ -64,20 +64,76 @@
     dispatch_async(self.queue, ^{ [self syncTVShowHistory]; });
 }
 
-- (void)test {
+- (void)syncTraktHistoryExtendedInBackgroundThread {
+    
+    //dispatch_async(self.queue, ^{ [self syncMovieHistory]; });
+    dispatch_async(self.queue, ^{ [self syncTVShowsExtend]; });
+}
+
+- (void)syncTVShowsExtend {
     
     ITDb *db = [ITDb new];
-    NSArray *results = [db executeAndGetResults:@"SELECT episodeId FROM episodes WHERE (showImdb_id = :id OR showImdb_id = :imdb OR trakt_id = :trakt)\
-                            AND episode = :episode AND season = :season" arguments:
-                            [NSArray arrayWithObjects:
-                            
-                             nil
-                             ]];
-    /*
-    ITTrakt *traktClient = [ITTrakt sharedClient];
-    [traktClient GET:[NSString stringWithFormat:kITTraktSyncWatchedShowsExtendedUrl, [show objectForKey:@"traktUrl"]]  withParameters:nil completionHandler:^(id response, NSError *err) {
-        NSLog(@"%@", response);
-    }];*/
+    
+    __block NSMutableDictionary *argsDict;
+    __block NSString *qry;
+    
+    NSArray *shows = [db executeAndGetResults:@"SELECT showId, traktUrl FROM tvshows WHERE extended = 0" arguments:nil];
+    
+    for(NSDictionary *show in shows) {
+        
+        ITTrakt *traktClient = [ITTrakt sharedClient];
+        [traktClient GET:[NSString stringWithFormat:kITTraktSyncWatchedShowsExtendedUrl, [show objectForKey:@"traktUrl"]]  withParameters:nil completionHandler:^(id response, NSError *err) {
+
+            argsDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                        @"1", @"extended",
+                        [response objectForKey:@"first_aired"], @"runtime",
+                        [response objectForKey:@"aired_episodes"], @"episodes",
+                        [response objectForKey:@"first_aired"], @"firstAired",
+                        [response objectForKey:@"status"], @"status",
+                        [response objectForKey:@"overview"], @"overview",
+                        [response objectForKey:@"network"], @"network",
+                        [[response objectForKey:@"genres"]  componentsJoinedByString:@","], @"genres",
+                        [response objectForKey:@"country"], @"country",
+                        [response objectForKey:@"rating"], @"rating",
+                        [[response objectForKey:@"airs"] objectForKey:@"time"], @"airTime",
+                        [[response objectForKey:@"airs"] objectForKey:@"day"], @"airDay",
+                        nil];
+            
+            qry = [db getUpdateQueryFromDictionary:argsDict
+               forTable:@"tvshows"
+               whereCol:@"trakt_id"
+             ];
+            
+            [argsDict setObject:[[response objectForKey:@"ids"] objectForKey:@"trakt"] forKey: @"where"];
+            
+            [db executeUpdateUsingQueue:qry arguments:argsDict];
+        }];      
+    }
+    
+    NSArray *episodes = [db executeAndGetResults:@"SELECT e.episodeId, e.season, e.episode, t.traktUrl FROM episodes e LEFT JOIN tvshows t ON t.tvdb_id = e.showTvdb_id WHERE e.title IS NULL" arguments:nil];
+    
+    for(NSDictionary *episode in episodes) {
+        
+        ITTrakt *traktClient = [ITTrakt sharedClient];
+        [traktClient GET:[NSString stringWithFormat:kITTraktSyncWatchedShowsEpisodeExtendedUrl, [episode objectForKey:@"traktUrl"], [episode objectForKey:@"season"], [episode objectForKey:@"episode"]]  withParameters:nil completionHandler:^(id response, NSError *err) {
+            
+            argsDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                        [[response objectForKey:@"ids"] objectForKey:@"tvdb"], @"tvdb_id",
+                        [response objectForKey:@"overview"], @"overview",
+                        [response objectForKey:@"title"], @"title",
+                        [episode objectForKey:@"traktUrl"], @"traktUrl",
+                        nil];
+            
+            qry = [db getUpdateQueryFromDictionary:argsDict
+                                          forTable:@"episodes"
+                                          whereCol:@"episodeId"
+                   ];
+            
+            [argsDict setObject:[episode objectForKey:@"episodeId"] forKey: @"where"];
+            
+            [db executeUpdateUsingQueue:qry arguments:argsDict];
+        }];
+    }
 }
 
 - (void)syncTVShowHistory {
