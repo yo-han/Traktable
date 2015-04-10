@@ -65,25 +65,29 @@
 }
 
 - (void)syncTraktHistoryExtendedInBackgroundThread {
-    
-    //dispatch_async(self.queue, ^{ [self syncMovieHistory]; });
-    dispatch_async(self.queue, ^{ [self syncTVShowsExtend]; });
+    dispatch_async(self.queue, ^{ [self syncMoviesExtended]; });
+    //dispatch_async(self.queue, ^{ [self syncTVShowsExtended]; });
 }
 
-- (void)syncTVShowsExtend {
+- (void)syncTVShowsExtended {
     
     ITDb *db = [ITDb new];
     
     __block NSMutableDictionary *argsDict;
     __block NSString *qry;
+      
+    NSArray *shows = [db executeAndGetResults:@"SELECT showId, trakt_id FROM tvshows WHERE extended = 0" arguments:nil];
     
-    NSArray *shows = [db executeAndGetResults:@"SELECT showId, traktUrl FROM tvshows WHERE extended = 0" arguments:nil];
+    self.totalItemsInQueue = self.totalItemsInQueue + [shows count];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kITUpdateProgressNotification
+                                                        object:self];
     
     for(NSDictionary *show in shows) {
         
         ITTrakt *traktClient = [ITTrakt sharedClient];
-        [traktClient GET:[NSString stringWithFormat:kITTraktSyncWatchedShowsExtendedUrl, [show objectForKey:@"traktUrl"]]  withParameters:nil completionHandler:^(id response, NSError *err) {
-
+        [traktClient GET:[NSString stringWithFormat:kITTraktSyncWatchedShowsExtendedUrl, [show objectForKey:@"trakt_id"]]  withParameters:nil completionHandler:^(id response, NSError *err) {
+            
             argsDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                         @"1", @"extended",
                         [response objectForKey:@"first_aired"], @"runtime",
@@ -97,6 +101,7 @@
                         [response objectForKey:@"rating"], @"rating",
                         [[response objectForKey:@"airs"] objectForKey:@"time"], @"airTime",
                         [[response objectForKey:@"airs"] objectForKey:@"day"], @"airDay",
+                        [[[response objectForKey:@"images"] objectForKey:@"poster"] objectForKey:@"full"], @"poster",
                         nil];
             
             qry = [db getUpdateQueryFromDictionary:argsDict
@@ -107,20 +112,30 @@
             [argsDict setObject:[[response objectForKey:@"ids"] objectForKey:@"trakt"] forKey: @"where"];
             
             [db executeUpdateUsingQueue:qry arguments:argsDict];
+            
+            self.itemsDone++;
+            [[NSNotificationCenter defaultCenter] postNotificationName:kITUpdateProgressNotification
+                                                                object:self];
         }];      
     }
     
-    NSArray *episodes = [db executeAndGetResults:@"SELECT e.episodeId, e.season, e.episode, t.traktUrl FROM episodes e LEFT JOIN tvshows t ON t.tvdb_id = e.showTvdb_id WHERE e.title IS NULL" arguments:nil];
+    NSArray *episodes = [db executeAndGetResults:@"SELECT e.episodeId, e.season, e.episode, t.trakt_id FROM episodes e LEFT JOIN tvshows t ON t.tvdb_id = e.showTvdb_id WHERE e.title IS NULL LIMIT 100" arguments:nil];
+    
+    self.totalItemsInQueue = self.totalItemsInQueue + [episodes count];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kITUpdateProgressNotification
+                                                        object:self];
     
     for(NSDictionary *episode in episodes) {
         
         ITTrakt *traktClient = [ITTrakt sharedClient];
-        [traktClient GET:[NSString stringWithFormat:kITTraktSyncWatchedShowsEpisodeExtendedUrl, [episode objectForKey:@"traktUrl"], [episode objectForKey:@"season"], [episode objectForKey:@"episode"]]  withParameters:nil completionHandler:^(id response, NSError *err) {
-            
+        [traktClient GET:[NSString stringWithFormat:kITTraktSyncWatchedShowsEpisodeExtendedUrl, [episode objectForKey:@"trakt_id"], [episode objectForKey:@"season"], [episode objectForKey:@"episode"]]  withParameters:nil completionHandler:^(id response, NSError *err) {
+
             argsDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                         [[response objectForKey:@"ids"] objectForKey:@"tvdb"], @"tvdb_id",
                         [response objectForKey:@"overview"], @"overview",
                         [response objectForKey:@"title"], @"title",
+                        [[[response objectForKey:@"images"] objectForKey:@"screenshot"] objectForKey:@"full"], @"screenImage",
                         [episode objectForKey:@"traktUrl"], @"traktUrl",
                         nil];
             
@@ -130,8 +145,12 @@
                    ];
             
             [argsDict setObject:[episode objectForKey:@"episodeId"] forKey: @"where"];
-            
+
             [db executeUpdateUsingQueue:qry arguments:argsDict];
+            
+            self.itemsDone++;
+            [[NSNotificationCenter defaultCenter] postNotificationName:kITUpdateProgressNotification
+                                                                object:self];
         }];
     }
 }
@@ -228,6 +247,55 @@
         }
     }];
 }
+
+- (void)syncMoviesExtended {
+    
+    ITDb *db = [ITDb new];
+    
+    __block NSMutableDictionary *argsDict;
+    __block NSString *qry;
+    
+    NSArray *movies = [db executeAndGetResults:@"SELECT movieId, trakt_id FROM movies WHERE extended = 0 OR extended IS NOT NULL" arguments:nil];
+    
+    self.totalItemsInQueue = self.totalItemsInQueue + [movies count];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kITUpdateProgressNotification
+                                                        object:self];
+    
+    for(NSDictionary *movie in movies) {
+        
+        ITTrakt *traktClient = [ITTrakt sharedClient];
+        [traktClient GET:[NSString stringWithFormat:kITTraktSyncWatchedMoviesExtendedUrl, [movie objectForKey:@"trakt_id"]]  withParameters:nil completionHandler:^(id response, NSError *err) {
+            
+            argsDict = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                        @"1", @"extended",
+                        [response objectForKey:@"released"], @"released",
+                        [response objectForKey:@"runtime"], @"runtime",
+                        [response objectForKey:@"tagline"], @"tagline",
+                        [response objectForKey:@"overview"], @"overview",
+                        [response objectForKey:@"trailer"], @"trailer",
+                        [[[response objectForKey:@"images"] objectForKey:@"poster"] objectForKey:@"full"], @"poster",
+                        [[response objectForKey:@"genres"]  componentsJoinedByString:@","], @"genres",
+                        nil];
+            
+            qry = [db getUpdateQueryFromDictionary:argsDict
+                                          forTable:@"movies"
+                                          whereCol:@"trakt_id"
+                   ];
+            
+            [argsDict setObject:[[response objectForKey:@"ids"] objectForKey:@"trakt"] forKey: @"where"];            
+            [db executeUpdateUsingQueue:qry arguments:argsDict];
+            
+            [self getMoviePoster:[movie objectForKey:@"movieId"] poster:[[[response objectForKey:@"images"] objectForKey:@"poster"] objectForKey:@"full"]];
+            
+            self.itemsDone++;
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:kITUpdateProgressNotification
+                                                                object:self];
+        }];      
+    }
+}
+
 
 - (void)syncMovieHistory {
     

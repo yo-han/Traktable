@@ -17,6 +17,7 @@
 @property (nonatomic, weak) IBOutlet NSSplitView *splitView;
 @property (nonatomic, weak) IBOutlet NSView *placeholderView;
 @property (nonatomic, weak) IBOutlet NSButton *bottomBarButton;
+@property (nonatomic, weak) IBOutlet NSTextField *progressLabel;
 
 - (IBAction)clearErrors:(id)sender;
 - (IBAction)clearQueue:(id)sender;

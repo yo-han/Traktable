@@ -15,6 +15,7 @@
 #import "ITQueueView.h"
 #import "ITMovieView.h"
 #import "ITTVShowView.h"
+#import "ITSync.h"
 
 static float const kSidebarWidth = 220.0f;
 
@@ -115,6 +116,10 @@ static float const kSidebarWidth = 220.0f;
     }
     
     [ud setInteger:(startupTime + 1) forKey:@"TraktableStartUpNum"];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateProgress:) name:kITUpdateProgressNotification object:nil];
+    
+    [self.progressLabel setStringValue:@"test"];
 }
 
 - (void)switchView:(NSString *)identifier {
@@ -372,6 +377,13 @@ static float const kSidebarWidth = 220.0f;
 - (IBAction)clearQueue:(id)sender {
     
     [self.queueViewController clearQueue:self];
+}
+
+- (void)updateProgress:(NSNotification *)aNotification;
+{
+    ITSync *sync = aNotification.object;
+    
+    [self.progressLabel setStringValue:[NSString stringWithFormat:@"total: %ld, done:", sync.totalItemsInQueue, sync.itemsDone]];
 }
 
 @end

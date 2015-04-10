@@ -18,16 +18,7 @@
 
 - (void)updateState:(id)aVideo state:(ITVideoPlayerState *)aState;
 - (void)batch:(NSDictionary *)videos;
-- (void)library:(NSArray *)videos type:(iTunesEVdK)videoType video:(id)aVideo;
-- (void)updateHistory:(NSDictionary *)update parameters:(NSDictionary *)params;
 
-// Alias for - (NSDictionary *)getSummary:videoId:season:episode:
-- (NSDictionary *)getSummary:(NSString *)videoType videoId:(NSNumber *)videoId;
-- (NSDictionary *)getSummary:(NSString *)videoType videoId:(NSNumber *)videoId season:(NSNumber *)seasonNumber episode:(NSNumber *)episodeNumber;
-
-- (NSArray *)watchedSync:(iTunesEVdK)videoType extended:(NSString *)ext;
-- (void)historySync;
-- (void)syncMovieHistory;
 - (void)retryTraktQueue;
 
 @end

@@ -20,8 +20,10 @@ NSString * const kITTraktSyncWatchedMoviesUrl = @"/sync/watched/movies";
 
 NSString * const kITTraktSyncWatchedShowsUrl = @"/sync/watched/shows";
 
-NSString * const kITTraktSyncWatchedMoviesExtendedUrl = @"/movies/%@?extended=full";
+NSString * const kITTraktSyncWatchedMoviesExtendedUrl = @"/movies/%@?extended=full,images";
 
-NSString * const kITTraktSyncWatchedShowsExtendedUrl = @"/shows/%@?extended=full";
+NSString * const kITTraktSyncWatchedShowsExtendedUrl = @"/shows/%@?extended=full,images";
 
-NSString * const kITTraktSyncWatchedShowsEpisodeExtendedUrl = @"/shows/%@/seasons/%@/episodes/%@?extended=full";
+NSString * const kITTraktSyncWatchedShowsEpisodeExtendedUrl = @"/shows/%@/seasons/%@/episodes/%@?extended=full,images";
+
+NSString * const kITTraktSearchUrl = @"/search?query=%@&type=%@%@";

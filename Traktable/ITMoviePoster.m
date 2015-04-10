@@ -52,6 +52,9 @@ struct ITPosterSize ITMoviePosterSizeMediumSize = {500.0, 750.0};
     if([[NSFileManager defaultManager] fileExistsAtPath:imagePath])
         return [[NSImage alloc] initWithContentsOfFile:imagePath];
     
+    if (urlString == (id)[NSNull null] || urlString.length == 0 )
+        return nil;
+    
     [ITUtil createDir:[[ITConstants applicationSupportFolder] stringByAppendingPathComponent:[NSString stringWithFormat:@"images/movies/%@", movieId]]];
     
     NSURL *url = [NSURL URLWithString:urlString];

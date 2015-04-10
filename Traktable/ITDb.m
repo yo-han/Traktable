@@ -204,8 +204,6 @@ static int dbVersion = 3;
     
     NSLog(@"Migrating database schema from version %d to version %d", version, dbVersion);
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:kITMigrateProgressWindowNotification object:nil];
-    
     [self backupDatabaseFile];
     
     [self.dbQueue inDatabase:^(FMDatabase *db) {

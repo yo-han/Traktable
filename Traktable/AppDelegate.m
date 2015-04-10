@@ -19,6 +19,7 @@
 #import "ITConfig.h"
 #import "ITTrakt.h"
 #import "ITConstants.h"
+#import "NSApplication+SelfRelaunch.h"
 #import <FeedbackReporter/FRFeedbackReporter.h>
 #import <OAuth2Client/NXOAuth2.h>
 #import <WebKit/WebKit.h>
@@ -67,24 +68,28 @@
 - (void)getUrl:(NSAppleEventDescriptor *)event withReplyEvent:(NSAppleEventDescriptor *)replyEvent {
 
     NSString *url = [[event paramDescriptorForKeyword:keyDirectObject] stringValue];
+  
+    NSLog(@"Renew OAuth");
     
     NSArray *pairComponents = [url componentsSeparatedByString:@"="];
     NSString *code = [pairComponents lastObject];
-    
+    NSLog(@"%@", code);
     [self.config setOAuthCode:code];
     [self.traktClient traktUserAuthenticated];
+
     [self showWindow:self];
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
-{   
+{
+   
     // Make sure all logging with NSLog is ported to the log file in the compiled version of the app
     [self redirectConsoleLogToDocumentFolder];
 
     //NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
     //[[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
     //return;
-    
+
     _api = [ITApi new];
     _video = [[ITVideo alloc] init];
     _library = [[ITLibrary alloc] init];
@@ -92,7 +97,7 @@
     
     _traktClient = [ITTrakt sharedClient];
     _config = [ITConfig sharedObject];
-    
+     NSLog(@"%@", [_config OAuthCode]);
     [[FRFeedbackReporter sharedReporter] reportIfCrash];
     
     [[NSAppleEventManager sharedAppleEventManager] setEventHandler:self
@@ -103,17 +108,13 @@
     // Register this class as the NotificationCenter delegate
     [[NSUserNotificationCenter defaultUserNotificationCenter] setDelegate:self];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self.sync selector:@selector(updateMovieData:) name:kITMovieNeedsUpdateNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self.sync selector:@selector(updateTVShowData:) name:kITTVShowNeedsUpdateNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self.sync selector:@selector(updateEpisodeData:) name:kITTVShowEpisodeNeedsUpdateNotification object:nil];
-    
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"NSConstraintBasedLayoutVisualizeMutuallyExclusiveConstraints"];
     
     if(!self.webview)
         _webview = [[WebViewController alloc] initWithWindowNibName:@"WebViewController"];
     
     if([self.traktClient traktUserAuthenticated] == NO) {
-
+        NSLog(@"no");
         [self.webview.window makeKeyAndOrderFront:self];
 
         [[NXOAuth2AccountStore sharedStore] requestAccessToAccountWithType:@"Trakt.tv"
@@ -127,14 +128,16 @@
         return;
     
     } else {
-        
+
         NSLog(@"Startup normal, loggedin.");
- 
+        
         [NSTimer scheduledTimerWithTimeInterval:900 target:self selector:@selector(iTunesSourceSaved:) userInfo:nil repeats:YES];
         
         [NSTimer scheduledTimerWithTimeInterval:3600 target:self.api selector:@selector(retryTraktQueue) userInfo:nil repeats:YES];
         
         [NSTimer scheduledTimerWithTimeInterval:86400 target:self.sync selector:@selector(syncTraktHistoryInBackgroundThread) userInfo:nil repeats:YES];
+        
+        [NSTimer scheduledTimerWithTimeInterval:3600 target:self.sync selector:@selector(syncTraktHistoryExtendedInBackgroundThread) userInfo:nil repeats:YES];
         
         [self showWindow:self];
     }
@@ -165,6 +168,12 @@
     [self.webview.window orderOut:nil];
     
     [NSApp activateIgnoringOtherApps:YES];
+     NSLog(@"%@", [_config OAuthCode]);
+    //if([ITConstants firstBoot] == YES) {
+        NSLog(@"First sync");
+        [self.sync syncTraktHistoryInBackgroundThread];
+        [self.sync syncTraktHistoryExtendedInBackgroundThread];
+    //}
 }
 
 - (IBAction)feedback:(id)sender {

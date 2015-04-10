@@ -49,6 +49,9 @@ struct ITPosterSize ITTVShowPosterSizeMediumSize = {500.0, 750.0};
     if([[NSFileManager defaultManager] fileExistsAtPath:imagePath])
         return [[NSImage alloc] initWithContentsOfFile:imagePath];
     
+    if (urlString == (id)[NSNull null] || urlString.length == 0 )
+        return nil;
+    
     [ITUtil createDir:[[ITConstants applicationSupportFolder] stringByAppendingPathComponent:[NSString stringWithFormat:@"images/tvshows/%@", showId]]];
     
     NSURL *url = [NSURL URLWithString:urlString];

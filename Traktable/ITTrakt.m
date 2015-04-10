@@ -12,7 +12,6 @@
 @interface ITTrakt()
 
 @property(nonatomic, retain) NSString *baseUrl;
-@property(nonatomic, retain) NSString *OAuthCode;
 @property(nonatomic, retain) ITConfig *config;
 
 @end
@@ -33,7 +32,6 @@
 - (id)initWithBaseURL:(NSString *)url {
     
     self.baseUrl = url;
-    self.OAuthCode = [NSString stringWithFormat:@"Bearer %@", [[NSUserDefaults standardUserDefaults] stringForKey:@"TraktOAuthCode"]];
     
     return self;
 }
@@ -44,7 +42,7 @@
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:requestUrl]];
     
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [request setValue:self.OAuthCode forHTTPHeaderField:@"Authorization"];
+    [request setValue:[NSString stringWithFormat:@"Bearer %@", [self.config OAuthCode]] forHTTPHeaderField:@"Authorization"];
     [request setValue:@"2" forHTTPHeaderField:@"trakt-api-version"];
     [request setValue:[self.config apiKey] forHTTPHeaderField:@"trakt-api-key"];
     
@@ -118,9 +116,9 @@
                                 @"traktable://oauth", @"redirect_uri",
                                 @"authorization_code", @"grant_type",
                             nil];
-    
+
     [self POST:kITTraktOAuthUrl withParameters:params completionHandler:^(id response, NSError *err) {
-        
+    NSLog(@"%@", response);
         [self.config setOAuthCode:[response objectForKey:@"access_token"]];
         [self.config setOAuthRefreshCode:[response objectForKey:@"refresh_token"]];
         [self.config setOAuthExpireTime:([[NSDate date] timeIntervalSince1970] + [[response objectForKey:@"expires_in"] doubleValue]) - 3600];
@@ -128,7 +126,7 @@
 }
 
 - (BOOL)traktUserAuthenticated {
-    
+       
     NSString *code = [self.config OAuthCode];
     NSString *refreshCode = [self.config OAuthRefreshCode];
     double expires = [self.config OAuthExpiresIn];
@@ -139,12 +137,14 @@
       
         return NO;
     }
-    
+
     if(expires && expires < [[NSDate date] timeIntervalSince1970])
-        code = refreshCode;
+        [self refreshOAuthToken:refreshCode];
+   
+    [self refreshOAuthToken:code];
+    //if(!expires)
+    //    [self.config setOAuthExpireTime:([[NSDate date] timeIntervalSince1970] + [[response objectForKey:@"expires_in"] doubleValue]) - 3600];
     
-    if(!expires || expires < [[NSDate date] timeIntervalSince1970])
-        [self refreshOAuthToken:code];
 
     return YES;
 }

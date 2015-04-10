@@ -13,4 +13,7 @@
 - (void)syncTraktHistoryInBackgroundThread;
 - (void)syncTraktHistoryExtendedInBackgroundThread;
 
+@property NSInteger totalItemsInQueue;
+@property NSInteger itemsDone;
+
 @end

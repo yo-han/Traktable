@@ -11,7 +11,6 @@
 		040CA4E717EB8F36007B9076 /* HistoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040CA4E617EB8F36007B9076 /* HistoryViewController.xib */; };
 		040CA4E917EDCDA0007B9076 /* ErrorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 040CA4E817EDCDA0007B9076 /* ErrorViewController.xib */; };
 		040CA4F217EDED67007B9076 /* ITErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 040CA4F117EDED67007B9076 /* ITErrorView.m */; };
-		04162D2617DFC90A0086EFB0 /* NSData+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = 04162D2517DFC90A0086EFB0 /* NSData+Additions.m */; };
 		042F07E316BC19DB00A0CE9E /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 042F07E216BC19DB00A0CE9E /* Cocoa.framework */; };
 		042F07ED16BC19DB00A0CE9E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 042F07EB16BC19DB00A0CE9E /* InfoPlist.strings */; };
 		042F07EF16BC19DB00A0CE9E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 042F07EE16BC19DB00A0CE9E /* main.m */; };
@@ -68,6 +67,7 @@
 		048DF20416DFF676004B064A /* Growl.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 048DF20216DFF64A004B064A /* Growl.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		048DF20616DFF6DD004B064A /* Growl Registration Ticket.growlRegDict in Resources */ = {isa = PBXBuildFile; fileRef = 048DF20516DFF6DD004B064A /* Growl Registration Ticket.growlRegDict */; };
 		048DF20A16DFFF17004B064A /* sync.png in Resources */ = {isa = PBXBuildFile; fileRef = 048DF20916DFFF17004B064A /* sync.png */; };
+		048F19DE1AD4811700FEDC18 /* NSApplication+SelfRelaunch.m in Sources */ = {isa = PBXBuildFile; fileRef = 048F19DD1AD4811700FEDC18 /* NSApplication+SelfRelaunch.m */; };
 		04982DE417FBFC2A00A50555 /* ImageBrowserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04982DE017FBFC2900A50555 /* ImageBrowserCell.m */; };
 		04982DE517FBFC2A00A50555 /* ImageBrowserView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04982DE217FBFC2900A50555 /* ImageBrowserView.m */; };
 		04982DE617FBFC2A00A50555 /* Main.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04982DE317FBFC2900A50555 /* Main.xib */; };
@@ -177,8 +177,6 @@
 		040CA4E817EDCDA0007B9076 /* ErrorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ErrorViewController.xib; sourceTree = "<group>"; };
 		040CA4F017EDED67007B9076 /* ITErrorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ITErrorView.h; sourceTree = "<group>"; };
 		040CA4F117EDED67007B9076 /* ITErrorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ITErrorView.m; sourceTree = "<group>"; };
-		04162D2417DFC90A0086EFB0 /* NSData+Additions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Additions.h"; sourceTree = "<group>"; };
-		04162D2517DFC90A0086EFB0 /* NSData+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Additions.m"; sourceTree = "<group>"; };
 		042F07DE16BC19DB00A0CE9E /* Traktable.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Traktable.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		042F07E216BC19DB00A0CE9E /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		042F07E516BC19DB00A0CE9E /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -269,6 +267,8 @@
 		048DF20216DFF64A004B064A /* Growl.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Growl.framework; sourceTree = "<group>"; };
 		048DF20516DFF6DD004B064A /* Growl Registration Ticket.growlRegDict */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Growl Registration Ticket.growlRegDict"; sourceTree = "<group>"; };
 		048DF20916DFFF17004B064A /* sync.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sync.png; sourceTree = "<group>"; };
+		048F19DC1AD4811700FEDC18 /* NSApplication+SelfRelaunch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSApplication+SelfRelaunch.h"; sourceTree = "<group>"; };
+		048F19DD1AD4811700FEDC18 /* NSApplication+SelfRelaunch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSApplication+SelfRelaunch.m"; sourceTree = "<group>"; };
 		04982DDF17FBFC2900A50555 /* ImageBrowserCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageBrowserCell.h; sourceTree = "<group>"; };
 		04982DE017FBFC2900A50555 /* ImageBrowserCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageBrowserCell.m; sourceTree = "<group>"; };
 		04982DE117FBFC2900A50555 /* ImageBrowserView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageBrowserView.h; sourceTree = "<group>"; };
@@ -491,10 +491,10 @@
 		042F080416BC1A3100A0CE9E /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				048F19DC1AD4811700FEDC18 /* NSApplication+SelfRelaunch.h */,
+				048F19DD1AD4811700FEDC18 /* NSApplication+SelfRelaunch.m */,
 				04A9FE5117B43E0C006CD129 /* NSImage+MGCropExtensions.h */,
 				04A9FE5217B43E0C006CD129 /* NSImage+MGCropExtensions.m */,
-				04162D2417DFC90A0086EFB0 /* NSData+Additions.h */,
-				04162D2517DFC90A0086EFB0 /* NSData+Additions.m */,
 				04B68CF917A5BE74006760D0 /* Unirest */,
 				04B68CB417A56E25006760D0 /* PXSourceList */,
 				0469CC0116CBF19F006863B7 /* itvdb */,
@@ -877,7 +877,6 @@
 				0469CC0016CBE010006863B7 /* IMDB.m in Sources */,
 				0469CC1616CBF19F006863B7 /* NSString+Helper.m in Sources */,
 				04A15E001AC82F5D00543D52 /* ITTraktConstants.m in Sources */,
-				04162D2617DFC90A0086EFB0 /* NSData+Additions.m in Sources */,
 				04A15E041AC8777600543D52 /* WebViewController.m in Sources */,
 				0469CC1A16CBF19F006863B7 /* TVDbClient.m in Sources */,
 				0469CC1B16CBF19F006863B7 /* TVDbEpisode.m in Sources */,
@@ -925,6 +924,7 @@
 				04B5BE7617D53081001F0705 /* ITErrorTableCellView.m in Sources */,
 				04B5BE7B17D5401B001F0705 /* ITToolbar.m in Sources */,
 				04A15DFD1AC82EB100543D52 /* ITTrakt.m in Sources */,
+				048F19DE1AD4811700FEDC18 /* NSApplication+SelfRelaunch.m in Sources */,
 				047D985417D67285002E97B8 /* ITTableRowGroupView.m in Sources */,
 				040CA4F217EDED67007B9076 /* ITErrorView.m in Sources */,
 				044AC42817F0DAF30045D281 /* ITTableGroupDateCellView.m in Sources */,

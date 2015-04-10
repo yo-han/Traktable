@@ -201,7 +201,7 @@
 - (void)addAnImageWithPath:(NSString*)path title:(NSString *)title year:(NSString *)year
 {
 	BOOL addObject = NO;
-	
+
 	NSDictionary* fileAttribs = [[NSFileManager defaultManager] attributesOfItemAtPath:path error:nil];
 	if (fileAttribs)
 	{
@@ -218,7 +218,7 @@
 	}
 	
 	if (addObject && [self isImageFile:path])
-	{
+    {
 		// Add a path to the temporary images array.
 		movieObject* p = [[movieObject alloc] init];
 		[p setPath:path];
@@ -255,7 +255,7 @@
     for (NSDictionary *result in results) {
         
         ITMovie *movie = [ITMovie movieWithDatabaseRecord:result];
-        
+
         [moviesTemp addObject:movie];
         
         NSString *imagePath = [[ITConstants applicationSupportFolder] stringByAppendingPathComponent:[NSString stringWithFormat:@"images/movies/%@/medium.jpg", movie.movieId]];
